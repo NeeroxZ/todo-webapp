@@ -1,12 +1,18 @@
-import {useContext, useState} from "react";
-import {useAuth} from "../stores/AuthStore";
-import {useNavigate} from "react-router-dom";
+import {useState} from "react";
 import pb from "../utils/pocketbase";
 import "../styles/login.css";
-import {Grid, Container, Input, TextField, Typography, Button, CircularProgress, Alert, AlertTitle} from "@mui/material";
+import {
+    Grid,
+    TextField,
+    Typography,
+    Button,
+    CircularProgress,
+    Alert,
+    AlertTitle,
+    Backdrop
+} from "@mui/material";
 
 export const Register = () => {
-    const navigator = useNavigate();
 
     const [username, setUsername] = useState(null);
     const [password, setPassword] = useState(null);
@@ -98,12 +104,11 @@ export const Register = () => {
                 </Button>
             </Grid>
         </Grid>
-
-        {waiting && (
             <div className={"circularContainer"}>
-                <CircularProgress/>
+                <Backdrop open={waiting}>
+                    <CircularProgress/>
+                </Backdrop>
             </div>
-        )}
         {registrationError && (
             <Alert severity="error" >
                 <AlertTitle>Error</AlertTitle>
