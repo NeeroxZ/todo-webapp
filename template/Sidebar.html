@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Responsive Sidebar</title>
+    <link rel="stylesheet" href="./style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+</head>
+<body>
+    <div class="sidebar">
+        <div class ="logo_content">
+            <div class="logo">
+                <i class='bx bxl-c-plus-plus'></i>
+                <div class ="logo_name">ToDo-APP</div>
+            </div>
+            <i class='bx bx-menu' id="btn"></i>
+        </div>
+        <ul class ="nav_list">
+            <li>
+                    <i class='bx bx-search' ></i>
+                    <input type="text" placeholder="Search..." class="links_name"></input>
+                <!-- <span class="tooltip"> Dashboard </span>> -->
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx bxs-home'></i>
+                    <span class="links_name">Home</span>
+                </a>
+                <!-- <span class="tooltip"> Dashboard </span>> -->
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx bx-grid-alt'></i>
+                    <span class="links_name">User</span>
+                </a>
+                <!-- <span class="tooltip"> Dashboard </span>> -->
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx bxs-circle-three-quarter' ></i>
+                    <span class="links_name">Today</span>
+                </a>
+                <!-- <span class="tooltip"> Dashboard </span>> -->
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx bxs-circle-three-quarter' ></i>
+                    <span class="links_name">Personal</span>
+                </a>
+                <!-- <span class="tooltip"> Dashboard </span>> -->
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx bxs-circle-three-quarter' ></i>
+                    <span class="links_name">Work</span>
+                </a>
+                <!-- <span class="tooltip"> Dashboard </span>> -->
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx bxs-building-house' ></i>
+                    <span class="links_name">House</span>
+                </a>
+                <!-- <span class="tooltip"> Dashboard </span>> -->
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx bxs-taxi' ></i>
+                    <span class="links_name">Road trip list</span>
+                </a>
+                <!-- <span class="tooltip"> Dashboard </span>> -->
+            </li>
+        </ul>
+        <div class="profile_content">
+            <div class="profile">
+                <div class="profile_details">
+                    <img src="./user.jpg" alt="Hier ist ein bild">
+                    <div class="name_job">
+                        <div class="name">Nick Obreiter</div>
+                        <div class="job">Software Engineer</div>
+                    </div>
+                </div>
+                <i class='bx bx-log-out' id="log_out"></i>
+            </div>
+        </div>
+    </div>
+    <div class="home_container">
+        <div class="text">Todo-Web-Application</div>
+    </div>
+    <script type="text/javascript" src="./script.js"></script>
+</body>
+</html>
