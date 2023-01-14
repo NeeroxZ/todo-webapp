@@ -1,20 +1,90 @@
-import logo from './logo.svg';
-import React from 'react';
+import React from "react";
+import GlobalStore from "./stores/GlobalStore";
+import {
+    BrowserRouter as Router,
+    Routes,
+    Route, NavLink,
+} from "react-router-dom";
 import './App.css';
+import {AuthProvider, useAuth} from "./stores/AuthStore";
+import {Login} from "./pages/Login";
+import ProtectedRoute from "./utils/ProtectedRoute";
+import {Register} from "./pages/Register";
+import pb from "./utils/pocketbase";
+import {ConfirmMailPage} from "./pages/ConfirmMail";
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    return (
+        <>
+            <GlobalStore>
+                    <Router>
+                        <AuthProvider>
+                            <Navigation />
+                            <Routes>
+                                <Route index element={<Home />} />
+                                <Route path="login" element={<Login />} />
+                                <Route path="register" element={<Register />} />
+                                <Route path="confirmMail" element={<ConfirmMailPage />}>
+
+                                </Route>
+                                <Route path="home" element={
+                                    <ProtectedRoute>
+                                        <Home />
+                                    </ProtectedRoute>} />
+                                <Route path="todo" element={
+                                    <ProtectedRoute>
+                                        <TodoPage />
+                                    </ProtectedRoute>
+                                } />
+                                <Route path="admin" element={<Admin />} />
+                                <Route path="*" element={<NoMatch />} />
+                            </Routes>
+                        </AuthProvider>
+                    </Router>
+
+            </GlobalStore>
+        </>
+    );
+}
+
+const Navigation = () => {
+    const {token, logout} = useAuth();
+    if (!pb.authStore.isValid) {
+        return;
+    }
+
+    return(
+        <nav>
+            <NavLink to="/home">Home</NavLink>
+            <NavLink to="/todo">Todos</NavLink>
+            {token && (
+                <button type="button" onClick={logout}>
+                    Sign Out
+                </button>
+            )}
+        </nav>
+    );
+}
+
+
+
+
+
+const TodoPage = () => {
+    const {} = useAuth();
+
+
+    return (
+        <div
+            style={{
+                position: 'absolute', left: '50%', top: '50%',
+                transform: 'translate(-50%, -50%)',
+                height: "30rem",
+                width: "20rem",
+                backgroundColor: "darkblue",
+                color: "white"
+            }}
         >
           Learn React
         </a>
