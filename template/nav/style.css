@@ -187,23 +187,24 @@ body{
 .sidebar.active .profile #log_out{
     left: 88%;
 }
-.home_container{
+.home_container1{
     position: absolute;
     height: 100%;
     width: calc(100% - 8em);
     left: 78px;
     transition: all 0.5s ease;
     background: pink;
-    margin: 1em 1em 1em 1em;
-
+    margin: 0 auto;
+    max-width: calc(100% - 8em);
 }
-.home_container .text{
-    font-size: 25px;
-    font-weight: 500;
-    color: #1d1b31;
-    margin: 12px;
+.home_container{
+    width: 95%;
+    max-width: 980px;
+    margin: 0 auto;
+    background-color: #61dafb;
 }
 .sidebar.active ~ .home_container{
     width: calc(100% - 240px);
     left: 240px;
 }
+
