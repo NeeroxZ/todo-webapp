@@ -18,30 +18,30 @@ function App() {
     return (
         <>
             <GlobalStore>
-                    <Router>
-                        <AuthProvider>
-                            <Navigation />
-                            <Routes>
-                                <Route index element={<Home />} />
-                                <Route path="login" element={<Login />} />
-                                <Route path="register" element={<Register />} />
-                                <Route path="confirmMail" element={<ConfirmMailPage />}>
+                <Router>
+                    <AuthProvider>
+                        <Navigation />
+                        <Routes>
+                            <Route index element={<Home />} />
+                            <Route path="login" element={<Login />} />
+                            <Route path="register" element={<Register />} />
+                            <Route path="confirmMail" element={<ConfirmMailPage />}>
 
-                                </Route>
-                                <Route path="home" element={
-                                    <ProtectedRoute>
-                                        <Home />
-                                    </ProtectedRoute>} />
-                                <Route path="todo" element={
-                                    <ProtectedRoute>
-                                        <TodoPage />
-                                    </ProtectedRoute>
-                                } />
-                                <Route path="admin" element={<Admin />} />
-                                <Route path="*" element={<NoMatch />} />
-                            </Routes>
-                        </AuthProvider>
-                    </Router>
+                            </Route>
+                            <Route path="home" element={
+                                <ProtectedRoute>
+                                    <Home />
+                                </ProtectedRoute>} />
+                            <Route path="todo" element={
+                                <ProtectedRoute>
+                                    <TodoPage />
+                                </ProtectedRoute>
+                            } />
+                            <Route path="admin" element={<Admin />} />
+                            <Route path="*" element={<NoMatch />} />
+                        </Routes>
+                    </AuthProvider>
+                </Router>
 
             </GlobalStore>
         </>
@@ -86,11 +86,47 @@ const TodoPage = () => {
                 color: "white"
             }}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+            Hello, world!
+        </div>
+        // <>
+        //     <h2>Dashboard (Protected)</h2>
+        //
+        //     <div>Authenticated as {token}</div>
+        // </>
+    );
+};
+
+const Home = () => {
+    const {logout} = useAuth();
+    return (
+        <>
+            <h2>Home (Public)</h2>
+
+
+            <button type="button" onClick={() => logout()}>
+                Sign Out
+            </button>
+        </>
+    );
+};
+
+const Admin = () => {
+    return (
+        <>
+            <h2>Admin (Protected)</h2>
+        </>
+    );
+};
+
+
+
+
+const NoMatch = () => {
+    return (
+        <>
+            <h2>Page not found</h2>
+        </>
+    )
 }
 
 export default App;
