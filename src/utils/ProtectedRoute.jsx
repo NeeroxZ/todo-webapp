@@ -1,15 +1,12 @@
 import React from 'react'
 import {Navigate} from "react-router-dom"
-import {useAuth} from "../stores/AuthStore";
+import pb from "./pocketbase";
 
-const ProtectedRoute = ({children}) => {
-    let {token} = useAuth();
-
-    if (token === null) {
+export const ProtectedRoute = ({children}) => {
+    if (!pb.authStore.isValid) {
         return <Navigate to="/login" replace/>;
     }
     return children
-
 };
 
 export default ProtectedRoute;

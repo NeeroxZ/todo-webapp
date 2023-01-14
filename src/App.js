@@ -1,43 +1,48 @@
-import logo from './logo.svg';
 import React from "react";
 import GlobalStore from "./stores/GlobalStore";
 import {
     BrowserRouter as Router,
     Routes,
-    Route, NavLink, useNavigate,
+    Route, NavLink,
 } from "react-router-dom";
 import './App.css';
 import {AuthProvider, useAuth} from "./stores/AuthStore";
 import {Login} from "./pages/Login";
 import ProtectedRoute from "./utils/ProtectedRoute";
 import {Register} from "./pages/Register";
+import pb from "./utils/pocketbase";
+import {ConfirmMailPage} from "./pages/ConfirmMail";
 
 
 function App() {
     return (
         <>
             <GlobalStore>
-                <AuthProvider>
                     <Router>
-                        <Navigation />
-                        <Routes>
-                            <Route index element={<Home />} />
-                            <Route path="login" element={<Login />} />
-                            <Route path="register" element={<Register />} />
-                            <Route path="home" element={
-                                <ProtectedRoute>
-                                    <Home />
-                                </ProtectedRoute>} />
-                            <Route path="todo" element={
-                                <ProtectedRoute>
-                                    <TodoPage />
-                                </ProtectedRoute>
-                            } />
-                            <Route path="admin" element={<Admin />} />
-                            <Route path="*" element={<NoMatch />} />
-                        </Routes>
+                        <AuthProvider>
+                            <Navigation />
+                            <Routes>
+                                <Route index element={<Home />} />
+                                <Route path="login" element={<Login />} />
+                                <Route path="register" element={<Register />} />
+                                <Route path="confirmMail" element={<ConfirmMailPage />}>
+
+                                </Route>
+                                <Route path="home" element={
+                                    <ProtectedRoute>
+                                        <Home />
+                                    </ProtectedRoute>} />
+                                <Route path="todo" element={
+                                    <ProtectedRoute>
+                                        <TodoPage />
+                                    </ProtectedRoute>
+                                } />
+                                <Route path="admin" element={<Admin />} />
+                                <Route path="*" element={<NoMatch />} />
+                            </Routes>
+                        </AuthProvider>
                     </Router>
-                </AuthProvider>
+
             </GlobalStore>
         </>
     );
@@ -45,6 +50,10 @@ function App() {
 
 const Navigation = () => {
     const {token, logout} = useAuth();
+    if (!pb.authStore.isValid) {
+        return;
+    }
+
     return(
         <nav>
             <NavLink to="/home">Home</NavLink>
@@ -55,7 +64,7 @@ const Navigation = () => {
                 </button>
             )}
         </nav>
-    )
+    );
 }
 
 
@@ -63,7 +72,7 @@ const Navigation = () => {
 
 
 const TodoPage = () => {
-    const {token} = useAuth();
+    const {} = useAuth();
 
 
     return (
@@ -88,14 +97,14 @@ const TodoPage = () => {
 };
 
 const Home = () => {
-    const { onLogin } = useAuth();
-
+    const {logout} = useAuth();
     return (
         <>
             <h2>Home (Public)</h2>
 
-            <button type="button" onClick={onLogin}>
-                Sign In
+
+            <button type="button" onClick={() => logout()}>
+                Sign Out
             </button>
         </>
     );
@@ -108,6 +117,8 @@ const Admin = () => {
         </>
     );
 };
+
+
 
 
 const NoMatch = () => {
