@@ -16,6 +16,8 @@ import {Register} from "./pages/Register";
 import {UserStore, useUserStore} from "./stores/UserStore";
 import Modal from './components/Modal.jsx';
 import {TodoPage} from "./pages/TodoPage";
+import {ResetPasswordPage} from "./pages/ResetPasswordPage";
+import {Button} from "@mui/material";
 
 
 function App() {
@@ -28,6 +30,7 @@ function App() {
                         <Routes>
                             <Route index element={<Login />} />
                             <Route path="login" element={<Login />} />
+                            <Route path="reset" element={<ResetPasswordPage />}/>
                             <Route path="register" element={<Register />} />
                             <Route path="confirm" element={<ConfirmMailPage />}>
 
@@ -90,6 +93,7 @@ const Home = () => {
         <>
             <button onClick={() => setIsOpen(true)}>Open Me</button>
             {isOpen && <Modal setIsOpen={setIsOpen}/>}
+            <Button variant={"contained"} onClick={() => logout()}>Log out</Button>
 
         </>
     );
