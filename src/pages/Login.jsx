@@ -2,7 +2,8 @@ import {useState} from "react";
 import {useAuth} from "../stores/AuthStore";
 import {useNavigate} from "react-router-dom";
 import "../styles/login.css";
-import {Grid, TextField, Typography, Button, CircularProgress, Alert, AlertTitle} from "@mui/material";
+import {Alert, AlertTitle, Backdrop, CircularProgress} from "@mui/material";
+
 
 export const Login = () => {
     const [username, setUsername] = useState('');
@@ -10,49 +11,49 @@ export const Login = () => {
     const auth = useAuth();
     const navigator = useNavigate();
 
+    // Todo (Marvin): Forgot password navigation
+    // Todo (Marvin): Register navigation
 
     return (
-        <div className="loginContainer">
-            <div className="containerHeader">
-                <Typography variant={"h4"}>
-                    Login
-                </Typography>
-            </div>
-            <Grid container spacing={1.5} className={"inputGrid"}>
-                <Grid item xs={12} md={12}>
-                    <TextField variant={"outlined"} label={"Username"} size={"small"} fullWidth={true}
-                               disabled={auth.waiting}
-                               onChange={e => setUsername(e.target.value)}/>
-                </Grid>
-                <Grid item xs={12} md={12}>
-                    <TextField variant={"outlined"} label={"Password"} size={"small"} type={"password"} fullWidth={true}
-                               disabled={auth.waiting}
-                               onChange={e => setPassword(e.target.value)}/>
-                </Grid>
-                <Grid item xs={6} md={12}>
-                    <Button variant={"contained"} fullWidth={true} onClick={() => auth.login(username, password)} disabled={auth.waiting}>
-                        Login
-                    </Button>
-                </Grid>
-                <Grid item xs={6} md={12}>
-                    <Button variant={"contained"} fullWidth={true} disabled={auth.waiting}
-                            onClick={() => navigator("/register")}>
-                        Register
-                    </Button>
-                </Grid>
-            </Grid>
+        <div className="container">
+            <div className="row">
+                <form className="box">
+                    <h1 className="form-name">Sign In</h1>
+                    <label>
+                        <input className="placeholders" type="text" placeholder="Username"
+                               onChange={e => setUsername(e.target.value)}
+                               disabled={auth.waiting}/>
+                    </label>
+                    <label>
+                        <input className="placeholders" type="password" placeholder="Password"
+                               onChange={e => setPassword(e.target.value)}
+                               disabled={auth.waiting}/>
+                    </label>
+                    <input className="btn-submit" type="submit" name="" value="Sign In"
+                           onClick={() => auth.login(username, password)}
+                           disabled={auth.waiting}
+                    />
+                    <p className="forgot">
+                        <a href="#">Forgot Password?</a>
+                    </p>
+                    <p className="forgot"> Don't have an account?
+                        <a onClick={() => navigator("/register")}>Create new acount</a></p>
 
+                </form>
+            </div>
             {auth.waiting && (
                 <div className={"circularContainer"}>
-                    <CircularProgress/>
+                    <Backdrop open={auth.waiting}>
+                        <CircularProgress/>
+                    </Backdrop>
                 </div>
             )}
             {auth.loginError && (
-                <Alert severity="error" >
+                <Alert severity="error">
                     <AlertTitle>Error</AlertTitle>
                     Login error — <strong>Please try again</strong>
                 </Alert>
             )}
         </div>
-    )
+    );
 };

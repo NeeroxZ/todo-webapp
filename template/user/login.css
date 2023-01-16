@@ -92,5 +92,8 @@ button:focus{
     border:2px solid #43d3a8;
     box-shadow: 0 0 4px #43d3a8;
     transition: 0.3s ease-in;
+}
 
+.error {
+    border:2px solid rgba(157, 25, 13, 0.99);
 }
