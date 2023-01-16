@@ -34,7 +34,7 @@ export const Login = () => {
                            disabled={auth.waiting}
                     />
                     <p className="forgot">
-                        <a href="#">Forgot Password?</a>
+                        <a onClick={() => navigator("/reset")}>Forgot Password?</a>
                     </p>
                     <p className="forgot"> Don't have an account?
                         <a onClick={() => navigator("/register")}>Create new acount</a></p>
