@@ -1,10 +1,12 @@
-import React from "react";
+import React, {useState} from "react";
+import './styles/Modal.module.css'
 import GlobalStore from "./stores/GlobalStore";
 import {
     BrowserRouter as Router,
     Routes,
     Route, NavLink,
 } from "react-router-dom";
+import {BlockPicker, CirclePicker, SketchPicker} from 'react-color';
 import './App.css';
 import {AuthProvider, useAuth} from "./stores/AuthStore";
 import ProtectedRoute from "./utils/ProtectedRoute";
@@ -13,6 +15,8 @@ import {ConfirmMailPage} from "./pages/ConfirmMail";
 import {Login} from "./pages/Login";
 import {Register} from "./pages/Register";
 import {UserStore, useUserStore} from "./stores/UserStore";
+import {Box, Button, Input, TextField, Typography} from "@mui/material";
+import Modal from './components/Modal.jsx';
 
 
 function App() {
@@ -23,7 +27,7 @@ function App() {
                     <AuthProvider>
                         <Navigation />
                         <Routes>
-                            <Route index element={<Home />} />
+                            <Route index element={<Login />} />
                             <Route path="login" element={<Login />} />
                             <Route path="register" element={<Register />} />
                             <Route path="confirm" element={<ConfirmMailPage />}>
@@ -53,6 +57,10 @@ function App() {
 
 const Navigation = () => {
     const {token, logout} = useAuth();
+
+    const [title, setTitle] = useState(null);
+
+
     if (!pb.authStore.isValid) {
         return;
     }
@@ -99,20 +107,17 @@ const TodoPage = () => {
     );
 };
 
+
 const Home = () => {
     const {logout} = useAuth();
-    const {getTopics} = useUserStore();
+    const {getTopics, uploadTopic} = useUserStore();
+    const [isOpen, setIsOpen] = useState(false);
+
     return (
         <>
-            <h2>Home (Public)</h2>
+            <button onClick={() => setIsOpen(true)}>Open Me</button>
+            {isOpen && <Modal setIsOpen={setIsOpen}/>}
 
-
-            <button type="button" onClick={() => logout()}>
-                Sign Out
-            </button>
-            <button type="button" onClick={() => getTopics()}>
-                Topics
-            </button>
         </>
     );
 };
@@ -124,6 +129,9 @@ const Admin = () => {
         </>
     );
 };
+
+
+
 
 
 

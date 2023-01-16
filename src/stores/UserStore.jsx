@@ -10,6 +10,14 @@ const initState = {
 
 export const UserContext = createContext(null);
 
+class topic {
+    constructor(id, name, color) {
+        this.id = id;
+        this.name = name;
+        this.color = color;
+    }
+}
+
 export const UserStore = ({children}) => {
     const [userId, setUserId] = useState("");
 
@@ -18,20 +26,38 @@ export const UserStore = ({children}) => {
     const [topicError, setTopicError] = useState(null);
 
     const getTopics = async () => {
+        let newTopics = [];
         setTopicWaiting(true);
         let resultList = {};
         try {
-            resultList = await pb.collection('topics').getFullList(200, {filter: `user_id == ${userId}`});
+            resultList = await pb.collection('topics').getList(1, 50,    );
             setTopicWaiting(false);
-
         } catch (error) {
             setTopicError(error);
             return
         }
+        for (const t of resultList.items) {
+            newTopics.push(new topic(t.id, t.name, t.color))
+        }
 
-        console.log(resultList);
-
+        setTopics(newTopics);
     };
+
+    const uploadTopic = async (name, color) => {
+        setTopicWaiting(true);
+        const data = {
+            "user_id": userId,
+            "title": name,
+            "color": color
+        }
+        try {
+            await pb.collection('topics').create(data);
+            setTopicWaiting(false);
+        } catch (error) {
+            setTopicError(error);
+            setTopicWaiting(false);
+        }
+    }
 
     useEffect(() => {
         if (pb.authStore.model.id !== "") {
@@ -45,7 +71,7 @@ export const UserStore = ({children}) => {
 
 
     return(
-        <UserContext.Provider value={{getTopics}}>
+        <UserContext.Provider value={{getTopics, uploadTopic}}>
             {children}
         </UserContext.Provider>
     );
