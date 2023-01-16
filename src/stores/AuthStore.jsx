@@ -9,6 +9,8 @@ export const AuthProvider = ({children}) => {
     const [loginError, setLoginError] = useState(null);
     const [loginSuccess, setLoginSuccess] = useState(false);
 
+    const [userId, setUserId] = useState(null);
+
     const navigator = useNavigate();
 
     // login
@@ -38,17 +40,19 @@ export const AuthProvider = ({children}) => {
         }
 
         setLoginSuccess(true);
+        setUserId(pb.authStore.model.id);
         navigator("/home");
     };
 
     // logout
     const logout = async () => {
         pb.authStore.clear()
+        setUserId(null);
         navigator("/login")
     };
 
     return(
-        <AuthContext.Provider value={{login, logout, loginError, waiting, loginSuccess}}>
+        <AuthContext.Provider value={{login, logout, loginError, waiting, loginSuccess, userId}}>
             {children}
         </AuthContext.Provider>
     )

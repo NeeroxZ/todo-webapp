@@ -6,7 +6,6 @@ import {
     Routes,
     Route, NavLink,
 } from "react-router-dom";
-import {BlockPicker, CirclePicker, SketchPicker} from 'react-color';
 import './App.css';
 import {AuthProvider, useAuth} from "./stores/AuthStore";
 import ProtectedRoute from "./utils/ProtectedRoute";
@@ -15,8 +14,8 @@ import {ConfirmMailPage} from "./pages/ConfirmMail";
 import {Login} from "./pages/Login";
 import {Register} from "./pages/Register";
 import {UserStore, useUserStore} from "./stores/UserStore";
-import {Box, Button, Input, TextField, Typography} from "@mui/material";
 import Modal from './components/Modal.jsx';
+import {TodoPage} from "./pages/TodoPage";
 
 
 function App() {
@@ -80,32 +79,6 @@ const Navigation = () => {
 
 
 
-
-
-const TodoPage = () => {
-    const {} = useAuth();
-
-
-    return (
-        <div
-            style={{
-                position: 'absolute', left: '50%', top: '50%',
-                transform: 'translate(-50%, -50%)',
-                height: "30rem",
-                width: "20rem",
-                backgroundColor: "darkblue",
-                color: "white"
-            }}
-        >
-            Hello, world!
-        </div>
-        // <>
-        //     <h2>Dashboard (Protected)</h2>
-        //
-        //     <div>Authenticated as {token}</div>
-        // </>
-    );
-};
 
 
 const Home = () => {
