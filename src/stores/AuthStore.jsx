@@ -7,6 +7,7 @@ const AuthContext = createContext(null);
 export const AuthProvider = ({children}) => {
     const [waiting, setWaiting] = useState(false);
     const [loginError, setLoginError] = useState(null);
+    const [loginSuccess, setLoginSuccess] = useState(false);
 
     const navigator = useNavigate();
 
@@ -28,9 +29,6 @@ export const AuthProvider = ({children}) => {
         }
         setWaiting(false);
 
-        console.log(pb.authStore.token)
-        console.log(pb.authStore.isValid)
-
         const test = pb.authStore.exportToCookie({}, 'token')
         console.log(test)
 
@@ -38,6 +36,8 @@ export const AuthProvider = ({children}) => {
             setLoginError(true);
             return
         }
+
+        setLoginSuccess(true);
         navigator("/home");
     };
 
@@ -48,7 +48,7 @@ export const AuthProvider = ({children}) => {
     };
 
     return(
-        <AuthContext.Provider value={{login, logout, loginError, waiting}}>
+        <AuthContext.Provider value={{login, logout, loginError, waiting, loginSuccess}}>
             {children}
         </AuthContext.Provider>
     )
