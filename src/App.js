@@ -7,11 +7,12 @@ import {
 } from "react-router-dom";
 import './App.css';
 import {AuthProvider, useAuth} from "./stores/AuthStore";
-import {Login} from "./pages/Login";
 import ProtectedRoute from "./utils/ProtectedRoute";
-import {Register} from "./pages/Register";
 import pb from "./utils/pocketbase";
 import {ConfirmMailPage} from "./pages/ConfirmMail";
+import {Login} from "./pages/Login";
+import {Register} from "./pages/Register";
+import {UserStore, useUserStore} from "./stores/UserStore";
 
 
 function App() {
@@ -25,12 +26,14 @@ function App() {
                             <Route index element={<Home />} />
                             <Route path="login" element={<Login />} />
                             <Route path="register" element={<Register />} />
-                            <Route path="confirmMail" element={<ConfirmMailPage />}>
+                            <Route path="confirm" element={<ConfirmMailPage />}>
 
                             </Route>
                             <Route path="home" element={
                                 <ProtectedRoute>
-                                    <Home />
+                                    <UserStore>
+                                        <Home />
+                                    </UserStore>
                                 </ProtectedRoute>} />
                             <Route path="todo" element={
                                 <ProtectedRoute>
@@ -98,6 +101,7 @@ const TodoPage = () => {
 
 const Home = () => {
     const {logout} = useAuth();
+    const {getTopics} = useUserStore();
     return (
         <>
             <h2>Home (Public)</h2>
@@ -105,6 +109,9 @@ const Home = () => {
 
             <button type="button" onClick={() => logout()}>
                 Sign Out
+            </button>
+            <button type="button" onClick={() => getTopics()}>
+                Topics
             </button>
         </>
     );
