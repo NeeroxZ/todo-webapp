@@ -65,11 +65,6 @@ export const UserStore = ({children}) => {
         }
     }, []);
 
-
-
-
-
-
     return(
         <UserContext.Provider value={{getTopics, uploadTopic}}>
             {children}

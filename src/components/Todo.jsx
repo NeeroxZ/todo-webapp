@@ -27,7 +27,6 @@ export const Todo = (props) => {
 
             setError(null);
         } catch (error) {
-            console.log(res.saved)
             setError(error.message);
             setData(null);
         } finally {
@@ -64,10 +63,7 @@ export const Todo = (props) => {
 
     return (
         <>
-            <div className={`todo-container ${done ? "done" : ""} ${saved ? "saved" : ""}`} onClick={(event) => {
-                console.log("LOL")
-
-            }}>
+            <div className={`todo-container ${done ? "done" : ""} ${saved ? "saved" : ""}`}}>
                 <Grid container direction="row"
                       justifyContent="space-between"
                       alignItems="center"

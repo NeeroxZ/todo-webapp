@@ -34,7 +34,6 @@
 
 .todo-title.done {
     text-decoration: line-through;
-    background-color: rgba(44, 62, 80, 0.35);
 }
 
 .todo-title {

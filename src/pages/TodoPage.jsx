@@ -3,6 +3,7 @@ import {Todo} from "../components/Todo";
 import {useEffect, useState} from "react";
 import {useAuth} from "../stores/AuthStore";
 import pb from "../utils/pocketbase";
+import {Skeleton} from "@mui/material";
 export const TodoPage = () => {
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(false);
@@ -16,25 +17,29 @@ export const TodoPage = () => {
         let res = {};
         try {
             res = await pb.collection('todo').getList(1, 200, `user_id = ${userID}`);
-            setData(res.items);
             setError(null);
+            setData(res.items);
         } catch (error) {
-            setError(error);
+            setError(error.message);
+            console.log(error)
+            console.log(error.message)
             setData(null);
         } finally {
             setLoading(false);
         }
     };
 
-    useEffect(() => {
-        getTodos()
-    }, []);
+    useEffect( () => {
+        async function test() {
+            await getTodos();
+        }
 
-    console.log(data)
+        test();
+    }, []);
 
     return (
         <>
-            {loading && <div>A moment please...</div>}
+            {loading && <Skeleton variant="rectangular" width={210} height={118} />}
             {error && (
                 <div>{`There is a problem fetching the post data - ${error}`}</div>
             )}
@@ -49,15 +54,6 @@ export const TodoPage = () => {
                     );
                 })}
             </ul>
-
-            {/*{!waiting && <div className={"todo-list"}>*/}
-            {/*    {todos && <Todo*/}
-            {/*        id={item.id}*/}
-            {/*        title={todos[0].title}*/}
-            {/*        saved={todos[0].saved}*/}
-            {/*        complete={todos[0].done}*/}
-            {/*    />}*/}
-            {/*</div>}*/}
         </>
     );
 };
