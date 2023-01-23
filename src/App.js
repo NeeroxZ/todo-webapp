@@ -18,6 +18,7 @@ import Modal from './components/Modal.jsx';
 import {TodoPage} from "./pages/TodoPage";
 import {ResetPasswordPage} from "./pages/ResetPasswordPage";
 import {Button} from "@mui/material";
+import {NavigationBar} from "./components/Navbar";
 
 
 function App() {
@@ -26,7 +27,8 @@ function App() {
             <GlobalStore>
                 <Router>
                     <AuthProvider>
-                        <Navigation />
+                        {/*<Navigation />*/}
+                        <NavigationBar />
                         <Routes>
                             <Route index element={<Login />} />
                             <Route path="login" element={<Login />} />
@@ -46,7 +48,6 @@ function App() {
                                     <TodoPage />
                                 </ProtectedRoute>
                             } />
-                            <Route path="admin" element={<Admin />} />
                             <Route path="*" element={<NoMatch />} />
                         </Routes>
                     </AuthProvider>
@@ -95,14 +96,6 @@ const Home = () => {
             {isOpen && <Modal setIsOpen={setIsOpen}/>}
             <Button variant={"contained"} onClick={() => logout()}>Log out</Button>
 
-        </>
-    );
-};
-
-const Admin = () => {
-    return (
-        <>
-            <h2>Admin (Protected)</h2>
         </>
     );
 };

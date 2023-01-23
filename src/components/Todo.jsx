@@ -39,11 +39,17 @@ export const Todo = (props) => {
     }, []);
 
 
-    const handleChange = async (event) => {
-        // if(event && event.stopPropagation) event.stopPropagation();
+    const handleChange = (event) => {
+        // event.stopPropagation();
+
+
         let data = {
             done: event.target.checked,
         }
+        updateTodo(data)
+    };
+
+    const updateTodo = async (data) => {
         await pb.collection('todo').update(props.id, data);
         getData();
     };
@@ -56,6 +62,10 @@ export const Todo = (props) => {
         getData();
     };
 
+    const handleOpenModal = (e) => {
+        console.log("open modal");
+    };
+
     /* Use effect
     *  fetch data
     *
@@ -63,7 +73,9 @@ export const Todo = (props) => {
 
     return (
         <>
-            <div className={`todo-container ${done ? "done" : ""} ${saved ? "saved" : ""}`}}>
+            <div className={`todo-container ${done ? "done" : ""} ${saved ? "saved" : ""}`}
+                 onClick={(e) => handleOpenModal(e)}
+            >
                 <Grid container direction="row"
                       justifyContent="space-between"
                       alignItems="center"

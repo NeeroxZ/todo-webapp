@@ -39,20 +39,12 @@ export const TodoPage = () => {
 
     return (
         <>
-            {loading && <Skeleton variant="rectangular" width={210} height={118} />}
-            {error && (
-                <div>{`There is a problem fetching the post data - ${error}`}</div>
-            )}
+            {/*{loading && <Skeleton variant="rectangular" width={210} height={118} />}*/}
+            {/*{error && (*/}
+            {/*    <div>{`There is a problem fetching the post data - ${error}`}</div>*/}
+            {/*)}*/}
             <ul>
-                {data && data.map(function (item, i) {
-                    return (
-                        <li key={i}>
-                            <Todo
-                                id={item.id}
-                            />
-                        </li>
-                    );
-                })}
+                {data && data.map((item, i) => <li key={i}><Todo id={item.id} /></li>)}
             </ul>
         </>
     );
