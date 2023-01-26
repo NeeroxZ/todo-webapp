@@ -28,33 +28,31 @@ const layout = [
 
 export const Grid = () => {
     return (
-        <Root>
-            <ResponsiveGridLayout
-                layouts={{lg: layout}}
-                breakepoints={{ lg:1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
-                cols={{ lg: 5, md: 4, sm: 3, xs: 2, xxs: 1}}
-                rowHeight={300}
-                width={1000}
-            >
-                <GridItemWrapper key="asdf1">
-                    <GridItemContent>asdf1</GridItemContent>
-                </GridItemWrapper>
-                <GridItemWrapper key="asdf2">
-                    <GridItemContent>asdf2</GridItemContent>
-                </GridItemWrapper>
-                <GridItemWrapper key="asdf3">
-                    <GridItemContent>asdf3</GridItemContent>
-                </GridItemWrapper>
-                <GridItemWrapper key="asdf4">
-                    <GridItemContent>asdf4</GridItemContent>
-                </GridItemWrapper>
-                <GridItemWrapper key="asdf5">
-                    <GridItemContent>asdf5</GridItemContent>
-                </GridItemWrapper>
-                <GridItemWrapper key="asdf6">
-                    <GridItemContenr>asdf6</GridItemContenr>
-                </GridItemWrapper>
-            </ResponsiveGridLayout>
-        </Root>
+        <ResponsiveGridLayout
+            layouts={{lg: layout}}
+            breakepoints={{ lg:1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
+            cols={{ lg: 5, md: 4, sm: 3, xs: 2, xxs: 1}}
+            rowHeight={300}
+            width={1000}
+        >
+            <GridItemWrapper key="asdf1">
+                <GridItemContent>asdf1</GridItemContent>
+            </GridItemWrapper>
+            <GridItemWrapper key="asdf2">
+                <GridItemContent>asdf2</GridItemContent>
+            </GridItemWrapper>
+            <GridItemWrapper key="asdf3">
+                <GridItemContent>asdf3</GridItemContent>
+            </GridItemWrapper>
+            <GridItemWrapper key="asdf4">
+                <GridItemContent>asdf4</GridItemContent>
+            </GridItemWrapper>
+            <GridItemWrapper key="asdf5">
+                <GridItemContent>asdf5</GridItemContent>
+            </GridItemWrapper>
+            <GridItemWrapper key="asdf6">
+                 <GridItemContenr>asdf6</GridItemContenr>
+            </GridItemWrapper>
+        </ResponsiveGridLayout>
     );
 };
