@@ -1,0 +1,40 @@
+.loginContainer {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    height: 20rem;
+    width: 15rem;
+    color: black;
+    padding: 1rem;
+    border-radius: 1rem;
+    border: 1px solid black;
+}
+
+.registerContainer {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    height: 25rem;
+    height: auto;
+    width: auto;
+    color: black;
+    padding: 1rem;
+    border-radius: 1rem;
+    border: 1px solid black;
+}
+
+.containerHeader {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.circularContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.inputGrid {
+    margin-bottom: 1rem;
+}

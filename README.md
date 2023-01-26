@@ -17,4 +17,3 @@ Not used for commercial purposes!
 2. Backend
    - XX
 ```
-
