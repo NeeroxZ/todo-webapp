@@ -19,6 +19,7 @@ import {TodoPage} from "./pages/TodoPage";
 import {ResetPasswordPage} from "./pages/ResetPasswordPage";
 import {Button} from "@mui/material";
 import {NavigationBar} from "./components/Navbar";
+import {TopicPage} from "./pages/TopicPage";
 
 
 function App() {
@@ -27,8 +28,8 @@ function App() {
             <GlobalStore>
                 <Router>
                     <AuthProvider>
-                        {/*<Navigation />*/}
-                        <NavigationBar />
+                        <Navigation />
+                        {/*<NavigationBar />*/}
                         <Routes>
                             <Route index element={<Login />} />
                             <Route path="login" element={<Login />} />
@@ -46,6 +47,11 @@ function App() {
                             <Route path="todo" element={
                                 <ProtectedRoute>
                                     <TodoPage />
+                                </ProtectedRoute>
+                            } />
+                            <Route path="topic/:id" element={
+                                <ProtectedRoute>
+                                    <TopicPage />
                                 </ProtectedRoute>
                             } />
                             <Route path="*" element={<NoMatch />} />
