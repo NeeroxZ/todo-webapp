@@ -9,11 +9,23 @@ export const Todo = (props) => {
     const [done, setDone] = useState(false);
     const [title, setTitle] = useState("");
     const [saved, setSaved] = useState(false);
+    const [dueDate, setDueDate] = useState(null);
+    const [due, setDue] = useState(false);
 
 
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+
+    const checkDueDate = () => {
+        let time = new Date();
+        let currentDate = `${time.getUTCFullYear()}-${time.getUTCMonth()}-${time.getUTCDate()}`;
+        let currentTime = `${time.getUTCHours()}:${time.getUTCMinutes()}:${time.getUTCSeconds()}.${time.getUTCMilliseconds()}`;
+        let currentDatetime = `${currentDate} ${currentTime}`;
+
+        console.log(time.getMonth());
+        console.log(currentDatetime);
+    };
 
 
     const getData = async() => {
@@ -24,6 +36,7 @@ export const Todo = (props) => {
             setTitle(res.title);
             setDone(res.done);
             setSaved(res.saved);
+            setDueDate(res.dueDate);
 
             setError(null);
         } catch (error) {
@@ -35,26 +48,34 @@ export const Todo = (props) => {
     };
 
     useEffect(() => {
+        checkDueDate();
         getData();
     }, []);
 
 
     const handleChange = (event) => {
         // event.stopPropagation();
-
+        setDone(event.target.checked);
 
         let data = {
             done: event.target.checked,
         }
         updateTodo(data)
+            .catch((error) => {
+                alert("could not sync with database: " + error.toString())
+            })
     };
 
     const updateTodo = async (data) => {
         await pb.collection('todo').update(props.id, data);
-        getData();
+        getData()
+            .catch((error) => {
+                alert("could not sync with database: " + error.toString());
+            });
     };
 
     const handleSaved = async (event) => {
+        setSaved(event.target.checked);
         let data = {
             saved: event.target.checked,
         }
@@ -73,7 +94,7 @@ export const Todo = (props) => {
 
     return (
         <>
-            <div className={`todo-container ${done ? "done" : ""} ${saved ? "saved" : ""}`}
+            <div className={`todo-container ${done ? "done" : (saved ? "saved" : "")}`}
                  onClick={(e) => handleOpenModal(e)}
             >
                 <Grid container direction="row"
