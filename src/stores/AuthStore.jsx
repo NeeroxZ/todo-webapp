@@ -13,6 +13,7 @@ export const AuthProvider = ({children}) => {
 
     const navigator = useNavigate();
 
+
     // login
     const login = async (username, password) => {
         if (loginError) setLoginError(false);
@@ -24,21 +25,19 @@ export const AuthProvider = ({children}) => {
                 password
             )
         } catch(error) {
-            console.log(error)
             setWaiting(false);
             setLoginError(true);
             return
         }
         setWaiting(false);
 
-        const test = pb.authStore.exportToCookie({}, 'token')
-        console.log(test)
-
         if (!pb.authStore.isValid) {
+            setWaiting(false);
             setLoginError(true);
             return
         }
 
+        setWaiting(false);
         setLoginSuccess(true);
         setUserId(pb.authStore.model.id);
         navigator("/home");
