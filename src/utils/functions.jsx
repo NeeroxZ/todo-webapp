@@ -1,4 +1,4 @@
-function convertDateTime(datetime) {
+export function convertDateTime(datetime) {
     let dt = {
         year: "",
         month: "",
