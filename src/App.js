@@ -18,7 +18,6 @@ import Modal from './components/Modal.jsx';
 import {TodoPage} from "./pages/TodoPage";
 import {ResetPasswordPage} from "./pages/ResetPasswordPage";
 import {Button} from "@mui/material";
-import {NavigationBar} from "./components/Navbar";
 import {TopicPage} from "./pages/TopicPage";
 
 
@@ -49,7 +48,7 @@ function App() {
                                     <TodoPage />
                                 </ProtectedRoute>
                             } />
-                            <Route path="topic/:id" element={
+                            <Route path="topic/:name" element={
                                 <ProtectedRoute>
                                     <TopicPage />
                                 </ProtectedRoute>

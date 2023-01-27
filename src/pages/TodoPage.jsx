@@ -3,7 +3,8 @@ import {Todo} from "../components/Todo";
 import {useEffect, useState} from "react";
 import {useAuth} from "../stores/AuthStore";
 import pb from "../utils/pocketbase";
-import {Skeleton} from "@mui/material";
+import PropTypes from 'prop-types';
+
 export const TodoPage = () => {
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(false);
@@ -49,3 +50,14 @@ export const TodoPage = () => {
         </>
     );
 };
+
+TodoPage.propType = {
+    bookmarkFilter: PropTypes.bool,
+    topicFilter: PropTypes.bool,
+    topicID: PropTypes.number,
+    tagFilter: PropTypes.bool,
+    tagIDs: PropTypes.arrayOf(PropTypes.number),
+    dateFilter: PropTypes.bool,
+    dateFrom: PropTypes.string,
+    dateUntil: PropTypes.string,
+}

@@ -1,8 +1,14 @@
 import {TodoPage} from "./TodoPage";
 import {useParams} from "react-router-dom";
+import {useEffect} from "react";
 
 export const TopicPage = () => {
-    const { id } = useParams();
+    const { name } = useParams();
+
+    useEffect(() => {
+
+    }, []);
+
 
     return(
         <>
