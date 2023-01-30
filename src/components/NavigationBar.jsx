@@ -20,11 +20,7 @@ export const NavigationBar = () => {
                     </div>
                     <i className='bx bx-menu' id="btn" />
                 </div>
-                <ul className="nav_list">
-                    <li>
-                        <i className='bx bx-search'></i>
-                        <input type="text" placeholder="Search..." className="links_name" />
-                    </li>
+                <ul className="nav_list main">
                     <li>
                         <a href="#">
                             <i className='bx bxs-home'></i>
@@ -33,8 +29,8 @@ export const NavigationBar = () => {
                     </li>
                     <li>
                         <a href="#">
-                            <i className='bx bx-grid-alt'></i>
-                            <span className="links_name">User</span>
+                            <i className='bx bxs-circle-three-quarter'></i>
+                            <span className="links_name">All</span>
                         </a>
                     </li>
                     <li>
@@ -46,19 +42,19 @@ export const NavigationBar = () => {
                     <li>
                         <a href="#">
                             <i className='bx bxs-circle-three-quarter'></i>
-                            <span className="links_name">Personal</span>
+                            <span className="links_name">Tomorrow</span>
                         </a>
                     </li>
                     <li>
                         <a href="#">
                             <i className='bx bxs-circle-three-quarter'></i>
-                            <span className="links_name">Work</span>
+                            <span className="links_name">Bookmark</span>
                         </a>
                     </li>
                     <li>
                         <a href="#">
                             <i className='bx bxs-building-house'></i>
-                            <span className="links_name">House</span>
+                            <span className="links_name">Due</span>
                         </a>
                     </li>
                     <li>
@@ -68,6 +64,26 @@ export const NavigationBar = () => {
                         </a>
                     </li>
 
+                </ul>
+                <ul>
+                    <li>
+                        <a href="#">
+                            <i className='bx bxs-building-house'></i>
+                            <span className="links_name">Due</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i className='bx bxs-building-house'></i>
+                            <span className="links_name">Due</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i className='bx bxs-building-house'></i>
+                            <span className="links_name">Due</span>
+                        </a>
+                    </li>
                 </ul>
                 <div className="profile_content">
                     <div className="profile">
