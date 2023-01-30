@@ -21,6 +21,7 @@ import {Button} from "@mui/material";
 import {TodoTopicPage} from "./pages/TodoTopicPage";
 import {TodoTodayPage} from "./pages/TodoTodayPage";
 import {TodoTomorrowPage} from "./pages/TodoTomorrowPage";
+import {NavigationBar} from "./components/NavigationBar";
 
 
 function App() {
@@ -30,15 +31,14 @@ function App() {
                 <Router>
                     <AuthProvider>
                         <Navigation />
-                        {/*<NavigationBar />*/}
                         <Routes>
                             <Route index element={<Login />} />
                             <Route path="login" element={<Login />} />
                             <Route path="reset" element={<ResetPasswordPage />}/>
                             <Route path="register" element={<Register />} />
-                            <Route path="confirm" element={<ConfirmMailPage />}>
+                            <Route path="confirm" element={<ConfirmMailPage />} />
+                            <Route path="test" element={<NavigationBar />} />
 
-                            </Route>
                             <Route path="home" element={
                                 <ProtectedRoute>
                                     <UserStore>
@@ -91,6 +91,8 @@ const Navigation = () => {
             <NavLink to="/home">Home</NavLink>
             <div style={{marginLeft: "1rem"}}/>
             <NavLink to="/todo">Todos</NavLink>
+            <div style={{marginLeft: "1rem"}}/>
+            <NavLink to="/test">Nav</NavLink>
             <div style={{marginLeft: "1rem"}}/>
             <NavLink to="/todo/all">ALL</NavLink>
             <div style={{marginLeft: "1rem"}}/>
