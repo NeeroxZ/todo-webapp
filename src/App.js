@@ -13,12 +13,15 @@ import pb from "./utils/pocketbase";
 import {ConfirmMailPage} from "./pages/ConfirmMail";
 import {Login} from "./pages/Login";
 import {Register} from "./pages/Register";
-import {UserStore, useUserStore} from "./stores/UserStore";
+import {UserStore} from "./stores/UserStore";
 import Modal from './components/Modal.jsx';
 import {TodoPage} from "./pages/TodoPage";
 import {ResetPasswordPage} from "./pages/ResetPasswordPage";
 import {Button} from "@mui/material";
-import {NavigationBar} from "./components/Navbar";
+import {TodoTopicPage} from "./pages/TodoTopicPage";
+import {TodoTodayPage} from "./pages/TodoTodayPage";
+import {TodoTomorrowPage} from "./pages/TodoTomorrowPage";
+import {NavigationBar} from "./components/NavigationBar";
 
 
 function App() {
@@ -27,25 +30,41 @@ function App() {
             <GlobalStore>
                 <Router>
                     <AuthProvider>
-                        {/*<Navigation />*/}
-                        <NavigationBar />
+                        <Navigation />
                         <Routes>
                             <Route index element={<Login />} />
                             <Route path="login" element={<Login />} />
                             <Route path="reset" element={<ResetPasswordPage />}/>
                             <Route path="register" element={<Register />} />
-                            <Route path="confirm" element={<ConfirmMailPage />}>
+                            <Route path="confirm" element={<ConfirmMailPage />} />
+                            <Route path="test" element={<NavigationBar />} />
 
-                            </Route>
                             <Route path="home" element={
                                 <ProtectedRoute>
                                     <UserStore>
                                         <Home />
                                     </UserStore>
                                 </ProtectedRoute>} />
-                            <Route path="todo" element={
+                            <Route path="todo">
+                                <Route path="all" element={
+                                    <ProtectedRoute>
+                                        <TodoPage />
+                                    </ProtectedRoute>
+                                }/>
+                                <Route path="today" element={
+                                    <ProtectedRoute>
+                                        <TodoTodayPage />
+                                    </ProtectedRoute>
+                                }/>
+                                <Route path="tomorrow" element={
+                                    <ProtectedRoute>
+                                        <TodoTomorrowPage />
+                                    </ProtectedRoute>
+                                }/>
+                            </Route>
+                            <Route path="topic/:title" element={
                                 <ProtectedRoute>
-                                    <TodoPage />
+                                    <TodoTopicPage />
                                 </ProtectedRoute>
                             } />
                             <Route path="*" element={<NoMatch />} />
@@ -61,7 +80,6 @@ function App() {
 const Navigation = () => {
     const {token, logout} = useAuth();
 
-    const [title, setTitle] = useState(null);
 
 
     if (!pb.authStore.isValid) {
@@ -69,9 +87,20 @@ const Navigation = () => {
     }
 
     return(
-        <nav>
+        <nav style={{display: "flex", justifyContent: "flex-start"}}>
             <NavLink to="/home">Home</NavLink>
+            <div style={{marginLeft: "1rem"}}/>
             <NavLink to="/todo">Todos</NavLink>
+            <div style={{marginLeft: "1rem"}}/>
+            <NavLink to="/test">Nav</NavLink>
+            <div style={{marginLeft: "1rem"}}/>
+            <NavLink to="/todo/all">ALL</NavLink>
+            <div style={{marginLeft: "1rem"}}/>
+            <NavLink to="/todo/today">TODAY</NavLink>
+            <div style={{marginLeft: "1rem"}}/>
+            <NavLink to="/todo/tomorrow">Tomorrow</NavLink>
+            <div style={{marginLeft: "1rem"}}/>
+            <NavLink to="/topic/auto">Topic: Auto</NavLink>
             {token && (
                 <button type="button" onClick={logout}>
                     Sign Out
@@ -87,7 +116,6 @@ const Navigation = () => {
 
 const Home = () => {
     const {logout} = useAuth();
-    const {getTopics, uploadTopic} = useUserStore();
     const [isOpen, setIsOpen] = useState(false);
 
     return (

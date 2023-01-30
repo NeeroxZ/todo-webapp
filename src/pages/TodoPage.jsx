@@ -3,26 +3,38 @@ import {Todo} from "../components/Todo";
 import {useEffect, useState} from "react";
 import {useAuth} from "../stores/AuthStore";
 import pb from "../utils/pocketbase";
-import {Skeleton} from "@mui/material";
-export const TodoPage = () => {
-    const [data, setData] = useState(null);
+import PropTypes from 'prop-types';
+import {QueryBuilder} from "../utils/queryBuilder";
+
+export const TodoPage = (props) => {
+    const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+    const [noTodo, setNoTodo] = useState(null);
 
-    const {userID} = useAuth();
+    const {getUserId} = useAuth();
 
 
     const getTodos = async () => {
         setLoading(true);
         let res = {};
         try {
-            res = await pb.collection('todo').getList(1, 200, `user_id = ${userID}`);
+            let params = getParams(props, getUserId());
+            console.log(params);
+            /* Todo (Marvin):   könnte zu Fehlern und performance Problemen führen,
+                                wenn mehr als 1000 todos gespeichert wurden */
+            res = await pb.collection('todo').getList(1, 1000, {
+                filter: params,
+                sort: '-dueDate'
+            });
             setError(null);
             setData(res.items);
-        } catch (error) {
-            setError(error.message);
-            console.log(error)
-            console.log(error.message)
+            if (res.items.length <= 0) {
+                setNoTodo(true);
+            }
+        } catch (err) {
+            setError(err.message);
+            console.log(err.message)
             setData(null);
         } finally {
             setLoading(false);
@@ -30,11 +42,11 @@ export const TodoPage = () => {
     };
 
     useEffect( () => {
-        async function test() {
+        async function refresh() {
             await getTodos();
         }
 
-        test();
+        refresh();
     }, []);
 
     return (
@@ -43,9 +55,68 @@ export const TodoPage = () => {
             {/*{error && (*/}
             {/*    <div>{`There is a problem fetching the post data - ${error}`}</div>*/}
             {/*)}*/}
-            <ul>
-                {data && data.map((item, i) => <li key={i}><Todo id={item.id} /></li>)}
-            </ul>
+            {noTodo && (
+                <div>No todos found</div>
+            )}
+            {data &&
+                <ul>
+                    {data && data.map((item, i) => <li key={i}><Todo id={item.id}/></li>)}
+                </ul>
+            }
         </>
     );
 };
+
+function getParams(props, userId) {
+    let q = new QueryBuilder();
+    let query = `user_id="${userId}"`;
+    // q.Part("user_id", "=", userId);
+    if (props.bookmarkFilter) {
+        query += " && saved=true";
+        // q.And("saved", "=", true);
+    }
+    if (props.deletedFilter) {
+        query += " && deleted=true"
+        // q.And("deleted", "=", true);
+    } else {
+        query += " && deleted=false"
+        // q.And("deleted", "=", false);
+    }
+
+    if (props.topicId) {
+        query += ` && topic="${props.topicId}"`;
+        // q.And("topic", "=", props.topicId);
+    }
+
+    if (props.tagFilter) {
+        let emptyTopics = {topics: []};
+        query += ` && tags!=${emptyTopics}`;
+        // q.And("tags", "!=", {topics: []});
+    }
+
+    if (props.dateFrom && props.dateUntil) {
+        if (props.dateFrom !== "" && props.dateUntil !== "") {
+
+            query += ` && (dueDate >="${props.dateFrom}" && dueDate<="${props.dateUntil}")`;
+
+
+            // q.Space().OpenBracket("&&")
+            //     .Part("dueDate", ">=", props.dateFrom)
+            //     .And("dueDate", "<=", props.dateUntil)
+            //     .CloseBracket();
+        }
+    }
+    return query;
+    // return q.Export();
+
+
+}
+
+TodoPage.propType = {
+    bookmarkFilter: PropTypes.bool,
+    deletedFilter: PropTypes.bool,
+    topicId: PropTypes.number,
+    tagFilter: PropTypes.bool,
+    dateFrom: PropTypes.string,
+    dateUntil: PropTypes.string,
+}

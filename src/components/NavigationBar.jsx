@@ -1,77 +1,94 @@
 import '../styles/navbar.css';
-
+import {useState} from "react";
 export const NavigationBar = () => {
+    const [active, setActive] = useState(false);
+
+    const toggleNav = () => {
+        console.log(active);
+        setActive(!active);
+    };
+
 
     return (
         <>
-            <div className="sidebar">
+            <button onClick={toggleNav}>Toggle</button>
+            <div className={`sidebar ${active ? "active" : ""}`}>
                 <div className="logo_content">
                     <div className="logo">
-                        <i className='bx bxl-c-plus-plus'></i>
+                        <i className='bx bxl-c-plus-plus' />
                         <div className="logo_name">ToDo-APP</div>
                     </div>
-                    <i className='bx bx-menu' id="btn"></i>
+                    <i className='bx bx-menu' id="btn" />
                 </div>
-                <ul className="nav_list">
-                    <li>
-                        <i className='bx bx-search'></i>
-                        <input type="text" placeholder="Search..." className="links_name"></input>
-                        <!-- <span class="tooltip"> Dashboard </span>> -->
-                    </li>
+                <ul className="nav_list main">
                     <li>
                         <a href="#">
                             <i className='bx bxs-home'></i>
                             <span className="links_name">Home</span>
                         </a>
-                        <!-- <span class="tooltip"> Dashboard </span>> -->
                     </li>
                     <li>
                         <a href="#">
-                            <i className='bx bx-grid-alt'></i>
-                            <span className="links_name">User</span>
+                            <i className='bx bxs-circle-three-quarter'></i>
+                            <span className="links_name">All</span>
                         </a>
-                        <!-- <span class="tooltip"> Dashboard </span>> -->
                     </li>
                     <li>
                         <a href="#">
                             <i className='bx bxs-circle-three-quarter'></i>
                             <span className="links_name">Today</span>
                         </a>
-                        <!-- <span class="tooltip"> Dashboard </span>> -->
                     </li>
                     <li>
                         <a href="#">
                             <i className='bx bxs-circle-three-quarter'></i>
-                            <span className="links_name">Personal</span>
+                            <span className="links_name">Tomorrow</span>
                         </a>
-                        <!-- <span class="tooltip"> Dashboard </span>> -->
                     </li>
                     <li>
                         <a href="#">
                             <i className='bx bxs-circle-three-quarter'></i>
-                            <span className="links_name">Work</span>
+                            <span className="links_name">Bookmark</span>
                         </a>
-                        <!-- <span class="tooltip"> Dashboard </span>> -->
                     </li>
                     <li>
                         <a href="#">
                             <i className='bx bxs-building-house'></i>
-                            <span className="links_name">House</span>
+                            <span className="links_name">Due</span>
                         </a>
-                        <!-- <span class="tooltip"> Dashboard </span>> -->
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="#" onClick={toggleNav}>
                             <i className='bx bxs-taxi'></i>
                             <span className="links_name">Road trip list</span>
                         </a>
-                        <!-- <span class="tooltip"> Dashboard </span>> -->
+                    </li>
+
+                </ul>
+                <ul>
+                    <li>
+                        <a href="#">
+                            <i className='bx bxs-building-house'></i>
+                            <span className="links_name">Due</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i className='bx bxs-building-house'></i>
+                            <span className="links_name">Due</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i className='bx bxs-building-house'></i>
+                            <span className="links_name">Due</span>
+                        </a>
                     </li>
                 </ul>
                 <div className="profile_content">
                     <div className="profile">
                         <div className="profile_details">
-                            <img src="../user.jpg" alt="Hier ist ein bild" />
+                            <img src="../assets/images/userIcon.jpg" alt="Hier ist ein bild" />
                                 <div className="name_job">
                                     <div className="name">Nick Obreiter</div>
                                     <div className="job">Software Engineer</div>
@@ -81,9 +98,7 @@ export const NavigationBar = () => {
                     </div>
                 </div>
             </div>
-            <div className="home_container">
 
-            </div>
         </>
     );
 };
