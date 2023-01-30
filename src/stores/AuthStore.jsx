@@ -9,9 +9,8 @@ export const AuthProvider = ({children}) => {
     const [loginError, setLoginError] = useState(null);
     const [loginSuccess, setLoginSuccess] = useState(false);
 
-    const [userId, setUserId] = useState(null);
-
     const navigator = useNavigate();
+
 
     // login
     const login = async (username, password) => {
@@ -24,35 +23,35 @@ export const AuthProvider = ({children}) => {
                 password
             )
         } catch(error) {
-            console.log(error)
             setWaiting(false);
             setLoginError(true);
             return
         }
         setWaiting(false);
 
-        const test = pb.authStore.exportToCookie({}, 'token')
-        console.log(test)
-
         if (!pb.authStore.isValid) {
+            setWaiting(false);
             setLoginError(true);
             return
         }
 
+        setWaiting(false);
         setLoginSuccess(true);
-        setUserId(pb.authStore.model.id);
         navigator("/home");
     };
 
     // logout
     const logout = async () => {
         pb.authStore.clear()
-        setUserId(null);
         navigator("/login")
     };
 
+    const getUserId = () => {
+        return pb.authStore.model.id;
+    };
+
     return(
-        <AuthContext.Provider value={{login, logout, loginError, waiting, loginSuccess, userId}}>
+        <AuthContext.Provider value={{login, logout, loginError, waiting, loginSuccess, getUserId}}>
             {children}
         </AuthContext.Provider>
     )
