@@ -1,5 +1,4 @@
-import React, {useState} from "react";
-import './styles/Modal.module.css'
+import React from "react";
 import GlobalStore from "./stores/GlobalStore";
 import {
     BrowserRouter as Router,
@@ -13,19 +12,9 @@ import pb from "./utils/pocketbase";
 import {ConfirmMailPage} from "./pages/ConfirmMail";
 import {Login} from "./pages/Login";
 import {Register} from "./pages/Register";
-import {UserStore} from "./stores/UserStore";
-import Modal from './components/Modal.jsx';
-import {TodoPage} from "./pages/TodoPage";
-import {ResetPasswordPage} from "./pages/ResetPasswordPage";
-import {Button} from "@mui/material";
-import {TodoTopicPage} from "./pages/TodoTopicPage";
-import {TodoTodayPage} from "./pages/TodoTodayPage";
-import {TodoTomorrowPage} from "./pages/TodoTomorrowPage";
-import {NavigationBar} from "./components/NavigationBar";
-import {Dashboard} from "./pages/Dashboard";
-import {NavBar} from "./components/Navbar";
-
-
+import {UserStore, useUserStore} from "./stores/UserStore";
+import {ModalPage} from "./pages/ModalPage";
+import 'bootstrap/dist/css/bootstrap.css';
 
 function App() {
     return (
@@ -33,47 +22,27 @@ function App() {
             <GlobalStore>
                 <Router>
                     <AuthProvider>
-
+                        <Navigation />
                         <Routes>
-                            <Route path={"/"} element={<NavBar />}>
-                            <Route index element={<Login />} />
+                            <Route index element={<Home />} />
                             <Route path="login" element={<Login />} />
-                            <Route path="reset" element={<ResetPasswordPage />}/>
                             <Route path="register" element={<Register />} />
-                            <Route path="confirm" element={<ConfirmMailPage />} />
-                            <Route path="test" element={<NavigationBar />} />
-                            <Route path="dashboard" element={<Dashboard />} />
+                            <Route path="confirm" element={<ConfirmMailPage />}>
+                            <Route path="test" element={<ModalPage />}/>
+                            </Route>
                             <Route path="home" element={
                                 <ProtectedRoute>
                                     <UserStore>
                                         <Home />
                                     </UserStore>
                                 </ProtectedRoute>} />
-                            <Route path="todo">
-                                <Route path="all" element={
-                                    <ProtectedRoute>
-                                        <TodoPage />
-                                    </ProtectedRoute>
-                                }/>
-                                <Route path="today" element={
-                                    <ProtectedRoute>
-                                        <TodoTodayPage />
-                                    </ProtectedRoute>
-                                }/>
-                                <Route path="tomorrow" element={
-                                    <ProtectedRoute>
-                                        <TodoTomorrowPage />
-                                    </ProtectedRoute>
-                                }/>
-                            </Route>
-                            <Route path="topic/:title" element={
+                            <Route path="todo" element={
                                 <ProtectedRoute>
-                                    <TodoTopicPage />
+                                    <TodoPage />
                                 </ProtectedRoute>
                             } />
-
+                            <Route path="admin" element={<Admin />} />
                             <Route path="*" element={<NoMatch />} />
-                            </Route>
                         </Routes>
                     </AuthProvider>
                 </Router>
@@ -85,28 +54,14 @@ function App() {
 
 const Navigation = () => {
     const {token, logout} = useAuth();
-
-
-
     if (!pb.authStore.isValid) {
         return;
     }
 
     return(
-        <nav style={{display: "flex", justifyContent: "flex-start"}}>
+        <nav>
             <NavLink to="/home">Home</NavLink>
-            <div style={{marginLeft: "1rem"}}/>
             <NavLink to="/todo">Todos</NavLink>
-            <div style={{marginLeft: "1rem"}}/>
-            <NavLink to="/test">Nav</NavLink>
-            <div style={{marginLeft: "1rem"}}/>
-            <NavLink to="/todo/all">ALL</NavLink>
-            <div style={{marginLeft: "1rem"}}/>
-            <NavLink to="/todo/today">TODAY</NavLink>
-            <div style={{marginLeft: "1rem"}}/>
-            <NavLink to="/todo/tomorrow">Tomorrow</NavLink>
-            <div style={{marginLeft: "1rem"}}/>
-            <NavLink to="/topic/auto">Topic: Auto</NavLink>
             {token && (
                 <button type="button" onClick={logout}>
                     Sign Out
@@ -120,23 +75,56 @@ const Navigation = () => {
 
 
 
-const Home = () => {
-    const {logout} = useAuth();
-    const [isOpen, setIsOpen] = useState(false);
+const TodoPage = () => {
+    const {} = useAuth();
+
 
     return (
-        <>
-            <Dashboard/>
-            <button onClick={() => setIsOpen(true)}>Open Me</button>
-            {isOpen && <Modal setIsOpen={setIsOpen}/>}
-            <Button variant={"contained"} onClick={() => logout()}>Log out</Button>
+        <div
+            style={{
+                position: 'absolute', left: '50%', top: '50%',
+                transform: 'translate(-50%, -50%)',
+                height: "30rem",
+                width: "20rem",
+                backgroundColor: "darkblue",
+                color: "white"
+            }}
+        >
+            Hello, world!
+        </div>
+        // <>
+        //     <h2>Dashboard (Protected)</h2>
+        //
+        //     <div>Authenticated as {token}</div>
+        // </>
+    );
+};
 
+const Home = () => {
+    const {logout} = useAuth();
+    const {getTopics} = useUserStore();
+    return (
+        <>
+            <h2>Home (Public)</h2>
+
+
+            <button type="button" onClick={() => logout()}>
+                Sign Out
+            </button>
+            <button type="button" onClick={() => getTopics()}>
+                Topics
+            </button>
         </>
     );
 };
 
-
-
+const Admin = () => {
+    return (
+        <>
+            <h2>Admin (Protected)</h2>
+        </>
+    );
+};
 
 
 

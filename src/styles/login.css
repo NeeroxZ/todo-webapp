@@ -37,7 +37,7 @@ a:hover{
     text-decoration: none;
     transition: 0.3s ease-in-out;
 }
-.containerLogin{
+.container{
     margin-top: 6rem;
 }
 .title{
@@ -98,12 +98,10 @@ button:focus{
     border:2px solid #43d3a8;
     box-shadow: 0 0 4px #43d3a8;
     transition: 0.3s ease-in;
+
 }
 
-.successBox {
-    background-color: #33a382;
-}
-
-.forgot {
-    margin-bottom: 1rem;
+.modalText{
+    background-color: #FFFFFF;
+    color: blue;
 }
