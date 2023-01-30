@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import { Responsive, WidthProvider } from "react-grid-layout";
+import {ToDoChart} from "../components/TodoChart";
+import {ToDoToday} from "../components/TodoToday";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
@@ -16,17 +18,17 @@ const Root = styled.div`
 `;
 
 const layout = [
-    { i: "asdf1", x:0, y:0, w:1, h:1 },
-    { i: "asdf2", x:0, y:0, w:1, h:1 },
-    { i: "asdf3", x:0, y:0, w:1, h:1 },
-    { i: "asdf4", x:0, y:0, w:1, h:1 },
+    { i: "tasksDone", x:0, y:0, w:1, h:1 },
+    { i: "tasksToday", x:0, y:0, w:1, h:1 },
+    { i: "tasksCart", x:0, y:0, w:1, h:1 },
+    { i: "tasksOverdue", x:0, y:0, w:1, h:1 },
     { i: "asdf5", x:0, y:0, w:1, h:1 },
     { i: "asdf6", x:0, y:0, w:1, h:1 }
 ];
 
-
-export const Dashboard = () => {
+export const Grid = () => {
     return (
+
         <ResponsiveGridLayout
             layouts={{lg: layout}}
             breakepoints={{ lg:1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
@@ -34,16 +36,16 @@ export const Dashboard = () => {
             rowHeight={300}
             width={1000}
         >
-            <GridItemWrapper key="asdf1">
-                <GridItemContent>asdf1</GridItemContent>
+            <GridItemWrapper key="tasksDone">
+                <GridItemContent></GridItemContent>
             </GridItemWrapper>
-            <GridItemWrapper key="asdf2">
-                <GridItemContent>asdf2</GridItemContent>
+            <GridItemWrapper key="todoToday">
+                <GridItemContent><ToDoToday/></GridItemContent>
             </GridItemWrapper>
-            <GridItemWrapper key="asdf3">
-                <GridItemContent>asdf3</GridItemContent>
+            <GridItemWrapper key="tasksCart">
+                <GridItemContent><ToDoChart/></GridItemContent>
             </GridItemWrapper>
-            <GridItemWrapper key="asdf4">
+            <GridItemWrapper key="tasksOverdue">
                 <GridItemContent>asdf4</GridItemContent>
             </GridItemWrapper>
             <GridItemWrapper key="asdf5">
