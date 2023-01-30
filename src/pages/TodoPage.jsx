@@ -69,34 +69,45 @@ export const TodoPage = (props) => {
 
 function getParams(props, userId) {
     let q = new QueryBuilder();
-    q.Part("user_id", "=", userId);
+    let query = `user_id="${userId}"`;
+    // q.Part("user_id", "=", userId);
     if (props.bookmarkFilter) {
-        q.And("saved", "=", true);
+        query += " && saved=true";
+        // q.And("saved", "=", true);
     }
     if (props.deletedFilter) {
-        q.And("deleted", "=", true);
+        query += " && deleted=true"
+        // q.And("deleted", "=", true);
     } else {
-        q.And("deleted", "=", false);
+        query += " && deleted=false"
+        // q.And("deleted", "=", false);
     }
 
     if (props.topicId) {
-        q.And("topic", "=", props.topicId);
+        query += ` && topic="${props.topicId}"`;
+        // q.And("topic", "=", props.topicId);
     }
 
     if (props.tagFilter) {
-        q.And("tags", "!=", {topics: []});
+        let emptyTopics = {topics: []};
+        query += ` && tags!=${emptyTopics}`;
+        // q.And("tags", "!=", {topics: []});
     }
 
     if (props.dateFrom && props.dateUntil) {
         if (props.dateFrom !== "" && props.dateUntil !== "") {
-            q.Space().OpenBracket("&&")
-                .Part("dueDate", ">=", props.dateFrom)
-                .And("dueDate", "<=", props.dateUntil)
-                .CloseBracket();
+
+            query += ` && (dueDate >="${props.dateFrom}" && dueDate<="${props.dateUntil}")`;
+
+
+            // q.Space().OpenBracket("&&")
+            //     .Part("dueDate", ">=", props.dateFrom)
+            //     .And("dueDate", "<=", props.dateUntil)
+            //     .CloseBracket();
         }
     }
-
-    return q.Export();
+    return query;
+    // return q.Export();
 
 
 }
