@@ -13,7 +13,8 @@ import {ConfirmMailPage} from "./pages/ConfirmMail";
 import {Login} from "./pages/Login";
 import {Register} from "./pages/Register";
 import {UserStore, useUserStore} from "./stores/UserStore";
-
+import {ModalPage} from "./pages/ModalPage";
+import 'bootstrap/dist/css/bootstrap.css';
 
 function App() {
     return (
@@ -27,7 +28,7 @@ function App() {
                             <Route path="login" element={<Login />} />
                             <Route path="register" element={<Register />} />
                             <Route path="confirm" element={<ConfirmMailPage />}>
-
+                            <Route path="test" element={<ModalPage />}/>
                             </Route>
                             <Route path="home" element={
                                 <ProtectedRoute>

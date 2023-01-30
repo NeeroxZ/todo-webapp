@@ -100,3 +100,8 @@ button:focus{
     transition: 0.3s ease-in;
 
 }
+
+.modalText{
+    background-color: #FFFFFF;
+    color: blue;
+}
