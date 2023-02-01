@@ -113,6 +113,11 @@ body{
     color:#11101d;
     background: #fff;
 }
+
+.sidebar ul li a:hover .links_name{
+    color:#11101d;
+}
+
 .sidebar ul li i{
     height: 50px;
     min-width: 50px;
