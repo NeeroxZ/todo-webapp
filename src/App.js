@@ -22,6 +22,7 @@ import {TodoTopicPage} from "./pages/TodoTopicPage";
 import {TodoTodayPage} from "./pages/TodoTodayPage";
 import {TodoTomorrowPage} from "./pages/TodoTomorrowPage";
 import {NavigationBar} from "./components/NavigationBar";
+import {Dashboard} from "./components/Dashboard";
 
 
 function App() {
@@ -101,6 +102,8 @@ const Navigation = () => {
             <NavLink to="/todo/tomorrow">Tomorrow</NavLink>
             <div style={{marginLeft: "1rem"}}/>
             <NavLink to="/topic/auto">Topic: Auto</NavLink>
+            <div style={{marginLeft: "1rem"}}/>
+            <NavLink to="/todo/gird">Tomorrow</NavLink>
             {token && (
                 <button type="button" onClick={logout}>
                     Sign Out
@@ -120,6 +123,7 @@ const Home = () => {
 
     return (
         <>
+            <Dashboard/>
             <button onClick={() => setIsOpen(true)}>Open Me</button>
             {isOpen && <Modal setIsOpen={setIsOpen}/>}
             <Button variant={"contained"} onClick={() => logout()}>Log out</Button>

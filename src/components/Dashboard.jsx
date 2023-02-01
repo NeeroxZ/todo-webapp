@@ -1,4 +1,3 @@
-import GridLayout from "react-grid-layout";
 import styled from "styled-components";
 import { Responsive, WidthProvider } from "react-grid-layout";
 
@@ -26,7 +25,7 @@ const layout = [
 ];
 
 
-export const Grid = () => {
+export const Dashboard = () => {
     return (
         <ResponsiveGridLayout
             layouts={{lg: layout}}
@@ -51,7 +50,7 @@ export const Grid = () => {
                 <GridItemContent>asdf5</GridItemContent>
             </GridItemWrapper>
             <GridItemWrapper key="asdf6">
-                 <GridItemContenr>asdf6</GridItemContenr>
+                 <GridItemContent>asdf6</GridItemContent>
             </GridItemWrapper>
         </ResponsiveGridLayout>
     );
