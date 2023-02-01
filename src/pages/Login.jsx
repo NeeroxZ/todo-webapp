@@ -15,8 +15,8 @@ export const Login = () => {
     // Todo (Marvin): Register navigation
 
     return (
-        <div className="container">
-            <div className="row">
+        <div className="containerLogin">
+            <div className="rowLogin">
                 <form className="box">
                     <h1 className="form-name">Sign In</h1>
                     <label>
