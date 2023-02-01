@@ -12,10 +12,8 @@ export const NavigationBar = () => {
     return (
         <>
             <button onClick={toggleNav}>Toggle</button>
-            <nav>
-
-            </nav>
-            <div className={`sidebar ${active ? "active" : ""}`}>
+            {/*<div className={`sidebar ${active ? "active" : ""}`}>*/}
+            <div className={`sidebar active `}>
                 <div className="logo_content">
                     <div className="logo">
                         <i className='bx bxl-c-plus-plus' />
@@ -23,52 +21,80 @@ export const NavigationBar = () => {
                     </div>
                     <i className='bx bx-menu' id="btn" />
                 </div>
-                <ul className="nav_list main">
-                    <li>
+
+                <ul className="nav_list nav_container">
+                    <li className="nav_item nav_static">
                         <a href="#">
                             <i className='bx bxs-home'></i>
                             <span className="links_name">Home</span>
                         </a>
                     </li>
-                    <li>
+                    <li className="nav_item nav_dynamic">
+                        <a href="#">
+                            <i className='bx bxs-home'></i>
+                            <span className="links_name">Home</span>
+                        </a>
+                    </li>
+                </ul>
+
+
+                <div className="nav_list nav_container">
+                    <div className="nav_item nav_static">
+                        <a href="#">
+                            <i className='bx bxs-circle-three-quarter'></i>
+                            <span className="links_name">All</span>
+                        </a>
+                    </div>
+                    <div className="nav_item nav_static nav_static">
+                        <a href="#">
+                            <i className='bx bxs-circle-three-quarter'></i>
+                            <span className="links_name">All</span>
+                        </a>
+                    </div>
+                </div>
+
+
+
+
+
+                <ul>
+                    <li className="nav_item">
                         <a href="#">
                             <i className='bx bxs-circle-three-quarter'></i>
                             <span className="links_name">All</span>
                         </a>
                     </li>
-                    <li>
+                    <li className="nav_item">
                         <a href="#">
                             <i className='bx bxs-circle-three-quarter'></i>
                             <span className="links_name">Today</span>
                         </a>
                     </li>
-                    <li>
+                    <li className="nav_item">
                         <a href="#">
                             <i className='bx bxs-circle-three-quarter'></i>
                             <span className="links_name">Tomorrow</span>
                         </a>
                     </li>
-                    <li>
+                    <li className="nav_item">
                         <a href="#">
                             <i className='bx bxs-circle-three-quarter'></i>
                             <span className="links_name">Bookmark</span>
                         </a>
                     </li>
-                    <li>
+                    <li className="nav_item">
                         <a href="#">
                             <i className='bx bxs-building-house'></i>
                             <span className="links_name">Due</span>
                         </a>
                     </li>
-                    <li>
+                    <li className="nav_item">
                         <a href="#" onClick={toggleNav}>
                             <i className='bx bxs-taxi'></i>
                             <span className="links_name">Road trip list</span>
                         </a>
                     </li>
 
-                </ul>
-                <ul>
                     <li>
                         <a href="#">
                             <i className='bx bxs-building-house'></i>

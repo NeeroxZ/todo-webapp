@@ -82,43 +82,38 @@ body:not(Header){
 .sidebar.active #btn{
     left: 90%;
 }
-.sidebar ul{
+
+
+.sidebar .nav_list{
     margin-top: 20px;
 }
-.sidebar ul li{
+
+.sidebar .nav_list .nav_container {
+     display: flex;
+     justify-content: space-around;
+}
+
+.sidebar .nav_list .nav_item {
+    list-style: none;
+}
+
+.sidebar .nav_list .nav_item .nav_dynamic{
     position: relative;
     height: 50px;
     width: 100%;
     margin:0 5px;
-    list-style: none;
     line-height: 50px;
 }
-.sidebar ul li input{
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    left: 0;
-    top: 0;
-    border-radius: 12px;
-    outline: none;
-    border: none;
-    background: #1d1b31;
-    padding-left: 50px;
-    font-size: 18px;
-    color: #fff;
+.sidebar .nav_list .nav_item .nav_static{
+    position: relative;
+    height: 50px;
+    width: 50px;
+    margin:0 5px;
+    line-height: 50px;
 }
-.sidebar ul li .bx-search{
-    position: absolute;
-    z-index: 99;
-    color: #fff;
-    font-size: 22px;
-    transition: all 0.5s ease;
-}
-.sidebar ul li .bx-search:hover{
-    background: #fff;
-    color: #1d1b31;
-}
-.sidebar ul li a{
+
+
+.sidebar .nav_list .nav_item a{
     color: #fff;
     display: flex;
     align-items: center;
@@ -127,22 +122,20 @@ body:not(Header){
     border-radius: 10px;
     white-space: nowrap;
 }
-.sidebar ul li a:hover{
+.sidebar .nav_list .nav_item a:hover {
     color:#11101d;
     background: #fff;
 }
-
-.sidebar ul li a:hover .links_name{
-    color:#11101d;
-}
-
-.sidebar ul li i{
+.sidebar .nav_list .nav_item i {
     height: 50px;
     min-width: 50px;
     border-radius: 12px;
     line-height: 50px;
     text-align: center;
 }
+
+
+
 .sidebar .links_name{
     opacity: 0;
     pointer-events: none;
