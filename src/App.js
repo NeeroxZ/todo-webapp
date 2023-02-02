@@ -22,10 +22,7 @@ import {TodoTopicPage} from "./pages/TodoTopicPage";
 import {TodoTodayPage} from "./pages/TodoTodayPage";
 import {TodoTomorrowPage} from "./pages/TodoTomorrowPage";
 import {NavigationBar} from "./components/NavigationBar";
-import {Dashboard} from "./pages/Dashboard";
-import {NavBar} from "./components/Navbar";
-
-
+import {UserDashboard} from "./pages/UserDashboard";
 
 function App() {
     return (
@@ -33,16 +30,15 @@ function App() {
             <GlobalStore>
                 <Router>
                     <AuthProvider>
-
+                        <Navigation />
                         <Routes>
-                            <Route path={"/"} element={<NavBar />}>
                             <Route index element={<Login />} />
                             <Route path="login" element={<Login />} />
                             <Route path="reset" element={<ResetPasswordPage />}/>
                             <Route path="register" element={<Register />} />
                             <Route path="confirm" element={<ConfirmMailPage />} />
                             <Route path="test" element={<NavigationBar />} />
-                            <Route path="dashboard" element={<Dashboard />} />
+
                             <Route path="home" element={
                                 <ProtectedRoute>
                                     <UserStore>
@@ -66,14 +62,17 @@ function App() {
                                     </ProtectedRoute>
                                 }/>
                             </Route>
+                            <Route path="userDashboard" element={
+                                <ProtectedRoute>
+                                    <UserDashboard />
+                                </ProtectedRoute>
+                            }/>
                             <Route path="topic/:title" element={
                                 <ProtectedRoute>
                                     <TodoTopicPage />
                                 </ProtectedRoute>
                             } />
-
                             <Route path="*" element={<NoMatch />} />
-                            </Route>
                         </Routes>
                     </AuthProvider>
                 </Router>
@@ -95,6 +94,8 @@ const Navigation = () => {
     return(
         <nav style={{display: "flex", justifyContent: "flex-start"}}>
             <NavLink to="/home">Home</NavLink>
+            <div style={{marginLeft: "1rem"}}/>
+            <NavLink to="/userDashboard">Dashboard</NavLink>
             <div style={{marginLeft: "1rem"}}/>
             <NavLink to="/todo">Todos</NavLink>
             <div style={{marginLeft: "1rem"}}/>
@@ -126,7 +127,6 @@ const Home = () => {
 
     return (
         <>
-            <Dashboard/>
             <button onClick={() => setIsOpen(true)}>Open Me</button>
             {isOpen && <Modal setIsOpen={setIsOpen}/>}
             <Button variant={"contained"} onClick={() => logout()}>Log out</Button>

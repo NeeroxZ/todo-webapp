@@ -1,21 +1,9 @@
-import styled from "styled-components";
 import { Responsive, WidthProvider } from "react-grid-layout";
-import {ToDoChart} from "../components/TodoChart";
-import {ToDoToday} from "../components/TodoToday";
+import {TodoChart} from "../components/TodoChart";
+import {TodoToday} from "../components/TodoToday";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
-
-const GridItemWrapper = styled.div`
-  background: #f5f5f5;
-`;
-
-const GridItemContent = styled.div`
-  padding: 8px;
-`;
-
-const Root = styled.div`
-  padding: 16px;
-`;
+const usrName = "BOI";
 
 const layout = [
     { i: "tasksDone", x:0, y:0, w:1, h:1 },
@@ -26,9 +14,8 @@ const layout = [
     { i: "asdf6", x:0, y:0, w:1, h:1 }
 ];
 
-export const Grid = () => {
+export const UserDashboard = () => {
     return (
-
         <ResponsiveGridLayout
             layouts={{lg: layout}}
             breakepoints={{ lg:1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
@@ -36,24 +23,30 @@ export const Grid = () => {
             rowHeight={300}
             width={1000}
         >
-            <GridItemWrapper key="tasksDone">
-                <GridItemContent></GridItemContent>
-            </GridItemWrapper>
-            <GridItemWrapper key="todoToday">
-                <GridItemContent><ToDoToday/></GridItemContent>
-            </GridItemWrapper>
-            <GridItemWrapper key="tasksCart">
-                <GridItemContent><ToDoChart/></GridItemContent>
-            </GridItemWrapper>
-            <GridItemWrapper key="tasksOverdue">
-                <GridItemContent>asdf4</GridItemContent>
-            </GridItemWrapper>
-            <GridItemWrapper key="asdf5">
-                <GridItemContent>asdf5</GridItemContent>
-            </GridItemWrapper>
-            <GridItemWrapper key="asdf6">
-                 <GridItemContent>asdf6</GridItemContent>
-            </GridItemWrapper>
+            <div>
+                Hello {usrName}
+            </div>
+            <div key="tasksDone">
+
+            </div>
+            <div key="tasksDone">
+
+            </div>
+            <div key="todoToday">
+                <TodoToday/>
+            </div>
+            <div key="tasksCart">
+                <TodoChart/>
+            </div>
+            <div key="tasksOverdue">
+
+            </div>
+            <div key="asdf5">
+
+            </div>
+            <div key="asdf6">
+
+            </div>
         </ResponsiveGridLayout>
     );
 };
