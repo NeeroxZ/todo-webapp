@@ -10,7 +10,16 @@ body:not(Header){
     min-height:100vh;
     width: 100%;
     overflow: hidden;
-    margin-top: 4%;
+    margin-top: 3.5%;
+}
+@media (max-width: 991px){
+    body:not(Header){
+        position: relative;
+        min-height:100vh;
+        width: 100%;
+        overflow: hidden;
+        margin-top: 10%;
+    }
 }
 .sidebar{
     position: fixed;
