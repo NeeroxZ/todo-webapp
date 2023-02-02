@@ -2,13 +2,13 @@ import React from "react";
 
 const tableData = "Data";
 
-export function todoToday() {
+export function TodoToday() {
     return (
         <div>
-            <h1 id='title'>React Dynamic Table</h1>
-            <table id='students'>
+            <h1>ToDo´s Today</h1>
+            <table>
                 <tbody>
-                {tableData()}
+                {tableData}
                 </tbody>
             </table>
         </div>

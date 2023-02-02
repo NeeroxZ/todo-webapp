@@ -6,3 +6,13 @@ html, body{
     background: linear-gradient(0deg, #09080a 0%, #151e25 36%, #0b0d18 79%, #0c0c11 100%);
     scroll-behavior: smooth;
 }
+
+.dashboard{
+    display:grid;
+    grid-template-columns: auto auto auto;
+    padding: 1%;
+}
+
+.dashboardItem{
+    text-align: center;
+}
