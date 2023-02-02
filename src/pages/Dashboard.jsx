@@ -1,7 +1,9 @@
 import styled from "styled-components";
 import { Responsive, WidthProvider } from "react-grid-layout";
-import {NavBar} from "../components/Navbar";
-
+import 'font-awesome/css/font-awesome.min.css';
+import "../styles/dashboard.css";
+import {Fab} from "@mui/material";
+import AddIcon from '@mui/icons-material/Add';
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
 const GridItemWrapper = styled.div`
@@ -26,9 +28,15 @@ const layout = [
 ];
 
 
+
+
 export const Dashboard = () => {
     return (
-        <ResponsiveGridLayout
+        <div className="dashBoardContainer">
+            <Fab size="medium" color="primary" aria-label="add" className="addIcon">
+                <AddIcon />
+            </Fab>
+            <ResponsiveGridLayout
             layouts={{lg: layout}}
             breakepoints={{ lg:1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
             cols={{ lg: 5, md: 4, sm: 3, xs: 2, xxs: 1}}
@@ -55,5 +63,7 @@ export const Dashboard = () => {
                 <GridItemContent>asdf6</GridItemContent>
             </GridItemWrapper>
         </ResponsiveGridLayout>
+
+        </div>
     );
 };

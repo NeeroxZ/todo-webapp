@@ -1,0 +1,11 @@
+.MuiButtonBase-root.addIcon{
+    position: fixed;
+    right: 1%;
+    top: 90%;
+
+}
+.dashBoardContainer{
+    width: 100%;
+    height: 100vh;
+    overflow: scroll;
+}
