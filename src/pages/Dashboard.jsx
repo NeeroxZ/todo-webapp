@@ -4,28 +4,19 @@ import 'font-awesome/css/font-awesome.min.css';
 import "../styles/dashboard.css";
 import {Fab} from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
+import {TodoToday} from "../components/TodoToday";
+import {TodoChart} from "../components/TodoChart";
+
 const ResponsiveGridLayout = WidthProvider(Responsive);
-
-const GridItemWrapper = styled.div`
-  background: #f5f5f5;
-`;
-
-const GridItemContent = styled.div`
-  padding: 8px;
-`;
-
-const Root = styled.div`
-  padding: 16px;
-`;
+const usrName = "BOI";
 
 const layout = [
-    { i: "asdf1", x:0, y:0, w:1, h:1 },
-    { i: "asdf2", x:1, y:0, w:1, h:1 },
-    { i: "asdf3", x:2, y:0, w:1, h:1 },
-    { i: "asdf4", x:0, y:0, w:1, h:1 },
-    { i: "asdf5", x:1, y:0, w:1, h:1 },
-    { i: "asdf6", x:2, y:0, w:1, h:1 }
+    { i: "tasksDone", x:0, y:0, w:1, h:1 },
+    { i: "tasksToday", x:0, y:0, w:1, h:1 },
+    { i: "tasksCart", x:0, y:0, w:1, h:1 },
+    { i: "tasksOverdue", x:0, y:0, w:1, h:1 }
 ];
+
 
 
 
@@ -37,32 +28,29 @@ export const Dashboard = () => {
                 <AddIcon />
             </Fab>
             <ResponsiveGridLayout
-            layouts={{lg: layout}}
-            breakepoints={{ lg:1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
-            cols={{ lg: 5, md: 4, sm: 3, xs: 2, xxs: 1}}
-            rowHeight={300}
-            width={1000}
-            style={{position: "relative"}}
-        >
-            <GridItemWrapper key="asdf1">
-                <GridItemContent>asdf1</GridItemContent>
-            </GridItemWrapper>
-            <GridItemWrapper key="asdf2">
-                <GridItemContent>asdf2</GridItemContent>
-            </GridItemWrapper>
-            <GridItemWrapper key="asdf3">
-                <GridItemContent>asdf3</GridItemContent>
-            </GridItemWrapper>
-            <GridItemWrapper key="asdf4">
-                <GridItemContent>asdf4</GridItemContent>
-            </GridItemWrapper>
-            <GridItemWrapper key="asdf5">
-                <GridItemContent>asdf5</GridItemContent>
-            </GridItemWrapper>
-            <GridItemWrapper key="asdf6">
-                <GridItemContent>asdf6</GridItemContent>
-            </GridItemWrapper>
-        </ResponsiveGridLayout>
+                layouts={{lg: layout}}
+                breakepoints={{ lg:1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
+                cols={{ lg: 3, md: 3, sm: 3, xs: 2, xxs: 1}}
+                rowHeight={150}
+                width={1000}
+                compactType={"horizontal"}
+            >
+                <div>
+                    Hello {usrName}
+                </div>
+                <div className="dashboardItem" key="tasksDone">
+                    pleb
+                </div>
+                <div className="dashboardItem" key="todoToday">
+                    <TodoToday/>
+                </div>
+                <div className="dashboardItem" key="tasksCart">
+                    <TodoChart/>
+                </div>
+                <div className="dashboardItem" key="tasksOverdue">
+                    FooBar
+                </div>
+            </ResponsiveGridLayout>
 
         </div>
     );
