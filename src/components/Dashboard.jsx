@@ -1,7 +1,7 @@
 import React from "react";
 import { Responsive, WidthProvider } from "react-grid-layout";
-import {TodoChart} from "../components/TodoChart";
-import {TodoToday} from "../components/TodoToday";
+import {TodoChart} from "./TodoChart";
+import {TodoToday} from "./TodoToday";
 import "../styles/dashboard.css";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
