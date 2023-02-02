@@ -12,6 +12,9 @@ export const NavigationBar = () => {
     return (
         <>
             <button onClick={toggleNav}>Toggle</button>
+            <nav>
+
+            </nav>
             <div className={`sidebar ${active ? "active" : ""}`}>
                 <div className="logo_content">
                     <div className="logo">
