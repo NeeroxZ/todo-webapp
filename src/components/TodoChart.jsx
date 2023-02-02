@@ -1,18 +1,18 @@
 import React from "react";
 import {Chart} from "react-google-charts";
 
-export const tasks = [
+const tasks = [
     ["Status", "Count"],
     ["Finished", 4],
     ["Unfinished", 7],
     ["Expired", 2]
 ];
 
-export const opts = {
+const opts = {
   title: "ToDo´s status",
 };
 
-export function ToDoChart() {
+export function TodoChart() {
     return (
         <Chart
             charttype="PieChart"
