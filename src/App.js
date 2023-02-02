@@ -22,7 +22,7 @@ import {TodoTopicPage} from "./pages/TodoTopicPage";
 import {TodoTodayPage} from "./pages/TodoTodayPage";
 import {TodoTomorrowPage} from "./pages/TodoTomorrowPage";
 import {NavigationBar} from "./components/NavigationBar";
-
+import {UserDashboard} from "./pages/UserDashboard";
 
 function App() {
     return (
@@ -62,6 +62,11 @@ function App() {
                                     </ProtectedRoute>
                                 }/>
                             </Route>
+                            <Route path="userDashboard" element={
+                                <ProtectedRoute>
+                                    <UserDashboard />
+                                </ProtectedRoute>
+                            }/>
                             <Route path="topic/:title" element={
                                 <ProtectedRoute>
                                     <TodoTopicPage />
@@ -89,6 +94,8 @@ const Navigation = () => {
     return(
         <nav style={{display: "flex", justifyContent: "flex-start"}}>
             <NavLink to="/home">Home</NavLink>
+            <div style={{marginLeft: "1rem"}}/>
+            <NavLink to="/userDashboard">Dashboard</NavLink>
             <div style={{marginLeft: "1rem"}}/>
             <NavLink to="/todo">Todos</NavLink>
             <div style={{marginLeft: "1rem"}}/>
