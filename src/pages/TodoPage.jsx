@@ -59,9 +59,11 @@ export const TodoPage = (props) => {
                 <div>No todos found</div>
             )}
             {data &&
-                <ul>
+                <div className="ex1">
+               <ul className="todo-list">
                     {data && data.map((item, i) => <li key={i}><Todo id={item.id}/></li>)}
                 </ul>
+                </div>
             }
         </>
     );
