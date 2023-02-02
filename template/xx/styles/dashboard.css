@@ -1,0 +1,27 @@
+.MuiButtonBase-root.addIcon{
+    position: fixed;
+    right: 1%;
+    top: 90%;
+
+}
+.dashBoardContainer {
+    width: 100%;
+    height: 100vh;
+    overflow: scroll;
+}
+html, body{
+    font-family: Helvetica Neue, Arial, sans-serif;
+    width: 100%;
+    height: 100%;
+    background: #0d0b18;
+    background: linear-gradient(0deg, #09080a 0%, #151e25 36%, #0b0d18 79%, #0c0c11 100%);
+    scroll-behavior: smooth;
+}
+
+.dashboardItem{
+    background: linear-gradient(0deg, #2e9274 0%, #33a382 33%, #43d3a8 66%, #43d3a8 100%);
+}
+
+rect{
+    fill:none;
+}

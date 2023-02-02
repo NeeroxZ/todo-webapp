@@ -96,8 +96,6 @@ header {
     padding: 0 100px;
     background: #262626;
     width: 100%;
-    background: linear-gradient(312deg,#455bbd1f 2%, rgba(255,255,255,0.2) 87%);
-
 }
 header .logo {
     color: #FFF;
