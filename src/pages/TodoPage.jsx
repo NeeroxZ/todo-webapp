@@ -25,7 +25,7 @@ export const TodoPage = (props) => {
                                 wenn mehr als 1000 todos gespeichert wurden */
             res = await pb.collection('todo').getList(1, 1000, {
                 filter: params,
-                sort: '-dueDate'
+                sort: '-due_date'
             });
             setError(null);
             setData(res.items);
@@ -99,7 +99,7 @@ function getParams(props, userId) {
     if (props.dateFrom && props.dateUntil) {
         if (props.dateFrom !== "" && props.dateUntil !== "") {
 
-            query += ` && (dueDate >="${props.dateFrom}" && dueDate<="${props.dateUntil}")`;
+            query += ` && (due_date >="${props.dateFrom}" && due_date<="${props.dateUntil}")`;
 
 
             // q.Space().OpenBracket("&&")

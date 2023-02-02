@@ -5,8 +5,7 @@
 
 }
 .dashBoardContainer {
-    width: 100%;
-    height: 100vh;
+
     overflow: scroll;
 }
 html, body{
@@ -19,9 +18,43 @@ html, body{
 }
 
 .dashboardItem{
-    background: linear-gradient(0deg, #2e9274 0%, #33a382 33%, #43d3a8 66%, #43d3a8 100%);
+    color: white;
+    margin-left: 2em;
+    overflow: scroll;
+    text-align: center;
+    font-size: 2em;
+    border-radius: 15px;
+    box-shadow: 0 0 10px #0d0b18;
+    background: linear-gradient(312deg,#455bbd1f 2%, rgba(255,255,255,0.2) 87%);
+    backdrop-filter: blur(10px);
+    border-left: 2px solid #fdfdfd3a;
+    border-bottom: 2px solid #43558f1a;
+}
+@media only screen and (max-width: 860px){
+    .dashboardItem{
+        margin-left: 0em;
+
+        color: white;
+        overflow: scroll;
+        text-align: center;
+        font-size: 1em;
+        border-radius: 15px;
+        box-shadow: 0 0 10px #0d0b18;
+        background: linear-gradient(312deg,#455bbd1f 2%, rgba(255,255,255,0.2) 87%);
+        backdrop-filter: blur(10px);
+        border-left: 2px solid #fdfdfd3a;
+        border-bottom: 2px solid #43558f1a;
+    }
+}
+@media (max-width: 881px){
+    .dashboardItem{
+    }
 }
 
 rect{
     fill:none;
+}
+empty{
+    background: linear-gradient(312deg,#455bbd1f 2%, rgba(255,255,255,0.2) 87%);
+    color: white;
 }
