@@ -33,16 +33,15 @@ function App() {
             <GlobalStore>
                 <Router>
                     <AuthProvider>
-
+                        <Navigation />
                         <Routes>
-                            <Route path={"/"} element={<NavBar />}>
                             <Route index element={<Login />} />
                             <Route path="login" element={<Login />} />
                             <Route path="reset" element={<ResetPasswordPage />}/>
                             <Route path="register" element={<Register />} />
                             <Route path="confirm" element={<ConfirmMailPage />} />
                             <Route path="test" element={<NavigationBar />} />
-                            <Route path="dashboard" element={<Dashboard />} />
+
                             <Route path="home" element={
                                 <ProtectedRoute>
                                     <UserStore>
@@ -71,9 +70,7 @@ function App() {
                                     <TodoTopicPage />
                                 </ProtectedRoute>
                             } />
-
                             <Route path="*" element={<NoMatch />} />
-                            </Route>
                         </Routes>
                     </AuthProvider>
                 </Router>
@@ -126,7 +123,6 @@ const Home = () => {
 
     return (
         <>
-            <Dashboard/>
             <button onClick={() => setIsOpen(true)}>Open Me</button>
             {isOpen && <Modal setIsOpen={setIsOpen}/>}
             <Button variant={"contained"} onClick={() => logout()}>Log out</Button>
