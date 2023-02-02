@@ -22,7 +22,10 @@ import {TodoTopicPage} from "./pages/TodoTopicPage";
 import {TodoTodayPage} from "./pages/TodoTodayPage";
 import {TodoTomorrowPage} from "./pages/TodoTomorrowPage";
 import {NavigationBar} from "./components/NavigationBar";
-import {UserDashboard} from "./pages/UserDashboard";
+import {Dashboard} from "./pages/Dashboard";
+import {NavBar} from "./components/Navbar";
+
+
 
 function App() {
     return (
@@ -30,49 +33,47 @@ function App() {
             <GlobalStore>
                 <Router>
                     <AuthProvider>
-                        <Navigation />
-                        <Routes>
-                            <Route index element={<Login />} />
-                            <Route path="login" element={<Login />} />
-                            <Route path="reset" element={<ResetPasswordPage />}/>
-                            <Route path="register" element={<Register />} />
-                            <Route path="confirm" element={<ConfirmMailPage />} />
-                            <Route path="test" element={<NavigationBar />} />
 
-                            <Route path="home" element={
-                                <ProtectedRoute>
-                                    <UserStore>
-                                        <Home />
-                                    </UserStore>
-                                </ProtectedRoute>} />
-                            <Route path="todo">
-                                <Route path="all" element={
+                        <Routes>
+                            <Route path={"/"} element={<NavBar />}>
+                                <Route index element={<Login />} />
+                                <Route path="login" element={<Login />} />
+                                <Route path="reset" element={<ResetPasswordPage />}/>
+                                <Route path="register" element={<Register />} />
+                                <Route path="confirm" element={<ConfirmMailPage />} />
+                                <Route path="test" element={<NavigationBar />} />
+                                <Route path="dashboard" element={<Dashboard />} />
+                                <Route path="home" element={
                                     <ProtectedRoute>
-                                        <TodoPage />
-                                    </ProtectedRoute>
-                                }/>
-                                <Route path="today" element={
+                                        <UserStore>
+                                            <Home />
+                                        </UserStore>
+                                    </ProtectedRoute>} />
+                                <Route path="todo">
+                                    <Route path="all" element={
+                                        <ProtectedRoute>
+                                            <TodoPage />
+                                        </ProtectedRoute>
+                                    }/>
+                                    <Route path="today" element={
+                                        <ProtectedRoute>
+                                            <TodoTodayPage />
+                                        </ProtectedRoute>
+                                    }/>
+                                    <Route path="tomorrow" element={
+                                        <ProtectedRoute>
+                                            <TodoTomorrowPage />
+                                        </ProtectedRoute>
+                                    }/>
+                                </Route>
+                                <Route path="topic/:title" element={
                                     <ProtectedRoute>
-                                        <TodoTodayPage />
+                                        <TodoTopicPage />
                                     </ProtectedRoute>
-                                }/>
-                                <Route path="tomorrow" element={
-                                    <ProtectedRoute>
-                                        <TodoTomorrowPage />
-                                    </ProtectedRoute>
-                                }/>
+                                } />
+
+                                <Route path="*" element={<NoMatch />} />
                             </Route>
-                            <Route path="userDashboard" element={
-                                <ProtectedRoute>
-                                    <UserDashboard />
-                                </ProtectedRoute>
-                            }/>
-                            <Route path="topic/:title" element={
-                                <ProtectedRoute>
-                                    <TodoTopicPage />
-                                </ProtectedRoute>
-                            } />
-                            <Route path="*" element={<NoMatch />} />
                         </Routes>
                     </AuthProvider>
                 </Router>
@@ -94,8 +95,6 @@ const Navigation = () => {
     return(
         <nav style={{display: "flex", justifyContent: "flex-start"}}>
             <NavLink to="/home">Home</NavLink>
-            <div style={{marginLeft: "1rem"}}/>
-            <NavLink to="/userDashboard">Dashboard</NavLink>
             <div style={{marginLeft: "1rem"}}/>
             <NavLink to="/todo">Todos</NavLink>
             <div style={{marginLeft: "1rem"}}/>
