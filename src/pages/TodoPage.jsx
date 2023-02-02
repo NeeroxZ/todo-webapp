@@ -59,11 +59,15 @@ export const TodoPage = (props) => {
                 <div>No todos found</div>
             )}
             {data &&
-                <div className="ex1">
-               <ul className="todo-list">
+                props.scrollable
+                ?<div className="ex1">
+                    <ul className="todo-list">
+                        {data && data.map((item, i) => <li key={i}><Todo id={item.id}/></li>)}
+                    </ul>
+                </div>
+                :<ul className="todo-list">
                     {data && data.map((item, i) => <li key={i}><Todo id={item.id}/></li>)}
                 </ul>
-                </div>
             }
         </>
     );
@@ -115,6 +119,7 @@ function getParams(props, userId) {
 }
 
 TodoPage.propType = {
+    scrollable: PropTypes.bool.isRequired,
     bookmarkFilter: PropTypes.bool,
     deletedFilter: PropTypes.bool,
     topicId: PropTypes.number,
