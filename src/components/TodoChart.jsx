@@ -1,5 +1,6 @@
 import React from "react";
 import {Chart} from "react-google-charts";
+import "../styles/dashboard.css";
 
 const tasks = [
     ["Status", "Count"],
@@ -9,17 +10,17 @@ const tasks = [
 ];
 
 const opts = {
-  title: "ToDo´s status",
+    title: "ToDo´s status",
 };
 
 export function TodoChart() {
     return (
         <Chart
-            charttype="PieChart"
+            chartType="PieChart"
             data={tasks}
             options={opts}
-            width={"350px"}
-            height={"400px"}
+            width="100%"
+            height="100%"
         />
     );
 }

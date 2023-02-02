@@ -7,12 +7,10 @@ html, body{
     scroll-behavior: smooth;
 }
 
-.dashboard{
-    display:grid;
-    grid-template-columns: auto auto auto;
-    padding: 1%;
+.dashboardItem{
+    background: linear-gradient(0deg, #2e9274 0%, #33a382 33%, #43d3a8 66%, #43d3a8 100%);
 }
 
-.dashboardItem{
-    text-align: center;
+rect{
+    fill:none;
 }
