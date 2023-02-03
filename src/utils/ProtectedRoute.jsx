@@ -1,9 +1,10 @@
 import React from 'react'
 import {Navigate} from "react-router-dom"
-import pb from "./pocketbase";
+import {useAuth} from "../stores/AuthStore";
 
 export const ProtectedRoute = ({children}) => {
-    if (!pb.authStore.isValid) {
+    const auth = useAuth();
+    if (!auth.loginValid) {
         return <Navigate to="/login" replace/>;
     }
     return children
