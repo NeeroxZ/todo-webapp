@@ -7,27 +7,25 @@ import AddIcon from '@mui/icons-material/Add';
 import {TodoToday} from "../components/TodoToday";
 import {TodoChart} from "../components/TodoChart";
 import {TodoAllPage} from "./TodoAllPage";
+import {UserInfo} from "../components/dashboard/UserInfo";
+import {User} from "../components/dashboard/User";
+import {Category} from "../components/dashboard/Category";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
 const layout = [
-    { i: "user",x:0, y:0, w:1, h:1 },
-    { i: "empty1",          x:1, y:0, w:0.25, h:1 },
-    { i: "tasksCart",       x:2, y:0, w:1, h:1 },
+        { i: "empty",            x:0, y:0, w:1, h:1 },
+        { i: "empty2",           x:1, y:0, w:1, h:1 },
+        { i: "empty3",           x:2, y:0, w:1, h:1 },
+        { i: "empty4",           x:3, y:0, w:1, h:4 },
 
-    { i: "empty2",x:0, y:1, w:1, h:1 },
-    { i: "empty3",x:1, y:1, w:1, h:1 },
-    { i: "empty4",x:2, y:1, w:1, h:1 },
+        { i: "empty5",           x:0, y:1, w:1, h:2 },
+        { i: "empty6",           x:1, y:1, w:1, h:1 },
+        { i: "empty7",           x:2, y:1, w:1, h:2 },
 
-    { i: "tasksOverdue",    x:0, y:2, w:1, h:2 },
-    { i: "empty5",           x:1, y:2, w:0.25, h:1 },
-    { i: "tasksOverdue1",   x:2, y:2, w:1, h:2 },
+        { i: "empty8",           x:0, y:3, w:3, h:1 },
 
 ];
-
-
-
-
 
 export const Dashboard = () => {
     return (
@@ -38,39 +36,41 @@ export const Dashboard = () => {
             <ResponsiveGridLayout
                 layouts={{lg: layout}}
                 breakepoints={{ lg:1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
-                cols={{ lg: 3, md: 3, sm: 3, xs: 1, xxs: 1}}
+                cols={{ lg: 4, md: 3, sm: 3, xs: 1, xxs: 1}}
                 rowHeight={150}
                 width={2000}
                 compactType={"horizontal"}
             >
-                <div className="dashboardItem" key="user">
-                    User INPUT
+
+                <div className="dashboardItem" key="empty" >
+                    <UserInfo/>
                 </div>
-                <div className="empty" key="empty1">
+                <div className="dashboardItem" key="empty2">
+                    empty1
                 </div>
-                <div className="dashboardItem" key="tasksCart">
-                    <TodoChart/>
+                <div className="dashboardItem" key="empty3">
+                    empty3
+                </div>
+                <div className="dashboardItem" key="empty4">
+                    <Category/>
                 </div>
 
 
-                <div className="empty" key="empty2">
-
-                </div>
-                <div className="empty" key="empty3">
-                </div>
-                <div className="empty" key="empty4">
-
-                </div>
-
-                <div className="dashboardItem todoAll" key="tasksOverdue">
-                    All TODOS
+                <div className="dashboardItem" key="empty5">
+                    TODO`S
                     <TodoAllPage/>
                 </div>
-                <div className="empty" key="empty5">
+                <div className="dashboardItem" key="empty6">
+                    empty6
                 </div>
-                <div className="dashboardItem" key="tasksOverdue1">
-                    <TodoToday/>
+                <div className="dashboardItem" key="empty7">
+                    empty7
                 </div>
+
+                <div className="dashboardItem todoAll" key="empty8">
+                    All TODOS
+                </div>
+
 
 
             </ResponsiveGridLayout>
