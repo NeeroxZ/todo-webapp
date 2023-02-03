@@ -1,6 +1,6 @@
 import {useState} from "react";
 import {useAuth} from "../stores/AuthStore";
-import {useNavigate} from "react-router-dom";
+import {Navigate, useNavigate} from "react-router-dom";
 import "../styles/login.css";
 import {Alert, AlertTitle, Backdrop, CircularProgress} from "@mui/material";
 
@@ -13,6 +13,12 @@ export const Login = () => {
 
     // Todo (Marvin): Forgot password navigation
     // Todo (Marvin): Register navigation
+
+    if (auth.loginValid) {
+        return (
+            <Navigate to="/home" />
+        )
+    }
 
     return (
         <div className="containerLogin">
