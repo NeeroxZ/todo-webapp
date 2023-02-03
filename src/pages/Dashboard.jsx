@@ -10,6 +10,8 @@ import {TodoAllPage} from "./TodoAllPage";
 import {UserInfo} from "../components/dashboard/UserInfo";
 import {User} from "../components/dashboard/User";
 import {Category} from "../components/dashboard/Category";
+import {View} from "../components/dashboard/View";
+import {View2} from "../components/dashboard/View2";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
@@ -46,10 +48,10 @@ export const Dashboard = () => {
                     <UserInfo/>
                 </div>
                 <div className="dashboardItem" key="empty2">
-                    empty1
+                    <View/>
                 </div>
                 <div className="dashboardItem" key="empty3">
-                    empty3
+                    <View2/>
                 </div>
                 <div className="dashboardItem" key="empty4">
                     <Category/>
