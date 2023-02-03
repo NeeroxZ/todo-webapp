@@ -1,18 +1,15 @@
-
 import '../styles/responsiveSidebar.css';
 import {useState} from "react";
 import {NavLink, Outlet} from "react-router-dom";
 import 'font-awesome/css/font-awesome.min.css';
 import dodo from '../assets/images/userIcon.jpg';
-import NavContext from "react-bootstrap/NavContext";
 import {useAuth} from "../stores/AuthStore";
-import pb from "../utils/pocketbase";
 export const NavBar = () => {
+    const {loginValid} = useAuth();
 
     const [open, setOpen] = useState(false);
 
-
-    if (!pb.authStore.isValid) {
+    if (!loginValid) {
         return;
     }
 
@@ -41,8 +38,12 @@ export const NavBar = () => {
                         <li>
                             <NavLink to="/todo/tomorrow" onClick={toggleMenu}>Tomorrow</NavLink>
                         </li>
-                        <li><a href="#">Services</a></li>
-                        <li><a href="#">Contact</a></li>
+                        <li>
+                            <NavLink to="/login" onClick={toggleMenu}>Login</NavLink>
+                        </li>
+                        <li>
+                            <NavLink to="/dashboard" onClick={toggleMenu}>{matches}</NavLink>
+                        </li>
                     </ul>
                 </nav>
                 <div onClick={toggleMenu} className="menu-toggle"><i className="fa fa-bars"></i></div>
