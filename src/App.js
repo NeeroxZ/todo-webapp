@@ -8,7 +8,7 @@ import {
 } from "react-router-dom";
 import './App.css';
 import {AuthProvider, useAuth} from "./stores/AuthStore";
-import ProtectedRoute from "./utils/ProtectedRoute";
+import ProtectedRoute, {PrivateRoute} from "./utils/ProtectedRoute";
 import {ConfirmMailPage} from "./pages/ConfirmMail";
 import {Login} from "./pages/Login";
 import {Register} from "./pages/Register";
@@ -28,12 +28,17 @@ import {NavBar} from "./components/Navbar";
 function App() {
     return (
         <>
+
             <GlobalStore>
                 <Router>
                     <AuthProvider>
                         <NavBar/>
                         <Routes>
-                            <Route index element={<Login/>}/>
+                            <Route index element={
+                                <ProtectedRoute>
+                                    <Dashboard />
+                                </ProtectedRoute>
+                            }/>
                             <Route path="login" element={<Login/>}/>
                             <Route path="reset" element={<ResetPasswordPage/>}/>
                             <Route path="register" element={<Register/>}/>
@@ -42,7 +47,7 @@ function App() {
                             <Route path="dashboard" element={<Dashboard/>}/>
                             <Route path="home" element={
                                 <ProtectedRoute>
-                                    <Home/>
+                                    <Dashboard/>
                                 </ProtectedRoute>}/>
                             <Route path="todo">
                                 <Route path="all" element={
@@ -71,34 +76,10 @@ function App() {
                         </Routes>
                     </AuthProvider>
                 </Router>
-
             </GlobalStore>
         </>
-    );
+    )
 }
-
-
-
-
-
-
-
-const Home = () => {
-    const {logout} = useAuth();
-    const [isOpen, setIsOpen] = useState(false);
-
-    return (
-        <>
-            <button onClick={() => setIsOpen(true)}>Open Me</button>
-            {isOpen && <Modal setIsOpen={setIsOpen}/>}
-            <Button variant={"contained"} onClick={() => logout()}>Log out</Button>
-
-        </>
-    );
-};
-
-
-
 
 
 

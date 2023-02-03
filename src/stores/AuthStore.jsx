@@ -6,7 +6,7 @@ import Cookies from "universal-cookie/es6";
 const AuthContext = createContext(null);
 
 export const AuthProvider = ({children}) => {
-    const [waiting, setWaiting] = useState(false);
+    const [waiting, setWaiting] = useState(true);
     const [loginError, setLoginError] = useState(null);
     const [loginSuccess, setLoginSuccess] = useState(false);
     const [loginValid, setLoginValid] = useState(false);
@@ -16,28 +16,35 @@ export const AuthProvider = ({children}) => {
     const cookies = new Cookies();
     const COOKIE_KEY = "auth";
 
+    const loadCookie = async () => {
+        console.log("loading cookie");
+        try {
+            let foundCookie = cookies.get(COOKIE_KEY)
+            if (foundCookie === undefined) {
+                await logout()
+                return;
+            }
+            try {
+                pb.authStore.loadFromCookie(foundCookie, COOKIE_KEY);
+                pb.authStore.isValid && await pb.collection('users').authRefresh();
+                setLoginValid(true);
+                setWaiting(false);
+            } catch (e) {
+                await logout()
+
+            }
+
+        }
+        catch (e){
+            console.log("could not find/parse auth cookie");
+            await logout();
+
+        }
+    };
 
     useEffect(() => {
-        const loadCookie = async () => {
-            try {
-                let foundCookie = cookies.get(COOKIE_KEY)
-                pb.authStore.loadFromCookie(foundCookie, COOKIE_KEY);
-                try {
-                    pb.authStore.isValid && await pb.collection('users').authRefresh();
-                    setLoginValid(true);
-                } catch (e) {
-                    setLoginValid(false);
-                    pb.authStore.clear();
-                }
-
-            }
-            catch (e){
-                console.log("could not find/parse auth cookie");
-            }
-        };
-        loadCookie().then(() => console.log("cookie checked"));
+        loadCookie().then((r) => {console.log("cookie loaded")});
     }, []);
-
 
     // login
     const login = async (username, password) => {
@@ -50,7 +57,7 @@ export const AuthProvider = ({children}) => {
                 password
             )
             let expCookie = pb.authStore.exportToCookie({sameSite: 'none', secure: false}, COOKIE_KEY);
-            cookies.set(COOKIE_KEY, expCookie, {sameSite:'none', secure:false})
+            cookies.set(COOKIE_KEY, expCookie, {sameSite:'none', secure: false})
         } catch(error) {
             setWaiting(false);
             setLoginError(true);
@@ -74,6 +81,8 @@ export const AuthProvider = ({children}) => {
         cookies.remove("auth");
         setLoginValid(false);
         pb.authStore.clear()
+        setWaiting(false);
+
         navigator("/login")
     };
 
@@ -83,7 +92,7 @@ export const AuthProvider = ({children}) => {
     };
 
     return(
-        <AuthContext.Provider value={{login, logout, loginError, waiting, loginSuccess, getUserId, loginValid}}>
+        <AuthContext.Provider value={{login, logout, loginError, waiting, loginSuccess, getUserId, loginValid, loadCookie}}>
             {children}
         </AuthContext.Provider>
     )
