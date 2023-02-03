@@ -9,7 +9,7 @@ export const Todo = (props) => {
     const [done, setDone] = useState(false);
     const [title, setTitle] = useState("");
     const [saved, setSaved] = useState(false);
-    const [dueDate, setDueDate] = useState(null);
+    const [dueTD, setDueTD] = useState(null);
     const [due, setDue] = useState(false);
 
 
@@ -22,21 +22,25 @@ export const Todo = (props) => {
         let currentDate = `${time.getUTCFullYear()}-${time.getUTCMonth()}-${time.getUTCDate()}`;
         let currentTime = `${time.getUTCHours()}:${time.getUTCMinutes()}:${time.getUTCSeconds()}.${time.getUTCMilliseconds()}`;
         let currentDatetime = `${currentDate} ${currentTime}`;
-
-        console.log(time.getMonth());
         console.log(currentDatetime);
+        console.log(dueTD);
+        console.log(currentDatetime > dueTD)
+
     };
 
 
     const getData = async() => {
         let res = {};
+        let test = "";
         try {
             res = await pb.collection('todo').getOne(props.id);
             setData(res);
             setTitle(res.title);
             setDone(res.done);
             setSaved(res.saved);
-            setDueDate(res.dueDate);
+            setDueTD(res.due_date);
+            console.log(dueTD);
+            checkDueDate();
 
             setError(null);
         } catch (error) {
@@ -48,7 +52,6 @@ export const Todo = (props) => {
     };
 
     useEffect(() => {
-        checkDueDate();
         getData();
     }, []);
 
@@ -94,7 +97,7 @@ export const Todo = (props) => {
 
     return (
         <>
-            <div className={`todo-container ${done ? "done" : (saved ? "saved" : "")}`}
+            <div className={`todo-container ${done ? "done" : (saved ? "saved" : "")} `}
                  onClick={(e) => handleOpenModal(e)}
             >
                 <Grid container direction="row"
@@ -110,10 +113,8 @@ export const Todo = (props) => {
                             className={"todo-done"}
                             onChange={handleChange}
                         />
-                        <Typography variant="h5">
-                            <Box className={`todo-title ${done ? "done" : ""}`}>
-                                {title}
-                            </Box>
+                        <Typography variant="h5" className={`todo-title ${done ? "done" : ""}`}>
+                            {title}
                         </Typography>
                     </Grid>
                     <Grid item xs={1} md={1}>

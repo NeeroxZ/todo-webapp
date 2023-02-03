@@ -15,7 +15,7 @@ export const TodoTomorrowPage = () => {
 
     return (
         <>
-            <TodoPage dateFrom={getTimeFrom()} dateUntil={getTimeUntil()} />
+            <TodoPage scrollable={true} dateFrom={getTimeFrom()} dateUntil={getTimeUntil()} />
         </>
     );
 };

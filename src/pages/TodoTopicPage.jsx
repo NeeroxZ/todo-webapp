@@ -58,7 +58,7 @@ export const TodoTopicPage = () => {
     return (
         <>
             {topicId && (
-                <TodoPage topicId={topicId} />
+                <TodoPage scrollable={true}  topicId={topicId} />
             )}
             {notFound && (
                 <div>Topic not found</div>
