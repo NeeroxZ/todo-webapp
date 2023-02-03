@@ -41,9 +41,6 @@ export const NavBar = () => {
                         <li>
                             <NavLink to="/login" onClick={toggleMenu}>Login</NavLink>
                         </li>
-                        <li>
-                            <NavLink to="/dashboard" onClick={toggleMenu}>{matches}</NavLink>
-                        </li>
                     </ul>
                 </nav>
                 <div onClick={toggleMenu} className="menu-toggle"><i className="fa fa-bars"></i></div>
