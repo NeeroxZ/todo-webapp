@@ -88,7 +88,7 @@ body {
     padding: 0;
     font-family: sans-serif;
 }
-header {
+.nav_header {
     position: fixed;
     top: 0;
     left: 0;
@@ -99,7 +99,7 @@ header {
     background: linear-gradient(312deg,#455bbd1f 2%, rgba(255,255,255,0.2) 87%);
 
 }
-header .logo {
+.nav_header .logo {
     color: #FFF;
     height: 50px;
     line-height: 50px;
@@ -107,18 +107,18 @@ header .logo {
     float: left;
     font-weight: bold;
 }
-header nav {
+.nav_header nav {
     float: right;
 }
-header nav ul {
+.nav_header nav ul {
     margin: 0;
     padding: 0;
     display: flex;
 }
-header nav ul li {
+.nav_header nav ul li {
     list-style: none;
 }
-header nav ul li a {
+.nav_header nav ul li a {
     height: 50px;
     line-height: 50px;
     padding: 0 20px;
@@ -126,8 +126,11 @@ header nav ul li a {
     text-decoration: none;
     display: block;
 }
-header nav ul li a:hover,
-header nav ul li a.active {
+.nav_header nav ul li a:hover {
+    color: #FFF;
+    background: #3674a6;
+}
+.nav_header nav ul li a.active {
     color: #FFF;
     background: #2196F3;
 }
@@ -140,13 +143,13 @@ header nav ul li a.active {
     display: none;
 }
 @media (max-width: 991px) {
-    header {
+    .nav_header {
         padding: 0 20px;
     }
     .menu-toggle {
         display: block;
     }
-    header nav {
+    .nav_header nav {
         position: absolute;
         width: 100%;
         height: calc(100vh - 50px);
@@ -155,14 +158,14 @@ header nav ul li a.active {
         left: -100%;
         transition: 0.5s;
     }
-    header nav.active {
+    .nav_header nav.active {
         left: 0;
     }
-    header nav ul {
+    .nav_header nav ul {
         display: block;
         text-align: center;
     }
-    header nav ul li a {
+    .nav_header nav ul li a {
         border-bottom: 1px solid rgba(0,0,0,0.2);
     }
 }

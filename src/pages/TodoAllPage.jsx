@@ -5,7 +5,7 @@ export const TodoAllPage = () => {
 
     return (
         <>
-            <TodoPage />
+            <TodoPage scrollable={true} />
         </>
     );
 };
