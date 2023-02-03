@@ -24,6 +24,7 @@ import {TodoTomorrowPage} from "./pages/TodoTomorrowPage";
 import {NavigationBar} from "./components/NavigationBar";
 import {Dashboard} from "./pages/Dashboard";
 import {NavBar} from "./components/Navbar";
+import {Test} from "./pages/Test";
 
 
 
@@ -41,7 +42,7 @@ function App() {
                                 <Route path="reset" element={<ResetPasswordPage />}/>
                                 <Route path="register" element={<Register />} />
                                 <Route path="confirm" element={<ConfirmMailPage />} />
-                                <Route path="test" element={<NavigationBar />} />
+                                <Route path="test" element={<Test />} />
                                 <Route path="dashboard" element={<Dashboard />} />
                                 <Route path="home" element={
                                     <ProtectedRoute>
