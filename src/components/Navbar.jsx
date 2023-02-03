@@ -5,8 +5,7 @@ import 'font-awesome/css/font-awesome.min.css';
 import dodo from '../assets/images/userIcon.jpg';
 import {useAuth} from "../stores/AuthStore";
 export const NavBar = () => {
-    const {loginValid} = useAuth();
-
+    const {loginValid, logout} = useAuth();
     const [open, setOpen] = useState(false);
 
     if (!loginValid) {
@@ -39,7 +38,9 @@ export const NavBar = () => {
                             <NavLink to="/todo/tomorrow" onClick={toggleMenu}>Tomorrow</NavLink>
                         </li>
                         <li>
-                            <NavLink to="/login" onClick={toggleMenu}>Login</NavLink>
+                            <NavLink to="/login" onClick={() => {
+                                logout();
+                            }}>Login</NavLink>
                         </li>
                     </ul>
                 </nav>

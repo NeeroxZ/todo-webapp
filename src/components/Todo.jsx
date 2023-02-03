@@ -1,15 +1,16 @@
 import '../styles/todo.css'
-import {Box, Checkbox, Grid, Typography} from "@mui/material";
+import {Checkbox, Grid, Typography} from "@mui/material";
 import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
 import RadioButtonCheckedIcon from '@mui/icons-material/RadioButtonChecked';
 import {Bookmark, BookmarkBorder} from "@mui/icons-material";
 import {useEffect, useState} from "react";
+import {zeroPad} from "../utils/functions";
 import pb from "../utils/pocketbase";
+
 export const Todo = (props) => {
     const [done, setDone] = useState(false);
     const [title, setTitle] = useState("");
     const [saved, setSaved] = useState(false);
-    const [dueTD, setDueTD] = useState(null);
     const [due, setDue] = useState(false);
 
 
@@ -19,27 +20,33 @@ export const Todo = (props) => {
 
     const checkDueDate = () => {
         let time = new Date();
-        let currentDate = `${time.getUTCFullYear()}-${time.getUTCMonth()}-${time.getUTCDate()}`;
-        let currentTime = `${time.getUTCHours()}:${time.getUTCMinutes()}:${time.getUTCSeconds()}.${time.getUTCMilliseconds()}`;
-        let currentDatetime = `${currentDate} ${currentTime}`;
-        console.log(currentDatetime);
-        console.log(dueTD);
-        console.log(currentDatetime > dueTD)
+        let year = time.getUTCFullYear();
+        let month = (time.getUTCMonth() +1).toString();
+        let date = time.getUTCDate().toString().slice(-2);
+        let hours = time.getUTCHours().toString().slice(-2);
+        let min = time.getUTCMinutes().toString().slice(-2);
+        let sec = time.getUTCSeconds().toString().slice(-2);
+        let mSec = time.getUTCMilliseconds().toString().slice(-3);
 
+        let currentDate = `${year}-${zeroPad(month, 2)}-${zeroPad(date, 2)}`;
+        let currentTime = `${zeroPad(hours, 2)}:${zeroPad(min, 2)}:${zeroPad(sec, 2)}`;
+        currentTime += `.${zeroPad(mSec, 3)}Z`
+        return `${currentDate} ${currentTime}`;
     };
 
 
     const getData = async() => {
         let res = {};
-        let test = "";
         try {
             res = await pb.collection('todo').getOne(props.id);
             setData(res);
             setTitle(res.title);
             setDone(res.done);
             setSaved(res.saved);
-            setDueTD(res.due_date);
-            console.log(dueTD);
+
+            if (res.due_date < checkDueDate()) {
+                setDue(true);
+            }
             checkDueDate();
 
             setError(null);
