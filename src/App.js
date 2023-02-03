@@ -4,16 +4,14 @@ import GlobalStore from "./stores/GlobalStore";
 import {
     BrowserRouter as Router,
     Routes,
-    Route, NavLink,
+    Route,
 } from "react-router-dom";
 import './App.css';
 import {AuthProvider, useAuth} from "./stores/AuthStore";
 import ProtectedRoute from "./utils/ProtectedRoute";
-import pb from "./utils/pocketbase";
 import {ConfirmMailPage} from "./pages/ConfirmMail";
 import {Login} from "./pages/Login";
 import {Register} from "./pages/Register";
-import {UserStore} from "./stores/UserStore";
 import Modal from './components/Modal.jsx';
 import {TodoPage} from "./pages/TodoPage";
 import {ResetPasswordPage} from "./pages/ResetPasswordPage";
@@ -44,9 +42,7 @@ function App() {
                             <Route path="dashboard" element={<Dashboard/>}/>
                             <Route path="home" element={
                                 <ProtectedRoute>
-                                    <UserStore>
-                                        <Home/>
-                                    </UserStore>
+                                    <Home/>
                                 </ProtectedRoute>}/>
                             <Route path="todo">
                                 <Route path="all" element={
@@ -81,38 +77,7 @@ function App() {
     );
 }
 
-const Navigation = () => {
-    const {token, logout} = useAuth();
 
-
-
-    if (!pb.authStore.isValid) {
-        return;
-    }
-
-    return(
-        <nav style={{display: "flex", justifyContent: "flex-start"}}>
-            <NavLink to="/home">Home</NavLink>
-            <div style={{marginLeft: "1rem"}}/>
-            <NavLink to="/todo">Todos</NavLink>
-            <div style={{marginLeft: "1rem"}}/>
-            <NavLink to="/test">Nav</NavLink>
-            <div style={{marginLeft: "1rem"}}/>
-            <NavLink to="/todo/all">ALL</NavLink>
-            <div style={{marginLeft: "1rem"}}/>
-            <NavLink to="/todo/today">TODAY</NavLink>
-            <div style={{marginLeft: "1rem"}}/>
-            <NavLink to="/todo/tomorrow">Tomorrow</NavLink>
-            <div style={{marginLeft: "1rem"}}/>
-            <NavLink to="/topic/auto">Topic: Auto</NavLink>
-            {token && (
-                <button type="button" onClick={logout}>
-                    Sign Out
-                </button>
-            )}
-        </nav>
-    );
-}
 
 
 
