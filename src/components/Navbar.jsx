@@ -4,6 +4,7 @@ import {NavLink, Outlet} from "react-router-dom";
 import 'font-awesome/css/font-awesome.min.css';
 import dodo from '../assets/images/userIcon.jpg';
 import {useAuth} from "../stores/AuthStore";
+import {Submenu} from "./Submenu";
 export const NavBar = () => {
     const {loginValid, logout} = useAuth();
     const [open, setOpen] = useState(false);
@@ -24,25 +25,22 @@ export const NavBar = () => {
                     DodoTodo
                 </div>
                 <nav className={`${open ? "active" : ""}`}>
-                    <ul>
-                        <li>
+                    <ul className="nav_list">
+                        <li className="nav_item">
                             <NavLink to="/home" onClick={toggleMenu}>Home</NavLink>
                         </li>
-                        <li>
+                        <li className="nav_item">
                             <NavLink to="/todo/all" onClick={toggleMenu}>All</NavLink>
                         </li>
-                        <li>
+                        <li className="nav_item">
                             <NavLink to="/todo/today" onClick={toggleMenu}>Today</NavLink>
                         </li>
-                        <li>
+                        <li className="nav_item">
                             <NavLink to="/todo/tomorrow" onClick={toggleMenu}>Tomorrow</NavLink>
                         </li>
-
-                        <li>
-                            <NavLink to="/user" onClick={toggleMenu}>User</NavLink>
-                        </li>
-                        <li>
-                            <NavLink to="/logout" onClick={() => {
+                        <Submenu name="Testing"/>
+                        <li className="nav_item">
+                            <NavLink to="/login" onClick={() => {
                                 logout();
                             }}>Login</NavLink>
                         </li>
