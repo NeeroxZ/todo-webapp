@@ -5,7 +5,7 @@ const ResponsiveGridLayout = WidthProvider(Responsive);
 
 export const User = () => {
     return (
-        <div className="item-profile dash-box">
+        <div className="item-a dash-box">
             <a href="#">
                 <i className="fas fa-user-circle"></i>
             </a>

@@ -1,3 +1,4 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
 import React, {useState} from "react";
 import './styles/Modal.module.css'
 import GlobalStore from "./stores/GlobalStore";
@@ -22,6 +23,7 @@ import {TodoTomorrowPage} from "./pages/TodoTomorrowPage";
 import {NavigationBar} from "./components/NavigationBar";
 import {Dashboard} from "./pages/Dashboard";
 import {NavBar} from "./components/Navbar";
+import {ModalPage} from "./pages/ModalPage";
 
 
 
@@ -45,6 +47,7 @@ function App() {
                             <Route path="confirm" element={<ConfirmMailPage/>}/>
                             <Route path="test" element={<NavigationBar/>}/>
                             <Route path="dashboard" element={<Dashboard/>}/>
+                            <Route path="modal" element={<ModalPage/>}/>
                             <Route path="home" element={
                                 <ProtectedRoute>
                                     <Dashboard/>

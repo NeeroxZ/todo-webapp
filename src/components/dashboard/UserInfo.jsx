@@ -1,6 +1,7 @@
 import { Responsive, WidthProvider } from "react-grid-layout";
 import {User} from "./User";
 import "../../styles/dashboard.css";
+import {DateDay} from "./DateDay";
 
 
 
@@ -13,7 +14,7 @@ export const UserInfo = () => {
                     <User/>
                 </div>
                 <div className="userItem" key="empty2">
-                    03.02
+                    <DateDay/>
                 </div>
         </div>
     );
