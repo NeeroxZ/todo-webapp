@@ -37,8 +37,12 @@ export const NavBar = () => {
                         <li>
                             <NavLink to="/todo/tomorrow" onClick={toggleMenu}>Tomorrow</NavLink>
                         </li>
+
                         <li>
-                            <NavLink to="/login" onClick={() => {
+                            <NavLink to="/user" onClick={toggleMenu}>User</NavLink>
+                        </li>
+                        <li>
+                            <NavLink to="/logout" onClick={() => {
                                 logout();
                             }}>Login</NavLink>
                         </li>

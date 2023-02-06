@@ -24,6 +24,8 @@ import {NavigationBar} from "./components/NavigationBar";
 import {Dashboard} from "./pages/Dashboard";
 import {NavBar} from "./components/Navbar";
 import {ModalPage} from "./pages/ModalPage";
+import {UserPage} from "./pages/UserPage";
+
 
 
 
@@ -47,6 +49,7 @@ function App() {
                             <Route path="confirm" element={<ConfirmMailPage/>}/>
                             <Route path="test" element={<NavigationBar/>}/>
                             <Route path="dashboard" element={<Dashboard/>}/>
+                            <Route path="user" element={<UserPage/>}/>
                             <Route path="modal" element={<ModalPage/>}/>
                             <Route path="home" element={
                                 <ProtectedRoute>
