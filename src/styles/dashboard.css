@@ -143,3 +143,18 @@ empty{
     background-color: #12142077;
     border-bottom: 6px solid #090b1b;
 }
+
+
+/*USER CSS */
+
+.containerUser {
+
+    width: 100%;
+}
+.containerUser .userDiv{
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    display: block ruby;
+}
