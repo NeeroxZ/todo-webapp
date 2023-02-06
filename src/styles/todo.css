@@ -4,7 +4,15 @@
     overflow: scroll;
     list-style: none;
 }
-
+@media (max-width: 991px) {
+    .todo-list {
+        padding-left: 2rem;
+        padding-right: 2rem;
+        overflow: scroll;
+        list-style: none;
+        width: 100%;
+    }
+}
 .todo-container {
     margin: 10px;
     width: available;
@@ -66,7 +74,10 @@
 /*}*/
 
 .ex1 {
-    width: 100%;
-    height: 100vh;
+    width: 50%;
+    height: 90vh;
     overflow: scroll;
+}
+.todoAllSize{
+    width: 50%;
 }

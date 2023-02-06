@@ -51,6 +51,7 @@ export const TodoPage = (props) => {
 
     return (
         <>
+
             {/*{loading && <Skeleton variant="rectangular" width={210} height={118} />}*/}
             {/*{error && (*/}
             {/*    <div>{`There is a problem fetching the post data - ${error}`}</div>*/}
