@@ -1,5 +1,4 @@
 import { Responsive, WidthProvider } from "react-grid-layout";
-import "../../styles/dashboard.css";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 

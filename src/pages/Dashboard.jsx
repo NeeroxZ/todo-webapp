@@ -1,15 +1,13 @@
 import { Responsive, WidthProvider } from "react-grid-layout";
 import 'font-awesome/css/font-awesome.min.css';
-import "../styles/dashboard.css";
 import {UserInfo} from "../components/dashboard/UserInfo";
 import {Category} from "../components/dashboard/Category";
 import {View} from "../components/dashboard/View";
-import {View2} from "../components/dashboard/View2";
 import {TodoPage} from "./TodoPage";
-import {ModalPage} from "./ModalPage";
 import "react-grid-layout/css/styles.css";
 import "react-resizable/css/styles.css";
 import {TodoChart} from "../components/TodoChart";
+import {AddTodo} from "../components/AddTodo";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
@@ -37,7 +35,6 @@ export const Dashboard = () => {
     }
     return (
         <div className="mainContainer">
-           <ModalPage/>
             <ResponsiveGridLayout
                 layouts={{lg: layout}}
                 breakepoints={{ lg:1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
@@ -77,6 +74,7 @@ export const Dashboard = () => {
                     <TodoChart/>
                 </div>
             </ResponsiveGridLayout>
+            <AddTodo/>
         </div>
     );
 };

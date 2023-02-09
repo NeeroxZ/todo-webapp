@@ -1,5 +1,4 @@
 import {useEffect, useState} from "react";
-import '../styles/responsiveSidebar.css';
 
 export const Submenu = (props) => {
     const [isOpen, setIsOpen] = useState(false);

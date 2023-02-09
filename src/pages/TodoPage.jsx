@@ -1,4 +1,3 @@
-import '../styles/todo.css'
 import {Todo} from "../components/Todo";
 import {useEffect, useState} from "react";
 import {useAuth} from "../stores/AuthStore";

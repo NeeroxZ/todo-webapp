@@ -1,6 +1,5 @@
 import React from "react";
 import {Chart} from "react-google-charts";
-import "../styles/dashboard.css";
 
 const tasks = [
     ["Status", "Count"],

@@ -1,7 +1,7 @@
 // @src/components/Modal.jsx
 
 import React, {useState} from "react";
-import styles from "../styles/Modal.module.css";
+import styles from "../styles/index.css";
 import { RiCloseLine } from "react-icons/ri";
 import {TextField} from "@mui/material";
 import {BlockPicker} from "react-color";
