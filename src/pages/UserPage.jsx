@@ -1,4 +1,3 @@
-import '../styles/dashboard.css';
 
 export const UserPage = () => {
     return(

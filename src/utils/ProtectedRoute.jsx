@@ -1,9 +1,7 @@
 import React from 'react'
-import {Navigate, Route, RedirectFunction} from "react-router-dom"
+import {Navigate} from "react-router-dom"
 import {useAuth} from "../stores/AuthStore";
-import pb from "./pocketbase";
 import {Backdrop, CircularProgress} from "@mui/material";
-import '../styles/global.css';
 
 export const ProtectedRoute = ({children}) => {
     const auth = useAuth();

@@ -1,4 +1,3 @@
-import "../../styles/Category.css";
 
 export const Category = () => {
     return (

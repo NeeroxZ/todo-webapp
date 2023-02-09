@@ -1,7 +1,6 @@
 import {useState} from "react";
 import {useAuth} from "../stores/AuthStore";
 import {Navigate, useNavigate} from "react-router-dom";
-import "../styles/login.css";
 import {Alert, AlertTitle, Backdrop, CircularProgress} from "@mui/material";
 
 

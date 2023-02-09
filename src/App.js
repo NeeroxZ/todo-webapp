@@ -1,29 +1,29 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
+import './styles/index.css'
+import './styles/navbar.css'
+import './styles/dashboard.css'
+import './styles/todo.css'
+
+
+
 import React, {useState} from "react";
-import './styles/Modal.module.css'
 import GlobalStore from "./stores/GlobalStore";
 import {
     BrowserRouter as Router,
     Routes,
     Route,
 } from "react-router-dom";
-import './App.css';
 import {AuthProvider, useAuth} from "./stores/AuthStore";
 import ProtectedRoute, {PrivateRoute} from "./utils/ProtectedRoute";
 import {ConfirmMailPage} from "./pages/ConfirmMail";
 import {Login} from "./pages/Login";
 import {Register} from "./pages/Register";
-import Modal from './components/Modal.jsx';
 import {TodoPage} from "./pages/TodoPage";
 import {ResetPasswordPage} from "./pages/ResetPasswordPage";
-import {Button} from "@mui/material";
 import {TodoTopicPage} from "./pages/TodoTopicPage";
 import {TodoTodayPage} from "./pages/TodoTodayPage";
 import {TodoTomorrowPage} from "./pages/TodoTomorrowPage";
-import {NavigationBar} from "./components/NavigationBar";
 import {Dashboard} from "./pages/Dashboard";
 import {NavBar} from "./components/Navbar";
-import {ModalPage} from "./pages/ModalPage";
 import {UserPage} from "./pages/UserPage";
 
 
@@ -47,10 +47,8 @@ function App() {
                             <Route path="reset" element={<ResetPasswordPage/>}/>
                             <Route path="register" element={<Register/>}/>
                             <Route path="confirm" element={<ConfirmMailPage/>}/>
-                            <Route path="test" element={<NavigationBar/>}/>
                             <Route path="dashboard" element={<Dashboard/>}/>
                             <Route path="user" element={<UserPage/>}/>
-                            <Route path="modal" element={<ModalPage/>}/>
                             <Route path="home" element={
                                 <ProtectedRoute>
                                     <Dashboard/>

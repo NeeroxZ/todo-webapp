@@ -1,6 +1,5 @@
 import { Responsive, WidthProvider } from "react-grid-layout";
 import {User} from "./User";
-import "../../styles/dashboard.css";
 import {DateDay} from "./DateDay";
 
 
