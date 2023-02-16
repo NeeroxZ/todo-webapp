@@ -2,10 +2,6 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    /*color: #fdfdfdce;*/
-}
-
-p {
     color: #fdfdfdce;
 }
 
@@ -14,7 +10,6 @@ input{
     border-radius: 40px;
     background-color: transparent;
     border: transparent;
-    color: #fdfdfdce;
 }
 input:focus, input:hover{
     border-radius: 40px;
@@ -39,12 +34,12 @@ a:hover{
     color: #fdfdfdce;
 }
 
-.containerParent {
+.containerLogin {
+    /*margin-top: 6rem;*/
     width: 100vw;
     height: 100vh;
 }
-
-.containerChild {
+.rowLogin {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -52,6 +47,7 @@ a:hover{
 }
 
 .containerRegist{
+
     margin-top: 2%;
 }
 .title{

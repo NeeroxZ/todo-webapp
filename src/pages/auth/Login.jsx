@@ -1,8 +1,8 @@
 import {useState} from "react";
-import {useAuth} from "../../stores/AuthStore";
+import {useAuth} from "../stores/AuthStore";
 import {Navigate, useNavigate} from "react-router-dom";
 import {Alert, AlertTitle, Backdrop, CircularProgress} from "@mui/material";
-import '../../styles/user.css';
+import '../styles/user.css';
 
 
 export const Login = () => {
@@ -11,7 +11,6 @@ export const Login = () => {
     const auth = useAuth();
     const navigator = useNavigate();
 
-    // redirect if cookie was found
     if (auth.loginValid) {
         return (
             <Navigate to="/home" />
@@ -19,8 +18,8 @@ export const Login = () => {
     }
 
     return (
-        <div className="containerParent">
-            <div className="containerChild">
+        <div className="containerLogin">
+            <div className="rowLogin">
                 <form className="box">
                     <h1 className="form-name">Sign In</h1>
                     <label>
