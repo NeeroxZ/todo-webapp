@@ -23,8 +23,7 @@ export const DatePicker = (props) => {
                         ampm={false}
                         value={props.date}
                         onChange={handleChange}
-                        error
-                        renderInput={(params) => <TextField {...params} error={props.dateError}/>}
+                        renderInput={(params) => <TextField {...params} />}
                     />
                     :
                     <MobileDateTimePicker className="tdDatePicker"
@@ -32,7 +31,7 @@ export const DatePicker = (props) => {
                                           ampm={false}
                                           value={props.date}
                                           onChange={handleChange}
-                                          renderInput={(params) => <TextField {...params} error={props.dateError} />}
+                                          renderInput={(params) => <TextField {...params} />}
                     />
                 }
             </LocalizationProvider>
