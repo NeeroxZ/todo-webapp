@@ -1,7 +1,4 @@
 import './styles/index.css'
-import './styles/navbar.css'
-import './styles/dashboard.css'
-import './styles/todo.css'
 
 
 

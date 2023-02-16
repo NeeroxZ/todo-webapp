@@ -5,6 +5,8 @@ import {Bookmark, BookmarkBorder} from "@mui/icons-material";
 import {useEffect, useState} from "react";
 import {zeroPad} from "../utils/functions";
 import pb from "../utils/pocketbase";
+import '../styles/todo.css'
+
 
 export const Todo = (props) => {
     const [done, setDone] = useState(false);

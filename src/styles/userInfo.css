@@ -1,0 +1,15 @@
+.containerUser{
+    margin-top: 6rem;
+}
+.box{
+    width: 400px;
+    padding: 30px;
+    margin: auto;
+    text-align: center;
+    border-radius: 15px;
+    box-shadow: 0 0 10px #0d0b18;
+    background: linear-gradient(312deg,#455bbd1f 2%, rgba(255,255,255,0.2) 87%);
+    backdrop-filter: blur(10px);
+    border-left: 2px solid #fdfdfd3a;
+    border-bottom: 2px solid #43558f1a;
+}
