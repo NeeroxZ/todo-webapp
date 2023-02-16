@@ -44,46 +44,24 @@ function App() {
                         <AuthProvider>
                             <NavBar/>
                             <Routes>
-                                <Route index element={
-                                    <ProtectedRoute>
-                                        <Dashboard/>
-                                    </ProtectedRoute>
-                                }/>
+                                <Route path="*" element={<NoMatch/>}/>
                                 <Route path="login" element={<Login/>}/>
                                 <Route path="reset" element={<ResetPasswordPage/>}/>
                                 <Route path="register" element={<Register/>}/>
                                 <Route path="confirm" element={<ConfirmMailPage/>}/>
-                                <Route path="dashboard" element={<Dashboard/>}/>
                                 <Route path="user" element={<UserPage/>}/>
                                 <Route path="about" element={<About/>}/>
-                                <Route path="home" element={
-                                    <ProtectedRoute>
-                                        <Dashboard/>
-                                    </ProtectedRoute>}/>
-                                <Route path="todo">
-                                    <Route path="all" element={
-                                        <ProtectedRoute>
-                                            <TodoPage scrollable={true}/>
-                                        </ProtectedRoute>
-                                    }/>
-                                    <Route path="today" element={
-                                        <ProtectedRoute>
-                                            <TodoTodayPage/>
-                                        </ProtectedRoute>
-                                    }/>
-                                    <Route path="tomorrow" element={
-                                        <ProtectedRoute>
-                                            <TodoTomorrowPage/>
-                                        </ProtectedRoute>
-                                    }/>
+                                <Route element={<PrivateRoute/>}>
+                                    <Route path="*" element={<NoMatch/>}/>
+                                    <Route index element={<Dashboard />} />
+                                    <Route path="home" element={<Dashboard/>}/>
+                                    <Route path="todo">
+                                        <Route path="all" element={<TodoPage scrollable={true}/>}/>
+                                        <Route path="today" element={<TodoTodayPage/>}/>
+                                        <Route path="tomorrow" element={<TodoTomorrowPage/>}/>
+                                    </Route>
+                                    <Route path="topic/:title" element={<TodoTopicPage/>}/>
                                 </Route>
-                                <Route path="topic/:title" element={
-                                    <ProtectedRoute>
-                                        <TodoTopicPage/>
-                                    </ProtectedRoute>
-                                }/>
-
-                                <Route path="*" element={<NoMatch/>}/>
                             </Routes>
                         </AuthProvider>
                     </Router>
