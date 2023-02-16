@@ -36,7 +36,7 @@ function App() {
     return (
         <>
             <GlobalStore>
-                <ThemeProvider theme={theme}>
+                <ThemeProvider theme={Theme}>
                     <Router>
                         <AuthProvider>
                             <NavBar/>
