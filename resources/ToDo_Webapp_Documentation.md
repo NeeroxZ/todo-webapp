@@ -89,7 +89,7 @@ After successfully authenticating he will be greeted on his home-site/dashboard 
 
 The user decides to create a new ToDo. For this he can use the button in the bottom right of every page.
 
-// Bild von ToDo Erstellung
+![Create_ToDo.png](Create_ToDo.png)
 
 The Navigation Bar at the top of the screen allows the user to navigate between the different sites.
 
