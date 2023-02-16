@@ -102,11 +102,11 @@ As visible in the table under "2.3 Division of responsibilities" the amount cont
 
 The user arrives at the login screen and enters his login credentials.
 
-// Bild von Sign In
+![Sign_In.png](Sign_In.png)
 
 After successfully authenticating he will be greeted on his home-site/dashboard and gets a comprehensive overview of all important information in relation to his existing ToDo's.
 
-// Bild von Dashboard
+![Dashboard.png](Dashboard.png)
 
 The user decides to create a new ToDo. For this he can use the button in the bottom right of every page.
 
@@ -114,7 +114,7 @@ The user decides to create a new ToDo. For this he can use the button in the bot
 
 The Navigation Bar at the top of the screen allows the user to navigate between the different sites.
 
-// Bild von Navbar
+![Navbar.png](Navbar.png)
 
 # 3.3. Routing structure
 
