@@ -1,5 +1,6 @@
 import "../styles/about.css"
 import userIcon from '../assets/images/userIcon.jpg'
+import {Documentation} from '../components/Documentation'
 export const About = () =>{
     return (
         <>
@@ -62,6 +63,7 @@ export const About = () =>{
                     </div>
                 </div>
             </div>
+            <Documentation/>
         </>
     );
 }
