@@ -1,39 +1,36 @@
+// styling
 import './styles/index.css'
+import {Theme} from "./theme/theme"
 
+// general
+import React from "react";
+import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
 
-
-import React, {useState} from "react";
+// utils, stores and providers
 import GlobalStore from "./stores/GlobalStore";
-import {
-    BrowserRouter as Router,
-    Routes,
-    Route,
-} from "react-router-dom";
-import {AuthProvider, useAuth} from "./stores/AuthStore";
-import ProtectedRoute, {PrivateRoute} from "./utils/ProtectedRoute";
-import {ConfirmMailPage} from "./pages/ConfirmMail";
+import {PrivateRoute} from "./utils/PrivateRoute";
+import {ThemeProvider} from "@mui/material";
+import {AuthProvider} from "./stores/AuthStore";
+
+// pages
 import {Login} from "./pages/Login";
 import {Register} from "./pages/Register";
-import {TodoPage} from "./pages/TodoPage";
+import {ConfirmMailPage} from "./pages/ConfirmMail";
 import {ResetPasswordPage} from "./pages/ResetPasswordPage";
-import {TodoTopicPage} from "./pages/TodoTopicPage";
+import {Dashboard} from "./pages/Dashboard";
+import {TodoPage} from "./pages/TodoPage";
 import {TodoTodayPage} from "./pages/TodoTodayPage";
 import {TodoTomorrowPage} from "./pages/TodoTomorrowPage";
-import {Dashboard} from "./pages/Dashboard";
-import {NavBar} from "./components/Navbar";
+import {TodoTopicPage} from "./pages/TodoTopicPage";
 import {UserPage} from "./pages/UserPage";
-import {createTheme, ThemeProvider} from "@mui/material";
+
+// components
+import {NavBar} from "./components/Navbar";
 import {About} from "./pages/About";
 
 
-const theme = createTheme({
-    palette:{
-        mode: 'dark',
-        primary: {
-            main: "#04AA6D",
-        },
-    }
-});
+
+
 
 function App() {
     return (
