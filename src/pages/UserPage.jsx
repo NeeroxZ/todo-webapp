@@ -1,73 +1,35 @@
-import styles from "../styles/user.css";
+import styles from "../styles/userInfo.css";
+import {Alert, AlertTitle, Backdrop, CircularProgress} from "@mui/material";
+import {useState} from "react";
+import {useAuth} from "../stores/AuthStore";
+import {Navigate, useNavigate} from "react-router-dom";
 
 export const UserPage = () => {
-    return(
-        <div className="containerUser">
-            <div>
-                <div className="userDiv">
-                    <div
-                        className="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-12 col-xs-12 edit_information">
-                            <h3 className="text-center">Edit Personal Information</h3>
-                            <div className="row">
-                                <div className="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                    <div className="form-group">
-                                        <label className="profile_details_text">Username:</label>
-                                        <input type="text" name="first_name" className="form-control"></input>
-                                    </div>
-                                </div>
-                                <div className="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                    <div className="form-group">
-                                        <label className="profile_details_text">Last Name: </label>
-                                        <input type="text" name="last_name" className="form-control"  ></input>
-                                    </div>
-                                </div>
-                            </div>
-                        <div className="row">
-                            <div className="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                <div className="form-group">
-                                    <label className="profile_details_text">E-Mail:</label>
-                                    <input type="email" name="email" className="form-control"></input>
-                                </div>
-                            </div>
-                            <div className="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                <div className="form-group">
-                                    <label className="profile_details_text">Date Of Birth:</label>
-                                    <input type="date" name="birthday" className="form-control"  ></input>
-                                </div>
-                            </div>
-                        </div>
-                            <div className="row">
-                                <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <div className="form-group">
-                                        <label className="profile_details_text">Gender:</label>
-                                        <select name="gender" className="form-control"  >
-                                            <option value="Male">Male</option>
-                                            <option value="Female">Female</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="row">
-                                <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <div className="form-group">
-                                        <label className="profile_details_text">Monthly Income:</label>
-                                        <input type="text" name="monthly_income" className="form-control"
-                                               required></input>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="row">
-                                <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <div className="form-group">
-                                        <input type="submit" className="btn btn-success"></input>
-                                        <input type="submit" className="btn btn-danger" value="Delete Account"></input>
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
 
-                                    </div>
-                                </div>
-                            </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    )
+    return (
+       <>
+           <div className="containerUser">
+               <div className="rowLogin">
+                   <form className="box">
+                       <h1 className="form-name">Sign In</h1>
+                       <label>
+                           <input className="placeholders" type="text" placeholder="Username"
+                                  onChange={e => setUsername(e.target.value)}
+                                  />
+                       </label>
+                       <label>
+                           <input className="placeholders" type="password" placeholder="Password"
+                                  onChange={e => setPassword(e.target.value)}
+                                  />
+                       </label>
+                       <input className="btn-submit" type="submit" name="" value="Sign In"
+
+                       />
+                   </form>
+               </div>
+           </div>
+       </>
+    );
 }

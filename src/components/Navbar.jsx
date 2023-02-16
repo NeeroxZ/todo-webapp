@@ -3,6 +3,8 @@ import {Outlet} from "react-router-dom";
 import 'font-awesome/css/font-awesome.min.css';
 import {useAuth} from "../stores/AuthStore";
 import {NavLink} from "react-router-dom";
+import '../styles/navbar.css'
+
 
 export const NavBar = () => {
     const {loginValid, logout} = useAuth();

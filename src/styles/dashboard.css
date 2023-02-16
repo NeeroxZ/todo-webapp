@@ -151,16 +151,3 @@ empty{
 }
 
 
-/*USER CSS */
-
-.containerUser {
-
-    width: 100%;
-}
-.containerUser .userDiv{
-    width: 60%;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-    display: block ruby;
-}

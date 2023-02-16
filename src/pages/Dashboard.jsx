@@ -8,6 +8,8 @@ import "react-grid-layout/css/styles.css";
 import "react-resizable/css/styles.css";
 import {TodoChart} from "../components/TodoChart";
 import {AddTodo} from "../components/AddTodo";
+import '../styles/dashboard.css'
+
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 

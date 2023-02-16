@@ -14,12 +14,6 @@
     font-size: 15px;
     border-radius: 0.5rem;
 }
-.topnav .dropdown{
-    color: #f2f2f2;
-    text-decoration: none;
-    font-size: 15px;
-    border-radius: 0.5rem;
-}
 
 .active {
     background-color: #04AA6D;
@@ -36,7 +30,7 @@
 }
 
 .dropdown .dropbtn {
-    font-size: 17px;
+    font-size: 15px;
     border: none;
     outline: none;
     color: white;
