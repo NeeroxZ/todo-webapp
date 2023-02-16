@@ -30,9 +30,22 @@ a:hover{
     text-decoration: none;
     transition: 0.3s ease-in-out;
 }
-.containerLogin{
-    margin-top: 6rem;
+.form-name {
+    color: #fdfdfdce;
 }
+
+.containerLogin {
+    /*margin-top: 6rem;*/
+    width: 100vw;
+    height: 100vh;
+}
+.rowLogin {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
 .containerRegist{
 
     margin-top: 2%;
