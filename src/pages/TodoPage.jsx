@@ -4,7 +4,7 @@ import {useAuth} from "../stores/AuthStore";
 import pb from "../utils/pocketbase";
 import PropTypes from 'prop-types';
 import {QueryBuilder} from "../utils/queryBuilder";
-import {NoTodo} from "./NoTodo";
+import {NoContent} from "./NoContent";
 
 export const TodoPage = (props) => {
     const [data, setData] = useState([]);
@@ -57,7 +57,7 @@ export const TodoPage = (props) => {
             {/*    <div>{`There is a problem fetching the post data - ${error}`}</div>*/}
             {/*)}*/}
             {noTodo && (
-                <NoTodo/>
+                <NoContent variant="todo"/>
             )}
             {data &&
                 props.scrollable
