@@ -1,5 +1,4 @@
-import "../../styles/Category.css";
-
+import ControlPointIcon from '@mui/icons-material/ControlPoint';
 export const Category = () => {
     return (
 
@@ -9,11 +8,11 @@ export const Category = () => {
                 <h3 className="title">Category</h3>
 
                 <a href="#" className="align-left add-category">
-                    <i className="fas fa-plus"></i>
+                    <ControlPointIcon/>
                     Add category
                 </a>
                 <div className="carousel-inner">
-                    <div id="daily" className="carousel-item active">
+                    <div id="daily" className="carousel-item ">
                         <ul>
                             <li className="liste">
                                 <div className="icon-wrapper"><i className="fas fa-utensils"></i></div>

@@ -1,6 +1,5 @@
 import {useNavigate} from "react-router-dom";
 import {useState} from "react";
-import '../styles/login.css'
 import pb from "../utils/pocketbase";
 import {Alert, Backdrop, CircularProgress} from "@mui/material";
 
@@ -46,9 +45,9 @@ export const ResetPasswordPage = () => {
                                        setMail(e.target.value);
                                    }}/>
                         </label>
-                        <button className="btn-submit" type="submit" onClick={() => {
+                        <input className="btn-submit" type="submit" onClick={() => {
                             requestResetLink()
-                        }}/>
+                        }} value="Reset"/>
                         <p className="forgot">
                             Don't have an account?
                             <a onClick={() => navigator("/register")}>Create new account</a>

@@ -1,11 +1,9 @@
-import React from 'react'
-import {Navigate, Route, RedirectFunction} from "react-router-dom"
 import {useAuth} from "../stores/AuthStore";
-import pb from "./pocketbase";
 import {Backdrop, CircularProgress} from "@mui/material";
-import '../styles/global.css';
+import {Navigate, Outlet} from "react-router-dom";
+import React from "react";
 
-export const ProtectedRoute = ({children}) => {
+export const PrivateRoute = () => {
     const auth = useAuth();
     if (auth.waiting) {
         return (
@@ -18,11 +16,10 @@ export const ProtectedRoute = ({children}) => {
             </>
         );
     }
-    if (!auth.loginValid) {
-        return <Navigate to="/login" replace/>;
-    }
-    return children
+
+    return (
+        auth.loginValid ? <Outlet /> : <Navigate to={"/login"} />
+    );
 };
 
-
-export default ProtectedRoute;
+export default PrivateRoute;

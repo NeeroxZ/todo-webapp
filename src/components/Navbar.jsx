@@ -1,10 +1,11 @@
-import '../styles/responsiveSidebar.css';
 import {useState} from "react";
-import {NavLink, Outlet} from "react-router-dom";
+import {Outlet} from "react-router-dom";
 import 'font-awesome/css/font-awesome.min.css';
-import dodo from '../assets/images/userIcon.jpg';
 import {useAuth} from "../stores/AuthStore";
-import {Submenu} from "./Submenu";
+import {NavLink} from "react-router-dom";
+import '../styles/navbar.css'
+
+
 export const NavBar = () => {
     const {loginValid, logout} = useAuth();
     const [open, setOpen] = useState(false);
@@ -20,33 +21,31 @@ export const NavBar = () => {
 
     return (
         <>
-            <div className="nav_header">
-                <div className="logo">
-                    DodoTodo
+            <div className={`topnav ${open?"responsive":""}`} id="myTopnav">
+                <a style={{display: "none"}}></a>
+                <NavLink to="/home" onClick={toggleMenu}>Home</NavLink>
+                <NavLink to="/todo/all" onClick={toggleMenu}>All</NavLink>
+                <NavLink to="/todo/today" onClick={toggleMenu}>Today</NavLink>
+                <NavLink to="/todo/tomorrow" onClick={toggleMenu}>Tomorrow</NavLink>
+                <div className="dropdown">
+                    <button className="dropbtn">
+                        Category
+                        <i className="fa fa-caret-down"></i>
+                    </button>
+                    <div className="dropdown-content">
+                        <NavLink to="/topic/food" onClick={toggleMenu}>Food</NavLink>
+                        <NavLink to="/topic/work" onClick={toggleMenu}>Work</NavLink>
+                        <NavLink to="/topic/travel" onClick={toggleMenu}>Travel</NavLink>
+                    </div>
+
                 </div>
-                <nav className={`${open ? "active" : ""}`}>
-                    <ul className="nav_list">
-                        <li className="nav_item">
-                            <NavLink to="/home" onClick={toggleMenu}>Home</NavLink>
-                        </li>
-                        <li className="nav_item">
-                            <NavLink to="/todo/all" onClick={toggleMenu}>All</NavLink>
-                        </li>
-                        <li className="nav_item">
-                            <NavLink to="/todo/today" onClick={toggleMenu}>Today</NavLink>
-                        </li>
-                        <li className="nav_item">
-                            <NavLink to="/todo/tomorrow" onClick={toggleMenu}>Tomorrow</NavLink>
-                        </li>
-                        <Submenu name="Testing"/>
-                        <li className="nav_item">
-                            <NavLink to="/login" onClick={() => {
-                                logout();
-                            }}>Login</NavLink>
-                        </li>
-                    </ul>
-                </nav>
-                <div onClick={toggleMenu} className="menu-toggle"><i className="fa fa-bars"></i></div>
+                <NavLink to="/about" onClick={toggleMenu}>About</NavLink>
+                <NavLink to="/login" onClick={() => {
+                    logout();
+                }}>Logout</NavLink>
+                <a onClick={() => {
+                    toggleMenu();
+                }} className="icon">&#9776;</a>
             </div>
             <Outlet/>
         </>

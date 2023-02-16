@@ -1,8 +1,8 @@
 import {useState} from "react";
 import {useAuth} from "../stores/AuthStore";
 import {Navigate, useNavigate} from "react-router-dom";
-import "../styles/login.css";
 import {Alert, AlertTitle, Backdrop, CircularProgress} from "@mui/material";
+import '../styles/user.css';
 
 
 export const Login = () => {
@@ -42,8 +42,9 @@ export const Login = () => {
                     <p className="forgot">
                         <a onClick={() => navigator("/reset")}>Forgot Password?</a>
                     </p>
+
                     <p className="forgot"> Don't have an account?
-                        <a onClick={() => navigator("/register")}>Create new acount</a></p>
+                        <a onClick={() => navigator("/register")}> Create new acount</a></p>
 
                 </form>
             </div>
