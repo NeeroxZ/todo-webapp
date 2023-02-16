@@ -10,7 +10,7 @@ By: Marvin Samouelian, Nick Obereiter and Martin Hofsäß
 
 ## 1. Planning
 ### 1.1. Target definition
-### 1.2 Choice of frameworks
+### 1.2 Choice of frameworks + Tech Stack
 ### 1.3. Division of responsibilities
 
 ## 2. Implementation and showcase
@@ -38,13 +38,18 @@ The page design should be fully responsive.
 
 Further statistics and services displayed and accessible through the dashboard or new pages.
 
-# 1.2. Choice of frameworks
+# 1.2. Choice of frameworks + Tech Stack
 
 As all of us had more or less comprehensive experience in web development, we decided to use technologies and frameworks which we were less or not proficient at all, as to challenge us a bit more.
 
 Thus our decisions fell on React-JS and CSS for the frontend of our web application. For the backend we chose to use Pocketbase, as it would fill in for everything our backend would be comprised of.
 
 Pocketbase functions as the whole backend of our web application in that it supplies a database, an authentication system, file storage and holds our backend logic as a Go framework.
+
+### Tech Stack
+- React JS
+- Pocketbase / Go
+- 
 
 # 1.3. Division of responsibilities
 
