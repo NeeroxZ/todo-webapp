@@ -8,42 +8,19 @@ By: Marvin Samouelian, Nick Obereiter and Martin Hofsäß
 
 # Table of contents
 
-## 1. Introduction
+## 1. Planning
+### 1.1. Target definition
+### 1.2 Choice of frameworks
+### 1.3. Division of responsibilities
 
-### 1.1. Technical requirements and assessment criteria
-### 1.2. Group organization and deliverables
+## 2. Implementation and showcase
+### 2.1. Key functions
+### 2.2. A simple showcase of the ToDo-Webapp
+### 2.3. Routing Structure
 
-## 2. Planning
+# 1. Planning
 
-### 2.1. Target definition
-### 2.2 Choice of frameworks
-### 2.3. Division of responsibilities
-
-## 3. Implementation and showcase
-
-### 3.1. General course of action
-### 3.2. A simple showcase of the ToDo-Webapp
-### 3.3. Routing Structure
-
-
-# 1. Introduction
-
-# 1.1. Technical requirements and assessment criteria
-
-The task is to design and implement a functional web application, following the MVC (Model View Controller) pattern. While there is free choice of Framework, the web application should at least consist of following components: HTML, CSS, Java Script, Webserver and functional backend logic.
-
-# 1.2. Group organization and deliverables
-
-The project should be done in teams of 3-5 students and every member of the team should actively work on the development (everyone should code!).
-
-The raw project idea and with team composition has to be registered until 26.01.202023.
-
-The project will be presented on the 02.03.2023 or 16.03.2023 and the project documentation will be due till 23.03.2023.
-
-
-# 2. Planning
-
-# 2.1. Target definition
+# 1.1. Target definition
 
 The program should allow different users to login into their existing accounts, create new accounts and recover their password if necessary.
 
@@ -61,7 +38,7 @@ The page design should be fully responsive.
 
 Further statistics and services displayed and accessible through the dashboard or new pages.
 
-# 2.2. Choice of frameworks
+# 1.2. Choice of frameworks
 
 As all of us had more or less comprehensive experience in web development, we decided to use technologies and frameworks which we were less or not proficient at all, as to challenge us a bit more.
 
@@ -69,7 +46,7 @@ Thus our decisions fell on React-JS and CSS for the frontend of our web applicat
 
 Pocketbase functions as the whole backend of our web application in that it supplies a database, an authentication system, file storage and holds our backend logic as a Go framework.
 
-# 2.3. Division of responsibilities
+# 1.3. Division of responsibilities
 
 | Login Page | Nick Obereiter |
 | --- | --- |
@@ -90,15 +67,17 @@ Pocketbase functions as the whole backend of our web application in that it supp
 |
 | Project Documentation | Martin Hofsäß |
 
-# 3. Implementation and showcase
+# 2. Implementation and showcase
 
-# 3.1. General course of action
+# 2.1. Key functions
 
-With the scope set for the ToDo-Webapp and the extra challenge added, due to unfamiliar technologies and frameworks, the general idea was to not just use the time during the lecture but to also continue development outside of lectures.
+- Functioning Server and Database via Pocketbase.
+- Working Account-Management via Pocketbase.
+- Fully reactive design.
+- Create, edit and delete ToDo's
+- 
 
-As visible in the table under "2.3 Division of responsibilities" the amount contributed to the project was different for the team members.
-
-# 3.2. A simple showcase of the ToDo-Webapp
+# 2.2. A simple showcase of the ToDo-Webapp
 
 The user arrives at the login screen and enters his login credentials.
 
@@ -116,6 +95,6 @@ The Navigation Bar at the top of the screen allows the user to navigate between 
 
 ![Navbar.png](Navbar.png)
 
-# 3.3. Routing structure
+# 2.3. Routing structure
 
 [Routing_Structure.drawio](Routing_Structure.drawio)
