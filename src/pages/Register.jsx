@@ -76,7 +76,7 @@ export const Register = () => {
     // }
 
     return (
-        <div className="container">
+        <div className="containerRegist">
             <div className="row">
                 <div className="box">
                     <h1 className="form-name">Register</h1>
@@ -104,7 +104,7 @@ export const Register = () => {
                         <input className="placeholders" type="password" placeholder="Confirm password"
                                onBlur={e => validatePassword(e.target.value)}/>
                     </label>
-                    <button className="btn-submit" type="submit" name="" value="Register"
+                    <input className="btn-submit" type="submit" name="" value="Register"
                            onClick={() => handleRegister()}/>
                     <p className="forgot"> Already have an account?
                         <a onClick={() => navigator("/login")}>Sign in</a>

@@ -17,6 +17,17 @@
     border-bottom: 2px solid #43558f1a;
     margin-left: 12.5%;
 }
+.dashboardItemView{
+    color: white;
+    text-align: center;
+    font-size: 2em;
+    border-radius: 15px;
+    box-shadow: 0 0 10px #0d0b18;
+    background: linear-gradient(312deg, #464d68 2%, rgb(43, 42, 42) 87%);
+    border-left: 2px solid #fdfdfd3a;
+    border-bottom: 2px solid #43558f1a;
+    margin-left: 12.5%;
+}
 .itemLeft{
 }
 .userItem{
@@ -55,6 +66,17 @@
         border-left: 2px solid #fdfdfd3a;
         border-bottom: 2px solid #43558f1a;
     }
+    .dashboardItemView{
+        margin-left: 0em;
+        color: white;
+        text-align: center;
+        font-size: 2em;
+        border-radius: 15px;
+        box-shadow: 0 0 10px #0d0b18;
+        background: linear-gradient(312deg, #464d68 2%, rgb(43, 42, 42) 87%);
+        border-left: 2px solid #fdfdfd3a;
+        border-bottom: 2px solid #43558f1a;
+    }
 }
 @media (max-width: 881px){
     .dashboardItem{
@@ -66,6 +88,16 @@
         box-shadow: 0 0 10px #0d0b18;
         background: linear-gradient(312deg,#455bbd1f 2%, rgba(255,255,255,0.2) 87%);
         backdrop-filter: blur(10px);
+        border-left: 2px solid #fdfdfd3a;
+        border-bottom: 2px solid #43558f1a;
+    }
+    .dashboardItemView{
+        color: white;
+        text-align: center;
+        font-size: 2em;
+        border-radius: 15px;
+        box-shadow: 0 0 10px #0d0b18;
+        background: linear-gradient(312deg, #464d68 2%, rgb(43, 42, 42) 87%);
         border-left: 2px solid #fdfdfd3a;
         border-bottom: 2px solid #43558f1a;
     }
@@ -99,14 +131,10 @@ empty{
     overflow: hidden;
 }
 .dash-box{
-    width:100%;
-    height: 100%;
     padding: 15px;
     text-align: center;
     border-radius: 15px;
-    background: linear-gradient(312deg,#9dafff15 2%, #9dafff15 87%);
-    backdrop-filter: blur(10px);
-    overflow-y:auto;
+    overflow: hidden;
 }
 .date-day{
     font-size:2rem;

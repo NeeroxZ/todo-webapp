@@ -45,7 +45,7 @@ a:hover{
 }
 .box{
     width: 400px;
-    padding: 30px;
+    padding: 20px;
     margin: auto;
     text-align: center;
     border-radius: 15px;
@@ -54,6 +54,7 @@ a:hover{
     backdrop-filter: blur(10px);
     border-left: 2px solid #fdfdfd3a;
     border-bottom: 2px solid #43558f1a;
+    height: 70%;
 }
 
 /* 3. PRELOADER */

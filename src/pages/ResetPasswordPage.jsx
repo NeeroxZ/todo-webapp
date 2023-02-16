@@ -45,9 +45,9 @@ export const ResetPasswordPage = () => {
                                        setMail(e.target.value);
                                    }}/>
                         </label>
-                        <button className="btn-submit" type="submit" onClick={() => {
+                        <input className="btn-submit" type="submit" onClick={() => {
                             requestResetLink()
-                        }}/>
+                        }} value="Reset"/>
                         <p className="forgot">
                             Don't have an account?
                             <a onClick={() => navigator("/register")}>Create new account</a>

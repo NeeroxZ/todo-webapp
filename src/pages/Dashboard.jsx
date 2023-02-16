@@ -52,7 +52,7 @@ export const Dashboard = () => {
                 <div className="dashboardItem itemLeft" key="empty" >
                     <UserInfo/>
                 </div>
-                <div className="dashboardItem" key="empty2">
+                <div className="dashboardItemView" key="empty2">
                     <View/>
                 </div>
 

@@ -1,3 +1,4 @@
+import styles from "../styles/user.css";
 
 export const UserPage = () => {
     return(
