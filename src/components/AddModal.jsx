@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {Box, TextField, Typography, Modal, Grid, InputLabel, Select, MenuItem} from "@mui/material";
-
+import "../styles/userInfo.css";
 import '../styles/modal.css'
 
 import dayjs from 'dayjs';
@@ -36,7 +36,40 @@ export const AddModal = (props) => {
                         className="modal"
                     >
                         <Box className="modalBox">
+                            <div className="containerUser">
+                                <div className="rowLogin">
+                                    <form className="box">
+                                        <p className="form-name">Change User Information</p>
+                                        <div className="userRow">
+                                            <h1>UserName</h1>
+                                            <input className="userInput" type="text" placeholder="Username"
+                                            />
+                                        </div>
+                                        <div className="userRow">
+                                            <h1>E-Mail</h1>
+                                            <input className="userInput" type="email" placeholder="E-Mail"
+                                            />
+                                        </div>
+                                        <div className="userRow">
+                                            <h1>Password</h1>
+                                            <input className="userInput" type="password" placeholder="Password"
+                                            />
+                                        </div>
+                                        <div className="userRow">
+                                            <h1>Date</h1>
+                                            <DateTimePicker
+                                                label="Date&Time picker"
+                                                value={value}
+                                                onChange={handleChange}
+                                                renderInput={(params) => <TextField {...params} />}
+                                            />                                            <span className="checkmark"></span>
+                                        </div>
+                                        <input className="btn-submit" type="submit" name="" value="Save"></input>
+                                        <input className="btn-delete" type="submit" name="" value="Delete"></input>
 
+                                    </form>
+                                </div>
+                            </div>
                         </Box>
                     </Modal>
                 </div>
