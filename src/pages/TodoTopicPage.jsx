@@ -6,6 +6,7 @@ import {Alert, AlertTitle, Backdrop, CircularProgress} from "@mui/material";
 import pb from "../utils/pocketbase";
 import PropTypes from "prop-types";
 import {QueryBuilder} from "../utils/queryBuilder";
+import {NoContent} from "./NoContent";
 
 export const TodoTopicPage = () => {
     const { title } = useParams();
@@ -61,7 +62,7 @@ export const TodoTopicPage = () => {
                 <TodoPage scrollable={true}  topicId={topicId} />
             )}
             {notFound && (
-                <div>Topic not found</div>
+                <NoContent variant="topic"/>
             )}
 
 
