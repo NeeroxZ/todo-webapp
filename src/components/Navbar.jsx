@@ -30,7 +30,7 @@ export const NavBar = () => {
                 <div className="dropdown">
                     <button className="dropbtn">
                         Category
-                        <i className="fa fa-caret-down"></i>
+                        <i className="fa fa-caret-down dropdownArrow"></i>
                     </button>
                     <div className="dropdown-content">
                         <NavLink to="/topic/food" onClick={toggleMenu}>Food</NavLink>
