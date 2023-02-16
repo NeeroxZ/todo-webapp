@@ -11,9 +11,6 @@ export const Login = () => {
     const auth = useAuth();
     const navigator = useNavigate();
 
-    // Todo (Marvin): Forgot password navigation
-    // Todo (Marvin): Register navigation
-
     if (auth.loginValid) {
         return (
             <Navigate to="/home" />
