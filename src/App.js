@@ -1,89 +1,64 @@
+// styling
 import './styles/index.css'
+import {Theme} from "./theme/theme"
 
+// general
+import React from "react";
+import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
 
-
-import React, {useState} from "react";
+// utils, stores and providers
 import GlobalStore from "./stores/GlobalStore";
-import {
-    BrowserRouter as Router,
-    Routes,
-    Route,
-} from "react-router-dom";
-import {AuthProvider, useAuth} from "./stores/AuthStore";
-import ProtectedRoute, {PrivateRoute} from "./utils/ProtectedRoute";
-import {ConfirmMailPage} from "./pages/ConfirmMail";
+import {PrivateRoute} from "./utils/PrivateRoute";
+import {ThemeProvider} from "@mui/material";
+import {AuthProvider} from "./stores/AuthStore";
+
+// pages
 import {Login} from "./pages/Login";
 import {Register} from "./pages/Register";
-import {TodoPage} from "./pages/TodoPage";
+import {ConfirmMailPage} from "./pages/ConfirmMail";
 import {ResetPasswordPage} from "./pages/ResetPasswordPage";
-import {TodoTopicPage} from "./pages/TodoTopicPage";
+import {Dashboard} from "./pages/Dashboard";
+import {TodoPage} from "./pages/TodoPage";
 import {TodoTodayPage} from "./pages/TodoTodayPage";
 import {TodoTomorrowPage} from "./pages/TodoTomorrowPage";
-import {Dashboard} from "./pages/Dashboard";
-import {NavBar} from "./components/Navbar";
+import {TodoTopicPage} from "./pages/TodoTopicPage";
 import {UserPage} from "./pages/UserPage";
-import {createTheme, ThemeProvider} from "@mui/material";
+
+// components
+import {NavBar} from "./components/Navbar";
 import {About} from "./pages/About";
 
 
-const theme = createTheme({
-    palette:{
-        mode: 'dark',
-        primary: {
-            main: "#04AA6D",
-        },
-    }
-});
+
+
 
 function App() {
     return (
         <>
             <GlobalStore>
-                <ThemeProvider theme={theme}>
+                <ThemeProvider theme={Theme}>
                     <Router>
                         <AuthProvider>
                             <NavBar/>
                             <Routes>
-                                <Route index element={
-                                    <ProtectedRoute>
-                                        <Dashboard/>
-                                    </ProtectedRoute>
-                                }/>
+                                <Route path="*" element={<NoMatch/>}/>
                                 <Route path="login" element={<Login/>}/>
                                 <Route path="reset" element={<ResetPasswordPage/>}/>
                                 <Route path="register" element={<Register/>}/>
                                 <Route path="confirm" element={<ConfirmMailPage/>}/>
-                                <Route path="dashboard" element={<Dashboard/>}/>
                                 <Route path="user" element={<UserPage/>}/>
                                 <Route path="about" element={<About/>}/>
-                                <Route path="home" element={
-                                    <ProtectedRoute>
-                                        <Dashboard/>
-                                    </ProtectedRoute>}/>
-                                <Route path="todo">
-                                    <Route path="all" element={
-                                        <ProtectedRoute>
-                                            <TodoPage scrollable={true}/>
-                                        </ProtectedRoute>
-                                    }/>
-                                    <Route path="today" element={
-                                        <ProtectedRoute>
-                                            <TodoTodayPage/>
-                                        </ProtectedRoute>
-                                    }/>
-                                    <Route path="tomorrow" element={
-                                        <ProtectedRoute>
-                                            <TodoTomorrowPage/>
-                                        </ProtectedRoute>
-                                    }/>
+                                <Route element={<PrivateRoute/>}>
+                                    <Route path="*" element={<NoMatch/>}/>
+                                    <Route index element={<Dashboard />} />
+                                    <Route path="home" element={<Dashboard/>}/>
+                                    <Route path="todo">
+                                        <Route path="all" element={<TodoPage scrollable={true}/>}/>
+                                        <Route path="today" element={<TodoTodayPage/>}/>
+                                        <Route path="tomorrow" element={<TodoTomorrowPage/>}/>
+                                    </Route>
+                                    <Route path="topic/:title" element={<TodoTopicPage/>}/>
                                 </Route>
-                                <Route path="topic/:title" element={
-                                    <ProtectedRoute>
-                                        <TodoTopicPage/>
-                                    </ProtectedRoute>
-                                }/>
-
-                                <Route path="*" element={<NoMatch/>}/>
                             </Routes>
                         </AuthProvider>
                     </Router>
