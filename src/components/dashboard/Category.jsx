@@ -27,8 +27,11 @@ export const Category = () => {
                 </div>
                 :
                 <ul>
-                    {topics.topics && topics.topics.map((item, i) => <li key={i} className={"liste"}>
-                        <NavLink  to={`/topic/${item.titleParam}`} className={"topicStyle"}>
+                    <li className={"liste"}>
+                        <NavLink to={"/topic/car"} className={"topicStyle"}>Test</NavLink>
+                    </li>
+                    {topics.topics && topics.topics.map((item, i) => <li className={"liste"}>
+                        <NavLink key={i} to={`/topic/${item.titleParam}`} className={"topicStyle"}>
                             {item.titleMod}
                         </NavLink>
                     </li>)}

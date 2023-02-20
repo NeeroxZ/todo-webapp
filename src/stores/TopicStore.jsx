@@ -6,7 +6,6 @@ import {string} from "prop-types";
 const TopicContext = createContext(null);
 
 export const TopicProvider = ({children}) => {
-    const auth = useAuth();
     const {getUserId} = useAuth();
     const [error, setError] = useState(false);
     const [waiting, setWaiting] = useState(true);
@@ -22,7 +21,6 @@ export const TopicProvider = ({children}) => {
                 sort: '-created'
             })
             let list = [];
-            console.log(foundTopics);
             foundTopics.forEach(elem => {
                 list.push({
                     id: elem.id,
@@ -34,7 +32,6 @@ export const TopicProvider = ({children}) => {
             });
             setTopics(list);
             setWaiting(false);
-            console.log("got topics");
         } catch (e) {
             console.log("error gettings topics: ", e);
             setError(e);
@@ -43,9 +40,8 @@ export const TopicProvider = ({children}) => {
     };
 
     useEffect(() => {
-            loadTopics();
-        // }
-    }, [auth.loginValid]);
+        loadTopics();
+    }, []);
 
 
     return (

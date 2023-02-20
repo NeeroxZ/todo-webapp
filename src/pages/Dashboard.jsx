@@ -3,7 +3,7 @@ import 'font-awesome/css/font-awesome.min.css';
 import {UserInfo} from "../components/dashboard/UserInfo";
 import {Category} from "../components/dashboard/Category";
 import {View} from "../components/dashboard/View";
-import {TodoPage} from "./todo/TodoPage";
+import {TodoPage} from "./TodoPage";
 import "react-grid-layout/css/styles.css";
 import "react-resizable/css/styles.css";
 import {TodoChart} from "../components/TodoChart";
@@ -65,7 +65,7 @@ export const Dashboard = () => {
 
                 <div className="dashboardItem" key="empty5">
                     TODO`S
-                    <TodoPage scrollable={false} showFab={false} showInfo={false}/>
+                    <TodoPage scrollable={false} showFab={false} />
                 </div>
 
                 <div className="dashboardItem" key="empty7">

@@ -7,9 +7,12 @@ import pb from "../utils/pocketbase";
 import PropTypes from "prop-types";
 import {QueryBuilder} from "../utils/queryBuilder";
 import {NoContent} from "./NoContent";
+import {useTopics} from "../stores/TopicStore";
+import '../styles/todo.css';
 
 export const TodoTopicPage = () => {
     const { title } = useParams();
+    const topic = useTopics();
     const {getUserId} = useAuth();
     const [topicId, setTopicId] = useState(null);
     const [notFound, setNotFound] = useState(null);
@@ -17,28 +20,36 @@ export const TodoTopicPage = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
 
-    useEffect(() => {
-        console.log(notFound);
-        }
-    , [notFound])
-
     const searchTopicID = async () => {
         setLoading(true);
-        let q = new QueryBuilder();
-        q.Part("user_id", "=", getUserId());
-        q.And("title", "=", title);
+        let newTitle = title.replaceAll("_", " ");
+        let req = `user_id="${getUserId()}"`;
         let res = {};
         try {
-            // res = pb.collection('topics').getFullList(1000, q.Export());
             res = await pb.collection('topics').getFullList(1000, {
-                filter: q.Export(),
+                filter: req,
             });
+
             if (res.length <= 0) {
                 setNotFound(true);
                 setLoading(false);
                 return;
             }
-            setTopicId(res[0].id);
+
+            let topicId = "";
+
+            res.forEach(element => {
+                if (element.title.toLowerCase() === newTitle) {
+                    setTopicId(element.id);
+                    topicId = element.id;
+                }
+            });
+
+            if (topicId !== "") {
+                setTopicId(topicId);
+            } else {
+                setNotFound(true);
+            }
             setLoading(false);
         } catch (e) {
             setLoading(false);
@@ -53,26 +64,38 @@ export const TodoTopicPage = () => {
             await searchTopicID();
         }
         refresh();
-    }, []);
+    }, [title]);
 
+    if (topic.waiting || loading) {
+        return (
+            <>
+                <CircularProgress />
+            </>
+        );
+    }
 
     return (
         <>
+            {loading && (
+                <div className={"screen_container"}>
+                    <div className={"progress_bar"}>
+                        <Backdrop open={loading}>
+                            <CircularProgress/>
+                        </Backdrop>
+                    </div>
+                </div>
+            )}
             {topicId && (
-                <TodoPage scrollable={true}  topicId={topicId} />
+                <TodoPage
+                    scrollable={true}
+                    showFab={true}
+                    topicId={topicId}
+                />
             )}
             {notFound && (
                 <NoContent variant="topic"/>
             )}
 
-
-            {loading && (
-                <div className={"circularContainer"}>
-                    <Backdrop open={loading}>
-                        <CircularProgress/>
-                    </Backdrop>
-                </div>
-            )}
             {error && (
                 <Alert severity="error">
                     <AlertTitle>Error</AlertTitle>
