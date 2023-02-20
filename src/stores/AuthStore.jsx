@@ -21,7 +21,8 @@ export const AuthProvider = ({children}) => {
         try {
             let foundCookie = cookies.get(COOKIE_KEY)
             if (foundCookie === undefined) {
-                await logout()
+                setLoginValid(false);
+                setWaiting(false);
                 return;
             }
             try {
@@ -31,7 +32,6 @@ export const AuthProvider = ({children}) => {
                 setWaiting(false);
             } catch (e) {
                 await logout()
-
             }
 
         }
@@ -82,7 +82,6 @@ export const AuthProvider = ({children}) => {
         setLoginValid(false);
         pb.authStore.clear()
         setWaiting(false);
-
         navigator("/login")
     };
 
