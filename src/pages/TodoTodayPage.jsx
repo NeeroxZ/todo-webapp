@@ -17,7 +17,12 @@ export const TodoTodayPage = () => {
 
     return (
         <>
-            <TodoPage scrollable={true} dateFrom={getTimeFrom()} dateUntil={getTimeUntil()} />
+            <TodoPage
+                scrollable={true}
+                showFab={true}
+                dateFrom={getTimeFrom()}
+                dateUntil={getTimeUntil()}
+            />
         </>
     );
 };
