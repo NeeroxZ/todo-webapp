@@ -12,7 +12,7 @@ export const AddTodo = () => {
             <>
             <AddModal show={isOpen} setShow={setIsOpen}/>
                 <div className="modalPopup">
-                    <Fab size="medium" color="primary" aria-label="add" className="fab" onClick={() => {
+                    <Fab size="large" color="primary" aria-label="add" className="fab" onClick={() => {
                         setIsOpen(true);}}>
                     <AddIcon/>
                     </Fab>
