@@ -7,6 +7,7 @@ export const TodoAllPage = () => {
             <TodoPage
                 scrollable={true}
                 showFab={true}
+                showInfo={true}
             />
         </>
     );
