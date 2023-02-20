@@ -4,7 +4,10 @@ export const TodoAllPage = () => {
 
     return (
         <>
-            <TodoPage scrollable={true} />
+            <TodoPage
+                scrollable={true}
+                showFab={true}
+            />
         </>
     );
 };
