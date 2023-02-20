@@ -79,7 +79,7 @@ export const AuthProvider = ({children}) => {
     // logout
     const logout = async () => {
         pb.authStore.clear()
-        cookies.remove("auth", { path: '/' });
+        cookies.remove("auth");
         setLoginValid(false);
         setWaiting(false);
         navigator("/login")
