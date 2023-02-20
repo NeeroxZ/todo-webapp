@@ -1,0 +1,13 @@
+.circularContainer {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dashBox {
+    width: 100%;
+    /*height: 120px;*/
+    height: 100%;
+    margin: 0;
+}
