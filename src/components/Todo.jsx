@@ -115,22 +115,23 @@ export const Todo = (props) => {
                 >
                     <Grid item xs={10} md={10} className={"todo-front"}>
                         <Checkbox
-                            icon={<RadioButtonUncheckedIcon/>}
+                            icon={<RadioButtonUncheckedIcon color={"textWhite"}/>}
                             checked={done}
-                            checkedIcon={<RadioButtonCheckedIcon/>}
+                            checkedIcon={<RadioButtonCheckedIcon color={"textWhite"}/>}
+                            color={"textWhite"}
                             className={"todo-done"}
                             onChange={handleChange}
                         />
-                        <Typography variant="h5" className={`todo-title ${done ? "done" : ""}`}>
+                        <Typography variant="h5" color={"textWhite"} className={`todo-title ${done ? "done" : ""}`}>
                             {title}
                         </Typography>
                     </Grid>
                     <Grid item xs={1} md={1}>
                         <div className={"todo-icon"}>
                             <Checkbox
-                                icon={<BookmarkBorder/>}
+                                icon={<BookmarkBorder color={"textWhite"}/>}
                                 checked={saved}
-                                checkedIcon={<Bookmark/>}
+                                checkedIcon={<Bookmark color={"textWhite"}/>}
                                 className={"todo-done"}
                                 onChange={handleSaved}
                             />
