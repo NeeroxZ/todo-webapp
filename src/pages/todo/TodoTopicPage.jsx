@@ -1,20 +1,20 @@
 import {TodoPage} from "./TodoPage";
 import {useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
-import {useAuth} from "../stores/AuthStore";
+import {useAuth} from "../../stores/AuthStore";
 import {Alert, AlertTitle, Backdrop, CircularProgress} from "@mui/material";
-import pb from "../utils/pocketbase";
+import pb from "../../utils/pocketbase";
 import PropTypes, {element} from "prop-types";
-import {QueryBuilder} from "../utils/queryBuilder";
-import {NoContent} from "./NoContent";
-import {useTopics} from "../stores/TopicStore";
-import '../styles/todo.css';
+import {QueryBuilder} from "../../utils/queryBuilder";
+import {NoContent} from "../NoContent";
+import {useTopics} from "../../stores/TopicStore";
+import '../../styles/todo.css';
 
 export const TodoTopicPage = () => {
     const { title } = useParams();
     const topic = useTopics();
     const {getUserId} = useAuth();
-    const [topicId, setTopicId] = useState(null);
+    const [foundTopic, setFoundTopic] = useState(null);
     const [notFound, setNotFound] = useState(null);
 
     const [loading, setLoading] = useState(true);
@@ -27,7 +27,7 @@ export const TodoTopicPage = () => {
         let found = false;
         topic.topics.forEach((elem, i) => {
             if (elem.titleLow === newTitle) {
-                setTopicId(elem.id);
+                setFoundTopic(elem);
                 found = true;
             }
         });
@@ -53,11 +53,12 @@ export const TodoTopicPage = () => {
 
     return (
         <>
-            {topicId && (
+            {foundTopic && (
                 <TodoPage
                     scrollable={true}
                     showFab={true}
-                    topicId={topicId}
+                    showInfo={true}
+                    topic={foundTopic}
                 />
             )}
             {notFound && (
