@@ -64,30 +64,15 @@ export const Register = () => {
         }
     };
 
-    // const mailValid = (address) => {
-    //     if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(address)) {
-    //         setMailError(true);
-    //         console.log("invalid")
-    //         return false;
-    //     }
-    //     console.log("valid")
-    //     setMailError(true);
-    //     return true;
-    // }
 
     return (
-        <div className="containerRegist">
-            <div className="row">
+        <div className="containerParent">
+            <div className="containerChild">
                 <div className="box">
                     <h1 className="form-name">Register</h1>
                     <label>
                         <input className={`placeholders ${mailError ? "error" : ""}`} type="text" placeholder="Email"
                                onBlur={e => {
-                                   // if (mailValid(e.target.value)) {
-                                   //     setMail(e.target.value);
-                                   // } else {
-                                   //
-                                   // }
                                    setMail(e.target.value)
                                }
                                }/>
