@@ -7,12 +7,13 @@ import {QueryBuilder} from "../utils/queryBuilder";
 import {NoContent} from "./NoContent";
 import {AddTodo} from "../components/AddTodo";
 import {getParams} from "../utils/getParams";
+import {CircularProgress} from "@mui/material";
 
 
 
 export const TodoPage = (props) => {
     const [data, setData] = useState([]);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [noTodo, setNoTodo] = useState(null);
 
@@ -21,6 +22,9 @@ export const TodoPage = (props) => {
 
     const getTodos = async () => {
         setLoading(true);
+        setNoTodo(false);
+        setError(false);
+        setData([]);
         let res = {};
         try {
             let params = getParams(props, getUserId());
@@ -46,7 +50,17 @@ export const TodoPage = (props) => {
 
     useEffect( () => {
         getTodos();
-    }, []);
+    }, [props.topicId]);
+
+    if (loading) {
+        return (
+            <div className={"screen_container"}>
+                <div className={"progress_bar"}>
+                    <CircularProgress/>
+                </div>
+            </div>
+        );
+    }
 
     //// realtime
     // useEffect(() => {
@@ -59,25 +73,25 @@ export const TodoPage = (props) => {
     //     };
     // });
 
+    if (noTodo) {
+        return (
+            <NoContent variant="todo"/>
+        );
+    }
 
 
     return (
         <>
-            {/*{loading && <Skeleton variant="rectangular" width={210} height={118} />}*/}
-            {/*{error && (*/}
-            {/*    <div>{`There is a problem fetching the post data - ${error}`}</div>*/}
-            {/*)}*/}
-            {noTodo && (
-                <NoContent variant="todo"/>
-            )}
             {data &&
-                props.scrollable
-                ?<div className="ex1">
+            props.scrollable
+                ?
+                <div className="ex1">
                     <ul className="todo-list">
                         {data && data.map((item, i) => <li key={i}><Todo id={item.id}/></li>)}
                     </ul>
                 </div>
-                :<ul className="todo-list">
+                :
+                <ul className="todo-list">
                     {data && data.map((item, i) => <li key={i}><Todo id={item.id}/></li>)}
                 </ul>
             }

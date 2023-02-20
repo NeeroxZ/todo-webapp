@@ -113,7 +113,7 @@ export const AddModal = (props) => {
             <LocalizationProvider dateAdapter={AdapterDayjs}>
 
 
-                <div className="modalContainer">
+                {/*<div className="modalContainer">*/}
                     <Modal
                         open={props.show}
                         onClose={() => {
@@ -245,7 +245,7 @@ export const AddModal = (props) => {
                             </div>
                         </Box>
                     </Modal>
-                </div>
+                {/*</div>*/}
             </LocalizationProvider>
         </>
     );
