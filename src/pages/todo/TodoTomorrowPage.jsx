@@ -18,6 +18,7 @@ export const TodoTomorrowPage = () => {
             <TodoPage
                 scrollable={true}
                 showFab={true}
+                showInfo={true}
                 dateFrom={getTimeFrom()}
                 dateUntil={getTimeUntil()}
             />

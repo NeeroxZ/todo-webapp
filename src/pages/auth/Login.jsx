@@ -1,8 +1,8 @@
 import {useState} from "react";
-import {useAuth} from "../stores/AuthStore";
+import {useAuth} from "../../stores/AuthStore";
 import {Navigate, useNavigate} from "react-router-dom";
 import {Alert, AlertTitle, Backdrop, CircularProgress} from "@mui/material";
-import '../styles/user.css';
+import '../../styles/user.css';
 
 
 export const Login = () => {
