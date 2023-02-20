@@ -65,7 +65,7 @@ export const Dashboard = () => {
 
                 <div className="dashboardItem" key="empty5">
                     TODO`S
-                    <TodoPage scrollable={false} />
+                    <TodoPage scrollable={false} showFab={false} />
                 </div>
 
                 <div className="dashboardItem" key="empty7">
