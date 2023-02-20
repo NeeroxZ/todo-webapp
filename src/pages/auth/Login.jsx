@@ -11,6 +11,7 @@ export const Login = () => {
     const auth = useAuth();
     const navigator = useNavigate();
 
+
     if (auth.loginValid) {
         return (
             <Navigate to="/home" />
@@ -18,8 +19,8 @@ export const Login = () => {
     }
 
     return (
-        <div className="containerLogin">
-            <div className="rowLogin">
+        <div className="containerParent">
+            <div className="containerChild">
                 <form className="box">
                     <h1 className="form-name">Sign In</h1>
                     <label>
