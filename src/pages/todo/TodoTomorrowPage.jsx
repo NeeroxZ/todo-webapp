@@ -1,18 +1,16 @@
 import {TodoPage} from "./TodoPage";
 
-export const TodoTodayPage = () => {
+export const TodoTomorrowPage = () => {
     let time = new Date();
-    let currentDate = (time.getUTCFullYear() + "-" +  ('0' + (time.getUTCMonth()+1)).slice(-2) + '-'
-        + ('0' + time.getUTCDate()).slice(-2))
+    time.setUTCDate(time.getDate() + 1);
+    let tomorrow = (time.getUTCFullYear() + "-" + ('0' + (time.getUTCMonth() + 1)).slice(-2) + '-' + ('0' + time.getUTCDate()).slice(-2));
 
-    console.log(currentDate)
-    // let currentDatetime = `${currentDate} ${currentTime}`;
     const getTimeFrom = () => {
-        return `${currentDate} 00:00:00.000`;
+        return `${tomorrow} 00:00:00.000`;
     }
 
     const getTimeUntil = () => {
-        return `${currentDate} 23:59:59.999`;
+        return `${tomorrow} 23:59:59.999`;
     };
 
     return (
@@ -20,6 +18,7 @@ export const TodoTodayPage = () => {
             <TodoPage
                 scrollable={true}
                 showFab={true}
+                showInfo={true}
                 dateFrom={getTimeFrom()}
                 dateUntil={getTimeUntil()}
             />

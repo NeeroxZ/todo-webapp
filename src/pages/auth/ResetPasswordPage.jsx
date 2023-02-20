@@ -1,6 +1,6 @@
 import {useNavigate} from "react-router-dom";
 import {useState} from "react";
-import pb from "../utils/pocketbase";
+import pb from "../../utils/pocketbase";
 import {Alert, Backdrop, CircularProgress} from "@mui/material";
 
 export const ResetPasswordPage = () => {
