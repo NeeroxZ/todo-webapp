@@ -26,7 +26,9 @@ import {UserPage} from "./pages/UserPage";
 
 // components
 import {NavBar} from "./components/Navbar";
-import {About} from "./pages/About";
+// import {UserProvider} from "./stores/UserStore";
+import {TopicProvider} from "./stores/TopicStore";
+import {AppRoutes} from "./AppRoutes";
 
 
 
@@ -39,27 +41,12 @@ function App() {
                 <ThemeProvider theme={Theme}>
                     <Router>
                         <AuthProvider>
-                            <NavBar/>
-                            <Routes>
-                                <Route path="*" element={<NoMatch/>}/>
-                                <Route path="login" element={<Login/>}/>
-                                <Route path="reset" element={<ResetPasswordPage/>}/>
-                                <Route path="register" element={<Register/>}/>
-                                <Route path="confirm" element={<ConfirmMailPage/>}/>
-                                <Route path="user" element={<UserPage/>}/>
-                                <Route path="about" element={<About/>}/>
-                                <Route element={<PrivateRoute/>}>
-                                    <Route path="*" element={<NoMatch/>}/>
-                                    <Route index element={<Dashboard />} />
-                                    <Route path="home" element={<Dashboard/>}/>
-                                    <Route path="todo">
-                                        <Route path="all" element={<TodoPage scrollable={true}/>}/>
-                                        <Route path="today" element={<TodoTodayPage/>}/>
-                                        <Route path="tomorrow" element={<TodoTomorrowPage/>}/>
-                                    </Route>
-                                    <Route path="topic/:title" element={<TodoTopicPage/>}/>
-                                </Route>
-                            </Routes>
+                            {/*<UserProvider>*/}
+                                <TopicProvider>
+                                    <NavBar/>
+                                    <AppRoutes />
+                                </TopicProvider>
+                            {/*</UserProvider>*/}
                         </AuthProvider>
                     </Router>
                 </ThemeProvider>
