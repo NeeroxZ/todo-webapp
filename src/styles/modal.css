@@ -28,9 +28,15 @@
 .modalBox {
     background: linear-gradient(312deg, #464d68 2%, rgb(43, 42, 42) 87%);
     border-radius: 0.5rem;
-    width: 400px;
-    height: 400px;
+    width: 550px;
+    height: 500px;
     color: white;
+    position: relative;
+}
+
+.modalBox.mobile {
+    width: 400px;
+    height: 560px;
 }
 
 .modalCenter{
@@ -49,4 +55,107 @@
 .helper-text {
     text-transform: initial;
     font-size: 1rem !important;
+}
+
+/*content*/
+.contentWrapper {
+    margin: 20px 20px 20px 20px;
+}
+
+.modalHeading {
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.modalHeading.mobile {
+    justify-content: space-between;
+}
+
+.tdTitleLabel {
+    font-size: 1.25rem;
+}
+.tdTitleStyle {
+    width: 100%;
+    flex-grow: 1;
+}
+
+.tdTitleRow {
+    margin-top: 20px;
+    display: flex;
+    justify-items: center;
+}
+.tpIconRight {
+    height: 100%;
+    /*width: 100%;*/
+}
+
+.tpIconRight.regular {
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    margin-left: 20px;
+}
+
+.tpIconRight.header {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+}
+
+.tdTopicRow {
+    display: flex;
+    justify-items: center;
+}
+
+.tdTopicAddStyle {
+    flex-grow: 1;
+    margin-left: 5px;
+
+    display: flex;
+    justify-items: center;
+    align-items: center;
+}
+.tdTopicStyle {
+    width: 100%;
+    flex-grow: 1;
+}
+
+.tdDatePicker {
+    width: 100%;
+}
+
+.gridSpacer {
+    margin-bottom: 20px;
+}
+
+.btnAddContainer {
+    margin-top: 10px;
+    width: 100%;
+}
+
+.btnAddTopic {
+    width: 100%;
+}
+
+.bottomBtnGroup {
+    position: absolute;
+    margin: 0 20px 20px 0;
+    bottom: 0;
+    right: 0;
+}
+
+.btnGrpContainer {
+    /*width: 100%;*/
+    display: flex;
+}
+
+.btn {
+    width: 80px;
+}
+
+.btn.save {
+    margin-left: 10px !important;
 }
