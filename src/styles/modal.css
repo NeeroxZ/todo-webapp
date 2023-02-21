@@ -1,7 +1,7 @@
-.modalPopup{
+.fixedRightContainer{
     position: absolute;
-    right: 3%;
-    bottom: 4%;
+    right: 0;
+    bottom:0;
 }
 
 .modalContainer {
