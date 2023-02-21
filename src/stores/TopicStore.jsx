@@ -43,15 +43,9 @@ export const TopicProvider = ({children}) => {
     };
 
     useEffect(() => {
-        // if (auth.loginValid) {
             loadTopics();
         // }
     }, [auth.loginValid]);
-
-    // if (auth.loginValid) {
-    //     loadTopics();
-    // }
-
 
 
     return (
