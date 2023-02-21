@@ -32,7 +32,7 @@ jobs:
       - name: show branch
         run:  echo ${{ steps.extract_branch.output.name }}
       - name: Exit if not on master branch
-        if: ${{ steps.extract_branch.outputs.branch != 'main' }}
+        if: ${{ steps.extract_branch.outputs.branch != 'dev-modal' }}
         run: exit -1
 
   build:
