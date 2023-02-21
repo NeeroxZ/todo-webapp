@@ -15,7 +15,7 @@ on:
 
 env:
   DOCKER_REGISTRY: registry.marvsman.com
-  IMAGE_TAG: $DOCKER_REGISTRY/dodotodo-ui
+  IMAGE_TAG: ${{ env.DOCKER_REGISTRY }}/dodotodo-ui
 
 
 jobs:
