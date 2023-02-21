@@ -11,8 +11,8 @@ export function getParams(filters, userId) {
         query += " && deleted=false"
     }
 
-    if (filters.topicId) {
-        query += ` && topic="${filters.topicId}"`;
+    if (filters.topic) {
+        query += ` && topic="${filters.topic.id}"`;
     }
 
     if (filters.tagFilter) {
