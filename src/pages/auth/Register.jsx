@@ -1,7 +1,7 @@
 import {useNavigate} from "react-router-dom";
 import {useState} from "react";
 import {Alert, AlertTitle, Backdrop, CircularProgress} from "@mui/material";
-import pb from "../utils/pocketbase";
+import pb from "../../utils/pocketbase";
 export const Register = () => {
     const [username, setUsername] = useState(null);
     const [mail, setMail] = useState(null);
