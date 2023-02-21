@@ -30,7 +30,7 @@ jobs:
       - name: show branch
         run:  echo ${{ steps.branch-name.outputs.current_branch }}
       - name: Exit if not on master branch
-        if: $GITHUB_REF_NAME != "main"
+        if: ${{ steps.branch-name.outputs.current_branch != "dev-modal" }}
         run: exit -1
 
   build:
