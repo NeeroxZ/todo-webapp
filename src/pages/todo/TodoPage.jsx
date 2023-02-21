@@ -97,7 +97,7 @@ export const TodoPage = (props) => {
                 <div className="scrollContainer">
                     {props.showInfo &&
                         <div className={"tdPgHeadingContainer"}>
-                            <div className={"tdPgHeading"}>This is the heading</div>
+                            <div className={"tdPgHeading"}>This is not the heading, lol</div>
                         </div>
                     }
                     <ul className="todo-list">
