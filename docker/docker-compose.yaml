@@ -12,6 +12,8 @@ services:
       CHOKIDAR_USEPOLLING: true
     ports:
       - "127.0.0.1:6060:80"
+    networks:
+      - servernetwork-internal
 
   watchtower:
     container_name: watchtower
@@ -30,3 +32,11 @@ services:
       WATCHTOWER_CLEANUP: true
       WATCHTOWER_NOTIFICATION_URL: "telegram://$TELEGRAM_TOKEN@telegram/?channels=$TELEGRAM_CHAT_ID"
     command: --interval 10 dodotodo-ui-container
+    networks:
+      - servernetwork-internal
+      - servernetwork-external
+
+networks:
+  servernetwork-internal:
+    internal: true
+  servernetwork-external:
