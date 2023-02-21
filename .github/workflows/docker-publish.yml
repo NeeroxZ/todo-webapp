@@ -45,8 +45,11 @@ jobs:
       - name: Setup Docker buildx
         uses: docker/setup-buildx-action@79abd3f86f79a9d68a23c75a09a9a85889262adf
 
-      - name: PrintPassword
-        run: echo "${{ secrets.DOCKERPASSWORD }}"
+      - name: Print Docker config
+        run:
+          - echo "${{ secrets.DOCKERPASSWORD }}"
+          - echo ${{ env.REGISTRY }}
+
 
       # Login against a Docker registry except on PR
       # https://github.com/docker/login-action
@@ -56,7 +59,7 @@ jobs:
         uses: docker/login-action@28218f9b04b4f3f62068d7b6ce6ca5b26e35336c
         with:
           registry: ${{ env.REGISTRY }}
-          username: "git"
+          username: git
           password: ${{ secrets.DOCKERPASSWORD }}
 
       # Extract metadata (tags, labels) for Docker
