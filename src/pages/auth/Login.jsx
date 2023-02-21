@@ -11,7 +11,7 @@ export const Login = () => {
     const auth = useAuth();
     const navigator = useNavigate();
 
-    // redirect if cookie is found
+    // redirect if cookie was found
     if (auth.loginValid) {
         return (
             <Navigate to="/home" />
