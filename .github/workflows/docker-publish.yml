@@ -24,15 +24,10 @@ jobs:
       id-token: write
     steps:
       - uses: actions/checkout@v1
-      - name: Extract branch name
-        shell: bash
-#        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
-        run: echo "name=${GITHUB_REF#refs/heads/}" >> $GITHUB_OUTPUT
-        id: extract_branch
       - name: show branch
-        run:  echo ${{ steps.extract_branch.output.name }}
+        run:  echo $GITHUB_REF_NAME
       - name: Exit if not on master branch
-        if: ${{ steps.extract_branch.outputs.branch != 'dev-modal' }}
+        if: $GITHUB_REF_NAME != "main"
         run: exit -1
 
   build:
