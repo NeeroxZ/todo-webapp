@@ -24,8 +24,11 @@ jobs:
       id-token: write
     steps:
       - uses: actions/checkout@v1
+      - name: get branch name
+        id: branch-name
+        uses: tj-actions/branch-names@v6
       - name: show branch
-        run:  echo $GITHUB_REF_NAME
+        run:  echo ${{ steps.branch-name.outputs.current_branch }}
       - name: Exit if not on master branch
         if: $GITHUB_REF_NAME != "main"
         run: exit -1
