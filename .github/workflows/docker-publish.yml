@@ -24,11 +24,6 @@ jobs:
       id-token: write
     steps:
       - uses: actions/checkout@v1
-#      - name: get branch name
-#        id: branch-name
-#        uses: tj-actions/branch-names@v6
-#      - name: show branch
-#        run:  echo ${{ steps.branch-name.outputs.current_branch }}
       - name: Exit if not on master branch
         if: github.ref == 'refs/heads/dev-modal'
         run: exit -1
