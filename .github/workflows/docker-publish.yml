@@ -23,9 +23,14 @@ jobs:
       # with sigstore/fulcio when running outside of PRs.
       id-token: write
     steps:
-      - name: Check branch
-        if: endsWith(github.ref, 'main') == false
+      - uses: actions/checkout@v1
+#      - name: Exit if not on master branch
+#        if: endsWith(github.ref, 'master') == false
+#        run: exit -1
+      - name: build only on my_branch tag
+        if: ${{ github.event_name == 'release' && github.event.release.target_commitish != 'main'}}
         run: exit -1
+
   build:
     runs-on: ubuntu-latest
     needs: check
