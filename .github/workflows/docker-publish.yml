@@ -7,9 +7,6 @@ name: Docker
 
 on:
   push:
-    branches:
-      - master
-      - dev-modal
     tags:
       - "v*.*.*"
 
@@ -27,7 +24,7 @@ jobs:
       id-token: write
     steps:
       - name: Check branch
-        if: endsWith(github.ref, 'master') == false
+        if: endsWith(github.ref, 'dev-modal') == false
         run: exit -1
   build:
     runs-on: ubuntu-latest
