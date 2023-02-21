@@ -24,7 +24,7 @@ jobs:
       id-token: write
     steps:
       - name: Check branch
-        if: endsWith(github.ref, 'dev-modal') == false
+        if: endsWith(github.ref, 'main') == false
         run: exit -1
   build:
     runs-on: ubuntu-latest
