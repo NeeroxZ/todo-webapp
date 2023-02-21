@@ -29,11 +29,13 @@ export const NoContent = (props) => {
             {/*    <div className="wave"></div>*/}
             {/*    <div className="wave"></div>*/}
             {/*</div>*/}
-            <div className="arrow">
-                <ArrowDownwardIcon
-                    fontSize="large"
-                    color="primary"
-                />
+            <div className={"fixedRightContainer"}>
+                <div className="arrow">
+                    <ArrowDownwardIcon
+                        fontSize="large"
+                        color="primary"
+                    />
+                </div>
             </div>
             <AddTodo/>
         </>

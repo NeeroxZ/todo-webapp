@@ -1,15 +1,15 @@
 import {Route, Routes} from "react-router-dom";
-import {Login} from "./pages/Login";
-import {ResetPasswordPage} from "./pages/ResetPasswordPage";
-import {Register} from "./pages/Register";
+import {Login} from "./pages/auth/Login";
+import {ResetPasswordPage} from "./pages/auth/ResetPasswordPage";
+import {Register} from "./pages/auth/Register";
 import {ConfirmMailPage} from "./pages/ConfirmMail";
 import {UserPage} from "./pages/UserPage";
 import {About} from "./pages/About";
 import {Dashboard} from "./pages/Dashboard";
-import {TodoAllPage} from "./pages/TodoAllPage";
-import {TodoTodayPage} from "./pages/TodoTodayPage";
-import {TodoTomorrowPage} from "./pages/TodoTomorrowPage";
-import {TodoTopicPage} from "./pages/TodoTopicPage";
+import {TodoAllPage} from "./pages/todo/TodoAllPage";
+import {TodoTodayPage} from "./pages/todo/TodoTodayPage";
+import {TodoTomorrowPage} from "./pages/todo/TodoTomorrowPage";
+import {TodoTopicPage} from "./pages/todo/TodoTopicPage";
 import React from "react";
 import PrivateRoute from "./utils/PrivateRoute";
 
