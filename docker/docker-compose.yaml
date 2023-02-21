@@ -1,0 +1,42 @@
+version: '3'
+
+services:
+  dodotodo-ui:
+    container_name: dodotodo-ui-container
+    image: registry.marvsman.com/dodotodo-ui:latest
+    restart: on-failure
+    volumes:
+      - ./data/app:/app
+      - ./data/node_modules:/app/node_modules
+    environment:
+      CHOKIDAR_USEPOLLING: true
+    ports:
+      - "127.0.0.1:6060:80"
+    networks:
+      - servernetwork-internal
+
+  watchtower:
+    container_name: watchtower
+    image: containrrr/watchtower
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./watchtower/config.json:/config.json
+    ports:
+      - "127.0.0.1:5200:8080"
+    environment:
+      TZ: Europe/Berlin
+      WATCHTOWER_LIFECYCLE_HOOKS: true
+      WATCHTOWER_NOTIFICATIONS: shoutrrr
+      WATCHTOWER_DEBUG: true
+      WATCHTOWER_CLEANUP: true
+      WATCHTOWER_NOTIFICATION_URL: "telegram://$TELEGRAM_TOKEN@telegram/?channels=$TELEGRAM_CHAT_ID"
+    command: --interval 10 dodotodo-ui-container
+    networks:
+      - servernetwork-internal
+      - servernetwork-external
+
+networks:
+  servernetwork-internal:
+    internal: true
+  servernetwork-external:
