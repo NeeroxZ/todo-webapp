@@ -56,6 +56,7 @@ export const Todo = (props) => {
             setData(null);
         } finally {
             setLoading(false);
+            props.doneLoading();
         }
     };
 
