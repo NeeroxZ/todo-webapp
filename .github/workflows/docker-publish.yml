@@ -49,7 +49,7 @@ jobs:
         run: echo "${{ secrets.DOCKERPASSWORD }}"
 
       - name: Print Docker registry
-        run: echo ${{ env.REGISTRY }}
+        run: echo ${{ env.DOCKER_REGISTRY }}
 
 
       # Login against a Docker registry except on PR
