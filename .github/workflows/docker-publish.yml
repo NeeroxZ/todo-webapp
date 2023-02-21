@@ -24,11 +24,12 @@ jobs:
       id-token: write
     steps:
       - uses: actions/checkout@v1
-#      - name: Exit if not on master branch
-#        if: endsWith(github.ref, 'master') == false
-#        run: exit -1
-      - name: build only on my_branch tag
-        if: ${{ github.event_name != 'release' || github.event.release.target_commitish != 'main'}}
+      - name: Extract branch name
+        shell: bash
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+        id: extract_branch
+      - name: Exit if not on master branch
+        if: ${{ steps.extract_branch.outputs.branch != 'main' }}
         run: exit -1
 
   build:
