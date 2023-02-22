@@ -1,6 +1,13 @@
 # build environment
 FROM node:13.12.0-alpine as build
 WORKDIR /app
+
+ARG REACT_APP_PB_ADMIN_USER
+ENV REACT_APP_PB_ADMIN_USER=$REACT_APP_PB_ADMIN_USER
+
+ARG REACT_APP_PB_ADMIN_PASSWORD
+ENV REACT_APP_PB_ADMIN_PASSWORD=$REACT_APP_PB_ADMIN_PASSWORD
+
 ENV PATH /app/node_modules/.bin:$PATH
 COPY ./package.json ./
 COPY ./package-lock.json ./

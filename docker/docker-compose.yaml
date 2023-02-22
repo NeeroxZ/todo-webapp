@@ -12,11 +12,15 @@ services:
       CHOKIDAR_USEPOLLING: true
     ports:
       - "127.0.0.1:6060:80"
+    labels:
+      - "com.centurylinklabs.watchtower.scope=frontend"
 
   watchtower:
-    container_name: watchtower
+    container_name: watchtower-ui
     image: containrrr/watchtower
     restart: unless-stopped
+    depends_on:
+      - dodotodo-ui
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - ./watchtower/config.json:/config.json
@@ -28,5 +32,8 @@ services:
       WATCHTOWER_NOTIFICATIONS: shoutrrr
       WATCHTOWER_DEBUG: true
       WATCHTOWER_CLEANUP: true
+      WATCHTOWER_NOTIFICATION_TITLE_TAG: "watchtower frontend"
       WATCHTOWER_NOTIFICATION_URL: "telegram://$TELEGRAM_TOKEN@telegram/?channels=$TELEGRAM_CHAT_ID"
-    command: --interval 10 dodotodo-ui-container
+    command: --interval 30 --scope frontend dodotodo-ui-container
+    labels:
+      - "com.centurylinklabs.watchtower.scope=frontend"
