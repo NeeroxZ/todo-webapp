@@ -19,6 +19,7 @@ export const TodoTomorrowPage = () => {
                 scrollable={true}
                 showFab={true}
                 showInfo={true}
+                pageHeading={"Tomorrow todos"}
                 dateFrom={getTimeFrom()}
                 dateUntil={getTimeUntil()}
             />

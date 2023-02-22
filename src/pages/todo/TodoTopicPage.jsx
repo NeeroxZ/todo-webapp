@@ -2,10 +2,8 @@ import {TodoPage} from "./TodoPage";
 import {useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {useAuth} from "../../stores/AuthStore";
-import {Alert, AlertTitle, Backdrop, CircularProgress} from "@mui/material";
-import pb from "../../utils/pocketbase";
-import PropTypes, {element} from "prop-types";
-import {QueryBuilder} from "../../utils/queryBuilder";
+import {Alert, AlertTitle, CircularProgress} from "@mui/material";
+import PropTypes from "prop-types";
 import {NoContent} from "../NoContent";
 import {useTopics} from "../../stores/TopicStore";
 import '../../styles/todo.css';
@@ -13,13 +11,13 @@ import '../../styles/todo.css';
 export const TodoTopicPage = () => {
     const { title } = useParams();
     const topic = useTopics();
-    const {getUserId} = useAuth();
     const [foundTopic, setFoundTopic] = useState(null);
     const [notFound, setNotFound] = useState(null);
 
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
 
+    // Todo: Error handling
     const searchTopicID = () => {
         setNotFound(false);
         setLoading(true);
@@ -58,6 +56,7 @@ export const TodoTopicPage = () => {
                     scrollable={true}
                     showFab={true}
                     showInfo={true}
+                    pageHeading={`Topic: ${foundTopic.titleMod}`}
                     topic={foundTopic}
                 />
             )}

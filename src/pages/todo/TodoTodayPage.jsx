@@ -21,6 +21,7 @@ export const TodoTodayPage = () => {
                 scrollable={true}
                 showFab={true}
                 showInfo={true}
+                pageHeading={"Today todos"}
                 dateFrom={getTimeFrom()}
                 dateUntil={getTimeUntil()}
             />

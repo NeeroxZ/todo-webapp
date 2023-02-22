@@ -70,7 +70,6 @@ export const TodoPage = (props) => {
         }
     }, [todosLoaded, noTodo]);
 
-
     // conditional rendering
     if (loading) {
         return (
@@ -80,8 +79,7 @@ export const TodoPage = (props) => {
                 </div>
             </>
         );
-    }
-    if (noTodo) {
+    } else if (noTodo) {
         return (
             <>
 
@@ -157,12 +155,15 @@ TodoPage.defaultProps = {
     showInfo: false,
     selectedTopic: null,
     topic: null,
+    pageHeading: "Hello there",
+    loading: false,
 };
 
 TodoPage.propType = {
     scrollable: PropTypes.bool.isRequired,
     showFab: PropTypes.bool.isRequired,
     showInfo: PropTypes.bool,
+    pageHeading: PropTypes.string,
     bookmarkFilter: PropTypes.bool,
     deletedFilter: PropTypes.bool,
     topic: PropTypes.object,
