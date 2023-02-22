@@ -113,7 +113,7 @@ export const TodoPage = (props) => {
                     <div className="scrollContainer">
                         {props.showInfo &&
                             <div className={"tdPgHeadingContainer"}>
-                                <Typography variant={"h2"} color={"primary"}>{props.pageHeading}</Typography>
+                                <div className={"tdPgHeading"}>{props.pageHeading}</div>
                             </div>
                         }
                         <ul className="todo-list">
