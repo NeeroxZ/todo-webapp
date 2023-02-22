@@ -1,7 +1,6 @@
 import {createContext, useContext, useEffect, useState} from "react";
 import pb from "../utils/pocketbase";
 import {useAuth} from "./AuthStore";
-import {string} from "prop-types";
 
 const TopicContext = createContext(null);
 
@@ -22,7 +21,6 @@ export const TopicProvider = ({children}) => {
                 sort: '-created'
             })
             let list = [];
-            console.log(foundTopics);
             foundTopics.forEach(elem => {
                 list.push({
                     id: elem.id,
@@ -44,7 +42,6 @@ export const TopicProvider = ({children}) => {
 
     useEffect(() => {
             loadTopics();
-        // }
     }, [auth.loginValid]);
 
 
