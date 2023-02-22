@@ -10,7 +10,6 @@ import PropTypes from 'prop-types';
 
 export const AddTodo = (props) => {
     const [isOpen, setIsOpen] = useState(false);
-    console.log(props.loading)
     return (
         <>
             <AddModal

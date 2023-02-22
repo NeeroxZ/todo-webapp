@@ -26,7 +26,6 @@ import pb from "../utils/pocketbase";
 import {useTopics} from "../stores/TopicStore";
 
 export const AddModal = (props) => {
-
     const tpCtx = useTopics();
 
     const [title, setTitle] = useState("");
@@ -34,7 +33,7 @@ export const AddModal = (props) => {
 
     const [bookmark, setBookmark] = useState(false);
 
-    const [topic, setTopic] = useState(props.selectedTopic);
+    const [topic, setTopic] = useState(null);
     const [topicInput, setTopicInput] = useState("");
     const [topicError, setTopicError] = useState(false);
 
@@ -44,21 +43,15 @@ export const AddModal = (props) => {
     const [date, setDate] = useState(dayjs());
     const [dateError, setDateError] = useState(false);
 
-    const [variant, setVariant] = useState(props.variant);
-    const [varEdit, setVarEdit] = useState(false);
-
-
-
     const {getUserId} = useAuth();
 
 
     useEffect(() => {
-        if (props.variant === "add") {
-            setVarEdit(true);
+        if (props.topic !== null) {
+            setTopic(props.selectedTopic);
         }
     }, []);
 
-    // Todo (Marvin): TOPICS
     // Todo (Marvin): Error handling
     const uploadTodo = async () => {
         if (checkInputs()) {
@@ -136,10 +129,7 @@ export const AddModal = (props) => {
                                 </Backdrop>
                             }
                             <div className={`modalHeading ${matches ? "" : "mobile"}`}>
-                                {varEdit
-                                    ? <div>Add Todo</div>
-                                    : <div>Edit Todo</div>
-                                }
+                                <div>Add Todo</div>
                                 {!matches &&
                                     <div className="tpIconRight.header">
                                         <Tooltip title="Bookmark" placement="top" arrow>
@@ -192,7 +182,7 @@ export const AddModal = (props) => {
                                             error={topicError.toString()}
                                             id="tdTopic"
                                             className="tdTopicStyle"
-                                            value={props.selectedTopic}
+                                            value={topic}
                                             onChange={(event, newValue) => {
                                                 setTopic(newValue);
                                             }}
@@ -266,7 +256,6 @@ export const AddModal = (props) => {
 };
 
 AddModal.defaultProps = {
-    variant: "add",
     reloadOnAdd: false,
     selectedTopic: null,
 }

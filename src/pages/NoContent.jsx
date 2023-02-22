@@ -1,6 +1,5 @@
 import "../styles/todo.css"
 import {AddTodo} from "../components/AddTodo";
-import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import PropTypes from 'prop-types';
 import {useEffect, useState} from "react";
 export const NoContent = (props) => {
@@ -29,14 +28,14 @@ export const NoContent = (props) => {
             {/*    <div className="wave"></div>*/}
             {/*    <div className="wave"></div>*/}
             {/*</div>*/}
-            <div className={"fixedRightContainer"}>
-                <div className="arrow">
-                    <ArrowDownwardIcon
-                        fontSize="large"
-                        color="primary"
-                    />
-                </div>
-            </div>
+            {/*<div className={"fixedRightContainer"}>*/}
+            {/*    <div className="arrow">*/}
+            {/*        <ArrowDownwardIcon*/}
+            {/*            fontSize="large"*/}
+            {/*            color="primary"*/}
+            {/*        />*/}
+            {/*    </div>*/}
+            {/*</div>*/}
             <AddTodo/>
         </>
     )
