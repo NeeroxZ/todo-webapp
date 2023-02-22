@@ -8,6 +8,7 @@ export const TodoAllPage = () => {
                 scrollable={true}
                 showFab={true}
                 showInfo={true}
+                pageHeading={"All todos"}
             />
         </>
     );

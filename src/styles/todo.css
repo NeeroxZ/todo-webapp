@@ -36,6 +36,7 @@ html, body, #app, #app>div {
 
 /*todo page header*/
 .tdPgHeadingContainer {
+    padding-top: 20px;
     width: 100%;
     height: 80px;
     display: flex;
