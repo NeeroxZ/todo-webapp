@@ -23,6 +23,19 @@ export const Register = () => {
         }
     };
 
+    const sendVerification = async () => {
+        try {
+            console.log(mail.toString())
+            await pb.collection('users').requestVerification(mail.toString());
+            return true;
+        } catch (error) {
+            console.log(error)
+            setWaiting(false);
+            setRegistrationError(true);
+            return false;
+        }
+    };
+
     const handleRegister = async () => {
         setWaiting(true);
 
@@ -48,19 +61,6 @@ export const Register = () => {
             navigator("/confirm");
         }
 
-    };
-
-    const sendVerification = async () => {
-        try {
-            console.log(mail.toString())
-            await pb.collection('users').requestVerification(mail.toString());
-            return true;
-        } catch (error) {
-            console.log(error)
-            setWaiting(false);
-            setRegistrationError(true);
-            return false;
-        }
     };
 
 

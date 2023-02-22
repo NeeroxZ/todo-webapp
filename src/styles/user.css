@@ -3,7 +3,19 @@
     margin: 0;
     padding: 0;
     /*color: #fdfdfdce;*/
+    -ms-overflow-style: none;
 }
+/*general*/
+html, body, #app, #app>div {
+    height: 100%
+}
+#root {
+    height: 100%;
+}
+::-webkit-scrollbar {
+    display: none;
+}
+
 
 p {
     color: #fdfdfdce;
@@ -118,4 +130,36 @@ button:focus{
 .modalText{
     background-color: #FFFFFF;
     color: blue;
+}
+
+/*static pages*/
+.staticAbsoluteContainer {
+    position: absolute;
+    width: 100%;
+    left: 50%;
+    top: 35%;
+    transform: translate(-50%,-50%);
+}
+.staticContainer {
+    position: relative;
+    margin: auto;
+    height: 300px;
+    width: 80%;
+    color: #fdfdfdce;
+}
+.staticHeading {
+    text-align: center;
+    font-size: 3rem;
+    color: #04AA6D;
+}
+.staticBody {
+    margin-top: 10px;
+    text-align: center;
+    font-size: 1.25rem;
+}
+
+.staticLabel {
+    margin-top: 5px;
+    text-align: center;
+    font-size: 0.9rem;
 }
