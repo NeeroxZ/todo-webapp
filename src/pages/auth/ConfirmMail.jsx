@@ -1,10 +1,6 @@
 import '../../styles/user.css'
-import {Button} from "@mui/material";
-import {useState} from "react";
-import {StatusBox} from "../../components/StatusBox";
-export const ConfirmMailPage = () => {
-    const [state, setState] = useState(false);
 
+export const ConfirmMailPage = () => {
     return (
         <>
             <div className={"staticAbsoluteContainer"}>
@@ -17,13 +13,9 @@ export const ConfirmMailPage = () => {
                     </div>
                     <div className={"staticLabel"}>
                         (Please check your spam or junk mail folder)
-                        <Button variant="contained" onClick={() => setState(true)}>
-                            TOGGLE
-                        </Button>
                     </div>
                 </div>
             </div>
-            <StatusBox type="error" message="hhuuhu" show={state} setShow={setState} />
         </>
     );
 };
