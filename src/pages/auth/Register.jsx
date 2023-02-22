@@ -24,7 +24,6 @@ export const Register = () => {
     };
 
     const handleRegister = async () => {
-        console.log("register")
         setWaiting(true);
 
         const data = {
