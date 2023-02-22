@@ -52,7 +52,7 @@ export const AddModal = (props) => {
         }
     }, []);
 
-    // Todo (Marvin): Error handling
+    // Todo (Marvin): Error handling again
     const uploadTodo = async () => {
         if (checkInputs()) {
             const data = {
