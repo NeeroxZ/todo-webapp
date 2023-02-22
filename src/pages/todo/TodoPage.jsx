@@ -3,12 +3,12 @@ import {useEffect, useState} from "react";
 import {useAuth} from "../../stores/AuthStore";
 import pb from "../../utils/pocketbase";
 import PropTypes from 'prop-types';
-import {QueryBuilder} from "../../utils/queryBuilder";
 import {NoContent} from "../NoContent";
 import {AddTodo} from "../../components/AddTodo";
 import {getParams} from "../../utils/getParams";
-import {CircularProgress} from "@mui/material";
-import {add} from "react-modal/lib/helpers/classList";
+import {CircularProgress, Typography} from "@mui/material";
+import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
+import "../../styles/todo.css"
 
 
 
@@ -68,7 +68,7 @@ export const TodoPage = (props) => {
                 setAllLoaded(true);
             }
         }
-    }, [todosLoaded]);
+    }, [todosLoaded, noTodo]);
 
 
     // conditional rendering
@@ -83,55 +83,74 @@ export const TodoPage = (props) => {
     }
     if (noTodo) {
         return (
-            <NoContent variant="todo"/>
+            <>
+
+                <NoContent variant="todo"/>
+                {props.showFab &&
+                    <div>
+                        <div className={"fixedRightContainer"}>
+                            <div className="arrow">
+                                <ArrowDownwardIcon
+                                    fontSize="large"
+                                    color="primary"
+                                />
+                            </div>
+                        </div>
+                        <AddTodo
+                            reloadOnAdd={true}
+                            reloadFunction={getTodos}
+                            loading={!allLoaded}
+                            selectedTopic={props.topic}
+                        />
+                    </div>
+                }
+            </>
+        );
+    } else {
+        return (
+            <>
+                {data &&
+                props.scrollable
+                    ?
+                    <div className="scrollContainer">
+                        {props.showInfo &&
+                            <div className={"tdPgHeadingContainer"}>
+                                <Typography variant={"h2"} color={"primary"}>{props.pageHeading}</Typography>
+                            </div>
+                        }
+                        <ul className="todo-list">
+                            {data && data.map((item, i) =>
+                                <li key={i}>
+                                    <Todo id={item.id} doneLoading={addLoaded}/>
+                                </li>)}
+                        </ul>
+                    </div>
+                    :
+                    <>
+                        {props.showInfo &&
+                            <div className={"tdPgHeadingContainer"}>
+                                <div className={"tdPgHeading"}>This is the heading</div>
+                            </div>
+                        }
+                        <ul className="todo-list">
+                            {data && data.map((item, i) =>
+                                <li key={i}>
+                                    <Todo id={item.id} doneLoading={addLoaded}/>
+                                </li>)}
+                        </ul>
+                    </>
+                }
+                {props.showFab &&
+                    <AddTodo
+                        reloadOnAdd={true}
+                        reloadFunction={getTodos}
+                        loading={!allLoaded}
+                        selectedTopic={props.topic}
+                    />
+                }
+            </>
         );
     }
-
-
-    return (
-        <>
-
-            {data &&
-            props.scrollable
-                ?
-                <div className="scrollContainer">
-                    {props.showInfo &&
-                        <div className={"tdPgHeadingContainer"}>
-                            <div className={"tdPgHeading"}>This is not the heading, lol</div>
-                        </div>
-                    }
-                    <ul className="todo-list">
-                        {data && data.map((item, i) =>
-                            <li key={i}>
-                                <Todo id={item.id} doneLoading={addLoaded}/>
-                            </li>)}
-                    </ul>
-                </div>
-                :
-                <>
-                    {props.showInfo &&
-                        <div className={"tdPgHeadingContainer"}>
-                            <div className={"tdPgHeading"}>This is the heading</div>
-                        </div>
-                    }
-                    <ul className="todo-list">
-                        {data && data.map((item, i) =>
-                            <li key={i}>
-                                <Todo id={item.id} doneLoading={addLoaded}/>
-                            </li>)}
-                    </ul>
-                </>
-            }
-            {props.showFab &&
-                <AddTodo
-                    reloadOnAdd={true}
-                    reloadFunction={getTodos}
-                    loading={!allLoaded}
-                    selectedTopic={props.topic}
-                />
-            }
-        </>
-    );
 };
 
 TodoPage.defaultProps = {
