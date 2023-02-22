@@ -1,25 +1,15 @@
-import {useContext, useState} from "react";
+import {createContext, useContext} from "react";
 
-const UserContext = useContext(null);
-
+const UserContext = createContext(null);
 export const UserProvider = ({children}) => {
-    const [count, setCount] = useState({
-        allCount: 0,
-        todayCount: 0,
-        tomorrowCount: 0,
-        doneCount: 0,
-        dueCount: 0,
-    });
-    const [countWait, setCountWait] = useState(true);
-    const [countErr, setCountErr] = useState(false);
 
-    const [settings, setSettings] = useState({});
-    const [settingsWait, setSettingsWait] = useState(true);
-    const [settingsErr, setSettingsErr] = useState(false);
-
-    return (
-        <UserContext.Provider value={{count, countWait, countErr, settings, settingsWait, settingsErr}}>
+    return(
+        <UserContext.Provider value={{}}>
             {children}
         </UserContext.Provider>
-    );
+    )
+};
+
+export const useUser = () => {
+    return useContext(UserContext);
 };
