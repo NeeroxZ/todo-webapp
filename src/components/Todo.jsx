@@ -35,7 +35,6 @@ export const Todo = (props) => {
         return `${currentDate} ${currentTime}`;
     };
 
-
     const getData = async() => {
         let res = {};
         try {
@@ -48,7 +47,6 @@ export const Todo = (props) => {
             if (res.due_date < checkDueDate()) {
                 setDue(true);
             }
-            checkDueDate();
 
             setError(null);
         } catch (error) {
@@ -106,7 +104,9 @@ export const Todo = (props) => {
 
     return (
         <>
-            <div className={`todo-container ${done ? "done" : (saved ? "saved" : "")} `}
+            <div className={`todo-container ${done 
+                ? "done" 
+                : (saved ? "saved" : "")} ${due  ? "due" : ""}`}
                  onClick={(e) => handleOpenModal(e)}
             >
                 <Grid container direction="row"
