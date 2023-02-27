@@ -10,4 +10,20 @@
     /*height: 120px;*/
     height: 100%;
     margin: 0;
+    font-size: 1rem;
+}
+.title{
+    font-size: 2rem;
+}
+.liste{
+    margin-top: 1rem;
+    text-align: center;
+}
+.liste:hover{
+    color: #33a382;
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 860px) {
+
 }
