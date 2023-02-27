@@ -10,13 +10,13 @@ import {BrowserRouter as Router} from "react-router-dom";
 import {GlobalStore} from "./stores/GlobalStore";
 import {ThemeProvider} from "@mui/material";
 import {AuthProvider} from "./stores/AuthStore";
+import {TopicProvider} from "./stores/TopicStore";
+import {UserProvider} from "./stores/UserStore";
 
 // components
 import {NavBar} from "./components/Navbar";
-// import {UserProvider} from "./stores/UserStore";
-import {TopicProvider} from "./stores/TopicStore";
+
 import {AppRoutes} from "./AppRoutes";
-import {UserProvider} from "./stores/UserStore";
 
 
 
