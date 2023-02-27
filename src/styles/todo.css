@@ -126,7 +126,8 @@ html, body, #app, #app>div {
 
 .scrollContainer {
     width: 80%;
-    height: 95vh;
+    height: 94vh;
+    /*height: 100%;*/
     overflow: scroll;
     margin: 0 auto;
 }
@@ -135,7 +136,7 @@ html, body, #app, #app>div {
 }
 .noTodoContainer{
     width: 100%;
-    height: 100%;
+    /*height: 100%;*/
 }
 
 .noTodo{
