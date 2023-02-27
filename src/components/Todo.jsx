@@ -21,6 +21,7 @@ export const Todo = (props) => {
 
     const checkDueDate = () => {
         let time = new Date();
+        time.setHours(time.getHours() + 24);
         let year = time.getUTCFullYear();
         let month = (time.getUTCMonth() +1).toString();
         let date = time.getUTCDate().toString().slice(-2);
@@ -32,7 +33,9 @@ export const Todo = (props) => {
         let currentDate = `${year}-${zeroPad(month, 2)}-${zeroPad(date, 2)}`;
         let currentTime = `${zeroPad(hours, 2)}:${zeroPad(min, 2)}:${zeroPad(sec, 2)}`;
         currentTime += `.${zeroPad(mSec, 3)}Z`
-        return `${currentDate} ${currentTime}`;
+
+        return time;
+        // return `${currentDate} ${currentTime}`;
     };
 
     const getData = async() => {
@@ -44,7 +47,12 @@ export const Todo = (props) => {
             setDone(res.done);
             setSaved(res.saved);
 
-            if (res.due_date < checkDueDate()) {
+            let resDate = new Date(res.due_date);
+            console.log("res: ", resDate)
+            console.log("check: ", checkDueDate());
+            console.log("resDate < checkDueDate(): ", resDate < checkDueDate())
+
+            if (resDate < checkDueDate()) {
                 setDue(true);
             }
 
