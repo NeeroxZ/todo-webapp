@@ -18,24 +18,12 @@ export const NoContent = (props) => {
             <div className="noTodoContainer">
                 <div className="noTodo">
                     {isTopic
-                        ? (<p>Ohh, it`s seems like that topic does not exists</p>)
-                        : (<p>Ohh, it`s seems you have no ToDo`s</p>)
+                        ? (<p>Ohh, it seems like that topic does not exists</p>)
+                        : (<p>Ohh, it seems you have no ToDo`s</p>)
                     }
                 </div>
             </div>
 
-            {/*<div className="ocean">*/}
-            {/*    <div className="wave"></div>*/}
-            {/*    <div className="wave"></div>*/}
-            {/*</div>*/}
-            {/*<div className={"fixedRightContainer"}>*/}
-            {/*    <div className="arrow">*/}
-            {/*        <ArrowDownwardIcon*/}
-            {/*            fontSize="large"*/}
-            {/*            color="primary"*/}
-            {/*        />*/}
-            {/*    </div>*/}
-            {/*</div>*/}
             <AddTodo/>
         </>
     )

@@ -7,7 +7,7 @@ import React from "react";
 import {BrowserRouter as Router} from "react-router-dom";
 
 // utils, stores and providers
-import GlobalStore from "./stores/GlobalStore";
+import {GlobalStore} from "./stores/GlobalStore";
 import {ThemeProvider} from "@mui/material";
 import {AuthProvider} from "./stores/AuthStore";
 
@@ -16,6 +16,7 @@ import {NavBar} from "./components/Navbar";
 // import {UserProvider} from "./stores/UserStore";
 import {TopicProvider} from "./stores/TopicStore";
 import {AppRoutes} from "./AppRoutes";
+import {UserProvider} from "./stores/UserStore";
 
 
 
@@ -28,12 +29,12 @@ function App() {
                 <ThemeProvider theme={Theme}>
                     <Router>
                         <AuthProvider>
-                            {/*<UserProvider>*/}
+                            <UserProvider>
                                 <TopicProvider>
                                     <NavBar/>
                                     <AppRoutes />
                                 </TopicProvider>
-                            {/*</UserProvider>*/}
+                            </UserProvider>
                         </AuthProvider>
                     </Router>
                 </ThemeProvider>
