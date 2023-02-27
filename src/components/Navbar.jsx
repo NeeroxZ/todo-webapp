@@ -1,4 +1,3 @@
-import {useState} from "react";
 import {Outlet} from "react-router-dom";
 import 'font-awesome/css/font-awesome.min.css';
 import {useAuth} from "../stores/AuthStore";
@@ -6,21 +5,18 @@ import {NavLink} from "react-router-dom";
 import '../styles/navbar.css'
 import {useTopics} from "../stores/TopicStore";
 import {CircularProgress} from "@mui/material";
-import {Todo} from "./Todo";
+import {useGlobalStore} from "../stores/GlobalStore";
 
 
 export const NavBar = () => {
     const {loginValid, logout} = useAuth();
     const {topics, waiting, error} = useTopics();
-    const [open, setOpen] = useState(false);
+
+    const {showNav, toggleNav} = useGlobalStore();
 
     if (!loginValid) {
         return;
     }
-
-    const toggleMenu = () => {
-        setOpen(!open);
-    };
 
     const checkTopics = () => {
         return topics.length !== 0;
@@ -30,7 +26,12 @@ export const NavBar = () => {
         if (checkTopics()) {
             return (
                 <>
-                    {topics.map((item, i) => <NavLink key={i} to={`/topic/${item.titleParam}`} onClick={toggleMenu}>{item.titleMod}</NavLink>)}
+                    {topics.map((item, i) =>
+                        <NavLink key={i}
+                                 to={`/topic/${item.titleParam}`}
+                                 onClick={toggleNav}>
+                            {item.titleMod}
+                        </NavLink>)}
                 </>
             );
         } else {
@@ -44,12 +45,12 @@ export const NavBar = () => {
 
     return (
         <>
-            <div className={`topnav ${open ? "responsive" : ""}`} id="myTopnav">
+            <div className={`topnav ${showNav ? "responsive" : ""}`} id="myTopnav">
                 <a style={{display: "none"}}></a>
-                <NavLink to="/home" onClick={toggleMenu}>Home</NavLink>
-                <NavLink to="/todo/all" onClick={toggleMenu}>All</NavLink>
-                <NavLink to="/todo/today" onClick={toggleMenu}>Today</NavLink>
-                <NavLink to="/todo/tomorrow" onClick={toggleMenu}>Tomorrow</NavLink>
+                <NavLink to="/home" onClick={() => toggleNav()}>Home</NavLink>
+                <NavLink to="/todo/all" onClick={() => toggleNav()}>All</NavLink>
+                <NavLink to="/todo/today" onClick={() => toggleNav()}>Today</NavLink>
+                <NavLink to="/todo/tomorrow" onClick={() => toggleNav()}>Tomorrow</NavLink>
                 {waiting
                     ?
                     <CircularProgress className={"dropdown"}/>
@@ -69,13 +70,11 @@ export const NavBar = () => {
                     </div>
                 }
 
-                <NavLink to="/about" onClick={toggleMenu}>About</NavLink>
+                <NavLink to="/about" onClick={toggleNav}>About</NavLink>
                 <NavLink to="/login" onClick={() => {
                     logout();
                 }}>Logout</NavLink>
-                <a onClick={() => {
-                    toggleMenu();
-                }} className="icon">&#9776;</a>
+                <a onClick={toggleNav} className="icon">&#9776;</a>
             </div>
             <Outlet/>
         </>
