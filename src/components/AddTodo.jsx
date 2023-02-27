@@ -2,7 +2,7 @@ import '../styles/modal.css'
 import '../styles/todo.css'
 import {Fab} from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
-import {AddModal} from "./AddModal";
+import {AddModal} from "./modals/AddModal";
 import {useState} from "react";
 import PropTypes from 'prop-types';
 

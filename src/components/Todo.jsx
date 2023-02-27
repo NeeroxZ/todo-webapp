@@ -130,7 +130,7 @@ export const Todo = (props) => {
                     <Grid item xs={1} md={1}>
                         <div className={"todo-icon"}>
                             <Checkbox
-                                icon={<BookmarkBorder color={"textWhite"}/>}
+                                icon={<BookmarkBorder color="textWhite"/>}
                                 checked={saved}
                                 checkedIcon={<Bookmark color={"textWhite"}/>}
                                 className={"todo-done"}
