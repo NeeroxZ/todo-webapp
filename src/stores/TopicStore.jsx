@@ -12,7 +12,6 @@ export const TopicProvider = ({children}) => {
     const [topics, setTopics] = useState([]);
 
     const loadTopics = async () => {
-        console.log("loginValid: ", auth.loginValid)
         if (auth.loginValid) {
             console.log("get topics");
             setError(false);
@@ -44,14 +43,11 @@ export const TopicProvider = ({children}) => {
     };
 
     useEffect(() => {
-        // if (auth.loginValid) {
+        if (auth.loginValid) {
             loadTopics();
-        // }
+        }
     }, [auth.loginValid]);
 
-    // if (auth.loginValid) {
-    //     loadTopics();
-    // }
 
 
     return (
