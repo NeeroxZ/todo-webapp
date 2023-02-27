@@ -4,7 +4,6 @@ import {
     TextField,
     Modal,
     Autocomplete,
-    useMediaQuery,
     Checkbox,
     Grid,
     Button,
@@ -22,9 +21,14 @@ import Tooltip from '@mui/material/Tooltip';
 import {useAuth} from "../../stores/AuthStore";
 import pb from "../../utils/pocketbase";
 import {useTopics} from "../../stores/TopicStore";
+import {useGlobalStore} from "../../stores/GlobalStore";
+import {useUserStore} from "../../stores/UserStore";
 
 export const AddModal = (props) => {
+    const user = useUserStore();
     const tpCtx = useTopics();
+
+    const {mobileView} = useGlobalStore();
 
     const [title, setTitle] = useState("");
     const [titleError, setTitleError] = useState(false);
@@ -97,8 +101,6 @@ export const AddModal = (props) => {
 
 
 
-    const matches = useMediaQuery('(min-width:600px)');
-
     const handleBookmarkChange = (event) => {
         setBookmark(event.target.checked)
     };
@@ -118,16 +120,16 @@ export const AddModal = (props) => {
                 }}
                 className="modal"
             >
-                <Box className={`modalBox ${!matches ? "mobile" : ""}`}>
+                <Box className={`modalBox ${mobileView ? "mobile" : ""}`}>
                     <div className="contentWrapper">
                         {props.reloadOnAdd &&
                             <Backdrop open={props.loading}>
                                 <CircularProgress/>
                             </Backdrop>
                         }
-                        <div className={`modalHeading ${matches ? "" : "mobile"}`}>
+                        <div className={`modalHeading ${!mobileView ? "" : "mobile"}`}>
                             <div>Add Todo</div>
-                            {!matches &&
+                            {mobileView &&
                                 <div className="tpIconRight.header">
                                     <Tooltip title="Bookmark" placement="top" arrow>
                                         <Checkbox
@@ -156,7 +158,7 @@ export const AddModal = (props) => {
                                         className="tdTitleStyle"
                                         id="tdTitle"/>
                                 </Grid>
-                                {matches &&
+                                {!mobileView &&
                                     <Grid item xs={2}>
                                         <div className="tpIconRight regular">
                                             <Tooltip title="Bookmark" placement="right" arrow>
@@ -194,7 +196,7 @@ export const AddModal = (props) => {
                                                                             error={topicError}/>}
                                     />
                                 </Grid>
-                                {matches
+                                {!mobileView
                                     ?
                                     <Grid item xs={2}>
                                         <div className="tpIconRight regular">
