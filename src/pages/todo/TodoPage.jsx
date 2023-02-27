@@ -3,16 +3,18 @@ import {useEffect, useState} from "react";
 import {useAuth} from "../../stores/AuthStore";
 import pb from "../../utils/pocketbase";
 import PropTypes from 'prop-types';
-import {QueryBuilder} from "../../utils/queryBuilder";
 import {NoContent} from "../NoContent";
 import {AddTodo} from "../../components/AddTodo";
 import {getParams} from "../../utils/getParams";
 import {CircularProgress} from "@mui/material";
-import {add} from "react-modal/lib/helpers/classList";
+import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
+import "../../styles/todo.css"
 
 
 
 export const TodoPage = (props) => {
+    const auth = useAuth();
+    const [heading, setHeading] = useState("");
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [todosLoaded, setTodosLoaded] = useState(0);
@@ -24,39 +26,42 @@ export const TodoPage = (props) => {
 
 
     const getTodos = async () => {
-        setLoading(true);
-        setTodosLoaded(0);
-        setAllLoaded(false);
-        setNoTodo(false);
-        setError(false);
-        setData([]);
-        let res = {};
-        try {
-            let params = getParams(props, getUserId());
-            /* Todo (Marvin):   könnte zu Fehlern und performance Problemen führen,
-                                wenn mehr als 1000 todos gespeichert wurden */
-            res = await pb.collection('todo').getList(1, 1000, {
-                filter: params,
-                sort: '-due_date'
-            });
-            setError(null);
-            setData(res.items);
-            if (res.items.length <= 0) {
-                setNoTodo(true);
+        if (auth.loginValid) {
+            setLoading(true);
+            setTodosLoaded(0);
+            setAllLoaded(false);
+            setNoTodo(false);
+            setError(false);
+            setData([]);
+            let res = {};
+            try {
+                let params = getParams(props, getUserId());
+                /* Todo (Marvin):   könnte zu Fehlern und performance Problemen führen,
+                                    wenn mehr als 1000 todos gespeichert wurden */
+                res = await pb.collection('todo').getList(1, 1000, {
+                    filter: params,
+                    sort: '-due_date'
+                });
+                setError(null);
+                setData(res.items);
+                if (res.items.length <= 0) {
+                    setNoTodo(true);
+                }
+            } catch (err) {
+                setError(err.message);
+                console.log(err.message)
+                setData(null);
+            } finally {
+                setLoading(false);
             }
-        } catch (err) {
-            setError(err.message);
-            console.log(err.message)
-            setData(null);
-        } finally {
-            setLoading(false);
         }
     };
 
 
     useEffect( () => {
         getTodos();
-    }, [props.topic]);
+        setHeading(props.pageHeading);
+    }, [props.topic, auth.loginValid]);
 
     // check if all todos fetched data
     const addLoaded = () => {
@@ -68,7 +73,7 @@ export const TodoPage = (props) => {
                 setAllLoaded(true);
             }
         }
-    }, [todosLoaded]);
+    }, [todosLoaded, noTodo]);
 
 
     // conditional rendering
@@ -83,21 +88,38 @@ export const TodoPage = (props) => {
     }
     if (noTodo) {
         return (
-            <NoContent variant="todo"/>
+            <>
+                <NoContent variant="todo"/>
+                {props.showFab &&
+                    <div>
+                        <div className={"fixedRightContainer"}>
+                            <div className="arrow">
+                                <ArrowDownwardIcon
+                                    fontSize="large"
+                                    color="primary"
+                                />
+                            </div>
+                        </div>
+                        <AddTodo
+                            reloadOnAdd={true}
+                            reloadFunction={getTodos}
+                            loading={!allLoaded}
+                            selectedTopic={props.topic}
+                        />
+                    </div>
+                }
+            </>
         );
     }
-
-
     return (
         <>
-
             {data &&
             props.scrollable
                 ?
                 <div className="scrollContainer">
                     {props.showInfo &&
                         <div className={"tdPgHeadingContainer"}>
-                            <div className={"tdPgHeading"}>This is not the heading, lol</div>
+                            <div className={"tdPgHeading"}>{heading}</div>
                         </div>
                     }
                     <ul className="todo-list">
@@ -138,12 +160,15 @@ TodoPage.defaultProps = {
     showInfo: false,
     selectedTopic: null,
     topic: null,
+    pageHeading: "",
+    loading: false,
 };
 
 TodoPage.propType = {
     scrollable: PropTypes.bool.isRequired,
     showFab: PropTypes.bool.isRequired,
     showInfo: PropTypes.bool,
+    pageHeading: PropTypes.string,
     bookmarkFilter: PropTypes.bool,
     deletedFilter: PropTypes.bool,
     topic: PropTypes.object,

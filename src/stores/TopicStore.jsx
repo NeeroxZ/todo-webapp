@@ -1,7 +1,6 @@
 import {createContext, useContext, useEffect, useState} from "react";
 import pb from "../utils/pocketbase";
 import {useAuth} from "./AuthStore";
-import {string} from "prop-types";
 
 const TopicContext = createContext(null);
 
@@ -13,39 +12,42 @@ export const TopicProvider = ({children}) => {
     const [topics, setTopics] = useState([]);
 
     const loadTopics = async () => {
-        console.log("get topics");
-        setError(false);
-        setWaiting(true);
-        try{
-            let foundTopics = await pb.collection('topics').getFullList(200, {
-                filter: `user_id="${getUserId()}"`,
-                sort: '-created'
-            })
-            let list = [];
-            console.log(foundTopics);
-            foundTopics.forEach(elem => {
-                list.push({
-                    id: elem.id,
-                    title: elem.title,
-                    titleLow: elem.title.toLowerCase(),
-                    titleParam: elem.title.toLowerCase().replaceAll(" ", "_"),
-                    titleMod: modifyTopic(elem.title),
+        if (auth.loginValid) {
+            console.log("get topics");
+            setError(false);
+            setWaiting(true);
+            try{
+                let foundTopics = await pb.collection('topics').getFullList(200, {
+                    filter: `user_id="${getUserId()}"`,
+                    sort: '-created'
                 })
-            });
-            setTopics(list);
-            setWaiting(false);
-            console.log("got topics");
-        } catch (e) {
-            console.log("error gettings topics: ", e);
-            setError(e);
-            setWaiting(false);
+                let list = [];
+                foundTopics.forEach(elem => {
+                    list.push({
+                        id: elem.id,
+                        title: elem.title,
+                        titleLow: elem.title.toLowerCase(),
+                        titleParam: elem.title.toLowerCase().replaceAll(" ", "_"),
+                        titleMod: modifyTopic(elem.title),
+                    })
+                });
+                setTopics(list);
+                setWaiting(false);
+                console.log("got topics");
+            } catch (e) {
+                console.log("error gettings topics: ", e);
+                setError(e);
+                setWaiting(false);
+            }
         }
     };
 
     useEffect(() => {
+        if (auth.loginValid) {
             loadTopics();
-        // }
+        }
     }, [auth.loginValid]);
+
 
 
     return (

@@ -2,10 +2,8 @@ import {TodoPage} from "./TodoPage";
 import {useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {useAuth} from "../../stores/AuthStore";
-import {Alert, AlertTitle, Backdrop, CircularProgress} from "@mui/material";
-import pb from "../../utils/pocketbase";
-import PropTypes, {element} from "prop-types";
-import {QueryBuilder} from "../../utils/queryBuilder";
+import {Alert, AlertTitle, CircularProgress} from "@mui/material";
+import PropTypes from "prop-types";
 import {NoContent} from "../NoContent";
 import {useTopics} from "../../stores/TopicStore";
 import '../../styles/todo.css';
@@ -13,33 +11,37 @@ import '../../styles/todo.css';
 export const TodoTopicPage = () => {
     const { title } = useParams();
     const topic = useTopics();
-    const {getUserId} = useAuth();
+    const auth = useAuth();
     const [foundTopic, setFoundTopic] = useState(null);
-    const [notFound, setNotFound] = useState(null);
+    const [notFound, setNotFound] = useState(false);
 
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
 
+    // Todo: Error handling
     const searchTopicID = () => {
-        setNotFound(false);
-        setLoading(true);
-        let newTitle = title.replaceAll("_", " ");
-        let found = false;
-        topic.topics.forEach((elem, i) => {
-            if (elem.titleLow === newTitle) {
-                setFoundTopic(elem);
-                found = true;
+            if (!topic.waiting) {
+                setNotFound(false);
+                setLoading(true);
+                let newTitle = title.replaceAll("_", " ");
+                let found = false;
+                topic.topics.forEach((elem, i) => {
+                    if (elem.titleLow === newTitle) {
+                        setFoundTopic(elem);
+                        found = true;
+                    }
+                });
+                if (!found) {
+                    console.log("bin hier")
+                    setNotFound(true);
+                }
+                setLoading(false);
             }
-        });
-        if (!found) {
-            setNotFound(true);
-        }
-        setLoading(false);
     };
 
     useEffect(() => {
         searchTopicID();
-    }, [title]);
+    }, [title, topic.waiting, auth.loginValid]);
 
     if (topic.waiting || loading) {
         return (
@@ -51,6 +53,12 @@ export const TodoTopicPage = () => {
         );
     }
 
+    console.log("not found: ", notFound)
+
+    if (notFound) {
+        return (<NoContent variant="topic"/>);
+    }
+
     return (
         <>
             {foundTopic && (
@@ -58,11 +66,9 @@ export const TodoTopicPage = () => {
                     scrollable={true}
                     showFab={true}
                     showInfo={true}
+                    pageHeading={`Topic: ${foundTopic.titleMod}`}
                     topic={foundTopic}
                 />
-            )}
-            {notFound && (
-                <NoContent variant="topic"/>
             )}
 
             {error && (

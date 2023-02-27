@@ -1,4 +1,4 @@
-name: Docker
+name: Deploy
 
 # This workflow uses actions that are not certified by GitHub.
 # They are provided by a third-party and are governed by
@@ -25,7 +25,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Exit if not on master branch
-        if: github.ref == 'refs/heads/dev-modal'
+        if: github.ref == 'refs/heads/main'
         run: exit -1
 
   build:
@@ -37,8 +37,6 @@ jobs:
       # This is used to complete the identity challenge
       # with sigstore/fulcio when running outside of PRs.
       id-token: write
-
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -87,9 +85,11 @@ jobs:
         with:
           context: .
           file: "./docker/Dockerfile"
+#          build-args: |
+#            REACT_APP_PB_ADMIN_USER=${{ secrets.DOCKERPASSWORD }}
+#            REACT_APP_PB_ADMIN_PASSWORD=${{ secrets.DOCKERPASSWORD }}
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ env.DOCKER_REGISTRY }}/dodotodo-ui:latest, ${{ env.DOCKER_REGISTRY }}/dodotodo-ui:${{  github.ref_name }}
-#          labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
@@ -106,3 +106,7 @@ jobs:
         # This step uses the identity token to provision an ephemeral certificate
         # against the sigstore community Fulcio instance.
         run: echo "${{ steps.meta.outputs.tags }}" | xargs -I {} cosign sign {}@${{ steps.build-and-push.outputs.digest }}
+          
+
+
+

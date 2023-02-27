@@ -2,7 +2,7 @@ import {Route, Routes} from "react-router-dom";
 import {Login} from "./pages/auth/Login";
 import {ResetPasswordPage} from "./pages/auth/ResetPasswordPage";
 import {Register} from "./pages/auth/Register";
-import {ConfirmMailPage} from "./pages/ConfirmMail";
+import {ConfirmMailPage} from "./pages/auth/ConfirmMail";
 import {UserPage} from "./pages/UserPage";
 import {About} from "./pages/About";
 import {Dashboard} from "./pages/Dashboard";
@@ -12,10 +12,7 @@ import {TodoTomorrowPage} from "./pages/todo/TodoTomorrowPage";
 import {TodoTopicPage} from "./pages/todo/TodoTopicPage";
 import React from "react";
 import PrivateRoute from "./utils/PrivateRoute";
-
-function NoMatch() {
-    return null;
-}
+import {NoMatch} from "./pages/NoMatch";
 
 export const AppRoutes = () => {
     return (
