@@ -11,33 +11,37 @@ import '../../styles/todo.css';
 export const TodoTopicPage = () => {
     const { title } = useParams();
     const topic = useTopics();
+    const auth = useAuth();
     const [foundTopic, setFoundTopic] = useState(null);
-    const [notFound, setNotFound] = useState(null);
+    const [notFound, setNotFound] = useState(false);
 
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
 
     // Todo: Error handling
     const searchTopicID = () => {
-        setNotFound(false);
-        setLoading(true);
-        let newTitle = title.replaceAll("_", " ");
-        let found = false;
-        topic.topics.forEach((elem, i) => {
-            if (elem.titleLow === newTitle) {
-                setFoundTopic(elem);
-                found = true;
+            if (!topic.waiting) {
+                setNotFound(false);
+                setLoading(true);
+                let newTitle = title.replaceAll("_", " ");
+                let found = false;
+                topic.topics.forEach((elem, i) => {
+                    if (elem.titleLow === newTitle) {
+                        setFoundTopic(elem);
+                        found = true;
+                    }
+                });
+                if (!found) {
+                    console.log("bin hier")
+                    setNotFound(true);
+                }
+                setLoading(false);
             }
-        });
-        if (!found) {
-            setNotFound(true);
-        }
-        setLoading(false);
     };
 
     useEffect(() => {
         searchTopicID();
-    }, [title]);
+    }, [title, topic.waiting, auth.loginValid]);
 
     if (topic.waiting || loading) {
         return (
@@ -47,6 +51,12 @@ export const TodoTopicPage = () => {
                 </div>
             </div>
         );
+    }
+
+    console.log("not found: ", notFound)
+
+    if (notFound) {
+        return (<NoContent variant="topic"/>);
     }
 
     return (
@@ -59,9 +69,6 @@ export const TodoTopicPage = () => {
                     pageHeading={`Topic: ${foundTopic.titleMod}`}
                     topic={foundTopic}
                 />
-            )}
-            {notFound && (
-                <NoContent variant="topic"/>
             )}
 
             {error && (
