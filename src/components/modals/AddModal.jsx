@@ -23,12 +23,15 @@ import pb from "../../utils/pocketbase";
 import {useTopics} from "../../stores/TopicStore";
 import {useGlobalStore} from "../../stores/GlobalStore";
 import {useUserStore} from "../../stores/UserStore";
+import {TopicModal} from "./TopicModal";
 
 export const AddModal = (props) => {
     const user = useUserStore();
     const tpCtx = useTopics();
 
     const {mobileView} = useGlobalStore();
+
+    const [showAddTopic, setShowAddTopic] = useState(false);
 
     const [title, setTitle] = useState("");
     const [titleError, setTitleError] = useState(false);
@@ -201,7 +204,9 @@ export const AddModal = (props) => {
                                     <Grid item xs={2}>
                                         <div className="tpIconRight regular">
                                             <Tooltip title="Create topic" placement="right" arrow>
-                                                <IconButton size="large" color="textWhite">
+                                                <IconButton size="large" color="textWhite" onClick={() => {
+                                                    setShowAddTopic(true);
+                                                }}>
                                                     <AddCircleOutlineIcon size="large"/>
                                                 </IconButton>
                                             </Tooltip>
@@ -249,6 +254,7 @@ export const AddModal = (props) => {
                     </div>
                 </Box>
             </Modal>
+            <TopicModal show={showAddTopic} setShow={setShowAddTopic}/>
         </>
     );
 };

@@ -39,6 +39,11 @@
     height: 560px;
 }
 
+.modalBox.topic {
+    width: 400px;
+    height: 250px;
+}
+
 .modalCenter{
     margin-top: 4%;
     justify-content: center;
