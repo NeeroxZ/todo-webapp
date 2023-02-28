@@ -9,7 +9,7 @@ export function useTodoState(todoFrameProps) {
     const tp = useTopics();
 
     const [todos, setTodos] = useState([]);
-    const [noTodos, setNoTodos] = useState();
+    const [noTodos, setNoTodos] = useState(true);
 
     const [reloading, setReloading] = useState(false);
     const [reloadError, setReloadError] = useState(null);
@@ -39,7 +39,6 @@ export function useTodoState(todoFrameProps) {
             console.log("todo page error: ", err.message)
             setTodos([]);
         } finally {
-            console.log("bin durch")
             setInitialLoading(false);
         }
     };
@@ -51,7 +50,6 @@ export function useTodoState(todoFrameProps) {
         try {
             console.log("update")
             let filters = getParams(todoFrameProps, getUserId());
-            console.log(filters)
             res = await pb.collection('todo').getList(1, 1000, {
                 filter: filters,
                 sort: '-due_date'
@@ -71,7 +69,6 @@ export function useTodoState(todoFrameProps) {
         } finally {
             setReloading(false);
         }
-        console.log("reloading: ", reloading)
     };
 
     return {todos, noTodos, reloading, reloadError, initialLoading, initialError,

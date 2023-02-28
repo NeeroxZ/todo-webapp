@@ -31,15 +31,6 @@ export const Category = () => {
                     </div>
                     :
                     <ul>
-                        <li className="liste">
-                            Test
-                        </li>
-                        <li className="liste">
-                            Test
-                        </li>
-                        <li className="liste">
-                            Test
-                        </li>
                         {topics.topics && topics.topics.map((item, i) => <li key={i} className={"liste"}>
                             <NavLink to={`/topic/${item.titleParam}`} className={"topicStyle"}>
                                 {item.titleMod}

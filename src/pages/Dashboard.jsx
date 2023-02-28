@@ -38,17 +38,17 @@ export const Dashboard = () => {
         <div className="mainContainer">
             <ResponsiveGridLayout
                 layouts={{lg: layout}}
-                breakepoints={{ lg:1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
-                cols={{ lg: 4, md: 2, sm: 2, xs: 1, xxs: 1}}
-                margin= {[10, 10]}
+                breakepoints={{lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0}}
+                cols={{lg: 4, md: 2, sm: 2, xs: 1, xxs: 1}}
+                margin={[10, 10]}
                 compactType={"horizontal"}
                 style={leftNavStyle}
                 isDraggable={false}
-                isResizable= {false}
+                isResizable={false}
                 autoSize={true}
             >
 
-                <div className="dashboardItem itemLeft" key="empty" >
+                <div className="dashboardItem itemLeft" key="empty">
                     <UserInfo/>
                 </div>
                 <div className="dashboardItemView" key="empty2">
@@ -64,21 +64,23 @@ export const Dashboard = () => {
                     <div className="todoHeaderDashboard">
                         TODO`S
                     </div>
-                    <TodoPage scrollable={false} showFab={false} showInfo={false} showDue={true}/>
+                    <TodoPage scrollable={false} showFab={false} showInfo={false} showDue={true} disableEdit={true}/>
                 </div>
 
                 <div className="dashboardItem" key="empty7">
                     <div className="todoHeaderDashboard">
                         DUE`S
                     </div>
-                    <TodoPage scrollable={false} showFab={false} showInfo={false}/>
+                    <TodoPage scrollable={false} showFab={false} showInfo={false} disableEdit={true}/>
                 </div>
 
                 <div className="dashboardItem todoAll" key="empty8">
                     <TodoChart/>
                 </div>
             </ResponsiveGridLayout>
-            <AddTodo/>
+            <AddTodo
+                reloadOnAdd={false}
+            />
         </div>
     );
 };

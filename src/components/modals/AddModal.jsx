@@ -64,8 +64,6 @@ export const AddModal = (props) => {
                 "title": title,
                 "saved": bookmark,
                 "description": desc,
-                "done": false,
-                "deleted": false,
                 "repetitive": "none",
                 "due_date": `${date.format("YYYY-MM-DD HH:mm:ss")}.000Z`
             };
@@ -74,12 +72,11 @@ export const AddModal = (props) => {
             }
 
             await pb.collection('todo').create(data);
-
             if (props.reloadOnAdd) {
-                await props.reloadFunction()
+                await props.reloadTodos();
             }
-            props.setShow(false);
 
+            props.setShow(false);
         }
     };
 
@@ -125,7 +122,7 @@ export const AddModal = (props) => {
                 <Box className={`modalBox ${mobileView ? "mobile" : ""}`}>
                     <div className="contentWrapper">
                         {props.reloadOnAdd &&
-                            <Backdrop open={props.loading}>
+                            <Backdrop open={props.reloading}>
                                 <CircularProgress/>
                             </Backdrop>
                         }
@@ -250,11 +247,12 @@ export const AddModal = (props) => {
                         <div className="bottomBtnGroupContainer">
                             <div className="bottomBtnGroupR">
                                 <Button variant="outlined" color="error"
-                                        className={`btn ${!mobileView?"desktopBtn":""}`}
+                                        className={`btn ${!mobileView ? "desktopBtn" : ""}`}
                                         onClick={handleExit}>Exit</Button>
-                                <Button variant="contained" className={`btn save ${!mobileView?"desktopBtn":""}`} onClick={() => {
-                                    uploadTodo();
-                                }}>Save</Button>
+                                <Button variant="contained" className={`btn save ${!mobileView ? "desktopBtn" : ""}`}
+                                        onClick={() => {
+                                            uploadTodo();
+                                        }}>Save</Button>
                             </div>
                         </div>
                     </div>
@@ -266,7 +264,6 @@ export const AddModal = (props) => {
 };
 
 AddModal.defaultProps = {
-    reloadOnAdd: false,
     selectedTopic: null,
 }
 

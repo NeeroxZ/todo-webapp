@@ -25,7 +25,6 @@ export const TopicModal = (props) => {
             return;
         }
         if (!tp.waiting) {
-            console.log("Bin her")
             setLoading(true);
             let newTitle = title.replaceAll("_", " ").toLowerCase();
             let found = false;

@@ -20,8 +20,6 @@ export const TodoPage = (props) => {
     const [showEdit, setShowEdit] = useState(false);
     const [editData, setEditData] = useState({});
 
-    console.log(tds.noTodos);
-
     useEffect( () => {
         tds.loadTodos(props);
         setHeading(props.pageHeading);
@@ -29,7 +27,6 @@ export const TodoPage = (props) => {
 
     // conditional rendering
     if (tds.initialLoading) {
-        console.log("bin hier")
         return (
             <>
                 <div className={"screen_container"}>
@@ -44,7 +41,7 @@ export const TodoPage = (props) => {
                 <NoContent variant="todo"/>
                 {props.showFab &&
                         <AddTodo
-                            reloadFunction={tds.reloadTodos}
+                            reloadTodos={tds.reloadTodos}
                             reloading={tds.reloading}
                             selectedTopic={props.topic}
                             showPointer={true}
@@ -107,8 +104,8 @@ export const TodoPage = (props) => {
             {props.showFab &&
                 <AddTodo
                     reloadOnAdd={true}
-                    reloadFunction={tds.reloadTodos}
-                    loading={tds.reloading}
+                    reloadTodos={tds.reloadTodos}
+                    reloading={tds.reloading}
                     selectedTopic={props.topic}
                 />
             }

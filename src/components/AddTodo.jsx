@@ -18,8 +18,8 @@ export const AddTodo = (props) => {
                 show={isOpen}
                 setShow={setIsOpen}
                 reloadOnAdd={props.reloadOnAdd}
-                reloadFunction={props.reloadFunction}
-                loading={props.loading}
+                reloadTodos={props.reloadTodos}
+                reloading={props.reloading}
                 selectedTopic={props.selectedTopic}
             />
             {props.showPointer
@@ -43,7 +43,7 @@ export const AddTodo = (props) => {
 }
 
 AddTodo.defaultProps = {
-    reloadOnAdd: false,
+    reloadOnAdd: true,
     showPointer: false,
 };
 
@@ -51,7 +51,7 @@ AddTodo.propType = {
     show: PropTypes.bool.isRequired,
     setShow: PropTypes.func.isRequired,
     reloadOnAdd: PropTypes.bool,
-    reloadFunction: PropTypes.func,
-    loading: PropTypes.bool,
+    reloadTodos: PropTypes.func,
+    reloading: PropTypes.bool,
     showPointer: PropTypes.bool
 }

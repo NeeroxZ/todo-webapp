@@ -32,7 +32,6 @@ export const TodoTopicPage = () => {
                     }
                 });
                 if (!found) {
-                    console.log("bin hier")
                     setNotFound(true);
                 }
                 setLoading(false);
