@@ -92,11 +92,16 @@ export const TopicModal = (props) => {
                             id="tdTitle"/>
                     </div>
                     <div className="bottomBtnGroup">
-                        <Button variant="outlined" color="error" className="btn"
-                                onClick={() => props.setShow(false)}>Exit</Button>
-                        <Button variant="contained" className="btn save" onClick={() => {
-                            validateTopic();
-                        }}>Save</Button>
+                        <div className="bottomBtnGroupContainer">
+                            <div className="bottomBtnGroupR">
+                                <Button variant="outlined" color="error" className="btn"
+
+                                        onClick={() => props.setShow(false)}>Exit</Button>
+                                <Button variant="contained" className="btn save" onClick={() => {
+                                    validateTopic();
+                                }}>Save</Button>
+                            </div>
+                        </div>
                     </div>
                 </Box>
 

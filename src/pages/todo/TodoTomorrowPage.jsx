@@ -1,16 +1,28 @@
 import {TodoPage} from "./TodoPage";
 
 export const TodoTomorrowPage = () => {
+    document.title = "Tomorrow";
     let time = new Date();
-    time.setUTCDate(time.getDate() + 1);
-    let tomorrow = (time.getUTCFullYear() + "-" + ('0' + (time.getUTCMonth() + 1)).slice(-2) + '-' + ('0' + time.getUTCDate()).slice(-2));
+    time.setHours(time.getHours() + 24);
 
     const getTimeFrom = () => {
-        return `${tomorrow} 00:00:00.000`;
+        let dt = new Date();
+        dt.setHours(dt.getHours() + 24);
+        dt.setHours(0);
+        dt.setMinutes(0);
+        dt.setSeconds(0);
+        dt.setMilliseconds(0);
+        return dt;
     }
 
     const getTimeUntil = () => {
-        return `${tomorrow} 23:59:59.999`;
+        let dt = new Date();
+        dt.setHours(dt.getHours() + 24);
+        dt.setHours(23);
+        dt.setMinutes(59);
+        dt.setSeconds(59);
+        dt.setMilliseconds(999);
+        return dt;
     };
 
     return (

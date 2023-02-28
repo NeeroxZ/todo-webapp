@@ -64,12 +64,24 @@ export const Dashboard = () => {
 
 
                 <div className="dashboardItem" key="empty5">
-                    TODO`S
-                    <TodoPage scrollable={false} showFab={false} showInfo={false}/>
+                    <div>All todos</div>
+                    <TodoPage
+                        scrollable={false}
+                        showFab={false}
+                        showInfo={false}
+                        disableEdit={true}
+                    />
                 </div>
 
                 <div className="dashboardItem" key="empty7">
-                    Due
+                    <div>Due todos</div>
+                    <TodoPage
+                        scrollable={false}
+                        showFab={false}
+                        showInfo={false}
+                        disableEdit={true}
+                        dateUntil={new Date()}
+                    />
                 </div>
 
                 <div className="dashboardItem todoAll" key="empty8">

@@ -5,6 +5,7 @@ import AddIcon from "@mui/icons-material/Add";
 import {AddModal} from "./modals/AddModal";
 import {useState} from "react";
 import PropTypes from 'prop-types';
+import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 
 
 
@@ -12,6 +13,7 @@ export const AddTodo = (props) => {
     const [isOpen, setIsOpen] = useState(false);
     return (
         <>
+
             <AddModal
                 show={isOpen}
                 setShow={setIsOpen}
@@ -20,8 +22,16 @@ export const AddTodo = (props) => {
                 loading={props.loading}
                 selectedTopic={props.selectedTopic}
             />
+            {props.showPointer
+                ? <div className="arrow">
+                    <ArrowDownwardIcon
+                        fontSize="large"
+                        color="primary"
+                    />
+                </div>
+                : null
+            }
             <div className={"fixedRightContainer"}>
-
                 <Fab size="large" color="primary" aria-label="add" className="fab" onClick={() => {
                     setIsOpen(true);
                 }}>
@@ -34,6 +44,7 @@ export const AddTodo = (props) => {
 
 AddTodo.defaultProps = {
     reloadOnAdd: false,
+    showPointer: false,
 };
 
 AddTodo.propType = {
@@ -42,4 +53,5 @@ AddTodo.propType = {
     reloadOnAdd: PropTypes.bool,
     reloadFunction: PropTypes.func,
     loading: PropTypes.bool,
+    showPointer: PropTypes.bool
 }

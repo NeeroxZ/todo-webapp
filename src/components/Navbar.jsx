@@ -10,7 +10,7 @@ import {useGlobalStore} from "../stores/GlobalStore";
 
 export const NavBar = () => {
     const {loginValid, logout} = useAuth();
-    const {topics, waiting, error} = useTopics();
+    const {topics, loading, error} = useTopics();
 
     const {showNav, toggleNav} = useGlobalStore();
 
@@ -51,7 +51,7 @@ export const NavBar = () => {
                 <NavLink to="/todo/all" onClick={() => toggleNav()}>All</NavLink>
                 <NavLink to="/todo/today" onClick={() => toggleNav()}>Today</NavLink>
                 <NavLink to="/todo/tomorrow" onClick={() => toggleNav()}>Tomorrow</NavLink>
-                {waiting
+                {loading
                     ?
                     <CircularProgress className={"dropdown"}/>
                     :
@@ -61,7 +61,7 @@ export const NavBar = () => {
                             <i className="fa fa-caret-down dropdownArrow"></i>
                         </button>
                         <div className="dropdown-content">
-                            {waiting
+                            {loading
                                 ?
                                 <div>loading...</div>
                                 :

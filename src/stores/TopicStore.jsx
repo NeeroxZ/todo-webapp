@@ -8,7 +8,7 @@ export const TopicProvider = ({children}) => {
     const auth = useAuth();
     const {getUserId} = useAuth();
     const [error, setError] = useState(false);
-    const [waiting, setWaiting] = useState(true);
+    const [loading, setLoading] = useState(true);
     const [topics, setTopics] = useState([]);
 
     const uploadTopic = async () => {
@@ -19,7 +19,7 @@ export const TopicProvider = ({children}) => {
         if (auth.loginValid) {
             console.log("get topics");
             setError(false);
-            setWaiting(true);
+            setLoading(true);
             try{
                 let foundTopics = await pb.collection('topics').getFullList(200, {
                     filter: `user_id="${getUserId()}"`,
@@ -36,12 +36,12 @@ export const TopicProvider = ({children}) => {
                     })
                 });
                 setTopics(list);
-                setWaiting(false);
+                setLoading(false);
                 console.log("got topics");
             } catch (e) {
                 console.log("error gettings topics: ", e);
                 setError(e);
-                setWaiting(false);
+                setLoading(false);
             }
         }
     };
@@ -55,7 +55,7 @@ export const TopicProvider = ({children}) => {
 
 
     return (
-        <TopicContext.Provider value={{topics, waiting, error, loadTopics}}>
+        <TopicContext.Provider value={{topics, loading, error, loadTopics}}>
             {children}
         </TopicContext.Provider>
     );

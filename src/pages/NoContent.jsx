@@ -24,7 +24,7 @@ export const NoContent = (props) => {
                 </div>
             </div>
 
-            <AddTodo/>
+            {/*<AddTodo/>*/}
         </>
     )
 }

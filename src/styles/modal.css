@@ -1,6 +1,6 @@
 .fixedRightContainer{
     position: absolute;
-    right: 0;
+    right: 20px;
     bottom:0;
 }
 
@@ -41,7 +41,7 @@
 
 .modalBox.topic {
     width: 400px;
-    height: 250px;
+    height: 200px;
 }
 
 .modalCenter{
@@ -75,6 +75,14 @@
 }
 .modalHeading.mobile {
     justify-content: space-between;
+}
+.modalHeadingDynamic {
+    /*width: 80%;*/
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+
+    display: -webkit-box;
 }
 
 .tdTitleLabel {
@@ -149,18 +157,40 @@
     position: absolute;
     margin: 0 20px 20px 0;
     bottom: 0;
-    right: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
 }
 
-.btnGrpContainer {
-    /*width: 100%;*/
+
+.bottomBtnGroup.leftGroup {
+    justify-content: space-between;
+}
+
+.bottomBtnGroupContainer {
+    width: 100%;
+    margin: 0 20px 0 20px;
     display: flex;
+    justify-content: flex-end;
+}
+.bottomBtnGroupContainer.leftGroup {
+    justify-content: space-between;
+}
+
+.bottomBtnGroupR {
+    display: flex;
+    gap: 10px;
 }
 
 .btn {
-    width: 80px;
+    width: 70px;
 }
 
-.btn.save {
-    margin-left: 10px !important;
+.btn.delete {
+    width: 10px;
+}
+
+.desktopBtn {
+    width: 100px;
 }

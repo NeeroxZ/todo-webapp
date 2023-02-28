@@ -13,6 +13,8 @@ import {TodoTopicPage} from "./pages/todo/TodoTopicPage";
 import React from "react";
 import PrivateRoute from "./utils/PrivateRoute";
 import {NoMatch} from "./pages/NoMatch";
+import {TodoDuePage} from "./pages/todo/TodoDuePage";
+import {TodoSavedPage} from "./pages/todo/TodoSavedPage";
 
 export const AppRoutes = () => {
     return (
@@ -33,6 +35,8 @@ export const AppRoutes = () => {
                         <Route path="all" element={<TodoAllPage/>}/>
                         <Route path="today" element={<TodoTodayPage/>}/>
                         <Route path="tomorrow" element={<TodoTomorrowPage/>}/>
+                        <Route path="due" element={<TodoDuePage/>} />
+                        <Route path="saved" element={<TodoSavedPage/>} />
                     </Route>
                     <Route path="topic/:title" element={<TodoTopicPage/>}/>
                 </Route>

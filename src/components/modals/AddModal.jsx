@@ -45,11 +45,10 @@ export const AddModal = (props) => {
     const [desc, setDesc] = useState("");
     const [descError, setDescError] = useState(false);
 
-    const [date, setDate] = useState(dayjs());
+    const [date, setDate] = useState(dayjs(new Date()));
     const [dateError, setDateError] = useState(false);
 
     const {getUserId} = useAuth();
-
 
     useEffect(() => {
         if (props.topic !== null) {
@@ -68,7 +67,7 @@ export const AddModal = (props) => {
                 "done": false,
                 "deleted": false,
                 "repetitive": "none",
-                "due_date": `${date.format("YYYY-MM-DD hh:mm:ss")}.000Z`
+                "due_date": `${date.format("YYYY-MM-DD HH:mm:ss")}.000Z`
             };
             if (topic !== null) {
                 data["topic"] = topic.id;
@@ -215,7 +214,9 @@ export const AddModal = (props) => {
                                     :
                                     <Grid item xs={12}>
                                         <div className="btnAddContainer">
-                                            <Button variant="outlined" className="btnAddTopic">
+                                            <Button variant="outlined" className="btnAddTopic" onClick={() => {
+                                                setShowAddTopic(true);
+                                            }}>
                                                 Create Topic
                                             </Button>
                                         </div>
@@ -246,11 +247,16 @@ export const AddModal = (props) => {
                         </Grid>
                     </div>
                     <div className="bottomBtnGroup">
-                        <Button variant="outlined" color="error" className="btn"
-                                onClick={handleExit}>Exit</Button>
-                        <Button variant="contained" className="btn save" onClick={() => {
-                            uploadTodo();
-                        }}>Save</Button>
+                        <div className="bottomBtnGroupContainer">
+                            <div className="bottomBtnGroupR">
+                                <Button variant="outlined" color="error"
+                                        className={`btn ${!mobileView?"desktopBtn":""}`}
+                                        onClick={handleExit}>Exit</Button>
+                                <Button variant="contained" className={`btn save ${!mobileView?"desktopBtn":""}`} onClick={() => {
+                                    uploadTodo();
+                                }}>Save</Button>
+                            </div>
+                        </div>
                     </div>
                 </Box>
             </Modal>

@@ -1,18 +1,22 @@
 import {TodoPage} from "./TodoPage";
 
 export const TodoTodayPage = () => {
-    let time = new Date();
-    let currentDate = (time.getUTCFullYear() + "-" +  ('0' + (time.getUTCMonth()+1)).slice(-2) + '-'
-        + ('0' + time.getUTCDate()).slice(-2))
-
-    console.log(currentDate)
-    // let currentDatetime = `${currentDate} ${currentTime}`;
     const getTimeFrom = () => {
-        return `${currentDate} 00:00:00.000`;
+        let dt = new Date();
+        dt.setHours(0);
+        dt.setMinutes(0);
+        dt.setSeconds(0);
+        dt.setMilliseconds(0);
+        return dt;
     }
 
     const getTimeUntil = () => {
-        return `${currentDate} 23:59:59.999`;
+        let dt = new Date();
+        dt.setHours(23);
+        dt.setMinutes(59);
+        dt.setSeconds(59);
+        dt.setMilliseconds(999);
+        return dt;
     };
 
     return (

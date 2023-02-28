@@ -20,7 +20,7 @@ export const TodoTopicPage = () => {
 
     // Todo: Error handling
     const searchTopicID = () => {
-            if (!topic.waiting) {
+            if (!topic.loading) {
                 setNotFound(false);
                 setLoading(true);
                 let newTitle = title.replaceAll("_", " ");
@@ -41,9 +41,9 @@ export const TodoTopicPage = () => {
 
     useEffect(() => {
         searchTopicID();
-    }, [title, topic.waiting, auth.loginValid]);
+    }, [title, topic.loading, auth.loginValid]);
 
-    if (topic.waiting || loading) {
+    if (topic.loading || loading) {
         return (
             <div className={"screen_container"}>
                 <div className={"progress_bar"}>

@@ -2,77 +2,54 @@ import {Checkbox, Grid, Typography} from "@mui/material";
 import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
 import RadioButtonCheckedIcon from '@mui/icons-material/RadioButtonChecked';
 import {Bookmark, BookmarkBorder} from "@mui/icons-material";
-import {useEffect, useState} from "react";
-import {zeroPad} from "../utils/functions";
+import {memo, useEffect, useState} from "react";
+import {checkIfDue, zeroPad} from "../utils/functions";
 import pb from "../utils/pocketbase";
 import '../styles/todo.css'
+import Grow from '@mui/material/Grow';
+import {useAuth} from "../stores/AuthStore";
 
-
-export const Todo = (props) => {
+const Todo = (props) => {
     const [done, setDone] = useState(false);
     const [title, setTitle] = useState("");
     const [saved, setSaved] = useState(false);
+    const [comment, setComment] = useState("");
+    const [topic, setTopic] = useState("");
     const [due, setDue] = useState(false);
+    const [date, setDate] = useState(new Date());
+    const [repetitive, setRepetitive] = useState("");
+
+    const [test, setTest] = useState(false);
+
+    const {getUserId} = useAuth();
+
 
 
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    const checkDueDate = () => {
-        let time = new Date();
-        time.setHours(time.getHours() + 24);
-        let year = time.getUTCFullYear();
-        let month = (time.getUTCMonth() +1).toString();
-        let date = time.getUTCDate().toString().slice(-2);
-        let hours = time.getUTCHours().toString().slice(-2);
-        let min = time.getUTCMinutes().toString().slice(-2);
-        let sec = time.getUTCSeconds().toString().slice(-2);
-        let mSec = time.getUTCMilliseconds().toString().slice(-3);
-
-        let currentDate = `${year}-${zeroPad(month, 2)}-${zeroPad(date, 2)}`;
-        let currentTime = `${zeroPad(hours, 2)}:${zeroPad(min, 2)}:${zeroPad(sec, 2)}`;
-        currentTime += `.${zeroPad(mSec, 3)}Z`
-
-        return time;
-        // return `${currentDate} ${currentTime}`;
-    };
-
-    const getData = async() => {
-        let res = {};
-        try {
-            res = await pb.collection('todo').getOne(props.id);
-            setData(res);
-            setTitle(res.title);
-            setDone(res.done);
-            setSaved(res.saved);
-
-            let resDate = new Date(res.due_date);
-            console.log("res: ", resDate)
-            console.log("check: ", checkDueDate());
-            console.log("resDate < checkDueDate(): ", resDate < checkDueDate())
-
-            if (resDate < checkDueDate()) {
-                setDue(true);
-            }
-
-            setError(null);
-        } catch (error) {
-            setError(error.message);
-            setData(null);
-        } finally {
-            setLoading(false);
-            props.doneLoading();
-        }
-    };
-
     useEffect(() => {
-        getData();
-    }, []);
+        setTitle(props.data.title);
+        setDone(props.data.done);
+        setSaved(props.data.saved);
+        console.log(props.data.saved);
+        setComment(props.data.comment);
+        setTopic(props.data.topic)
 
+        // check if element is due
+        let resDate = new Date(props.data.due_date);
+        resDate.setHours(resDate.getHours() - 1);
+        setDate(resDate);
+        if (checkIfDue(resDate)) {
+            setDue(true);
+        } else {
+            setDue(false);
+        }
+    }, [props.data])
 
     const handleChange = (event) => {
-        // event.stopPropagation();
+        event.stopPropagation();
         setDone(event.target.checked);
 
         let data = {
@@ -86,68 +63,86 @@ export const Todo = (props) => {
 
     const updateTodo = async (data) => {
         await pb.collection('todo').update(props.id, data);
-        getData()
-            .catch((error) => {
-                alert("could not sync with database: " + error.toString());
-            });
+        // props.reloadTodos()
     };
 
     const handleSaved = async (event) => {
+        event.stopPropagation();
         setSaved(event.target.checked);
         let data = {
             saved: event.target.checked,
         }
-        await pb.collection('todo').update(props.id, data);
-        getData();
+        updateTodo(data)
+            .catch((error) => {
+                alert("could not sync with database: " + error.toString())
+            })
     };
 
     const handleOpenModal = (e) => {
-        console.log("open modal");
+        if (!props.disableEdit) {
+            props.setEditDate({
+                id: props.id,
+                title: title,
+                done: done,
+                comment: comment,
+                date: date,
+                topic: topic,
+                saved: saved,
+            });
+            props.setShowEdit(true);
+        }
     };
 
-    /* Use effect
-    *  fetch data
-    *
-    * */
+    // if (props.reloading) {
+    //     return null;
+    // }
 
     return (
         <>
-            <div className={`todo-container ${done 
-                ? "done" 
-                : (saved ? "saved" : "")} ${due  ? "due" : ""}`}
+            <div className={`todo-container ${done
+                ? "done"
+                : (saved ? "saved" : "")} ${due ? "due" : ""}`}
                  onClick={(e) => handleOpenModal(e)}
             >
-                <Grid container direction="row"
-                      justifyContent="space-between"
-                      alignItems="center"
-                      gap={0}
-                >
-                    <Grid item xs={10} md={10} className={"todo-front"}>
-                        <Checkbox
-                            icon={<RadioButtonUncheckedIcon color={"textWhite"}/>}
-                            checked={done}
-                            checkedIcon={<RadioButtonCheckedIcon color={"textWhite"}/>}
-                            color={"textWhite"}
-                            className={"todo-done"}
-                            onChange={handleChange}
-                        />
-                        <Typography variant="h5" color={"textWhite"} className={`todo-title ${done ? "done" : ""}`}>
-                            {title}
-                        </Typography>
-                    </Grid>
-                    <Grid item xs={1} md={1}>
-                        <div className={"todo-icon"}>
+                {!props.reloading &&
+
+                    <Grid container direction="row"
+                          justifyContent="space-between"
+                          alignItems="center"
+                          gap={0}
+                    >
+                        <Grid item xs={10} md={10} className={"todo-front"}>
                             <Checkbox
-                                icon={<BookmarkBorder color="textWhite"/>}
-                                checked={saved}
-                                checkedIcon={<Bookmark color={"textWhite"}/>}
+                                icon={<RadioButtonUncheckedIcon color={"textWhite"}/>}
+                                // checked={props.data.done}
+                                checked={done}
+                                checkedIcon={<RadioButtonCheckedIcon color={"textWhite"}/>}
+                                color={"textWhite"}
                                 className={"todo-done"}
-                                onChange={handleSaved}
+                                onClick={handleChange}
                             />
-                        </div>
+                            <Typography variant="h5" color={"textWhite"} className={`todo-title ${done ? "done" : ""}`}>
+                                {/*{props.data.title}*/}
+                                {title}
+                            </Typography>
+                        </Grid>
+                        <Grid item xs={1} md={1}>
+                            <div className={"todo-icon"}>
+                                <Checkbox
+                                    icon={<BookmarkBorder color="textWhite"/>}
+                                    // checked={props.data.saved}
+                                    checked={saved}
+                                    checkedIcon={<Bookmark color="textWhite"/>}
+                                    className={"todo-done"}
+                                    onClick={handleSaved}
+                                />
+                            </div>
+                        </Grid>
                     </Grid>
-                </Grid>
+                }
             </div>
         </>
     );
 };
+
+export default memo(Todo);

@@ -79,6 +79,15 @@ html, body, #app, #app>div {
     white-space: nowrap;
     text-overflow: ellipsis " [..]";
     font-size: 1rem;
+    transition: all .2s ease-in-out;
+}
+.todo-container:hover {
+    transform: scale(1.02);
+    cursor: pointer;
+}
+
+.todo-container:active {
+    transform: scale(1.03);
 }
 
 .todo-container.done {
@@ -152,7 +161,7 @@ html, body, #app, #app>div {
 .arrow{
     margin: 0;
     top: auto;
-    right: 30px;
+    right: 50px;
     bottom: 80px;
     left: auto;
     position: fixed;

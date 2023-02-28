@@ -40,6 +40,11 @@ export function convertDateTime(datetime) {
     return dt;
 }
 
+export function checkIfDue(datetime) {
+    const dtNow = new Date();
+    return datetime < dtNow;
+}
+
 export function zeroPad(num, places) {
     let zero = places - num.toString().length + 1;
     return Array(+(zero > 0 && zero)).join("0") + num;

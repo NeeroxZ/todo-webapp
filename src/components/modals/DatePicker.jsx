@@ -1,10 +1,12 @@
 import {TextField, useMediaQuery} from "@mui/material";
 import React from "react";
 import {MobileDateTimePicker, LocalizationProvider} from "@mui/x-date-pickers";
+// import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import dayjs from "dayjs";
 import PropTypes from 'prop-types';
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import {DateTimePicker} from "@mui/x-date-pickers/DateTimePicker";
+import 'dayjs/locale/de';
 
 export const DatePicker = (props) => {
     const matches = useMediaQuery('(min-width:600px)');
@@ -14,7 +16,10 @@ export const DatePicker = (props) => {
 
     return (
         <>
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <LocalizationProvider
+                dateAdapter={AdapterDayjs}
+                adapterLocale="de"
+            >
                 {matches
                     ?
                     <DateTimePicker
@@ -32,7 +37,7 @@ export const DatePicker = (props) => {
                                           ampm={false}
                                           value={props.date}
                                           onChange={handleChange}
-                                          renderInput={(params) => <TextField {...params} error={props.dateError} />}
+                                          renderInput={(params) => <TextField {...params} error={props.dateError}/>}
                     />
                 }
             </LocalizationProvider>

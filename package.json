@@ -60,6 +60,7 @@
     ]
   },
   "devDependencies": {
+    "@wixc3/react-board": "^2.1.3",
     "babel-plugin-relative-path-import": "^2.0.1",
     "css-loader": "^6.7.3"
   }

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import {Bookmark, BookmarkBorder, Edit} from "@mui/icons-material";
 import {useTopics} from "../../stores/TopicStore";
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import dayjs from "dayjs";
 import {useAuth} from "../../stores/AuthStore";
 import {
@@ -17,66 +17,116 @@ import {
 } from "@mui/material";
 import Tooltip from "@mui/material/Tooltip";
 import IconButton from "@mui/material/IconButton";
+import DeleteIcon from '@mui/icons-material/Delete';
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import {DatePicker} from "./DatePicker";
-const EditModal = (props) => {
+import {useUserStore} from "../../stores/UserStore";
+import {useGlobalStore} from "../../stores/GlobalStore";
+import pb from "../../utils/pocketbase";
+import {TopicModal} from "./TopicModal";
+import {findShadowRoot} from "bootstrap/js/src/util";
+export const EditModal = (props) => {
+    const user = useUserStore();
     const tpCtx = useTopics();
-    const auth = useAuth();
 
-    const [id, setId] = useState(null);
+    const [loadingData, setLoadingData] = useState(true);
+
+    const {mobileView} = useGlobalStore();
+
+    const [showAddTopic, setShowAddTopic] = useState(false);
+
 
     const [title, setTitle] = useState("");
     const [titleError, setTitleError] = useState(false);
-
     const [bookmark, setBookmark] = useState(false);
-
     const [topic, setTopic] = useState(null);
     const [topicInput, setTopicInput] = useState("");
     const [topicError, setTopicError] = useState(false);
-
     const [desc, setDesc] = useState("");
     const [descError, setDescError] = useState(false);
-
-    const [date, setDate] = useState(dayjs());
+    const [date, setDate] = useState(null);
     const [dateError, setDateError] = useState(false);
+
+    const [disableBtn, setDisableBtn] = useState(true);
+    const firstUpdate = useRef(true);
 
     const {getUserId} = useAuth();
 
+    const loadTopic = () => {
+        if (!tpCtx.loading && (tpCtx.topics.length !== 0)) {
+            tpCtx.topics.forEach((elem, i) => {
+                if (elem.id === props.todoData.topic) {
+                    setTopic(elem);
+                }
+            });
+        }
+    }
+
+    // reset states on hide
     useEffect(() => {
-        setTopic(props.selectedTopic);
-        setId(props.todoId);
-        setTitle(props.title);
-        const newDate = new Date(props.date);
-        setDate(newDate);
-    }, []);
+        if (!props.show) {
+            setLoadingData(true);
+            setTitle("");
+            setTitleError(false);
+            setBookmark(false);
+            setTopic( null);
+            setTopicInput("");
+            setTopicError(false);
+            setDesc("");
+            setDescError(false);
+            setDate(null);
+            setDateError(false);
+            setDisableBtn(true);
+            firstUpdate.current = true;
+        } else {
+            setLoadingData(true);
+            loadTopic()
+            setTitle(props.todoData.title);
+            setBookmark(props.todoData.saved);
+            setDesc(props.todoData.description);
+            setDate(dayjs(props.todoData.date));
+            setDisableBtn(true);
+            setLoadingData(false);
+            firstUpdate.current = true;
+        }
+    }, [props.show]);
+
+    useEffect(() => {
+        if (props.show && !loadingData) {
+            if (firstUpdate.current) {
+                firstUpdate.current = false;
+            } else {
+                setDisableBtn(false);
+            }
+        }
+    }, [title, desc, bookmark, topic, date]);
 
     // Todo (Marvin): Error handling again
-    // const uploadTodo = async () => {
-    //     if (checkInputs()) {
-    //         const data = {
-    //             "user_id": getUserId(),
-    //             "title": title,
-    //             "saved": bookmark,
-    //             "description": desc,
-    //             "done": false,
-    //             "deleted": false,
-    //             "repetitive": "none",
-    //             "due_date": `${date.format("YYYY-MM-DD hh:mm:ss")}.000Z`
-    //         };
-    //         if (topic !== null) {
-    //             data["topic"] = topic.id;
-    //         }
-    //
-    //         await pb.collection('todo').create(data);
-    //
-    //         if (props.reloadOnAdd) {
-    //             await props.reloadFunction()
-    //         }
-    //         props.setShow(false);
-    //
-    //     }
-    // };
+    const updateTodo = async () => {
+        if (checkInputs()) {
+            const data = {
+                "user_id": getUserId(),
+                "title": title,
+                "saved": bookmark,
+                "description": desc,
+                "repetitive": "none",
+                "due_date": `${date.format("YYYY-MM-DD HH:mm:ss")}.000Z`,
+            };
+            if (topic !== null) {
+                data["topic"] = topic.id;
+            }
 
+            await pb.collection('todo').update(props.todoData.id, data);
+            await props.reloadTodos()
+            props.setShow(false);
+        }
+    };
+
+    const handleDelete = async () => {
+        await pb.collection('todo').delete(props.todoData.id);
+        await props.reloadTodos();
+        props.setShow(false);
+    };
 
     const checkInputs = () => {
         let failed = false;
@@ -86,7 +136,7 @@ const EditModal = (props) => {
         } else {
             setTitleError(false);
         }
-        if (date === dayjs('')) {
+        if (date === null) {
             setDateError(true);
             failed = true;
         } else {
@@ -94,10 +144,6 @@ const EditModal = (props) => {
         }
         return !failed;
     };
-
-
-
-    const matches = useMediaQuery('(min-width:600px)');
 
     const handleBookmarkChange = (event) => {
         setBookmark(event.target.checked)
@@ -109,7 +155,6 @@ const EditModal = (props) => {
 
 
     return (
-
         <>
             <Modal
                 open={props.show}
@@ -118,16 +163,19 @@ const EditModal = (props) => {
                 }}
                 className="modal"
             >
-                <Box className={`modalBox ${!matches ? "mobile" : ""}`}>
+                <Box className={`modalBox ${mobileView ? "mobile" : ""}`}>
                     <div className="contentWrapper">
-                        {props.reloadOnAdd &&
-                            <Backdrop open={props.loading}>
+                        {/*{props.reloadOnAdd &&*/}
+                            <Backdrop open={props.reloading}>
                                 <CircularProgress/>
                             </Backdrop>
-                        }
-                        <div className={`modalHeading ${matches ? "" : "mobile"}`}>
-                            <div>Add Todo</div>
-                            {!matches &&
+                        {/*}*/}
+                        <div className={`modalHeading ${!mobileView ? "" : "mobile"}`}>
+                            {(title !== "")
+                                ? <div className="modalHeadingDynamic">Edit '{title}'</div>
+                                : <div>Edit Todo</div>
+                            }
+                            {mobileView &&
                                 <div className="tpIconRight.header">
                                     <Tooltip title="Bookmark" placement="top" arrow>
                                         <Checkbox
@@ -154,9 +202,10 @@ const EditModal = (props) => {
                                             setTitle(event.target.value);
                                         }}
                                         className="tdTitleStyle"
+                                        autoFocus={true}
                                         id="tdTitle"/>
                                 </Grid>
-                                {matches &&
+                                {!mobileView &&
                                     <Grid item xs={2}>
                                         <div className="tpIconRight regular">
                                             <Tooltip title="Bookmark" placement="right" arrow>
@@ -194,12 +243,14 @@ const EditModal = (props) => {
                                                                             error={topicError}/>}
                                     />
                                 </Grid>
-                                {matches
+                                {!mobileView
                                     ?
                                     <Grid item xs={2}>
                                         <div className="tpIconRight regular">
                                             <Tooltip title="Create topic" placement="right" arrow>
-                                                <IconButton size="large" color="textWhite">
+                                                <IconButton size="large" color="textWhite" onClick={() => {
+                                                    setShowAddTopic(true);
+                                                }}>
                                                     <AddCircleOutlineIcon size="large"/>
                                                 </IconButton>
                                             </Tooltip>
@@ -208,7 +259,9 @@ const EditModal = (props) => {
                                     :
                                     <Grid item xs={12}>
                                         <div className="btnAddContainer">
-                                            <Button variant="outlined" className="btnAddTopic">
+                                            <Button variant="outlined" className="btnAddTopic" onClick={() => {
+                                                setShowAddTopic(true);
+                                            }}>
                                                 Create Topic
                                             </Button>
                                         </div>
@@ -239,22 +292,37 @@ const EditModal = (props) => {
                         </Grid>
                     </div>
                     <div className="bottomBtnGroup">
-                        <Button variant="outlined" color="error" className="btn"
-                                onClick={handleExit}>Exit</Button>
-                        <Button variant="contained" className="btn save" onClick={() => {
-                            uploadTodo();
-                        }}>Save</Button>
+                        <div className="bottomBtnGroupContainer leftGroup">
+                            <Button variant="contained" color="error"
+                                    // startIcon={<DeleteIcon />}
+                                    className={`btn delete ${!mobileView?"desktopBtn":""}`}
+                                    onClick={handleDelete}
+                            ><DeleteIcon /></Button>
+                            <div className="bottomBtnGroupR">
+                                <Button variant="outlined" color="error"
+                                        className={`btn ${!mobileView?"desktopBtn":""}`}
+                                        onClick={handleExit}>Exit</Button>
+                                <Button variant="contained"
+                                        className={`btn save ${!mobileView?"desktopBtn":""}`}
+                                        disabled={disableBtn}
+                                        onClick={() => {
+                                    updateTodo();
+                                }}>Save</Button>
+                            </div>
+                        </div>
                     </div>
                 </Box>
             </Modal>
+            <TopicModal show={showAddTopic} setShow={setShowAddTopic}/>
         </>
     );
 };
 
 Edit.propTypes = {
+    show: PropTypes.bool.isRequired,
+    setShow: PropTypes.func.isRequired,
     todoId: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    date: PropTypes.string.isRequired,
-    bookmark: PropTypes.bool.isRequired,
-    selectedTopic: PropTypes.object.isRequired,
+    todoData: PropTypes.object.isRequired,
+    reloading: PropTypes.func.isRequired,
+    reloadTodos: PropTypes.func.isRequired,
 }
