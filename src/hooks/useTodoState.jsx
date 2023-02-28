@@ -9,7 +9,7 @@ export function useTodoState(todoFrameProps) {
     const tp = useTopics();
 
     const [todos, setTodos] = useState([]);
-    const [noTodos, setNoTodos] = useState(null);
+    const [noTodos, setNoTodos] = useState();
 
     const [reloading, setReloading] = useState(false);
     const [reloadError, setReloadError] = useState(null);
@@ -18,9 +18,7 @@ export function useTodoState(todoFrameProps) {
     const [initialError, setInitialError] = useState(null);
 
     const loadTodos = async () => {
-        console.log("LOADING")
         let res = {};
-        setNoTodos(false);
         setInitialLoading(true);
         try {
             let params = getParams(todoFrameProps, getUserId());
@@ -30,7 +28,9 @@ export function useTodoState(todoFrameProps) {
             });
             setInitialError(null);
             setTodos(res.items);
-            if (res.items.length <= 0) {
+            if (res.items.length > 0) {
+                setNoTodos(false);
+            } else {
                 setNoTodos(true);
             }
             console.log("done")

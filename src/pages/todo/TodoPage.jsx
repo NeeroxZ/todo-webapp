@@ -20,6 +20,7 @@ export const TodoPage = (props) => {
     const [showEdit, setShowEdit] = useState(false);
     const [editData, setEditData] = useState({});
 
+    console.log(tds.noTodos);
 
     useEffect( () => {
         tds.loadTodos(props);
@@ -28,6 +29,7 @@ export const TodoPage = (props) => {
 
     // conditional rendering
     if (tds.initialLoading) {
+        console.log("bin hier")
         return (
             <>
                 <div className={"screen_container"}>
