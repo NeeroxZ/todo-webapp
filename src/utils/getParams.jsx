@@ -1,8 +1,6 @@
-import {zeroPad} from "./functions";
 
 
 export function getParams(filters, userId) {
-    console.log("kam an: ", filters)
     let query = `user_id="${userId}"`;
     if (filters.bookmarkFilter) {
         query += " && saved=true";

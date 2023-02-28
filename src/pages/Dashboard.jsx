@@ -14,12 +14,11 @@ import '../styles/dashboard.css'
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
 const layout = [
-        { i: "empty",            x:0, y:0, w:1, h:1 },
-        { i: "empty2",           x:1, y:0, w:1, h:1 },
-        //{ i: "empty3",           x:2, y:0, w:1, h:1 },
+        { i: "empty",            x:0, y:0, w:1, h:1 , static: true},
+        { i: "empty2",           x:1, y:0, w:1, h:1 , static: true},
         { i: "empty4",           x:3, y:0, w:1, h:4 },
 
-        { i: "empty5",           x:0, y:1, w:1, h:2 },
+        { i: "empty5",           x:0, y:1, w:1, h:2,  },
         //{ i: "empty6",           x:1, y:1, w:1, h:1 },
         { i: "empty7",           x:2, y:1, w:1, h:2 },
 
@@ -40,10 +39,8 @@ export const Dashboard = () => {
             <ResponsiveGridLayout
                 layouts={{lg: layout}}
                 breakepoints={{ lg:1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
-                cols={{ lg: 4, md: 3, sm: 3, xs: 1, xxs: 1}}
+                cols={{ lg: 4, md: 2, sm: 2, xs: 1, xxs: 1}}
                 margin= {[10, 10]}
-                rowHeight={120}
-                width={2000}
                 compactType={"horizontal"}
                 style={leftNavStyle}
                 isDraggable={false}
@@ -64,24 +61,17 @@ export const Dashboard = () => {
 
 
                 <div className="dashboardItem" key="empty5">
-                    <div>All todos</div>
-                    <TodoPage
-                        scrollable={false}
-                        showFab={false}
-                        showInfo={false}
-                        disableEdit={true}
-                    />
+                    <div className="todoHeaderDashboard">
+                        TODO`S
+                    </div>
+                    <TodoPage scrollable={false} showFab={false} showInfo={false} showDue={true}/>
                 </div>
 
                 <div className="dashboardItem" key="empty7">
-                    <div>Due todos</div>
-                    <TodoPage
-                        scrollable={false}
-                        showFab={false}
-                        showInfo={false}
-                        disableEdit={true}
-                        dateUntil={new Date()}
-                    />
+                    <div className="todoHeaderDashboard">
+                        DUE`S
+                    </div>
+                    <TodoPage scrollable={false} showFab={false} showInfo={false}/>
                 </div>
 
                 <div className="dashboardItem todoAll" key="empty8">

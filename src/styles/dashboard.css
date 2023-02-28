@@ -51,7 +51,7 @@
         color: white;
         overflow: scroll;
         text-align: center;
-        font-size: 1em;
+        font-size: 2em;
         border-radius: 15px;
         box-shadow: 0 0 10px #0d0b18;
         background: linear-gradient(312deg, #464d68 2%, rgb(43, 42, 42) 87%);
@@ -88,7 +88,7 @@
         color: white;
         width: 50%;
         text-align: center;
-        font-size: 0.5em;
+        font-size: 1em;
         border-radius: 15px;
         box-shadow: 0 0 10px #0d0b18;
         background: linear-gradient(312deg,#455bbd1f 2%, rgba(255,255,255,0.2) 87%);
@@ -107,6 +107,11 @@
         border-bottom: 2px solid #43558f1a;
     }
 
+
+}
+.todoHeaderDashboard{
+    margin-top: 0.5rem;
+    color: #33a382;
 
 }
 

@@ -47,6 +47,22 @@ export const NavBar = () => {
         <>
             <div className={`topnav ${showNav ? "responsive" : ""}`} id="myTopnav">
                 <a style={{display: "none"}}></a>
+                <div className="dropdown">
+                    <button className="dropbtn">
+                        <i className="fa fa-user" aria-hidden="true"></i>
+
+                    </button>
+                    <div className="dropdown-content-user">
+
+                            <NavLink to="/user" onClick={toggleNav}>User</NavLink>
+
+                            <NavLink to="/about" onClick={toggleNav}>About</NavLink>
+
+                        <NavLink to="/login" onClick={() => {
+                            logout();
+                        }}>Logout</NavLink>
+                    </div>
+                </div>
                 <NavLink to="/home" onClick={() => toggleNav()}>Home</NavLink>
                 <NavLink to="/todo/all" onClick={() => toggleNav()}>All</NavLink>
                 <NavLink to="/todo/today" onClick={() => toggleNav()}>Today</NavLink>
@@ -70,10 +86,6 @@ export const NavBar = () => {
                     </div>
                 }
 
-                <NavLink to="/about" onClick={toggleNav}>About</NavLink>
-                <NavLink to="/login" onClick={() => {
-                    logout();
-                }}>Logout</NavLink>
                 <a onClick={toggleNav} className="icon">&#9776;</a>
             </div>
             <Outlet/>
