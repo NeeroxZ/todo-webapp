@@ -1,12 +1,13 @@
 import { Responsive, WidthProvider } from "react-grid-layout";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import {useAuth} from "../../stores/AuthStore";
+import {useUserStore} from "../../stores/UserStore";
+
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
 export const User = () => {
-    const auth = useAuth();
-    const name = auth.getUserId();
+    const {user, isLoadingUser} = useUserStore();
+
 
     return (
         <div className="item-a dash-box">
@@ -14,7 +15,7 @@ export const User = () => {
                 <AccountCircleIcon/>
             </a>
             <div className="username">
-                {name}
+                {user.username}
             </div>
         </div>
     );

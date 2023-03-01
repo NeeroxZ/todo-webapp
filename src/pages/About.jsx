@@ -18,7 +18,7 @@ export const About = () =>{
                             <div className="container">
                                 <h2>Nick Obreiter</h2>
                                 <p className="title">CEO & Founder</p>
-                                <p>Jung, Brutal, Gut aussehender CEO</p>
+                                <p>Gutaussehender CEO</p>
                                 <br/>
                                 <p>neeroxz@hotmail.com</p>
                                 <p>
@@ -35,7 +35,7 @@ export const About = () =>{
                             <div className="container">
                                 <h2>Marvin Samouelian</h2>
                                 <p className="title">CEO & Founder</p>
-                                <p>Jung, Brutal, Gut aussehender CEO</p>
+                                <p>Gutaussehender CEO</p>
                                 <br/>
                                 <p>marvin@web.com</p>
                                 <p>
@@ -52,7 +52,7 @@ export const About = () =>{
                             <div className="container">
                                 <h2>Martin Hofsäß</h2>
                                 <p className="title">CEO & Founder</p>
-                                <p>Jung, Brutal, Gut aussehender CEO</p>
+                                <p>Gutaussehender CEO</p>
                                 <br/>
                                 <p>martin@google.com</p>
                                 <p>
@@ -63,7 +63,6 @@ export const About = () =>{
                     </div>
                 </div>
             </div>
-            <Documentation/>
         </>
     );
 }
