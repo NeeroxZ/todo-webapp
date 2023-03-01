@@ -149,7 +149,7 @@ empty{
 .date-day{
     font-size:2rem;
     font-weight: bold;
-    margin-top:20px;
+    margin-top:43px;
     margin-bottom:-10px;
 }
 .date-month{
@@ -159,5 +159,11 @@ empty{
     background-color: #12142077;
     border-bottom: 6px solid #090b1b;
 }
-
+.username{
+    margin-top: 15%;
+    font-size: 1.5rem;
+}
+.allNmb{
+    margin-top: 6%;
+}
 
