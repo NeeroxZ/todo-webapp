@@ -6,6 +6,7 @@ import '../styles/navbar.css'
 import {useTopics} from "../stores/TopicStore";
 import {CircularProgress} from "@mui/material";
 import {useGlobalStore} from "../stores/GlobalStore";
+import logo from '../assets/images/dodo/dodoWithCoffee.png';
 
 
 export const NavBar = () => {
@@ -47,6 +48,7 @@ export const NavBar = () => {
         <>
             <div className={`topnav ${showNav ? "responsive" : ""}`} id="myTopnav">
                 <a style={{display: "none"}}></a>
+
                 <div className="dropdown">
                     <button className="dropbtn">
                         <i className="fa fa-user" aria-hidden="true"></i>
@@ -87,6 +89,10 @@ export const NavBar = () => {
                 }
 
                 <a onClick={toggleNav} className="icon">&#9776;</a>
+                <div className="leftSide">
+                    <img src={logo} className="logoNav"></img>
+                    <p>ToDoDo</p>
+                </div>
             </div>
             <Outlet/>
         </>

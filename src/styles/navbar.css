@@ -137,5 +137,18 @@
         width: 100%;
         text-align: left;
     }
-    
+}
+.leftSide{
+    float: left;
+}
+.leftSide p{
+    margin-top: 0.5rem;
+    margin-left: 4rem;
+    font-size: 2rem;
+}
+.logoNav{
+    width: 6.5%;
+    height: 20%;
+    float: left;
+    margin-left: 1rem;
 }
