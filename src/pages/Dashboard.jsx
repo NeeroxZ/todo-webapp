@@ -9,6 +9,8 @@ import "react-resizable/css/styles.css";
 import {TodoChart} from "../components/TodoChart";
 import {AddTodo} from "../components/AddTodo";
 import '../styles/dashboard.css'
+import {TodoDuePage} from "./todo/TodoDuePage";
+import React from "react";
 
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
@@ -29,11 +31,11 @@ const layout = [
 
 export const Dashboard = () => {
     const leftNavStyle = {
-
-
         marginRight: 10,
-
     }
+    const getTimeUntil = () => {
+        return new Date();
+    };
     return (
         <div className="mainContainer">
             <ResponsiveGridLayout
@@ -71,7 +73,13 @@ export const Dashboard = () => {
                     <div className="todoHeaderDashboard">
                         DUE`S
                     </div>
-                    <TodoPage scrollable={false} showFab={false} showInfo={false} disableEdit={true}/>
+                    <TodoPage
+                        scrollable={false}
+                        showFab={false}
+                        showInfo={false}
+                        pageHeading={"Due todos"}
+                        dateUntil={getTimeUntil()}
+                    />
                 </div>
 
                 <div className="dashboardItem todoAll" key="empty8">
