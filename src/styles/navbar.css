@@ -106,7 +106,11 @@
     display: block;
 }
 
-@media screen and (max-width: 599px) {
+.leftSide{
+    float: left;
+}
+
+@media screen and (max-width: 900px) {
     .topnav a:not(:first-child), .dropdown .dropbtn {
         display: none;
     }
@@ -114,9 +118,7 @@
         float: right;
         display: block;
     }
-}
 
-@media screen and (max-width: 600px) {
     .topnav.responsive {position: fixed;
         z-index: 5;
         width: 100%;}
@@ -137,5 +139,19 @@
         width: 100%;
         text-align: left;
     }
-    
+    .leftSide{
+        float: inherit;
+    }
+}
+
+.leftSide p{
+    margin-top: 0.5rem;
+    margin-left: 4rem;
+    font-size: 2rem;
+}
+.logoNav{
+    width: 6.5%;
+    height: 20%;
+    float: left;
+    margin-left: 1rem;
 }

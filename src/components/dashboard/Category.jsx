@@ -15,7 +15,7 @@ export const Category = () => {
             <div className="dashBox">
                 <h3 className="title">Topics</h3>
 
-                <a href="#" className="align-left add-category" onClick={() => {
+                <a href="#" className="align-left add-category addTopic" onClick={() => {
                     setShow(true);
                 }}>
                     <ControlPointIcon/>
@@ -32,7 +32,7 @@ export const Category = () => {
                     :
                     <ul>
                         {topics.topics && topics.topics.map((item, i) => <li key={i} className={"liste"}>
-                            <NavLink to={`/topic/${item.titleParam}`} className={"topicStyle"}>
+                            <NavLink to={`/topic/${item.titleParam}`} className="topicStyle">
                                 {item.titleMod}
                             </NavLink>
                         </li>)}

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import ReactMarkdown from 'react-markdown'
 
-import Doc from '../documentationResuorces/ToDo_Webapp_Documentation.md'
+import Doc from '../doku/ToDo_Webapp_Documentation.md'
 export const Documentation = () => {
     const [DocContent, setDocContent] = useState('')
 

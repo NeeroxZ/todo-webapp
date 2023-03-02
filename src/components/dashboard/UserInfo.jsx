@@ -8,7 +8,6 @@ import {DateDay} from "./DateDay";
 export const UserInfo = () => {
     return (
         <div className="userInfo">
-
                 <div className="userItem" key="empty">
                     <User/>
                 </div>

@@ -1,5 +1,5 @@
 .fixedRightContainer{
-    position: absolute;
+    position: fixed;
     right: 20px;
     bottom:0;
 }
