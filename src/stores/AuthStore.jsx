@@ -59,15 +59,14 @@ export const AuthProvider = ({children}) => {
             let expCookie = pb.authStore.exportToCookie({sameSite: 'none', secure: false}, COOKIE_KEY);
             cookies.set(COOKIE_KEY, expCookie, {sameSite:'none', secure: false})
         } catch(error) {
+            setLoginError(error);
+        } finally {
             setWaiting(false);
-            setLoginError(true);
-            return
         }
-        setWaiting(false);
 
         if (!pb.authStore.isValid) {
             setWaiting(false);
-            setLoginError(true);
+            setLoginError("auth not valid");
             return
         }
         setLoginValid(true);

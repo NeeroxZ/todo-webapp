@@ -19,7 +19,7 @@ export const ResetPasswordPage = () => {
 
         setLoading(true);
         try {
-            await pb.collection('users').requestPasswordReset(mail.toString());
+            await pb.collection('users').requestPasswordReset(mail);
             setError(null);
             setSuccess(true);
         } catch (error) {

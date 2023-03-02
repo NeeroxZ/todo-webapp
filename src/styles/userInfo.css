@@ -2,7 +2,7 @@
     margin-top: 2rem;
 }
 .box{
-    width: 400px;
+    width: 500px;
     padding: 10px;
     margin: auto;
     text-align: center;
@@ -13,10 +13,15 @@
     border-left: 2px solid #fdfdfd3a;
     border-bottom: 2px solid #43558f1a;
 }
+.box.mobile {
+    width: 400px;
+}
+
 .userRow{
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: center;
     flex-wrap: wrap;
     gap: 16px;
 }
@@ -44,4 +49,44 @@
 }
 .checkBoxInput{
     margin-left: 12.5%;
+}
+
+.userHeading {
+    text-align: center;
+    font-size: 2rem;
+    color: #fdfdfdce;
+}
+
+/*user info component*/
+.infoContainer {
+    margin: 0 20px 0 30px !important;
+}
+
+.infoText {
+    font-size: 1.0rem;
+    color: #fdfdfdce;
+}
+
+.infoText.userValue {
+    margin-left: 10px;
+    color: #04AA6D;
+}
+
+.infoText.rowHeading {
+    font-size: 1.5rem;
+}
+
+.inp {
+    width: 100%;
+    flex-grow: 1;
+}
+
+.btnInf {
+    width: 100px;
+    height: 40px;
+    /*width: 100%;*/
+}
+
+.btnInf.mobile.row {
+    width: 100%;
 }

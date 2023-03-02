@@ -29,11 +29,13 @@ const layout = [
 
 export const Dashboard = () => {
     const leftNavStyle = {
-
-
         marginRight: 10,
-
     }
+
+    const getTimeUntil = () => {
+        return new Date();
+    };
+
     return (
         <div className="mainContainer">
             <ResponsiveGridLayout
@@ -64,14 +66,27 @@ export const Dashboard = () => {
                     <div className="todoHeaderDashboard">
                         TODO`S
                     </div>
-                    <TodoPage scrollable={false} showFab={false} showInfo={false} showDue={true} disableEdit={true}/>
+                    <TodoPage
+                        scrollable={false}
+                        showFab={false}
+                        showInfo={false}
+                        showDue={true}
+                        disableEdit={true}
+                    />
                 </div>
 
                 <div className="dashboardItem" key="empty7">
                     <div className="todoHeaderDashboard">
                         DUE`S
                     </div>
-                    <TodoPage scrollable={false} showFab={false} showInfo={false} disableEdit={true}/>
+                    <TodoPage
+                        scrollable={false}
+                        showFab={false}
+                        showInfo={false}
+                        showDue={false}
+                        disableEdit={true}
+                        dateUntil={getTimeUntil()}
+                    />
                 </div>
 
                 <div className="dashboardItem todoAll" key="empty8">

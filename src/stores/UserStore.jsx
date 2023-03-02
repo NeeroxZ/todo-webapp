@@ -7,25 +7,26 @@ export const UserProvider = ({children}) => {
     const auth = useAuth();
 
     const [settings, setSettings] = useState({});
+    const [isLoadingSettings, setIsLoadingSettings] = useState(true);
+
     const [user, setUser] = useState({});
+    const [isLoadingUser, setIsLoadingUser] = useState(true);
 
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
     const reloadSettings = async () => {
         await loadSettings();
-        setLoading(false);
     };
 
     const reloadUser = async () => {
         await loadUser();
-        setLoading(false);
     };
 
     const loadSettings = async () => {
         if (auth.loginValid) {
             console.log("loading settings")
-            setLoading(true);
+            setIsLoadingSettings(true);
             setError(null);
             try {
                 let data = await pb.collection('user_settings').getFirstListItem(
@@ -36,6 +37,8 @@ export const UserProvider = ({children}) => {
             } catch (e) {
                 console.log("error getting user_settings: ", e);
                 setError(e);
+            } finally {
+                setIsLoadingSettings(false);
             }
         }
     };
@@ -43,33 +46,43 @@ export const UserProvider = ({children}) => {
     const loadUser = async () => {
         if (auth.loginValid) {
             console.log("loading user")
-            setLoading(true);
+            setIsLoadingUser(true);
             setError(null);
             try {
                 let data = await pb.collection('users').getOne(auth.getUserId());
-                console.log(data);
                 setUser(data);
                 console.log("user loaded")
             } catch (e) {
                 console.log("error getting user: ", e);
                 setError(e);
+            } finally {
+                setIsLoadingUser(false);
             }
 
         }
-    }
+    };
 
     useEffect(() => {
         if (auth.loginValid) {
             loadUser();
             loadSettings();
-            setLoading(false);
         }
     }, [auth.loginValid]);
 
+    useEffect(() => {
+        if (isLoadingUser || isLoadingSettings) {
+            setLoading(true);
+        } else {
+            setLoading(false);
+        }
+
+    }, [isLoadingUser, isLoadingSettings])
+
     return (
         <UserContext.Provider value={{
-            user, reloadUser,
-            settings, reloadSettings
+            user, reloadUser, isLoadingUser,
+            settings, reloadSettings, isLoadingSettings,
+            loading
         }}>
             {children}
         </UserContext.Provider>
