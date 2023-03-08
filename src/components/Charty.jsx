@@ -11,7 +11,7 @@ export const Charty = () => {
         <>
             <div className={'containerChart'} style={{display:'flex'}}>
 
-                <div style={{ width: 120, height: 120 , marginLeft: 90, fontSize: 20, marginTop: 5}}>
+                <div className={'charty'}>
                     <CircularProgressbar
                         value={today}
                         text={`${today}%`}
@@ -28,7 +28,7 @@ export const Charty = () => {
                         <strong>Today</strong>
                     </div>
                 </div>
-                <div style={{ width: 120, height: 120 , marginLeft: 90,fontSize: 20, marginTop: 5}}>
+                <div className={'charty'}>
                     <CircularProgressbar
                         value={done}
                         text={`${done}%`}
@@ -45,7 +45,7 @@ export const Charty = () => {
                         <strong>Done</strong>
                     </div>
                 </div>
-                <div style={{ width: 120, height: 120 , marginLeft: 90, fontSize: 20, marginTop: 5}}>
+                <div className={'charty'}>
                     <CircularProgressbar
                         value={saved}
                         text={`${saved}%`}
@@ -62,7 +62,7 @@ export const Charty = () => {
                         <strong>Saved</strong>
                     </div>
                 </div>
-                <div style={{ width: 120, height: 120 , marginLeft: 90, fontSize: 20, marginTop: 5}}>
+                <div className={'charty'}>
                     <CircularProgressbar
                         value={due}
                         text={`${due}%`}
