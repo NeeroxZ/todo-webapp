@@ -47,6 +47,8 @@ export const EditModal = (props) => {
     const [date, setDate] = useState(null);
     const [dateError, setDateError] = useState(false);
 
+    const [deleted, setDeleted] = useState(false);
+
     const [disableBtn, setDisableBtn] = useState(true);
     const firstUpdate = useRef(true);
 
@@ -85,6 +87,7 @@ export const EditModal = (props) => {
             setBookmark(props.todoData.saved);
             setDesc(props.todoData.description);
             setDate(dayjs(props.todoData.date));
+            setDeleted(props.todoData.deleted);
             setDisableBtn(true);
             setLoadingData(false);
             firstUpdate.current = true;
@@ -109,6 +112,7 @@ export const EditModal = (props) => {
                 "title": title,
                 "saved": bookmark,
                 "description": desc,
+                "deleted": deleted,
                 "repetitive": "none",
                 "due_date": `${date.format("YYYY-MM-DD HH:mm:ss")}.000Z`,
             };
@@ -123,7 +127,10 @@ export const EditModal = (props) => {
     };
 
     const handleDelete = async () => {
-        await pb.collection('todo').delete(props.todoData.id);
+        const data = {
+            "deleted": true,
+        }
+        await pb.collection('todo').update(props.todoData.id, data);
         await props.reloadTodos();
         props.setShow(false);
     };

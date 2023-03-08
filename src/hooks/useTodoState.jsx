@@ -33,7 +33,6 @@ export function useTodoState(todoFrameProps) {
             } else {
                 setNoTodos(true);
             }
-            console.log("done")
         } catch (err) {
             setInitialError(err.message);
             console.log("todo page error: ", err.message)
@@ -43,12 +42,16 @@ export function useTodoState(todoFrameProps) {
         }
     };
 
+    const removeTodo = async (todoId) => {
+        setTodos(todos.filter(e => e.id !== todoId))
+    };
+
     const reloadTodos = async () => {
         setReloading(true);
         setReloadError(null);
         let res = {};
         try {
-            console.log("update")
+            console.log("useTodoState: reload todos")
             let filters = getParams(todoFrameProps, getUserId());
             res = await pb.collection('todo').getList(1, 1000, {
                 filter: filters,
@@ -62,16 +65,17 @@ export function useTodoState(todoFrameProps) {
                 setNoTodos(true);
             }
 
+            console.log("useTodoState: reloaded")
             setTodos(resData);
         } catch (e) {
             setReloadError(e);
-            console.log("error reloading todos: ", e.message)
+            console.log("useTodoState: error reloading todos: ", e.message)
         } finally {
             setReloading(false);
         }
     };
 
     return {todos, noTodos, reloading, reloadError, initialLoading, initialError,
-        loadTodos, reloadTodos,
+        loadTodos, reloadTodos, removeTodo
     }
 }

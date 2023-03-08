@@ -1,19 +1,21 @@
-import Todo from "../../components/Todo";
+import Todo from "./Todo";
 import {useEffect, useState} from "react";
-import {useAuth} from "../../stores/AuthStore";
-import pb from "../../utils/pocketbase";
+import {useAuth} from "../stores/AuthStore";
+import pb from "../utils/pocketbase";
 import PropTypes from 'prop-types';
-import {NoContent} from "../NoContent";
-import {AddTodo} from "../../components/AddTodo";
-import {getParams} from "../../utils/getParams";
+import {NoContent} from "../pages/NoContent";
+import {AddTodo} from "./AddTodo";
+import {getParams} from "../utils/getParams";
 import {CircularProgress} from "@mui/material";
-import "../../styles/todo.css"
-import {EditModal} from "../../components/modals/EditModal";
-import {useTodoState} from "../../hooks/useTodoState";
+import "../styles/todo.css"
+import {EditModal} from "./modals/EditModal";
+import {useTodoState} from "../hooks/useTodoState";
 
-export const TodoPage = (props) => {
+export const TodoView = (props) => {
     const auth = useAuth();
     const tds = useTodoState(props);
+
+    const [initialRender, setInitialRender] = useState(true);
 
     const [heading, setHeading] = useState("");
 
@@ -21,9 +23,22 @@ export const TodoPage = (props) => {
     const [editData, setEditData] = useState({});
 
     useEffect( () => {
-        tds.loadTodos(props);
-        setHeading(props.pageHeading);
-    }, [props.topic, auth.loginValid]);
+        if (!initialRender && props.triggerReload !== undefined) {
+            tds.loadTodos(props);
+            setHeading(props.pageHeading);
+            props.setReloading(false);
+        } else {
+            tds.loadTodos(props);
+            setHeading(props.pageHeading);
+        }
+    }, [props.topic, auth.loginValid, props.triggerReload]);
+    useEffect(() => {
+        console.log("TodoView - useEffect - reloading: ", props.reloading);
+    }, [props.reloading])
+
+    useEffect(() => {
+        setInitialRender(false)
+    }, [])
 
     // conditional rendering
     if (tds.initialLoading) {
@@ -73,6 +88,7 @@ export const TodoPage = (props) => {
                                     setShowEdit={setShowEdit}
                                     setEditDate={setEditData}
                                     disableEdit={props.disableEdit}
+                                    setTriggerCountReload={props.setTriggerCountReload}
                                 />
                             );
                         })}
@@ -95,6 +111,7 @@ export const TodoPage = (props) => {
                                         disableEdit={props.disableEdit}
                                         reloadTodos={tds.reloadTodos}
                                         reloading={tds.reloading}
+                                        setTriggerCountReload={props.setTriggerCountReload}
                                     />
                             );
                         })}
@@ -123,23 +140,40 @@ export const TodoPage = (props) => {
     );
 };
 
-TodoPage.defaultProps = {
+TodoView.defaultProps = {
     showInfo: false,
     selectedTopic: null,
     topic: null,
     pageHeading: "",
     loading: false,
     disableEdit: false,
+
+    reloading: false,
+
+    deletedFilter: false,
 };
 
-TodoPage.propType = {
+TodoView.propType = {
+    // view options
     scrollable: PropTypes.bool.isRequired,
     showFab: PropTypes.bool.isRequired,
     showInfo: PropTypes.bool,
     disableEdit: PropTypes.bool,
     pageHeading: PropTypes.string,
+
+    // reload from parent
+    triggerReload: PropTypes.bool,
+    reloading: PropTypes.bool,
+    setReloading: PropTypes.func,
+
+    triggerCountReload: PropTypes.bool,
+    setTriggerCountReload: PropTypes.func,
+
+    // filters
     bookmarkFilter: PropTypes.bool,
     deletedFilter: PropTypes.bool,
+    doneFilter: PropTypes.bool,
+    isDone: PropTypes.bool,
     topic: PropTypes.object,
     tagFilter: PropTypes.bool,
     dateFrom: PropTypes.string,

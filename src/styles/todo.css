@@ -13,10 +13,7 @@ html, body, #app, #app>div {
     height: 100%
 }
 *{
-    -ms-overflow-style: none;
-}
-::-webkit-scrollbar {
-    display: none;
+    -ms-overflow-style: none !important;
 }
 
 /*loading*/
@@ -61,7 +58,9 @@ html, body, #app, #app>div {
     margin-top: 10px;
     padding-left: 2rem;
     padding-right: 2rem;
-    overflow-x: scroll;
+    scrollbar-width: none;
+    overflow: scroll;
+
     list-style: none;
 }
 .todo-container {
@@ -138,6 +137,7 @@ html, body, #app, #app>div {
     height: 94vh;
     /*height: 100%;*/
     overflow: scroll;
+    scrollbar-width: none;
     margin: 0 auto;
 }
 .todoAllSize{

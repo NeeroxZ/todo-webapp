@@ -1,3 +1,9 @@
+.responsiveGridContainer {
+    border-right: none;
+    border-bottom: none;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
 .topicStyle {
     color: #fdfdfdce;
 }
@@ -9,9 +15,11 @@
 }
 
 
-.dashboardItem{
+.dashboardItem {
     color: white;
     overflow: scroll;
+    scrollbar-width: none;
+
     text-align: center;
     font-size: 2em;
     border-radius: 15px;

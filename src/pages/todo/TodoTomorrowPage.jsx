@@ -1,4 +1,4 @@
-import {TodoPage} from "./TodoPage";
+import {TodoView} from "../../components/TodoView";
 
 export const TodoTomorrowPage = () => {
     document.title = "Tomorrow";
@@ -24,7 +24,7 @@ export const TodoTomorrowPage = () => {
 
     return (
         <>
-            <TodoPage
+            <TodoView
                 scrollable={true}
                 showFab={true}
                 showInfo={true}

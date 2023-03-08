@@ -1,4 +1,4 @@
-import {TodoPage} from "./TodoPage";
+import {TodoView} from "../../components/TodoView";
 import {useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {useAuth} from "../../stores/AuthStore";
@@ -61,7 +61,7 @@ export const TodoTopicPage = () => {
     return (
         <>
             {foundTopic && (
-                <TodoPage
+                <TodoView
                     scrollable={true}
                     showFab={true}
                     showInfo={true}
@@ -80,7 +80,7 @@ export const TodoTopicPage = () => {
     );
 };
 
-TodoPage.propType = {
+TodoView.propType = {
     bookmarkFilter: PropTypes.bool,
     deletedFilter: PropTypes.bool,
     topicFilter: PropTypes.bool,

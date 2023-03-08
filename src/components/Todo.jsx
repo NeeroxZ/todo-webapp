@@ -33,13 +33,12 @@ const Todo = (props) => {
         setTitle(props.data.title);
         setDone(props.data.done);
         setSaved(props.data.saved);
-        console.log(props.data.saved);
         setComment(props.data.comment);
         setTopic(props.data.topic)
 
         // check if element is due
         let resDate = new Date(props.data.due_date);
-        resDate.setHours(resDate.getHours() - 1);
+        resDate.setHours(resDate.getHours());
         setDate(resDate);
         if (checkIfDue(resDate)) {
             setDue(true);
@@ -59,6 +58,7 @@ const Todo = (props) => {
             .catch((error) => {
                 alert("could not sync with database: " + error.toString())
             })
+        props.setTriggerCountReload(true);
     };
 
     const updateTodo = async (data) => {

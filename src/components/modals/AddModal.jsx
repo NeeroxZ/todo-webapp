@@ -24,6 +24,8 @@ import {useTopics} from "../../stores/TopicStore";
 import {useGlobalStore} from "../../stores/GlobalStore";
 import {useUserStore} from "../../stores/UserStore";
 import {TopicModal} from "./TopicModal";
+import PropTypes from 'prop-types';
+
 
 export const AddModal = (props) => {
     const user = useUserStore();
@@ -32,6 +34,8 @@ export const AddModal = (props) => {
     const {mobileView} = useGlobalStore();
 
     const [showAddTopic, setShowAddTopic] = useState(false);
+
+    const [initialRender, setInitialRender] = useState(true);
 
     const [title, setTitle] = useState("");
     const [titleError, setTitleError] = useState(false);
@@ -43,7 +47,6 @@ export const AddModal = (props) => {
     const [topicError, setTopicError] = useState(false);
 
     const [desc, setDesc] = useState("");
-    const [descError, setDescError] = useState(false);
 
     const [date, setDate] = useState(dayjs(new Date()));
     const [dateError, setDateError] = useState(false);
@@ -54,7 +57,32 @@ export const AddModal = (props) => {
         if (props.topic !== null) {
             setTopic(props.selectedTopic);
         }
+        setInitialRender(false);
     }, []);
+
+    useEffect(() => {
+        if (!props.show) {
+            setTitle("");
+            setTitleError(false);
+            setBookmark(false);
+            setTopic(null);
+            setTopicInput("");
+            setTopicError(false);
+            setDesc("");
+            setDate(dayjs(new Date()));
+            setDateError(false);
+        }
+    }, [props.show]);
+
+
+    useEffect(() => {
+        console.log("AddModal - useEffect - reloadingExternal: ", props.reloadingExternal)
+        if (props.reloadingExternal !== undefined && !initialRender) {
+            if (!props.reloadingExternal) {
+                props.setShow(false);
+            }
+        }
+    }, [props.reloadingExternal])
 
     // Todo (Marvin): Error handling again
     const uploadTodo = async () => {
@@ -72,14 +100,20 @@ export const AddModal = (props) => {
             }
 
             await pb.collection('todo').create(data);
-            if (props.reloadOnAdd) {
+            if (props.reloadOnAdd && props.triggerExternal === undefined) {
                 await props.reloadTodos();
+            } else if (props.reloadOnAdd && props.triggerExternal !== undefined) {
+                props.setTriggerExternal(true);
             }
-
-            props.setShow(false);
         }
     };
 
+    const handleUpload = async () => {
+        await uploadTodo();
+        if (props.triggerExternal === undefined) {
+            props.setShow(false);
+        }
+    }
 
     const checkInputs = () => {
         let failed = false;
@@ -97,8 +131,6 @@ export const AddModal = (props) => {
         }
         return !failed;
     };
-
-
 
     const handleBookmarkChange = (event) => {
         setBookmark(event.target.checked)
@@ -122,9 +154,18 @@ export const AddModal = (props) => {
                 <Box className={`modalBox ${mobileView ? "mobile" : ""}`}>
                     <div className="contentWrapper">
                         {props.reloadOnAdd &&
-                            <Backdrop open={props.reloading}>
-                                <CircularProgress/>
-                            </Backdrop>
+                            (props.triggerExternal
+                                    ? (
+                                        <Backdrop open={props.reloadingExternal}>
+                                            <CircularProgress/>
+                                        </Backdrop>
+                                    )
+                                    : (
+                                        <Backdrop open={props.reloading}>
+                                            <CircularProgress/>
+                                        </Backdrop>
+                                    )
+                            )
                         }
                         <div className={`modalHeading ${!mobileView ? "" : "mobile"}`}>
                             <div>Add Todo</div>
@@ -223,7 +264,6 @@ export const AddModal = (props) => {
                             <Grid item xs={12}>
                                 <TextField
                                     id="outlined-multiline-static"
-                                    error={descError}
                                     value={desc}
                                     onChange={(event) => {
                                         setDesc(event.target.value);
@@ -250,9 +290,8 @@ export const AddModal = (props) => {
                                         className={`btn ${!mobileView ? "desktopBtn" : ""}`}
                                         onClick={handleExit}>Exit</Button>
                                 <Button variant="contained" className={`btn save ${!mobileView ? "desktopBtn" : ""}`}
-                                        onClick={() => {
-                                            uploadTodo();
-                                        }}>Save</Button>
+                                        onClick={handleUpload}
+                                >Save</Button>
                             </div>
                         </div>
                     </div>
@@ -265,5 +304,16 @@ export const AddModal = (props) => {
 
 AddModal.defaultProps = {
     selectedTopic: null,
+    reloading: false,
+}
+
+AddModal.propTypes = {
+    show: PropTypes.bool.isRequired,
+    setShow: PropTypes.func.isRequired,
+
+    triggerExternal: PropTypes.bool,
+    setTriggerExternal: PropTypes.func,
+
+    reloadingExternal: PropTypes.bool
 }
 

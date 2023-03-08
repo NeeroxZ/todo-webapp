@@ -14,7 +14,7 @@ import {TopicProvider} from "./stores/TopicStore";
 import {UserProvider} from "./stores/UserStore";
 
 // components
-import {NavBar} from "./components/Navbar";
+import {NavBar} from "./components/navbar/Navbar";
 
 import {AppRoutes} from "./AppRoutes";
 

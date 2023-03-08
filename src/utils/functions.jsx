@@ -42,6 +42,7 @@ export function convertDateTime(datetime) {
 
 export function checkIfDue(datetime) {
     const dtNow = new Date();
+    dtNow.setUTCHours(dtNow.getUTCHours() + 1);
     return datetime < dtNow;
 }
 

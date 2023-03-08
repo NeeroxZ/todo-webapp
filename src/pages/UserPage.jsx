@@ -41,6 +41,7 @@ export const UserPage = () => {
 
     return (
         <>
+            <div className="containerSpacer" />
             <div className="containerUser">
                 <div className="rowLogin">
                     <div className={`box ${mobileView ? "mobile" : ""}`}>

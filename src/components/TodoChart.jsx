@@ -12,7 +12,7 @@ const tasks = [
 ];
 
 const opts = {
-    title: "ToDo´s status",
+    // title: "ToDo´s status",
     // titleTextStyle: {
     //     color: '#fdfdfdce'
     // }
@@ -70,13 +70,20 @@ export function TodoChart() {
     }, [loginValid])
 
     return (
-        <Chart
-            chartType="PieChart"
-            data={data}
-            options={opts}
-            width="100%"
-            height="90%"
+        <div style={{
+            color: "white",
+            fontSize: "1rem",
+            // width: "100%",
+            // height: "94%",
+        }}>
+            <Chart
+                chartType="PieChart"
+                data={data}
+                options={opts}
+                width="100%"
+                height="100%"
 
-        />
+            />
+        </div>
     );
 }

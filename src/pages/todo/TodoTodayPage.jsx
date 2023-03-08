@@ -1,4 +1,4 @@
-import {TodoPage} from "./TodoPage";
+import {TodoView} from "../../components/TodoView";
 
 export const TodoTodayPage = () => {
     const getTimeFrom = () => {
@@ -21,7 +21,7 @@ export const TodoTodayPage = () => {
 
     return (
         <>
-            <TodoPage
+            <TodoView
                 scrollable={true}
                 showFab={true}
                 showInfo={true}

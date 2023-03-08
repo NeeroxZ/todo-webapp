@@ -16,6 +16,10 @@ export function getParams(filters, userId) {
         query += ` && topic="${filters.topic.id}"`;
     }
 
+    if (filters.doneFilter) {
+            query += ` && done=${filters.isDone}`
+    }
+
     if (filters.tagFilter) {
         let emptyTopics = {topics: []};
         query += ` && tags!=${emptyTopics}`;
@@ -31,6 +35,8 @@ export function getParams(filters, userId) {
         if (filters.dateUntil !== "") {
             let du = convertToPocketbaseDate(filters.dateUntil);
             query += ` && due_date < "${du}"`;
+
+            console.log(convertToPocketbaseDate(filters.dateUntil));
         }
     }
 
@@ -38,6 +44,7 @@ export function getParams(filters, userId) {
 }
 
 function convertToPocketbaseDate(dt) {
+    dt.setUTCHours(dt.getUTCHours() + 1);
     let year = dt.getUTCFullYear();
     let month = (dt.getUTCMonth() +1).toString();
     let date = dt.getUTCDate().toString().slice(-2);

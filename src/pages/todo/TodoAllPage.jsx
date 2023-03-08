@@ -1,10 +1,10 @@
-import {TodoPage} from "./TodoPage";
+import {TodoView} from "../../components/TodoView";
 
 export const TodoAllPage = () => {
 
     return (
         <>
-            <TodoPage
+            <TodoView
                 scrollable={true}
                 showFab={true}
                 showInfo={true}

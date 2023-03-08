@@ -1,18 +1,17 @@
 import {TodoView} from "../../components/TodoView";
 
-export const TodoDuePage = () => {
-    const getTimeUntil = () => {
-        return new Date();
-    };
-
+export const TodoDonePage = () => {
     return (
         <>
             <TodoView
                 scrollable={true}
                 showFab={true}
                 showInfo={true}
-                pageHeading={"Due todos"}
-                dateUntil={getTimeUntil()}
+
+                doneFilter={true}
+                isDone={true}
+
+                pageHeading={"Done todos"}
             />
         </>
     );

@@ -15,12 +15,18 @@ export const AddTodo = (props) => {
         <>
 
             <AddModal
+                // modal props
                 show={isOpen}
                 setShow={setIsOpen}
                 reloadOnAdd={props.reloadOnAdd}
                 reloadTodos={props.reloadTodos}
                 reloading={props.reloading}
                 selectedTopic={props.selectedTopic}
+
+                // external reload
+                reloadingExternal={props.externalReload}
+                triggerExternal={props.triggerExternal}
+                setTriggerExternal={props.setTriggerExternal}
             />
             {props.showPointer
                 ? <div className="arrow">
@@ -53,5 +59,9 @@ AddTodo.propType = {
     reloadOnAdd: PropTypes.bool,
     reloadTodos: PropTypes.func,
     reloading: PropTypes.bool,
-    showPointer: PropTypes.bool
+    showPointer: PropTypes.bool,
+
+    externalReload: PropTypes.bool,
+    triggerExternal: PropTypes.bool,
+    setTriggerExternal: PropTypes.func,
 }

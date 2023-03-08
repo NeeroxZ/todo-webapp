@@ -1,6 +1,11 @@
 .containerUser{
     margin-top: 2rem;
 }
+
+.containerSpacer {
+    height: 2rem;
+}
+
 .box{
     width: 500px;
     padding: 10px;
