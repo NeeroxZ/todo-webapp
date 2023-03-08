@@ -8,7 +8,7 @@ import "react-grid-layout/css/styles.css";
 import "react-resizable/css/styles.css";
 import {AddTodo} from "../components/AddTodo";
 import '../styles/dashboard.css'
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {Charty} from "../components/Charty";
 
 
