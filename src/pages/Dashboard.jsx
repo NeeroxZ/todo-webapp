@@ -6,11 +6,10 @@ import {AllTodosCount} from "../components/dashboard/AllTodosCount";
 import {TodoView} from "../components/TodoView";
 import "react-grid-layout/css/styles.css";
 import "react-resizable/css/styles.css";
-import {TodoChart} from "../components/TodoChart";
 import {AddTodo} from "../components/AddTodo";
 import '../styles/dashboard.css'
-import {TodoDuePage} from "./todo/TodoDuePage";
-import React, {useEffect, useState} from "react";
+import React from "react";
+import {Charty} from "../components/Charty";
 
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
@@ -157,7 +156,7 @@ export const Dashboard = () => {
                 </div>
 
                 <div className="dashboardItem todoAll" key="empty8">
-                    <TodoChart/>
+                    <Charty/>
                 </div>
             </ResponsiveGridLayout>
             <AddTodo
