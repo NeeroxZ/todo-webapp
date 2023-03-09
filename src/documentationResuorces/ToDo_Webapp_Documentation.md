@@ -48,17 +48,21 @@ Pocketbase functions as the whole backend of our web application in that it supp
 
 ### Tech Stack
 - React JS
+- HTML
+- CSS
 - Pocketbase / Go
-- 
+- Material UI components
 
 # 1.3. Division of responsibilities
 
-| Login Page | Nick Obereiter |
+| Contribution | Team Member |
 | --- | --- |
+| Login Page | Nick Obereiter |
 | Registration Page | Nick Obereiter |
 | Reset Password Page | Nick Obereiter |
 | Home/Dashboard | Martin Hofsäß / Nick Obereiter |
 | Dashboard sub functionality | Martin Hofsäß / Nick Obereiter |
+| About Page | Nick Obereiter |
 | Create ToDo | Marvin Samouelian |
 | ToDo overview Page | Marvin Samouelian |
 | ToDo tomorrow Page | Marvin Samouelian |
@@ -67,10 +71,7 @@ Pocketbase functions as the whole backend of our web application in that it supp
 | Login/Registration Logic | Marvin Samouelian |
 | Database | Marvin Samouelian |
 | Backend | Marvin Samouelian |
-|
-|
-|
-| Project Documentation | Martin Hofsäß |
+| Project Documentation | Martin Hofsäß / Nick Obereiter / Marvin Samouelian |
 
 # 2. Implementation and showcase
 
@@ -79,12 +80,12 @@ Pocketbase functions as the whole backend of our web application in that it supp
 - Functioning Server and Database via Pocketbase.
 - Working Account-Management via Pocketbase.
 - Fully reactive design.
+- Create, edit and use different topics for your ToDo's
 - Create, edit and delete ToDo's
-- 
 
 # 2.2. A simple showcase of the ToDo-Webapp
 
-The user arrives at the login screen and enters his login credentials.
+The user arrives at the login screen and enters his login credentials. He also may create a new account or recover his password if needed.
 
 ![Sign_In.png](Sign_In.png)
 
@@ -92,13 +93,19 @@ After successfully authenticating he will be greeted on his home-site/dashboard 
 
 ![Dashboard.png](Dashboard.png)
 
-The user decides to create a new ToDo. For this he can use the button in the bottom right of every page.
+The user may now create new ToDo's. For this he can use the button in the bottom right of every page.
 
 ![Create_ToDo.png](Create_ToDo.png)
 
 The Navigation Bar at the top of the screen allows the user to navigate between the different sites.
 
 ![Navbar.png](Navbar.png)
+
+The pages for ToDoToday and ToDoTomorow can give you a more in depth overview of corresponding ToDo's.
+
+![ToDoToday.png](ToDoToday.png)
+
+![ToDoTomorow.png](ToDoTomorow.png)
 
 # 2.3. Routing structure
 
