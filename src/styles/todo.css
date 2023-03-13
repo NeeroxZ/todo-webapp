@@ -41,8 +41,7 @@ html, body, #app, #app>div {
 }
 
 .tdPgHeading {
-    min-width: 410px;
-    /*margin: 0 0 20px 20px;*/
+    min-width: 380px;
     padding: 0 20px 0 20px;
     color: #04AA6D;
     overflow: hidden;

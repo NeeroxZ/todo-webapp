@@ -3,13 +3,13 @@
     right: 20px;
     bottom:0;
 }
-@media only screen and (max-width: 900px) {
-    .fixedRightContainer{
-        position: fixed;
-        right: -10px;
-        bottom:-12px;
-    }
-}
+/*@media only screen and (max-width: 900px) {*/
+/*    .fixedRightContainer{*/
+/*        position: fixed;*/
+/*        right: -10px;*/
+/*        bottom:-12px;*/
+/*    }*/
+/*}*/
 
 .modalContainer {
     width: 100%;
