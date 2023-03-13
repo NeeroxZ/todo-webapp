@@ -12,6 +12,7 @@ export const TodoDeletedPage = () => {
                 showInfo={true}
                 deletedFilter={true}
                 pageHeading={"Deleted todos"}
+                revertDeleted
             />
         </>
     );

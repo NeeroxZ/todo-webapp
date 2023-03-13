@@ -129,6 +129,7 @@ export const TodoView = (props) => {
                     todoData={editData}
                     show={showEdit}
                     setShow={setShowEdit}
+                    revertDeleted={props.revertDeleted}
                     reloading={tds.reloading}
                     reloadTodos={tds.reloadTodos}
                 />
@@ -144,6 +145,7 @@ TodoView.defaultProps = {
     pageHeading: "",
     loading: false,
     disableEdit: false,
+    revertDelete: false,
 
     reloading: false,
 
@@ -157,6 +159,7 @@ TodoView.propType = {
     showInfo: PropTypes.bool,
     disableEdit: PropTypes.bool,
     pageHeading: PropTypes.string,
+    revertDelete: PropTypes.bool,
 
     // reload from parent
     triggerReload: PropTypes.bool,

@@ -64,18 +64,27 @@ export const Charty = (props) => {
             tmpDone["max"] = tmpTds.length;
             tmpDone["value"] = tmpTds.filter(e => e.done).length;
             tmpDone["percentage"] = ((tmpDone["value"] / tmpDone["max"]) * 100).toFixed(0);
+            if (tmpDone["percentage"] === "NaN") {
+                tmpDone["percentage"] = "100"
+            }
             setDoneData(tmpDone);
 
             // check saved
             let tmpSaved = {"value": 0, "max": tmpDone["max"], "percentage": "0"};
             tmpSaved["value"] = tmpTds.filter(e => e.saved).length;
             tmpSaved["percentage"] = ((tmpSaved["value"] / tmpSaved["max"]) * 100).toFixed(0);
+            if (tmpSaved["percentage"] === "NaN") {
+                tmpSaved["percentage"] = "100"
+            }
             setSavedData(tmpSaved);
 
             // check due
             let tmpDue = {"value": 0, "max": tmpDone["max"], "percentage": "0"};
             tmpDue["value"] = tmpTds.filter(e => (new Date(e.due_date) < currentDate)).length;
             tmpDue["percentage"] = ((tmpDue["value"] / tmpDue["max"]) * 100).toFixed(0);
+            if (tmpDue["percentage"] === "NaN") {
+                tmpDue["percentage"] = "100"
+            }
             setDueData(tmpDue);
 
         } catch(e) {

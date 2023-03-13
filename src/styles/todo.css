@@ -150,7 +150,7 @@ html, body, #app, #app>div {
 
 .noTodo{
     width: 50%;
-    height: 90vh;
+    height: 100%;
     margin: 0 auto;
 }
 .noTodoContainer .noTodo p{

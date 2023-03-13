@@ -19,6 +19,7 @@ import Tooltip from "@mui/material/Tooltip";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import RestoreIcon from '@mui/icons-material/Restore';
 import {DatePicker} from "./DatePicker";
 import {useUserStore} from "../../stores/UserStore";
 import {useGlobalStore} from "../../stores/GlobalStore";
@@ -135,6 +136,15 @@ export const EditModal = (props) => {
         props.setShow(false);
     };
 
+    const handleRevert = async () => {
+        const data = {
+            "deleted": false,
+        }
+        await pb.collection('todo').update(props.todoData.id, data);
+        await props.reloadTodos();
+        props.setShow(false);
+    }
+
     const checkInputs = () => {
         let failed = false;
         if (title === "") {
@@ -173,9 +183,9 @@ export const EditModal = (props) => {
                 <Box className={`modalBox ${mobileView ? "mobile" : ""}`}>
                     <div className="contentWrapper">
                         {/*{props.reloadOnAdd &&*/}
-                            <Backdrop open={props.reloading}>
-                                <CircularProgress/>
-                            </Backdrop>
+                        <Backdrop open={props.reloading}>
+                            <CircularProgress/>
+                        </Backdrop>
                         {/*}*/}
                         <div className={`modalHeading ${!mobileView ? "" : "mobile"}`}>
                             {(title !== "")
@@ -300,21 +310,34 @@ export const EditModal = (props) => {
                     </div>
                     <div className="bottomBtnGroup">
                         <div className="bottomBtnGroupContainer leftGroup">
-                            <Button variant="contained" color="error"
-                                    // startIcon={<DeleteIcon />}
-                                    className={`btn delete ${!mobileView?"desktopBtn":""}`}
-                                    onClick={handleDelete}
-                            ><DeleteIcon /></Button>
+                            {props.revertDeleted
+                                ? (
+                                    <Button variant="contained" color="warning"
+                                            className={`btn delete ${!mobileView ? "desktopBtn" : ""}`}
+                                            onClick={handleRevert}
+                                    >
+                                        <RestoreIcon/>
+                                    </Button>
+                                )
+                                : (
+                                    <Button variant="contained" color="error"
+                                            className={`btn delete ${!mobileView ? "desktopBtn" : ""}`}
+                                            onClick={handleDelete}
+                                    >
+                                        <DeleteIcon/>
+                                    </Button>
+                                )
+                            }
                             <div className="bottomBtnGroupR">
                                 <Button variant="outlined" color="error"
-                                        className={`btn ${!mobileView?"desktopBtn":""}`}
+                                        className={`btn ${!mobileView ? "desktopBtn" : ""}`}
                                         onClick={handleExit}>Exit</Button>
                                 <Button variant="contained"
-                                        className={`btn save ${!mobileView?"desktopBtn":""}`}
+                                        className={`btn save ${!mobileView ? "desktopBtn" : ""}`}
                                         disabled={disableBtn}
                                         onClick={() => {
-                                    updateTodo();
-                                }}>Save</Button>
+                                            updateTodo();
+                                        }}>Save</Button>
                             </div>
                         </div>
                     </div>
@@ -325,9 +348,14 @@ export const EditModal = (props) => {
     );
 };
 
+Edit.defaultProps = {
+    revertDeleted: false,
+}
+
 Edit.propTypes = {
     show: PropTypes.bool.isRequired,
     setShow: PropTypes.func.isRequired,
+    revertDeleted: PropTypes.bool,
     todoId: PropTypes.number.isRequired,
     todoData: PropTypes.object.isRequired,
     reloading: PropTypes.func.isRequired,
