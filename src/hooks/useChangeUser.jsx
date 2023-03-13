@@ -60,8 +60,6 @@ export const useChangeUser = () => {
         }
     };
 
-    console.log("IN USECHANGE: ", errorChangePassword);
-
     const changeUsername = async (new_un) => {
         setIsLoadingChangeUsername(true);
         setErrorChangeUsername(false);
@@ -72,10 +70,8 @@ export const useChangeUser = () => {
         let data = {"username": new_un}
         try {
             await pb.collection('users').update(auth.getUserId(), data);
-            console.log("afer")
         } catch (e) {
             console.log("error changing username: ", e);
-            console.log("failed")
             setErrorChangeUsername(e);
         } finally {
             setIsLoadingChangeUsername(false);

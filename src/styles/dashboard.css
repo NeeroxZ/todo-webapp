@@ -8,6 +8,12 @@
     color: #fdfdfdce;
 }
 
+.todoCountContainer {
+    display: flex;
+    justify-content: space-around;
+    padding-left: 10px;
+    padding-right: 10px;
+}
 
 
 .dateInput{
@@ -120,7 +126,10 @@
 .todoHeaderDashboard{
     margin-top: 0.5rem;
     color: #33a382;
+}
 
+.todoHeaderDashboard.mobile {
+    font-size: 2rem;
 }
 
 rect{
@@ -168,7 +177,7 @@ empty{
     border-bottom: 6px solid #090b1b;
 }
 .username{
-    margin-top: 15%;
+    margin-top: 1rem;
     font-size: 1.5rem;
 }
 .allNmb{

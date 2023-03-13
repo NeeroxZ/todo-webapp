@@ -12,7 +12,7 @@ export const User = () => {
     return (
         <div className="item-a dash-box">
             <a href="#">
-                <AccountCircleIcon/>
+                <AccountCircleIcon fontSize="large"/>
             </a>
             <div className="username">
                 {user.username}

@@ -28,8 +28,14 @@ export const AuthProvider = ({children}) => {
             try {
                 pb.authStore.loadFromCookie(foundCookie, COOKIE_KEY);
                 pb.authStore.isValid && await pb.collection('users').authRefresh();
-                setLoginValid(true);
-                setWaiting(false);
+                if (!pb.authStore.isValid) {
+                    setLoginValid(false);
+                    setWaiting(false);
+                    await logout();
+                } else {
+                    setLoginValid(true);
+                    setWaiting(false);
+                }
             } catch (e) {
                 await logout()
             }

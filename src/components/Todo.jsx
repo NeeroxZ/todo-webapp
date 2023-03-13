@@ -2,12 +2,14 @@ import {Checkbox, Grid, Typography} from "@mui/material";
 import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
 import RadioButtonCheckedIcon from '@mui/icons-material/RadioButtonChecked';
 import {Bookmark, BookmarkBorder} from "@mui/icons-material";
-import {memo, useEffect, useState} from "react";
+import {memo, useEffect, useRef, useState} from "react";
 import {checkIfDue, zeroPad} from "../utils/functions";
 import pb from "../utils/pocketbase";
 import '../styles/todo.css'
 import Grow from '@mui/material/Grow';
 import {useAuth} from "../stores/AuthStore";
+import {useGlobalStore} from "../stores/GlobalStore";
+import {debounce} from "lodash";
 
 const Todo = (props) => {
     const [done, setDone] = useState(false);
@@ -20,8 +22,13 @@ const Todo = (props) => {
     const [repetitive, setRepetitive] = useState("");
 
     const [test, setTest] = useState(false);
+    const [isDebouncing, setIsDebouncing] = useState(false);
+    const [doneSave, setDoneSave] = useState(false);
 
     const {getUserId} = useAuth();
+
+
+    const {mobileView} = useGlobalStore();
 
 
 
@@ -47,18 +54,51 @@ const Todo = (props) => {
         }
     }, [props.data])
 
+    // // debounce done
+    // const debounceSaved = debounce((checked) => {
+    //         console.log("IN DEBOUNCE")
+    //         console.log("EVENT TARGET: ", done)
+    //         console.log("DONE SAVED: ", doneSave)
+    //         if (done !== doneSave) {
+    //             console.log("changing value")
+    //             let data = {
+    //                 done: checked,
+    //             };
+    //             updateTodo(data)
+    //                 .catch((error) => {
+    //                     alert("could not sync with database: " + error.toString())
+    //                 })
+    //         } else {
+    //             console.log("NOT changing value")
+    //         }
+    //
+    //         setIsDebouncing(false);
+    //     }, 1000);
+
     const handleChange = (event) => {
         event.stopPropagation();
         setDone(event.target.checked);
 
+        // if (isDebouncing) {
+        //     console.log("DEBOUNCE Cancel")
+        //     debounceSaved.flush();
+        // } else {
+        //     console.log("DEBOUNCE Start")
+        //     setIsDebouncing(true);
+        //     setDoneSave(!event.target.checked);
+        //     debounceSaved(event.target.checked);
+        // }
+
         let data = {
             done: event.target.checked,
-        }
+        };
         updateTodo(data)
             .catch((error) => {
                 alert("could not sync with database: " + error.toString())
             })
-        props.setTriggerCountReload(true);
+        if (props.setTriggerCountReload !== null && props.setTriggerCountReload !== undefined) {
+            props.setTriggerCountReload(true);
+        }
     };
 
     const updateTodo = async (data) => {
@@ -76,7 +116,10 @@ const Todo = (props) => {
             .catch((error) => {
                 alert("could not sync with database: " + error.toString())
             })
-    };
+        if (props.setTriggerCountReload !== null && props.setTriggerCountReload !== undefined) {
+            props.setTriggerCountReload(true);
+        }
+    }
 
     const handleOpenModal = (e) => {
         if (!props.disableEdit) {
@@ -105,7 +148,6 @@ const Todo = (props) => {
                  onClick={(e) => handleOpenModal(e)}
             >
                 {!props.reloading &&
-
                     <Grid container direction="row"
                           justifyContent="space-between"
                           alignItems="center"
@@ -122,7 +164,6 @@ const Todo = (props) => {
                                 onClick={handleChange}
                             />
                             <Typography variant="h5" color={"textWhite"} className={`todo-title ${done ? "done" : ""}`}>
-                                {/*{props.data.title}*/}
                                 {title}
                             </Typography>
                         </Grid>

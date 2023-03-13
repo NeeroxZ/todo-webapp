@@ -16,8 +16,6 @@ export const ChangePassword = (props) => {
     // const {changePassword, isLoadingChangePassword, errorChangePassword} = useChangeUser();
     const uc = useChangeUser();
 
-    console.log(uc.isLoadingChangePassword);
-
     const [newPw, setNewPw] = useState("");
     const [newConfPw, setNewConfPw] = useState("");
     const [oldPw, setOldPw] = useState("");
@@ -50,7 +48,6 @@ export const ChangePassword = (props) => {
                     props.showStatusMessage("error", "Error changing account password.")
                 }
             } catch (e) {
-                console.log("BIN IN CATCH")
             }
         }
     };

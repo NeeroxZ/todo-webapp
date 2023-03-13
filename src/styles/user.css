@@ -128,6 +128,11 @@ button:focus{
 
 }
 
+.placeholders.invalid {
+    border:2px solid #d34343;
+    box-shadow: 0 0 4px #d34343;
+}
+
 .modalText{
     background-color: #FFFFFF;
     color: blue;

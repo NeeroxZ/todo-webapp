@@ -9,14 +9,16 @@ import "react-resizable/css/styles.css";
 import {AddTodo} from "../components/AddTodo";
 import '../styles/dashboard.css'
 import React, {useEffect, useState} from "react";
-import {Charty} from "../components/Charty";
+import {Charty} from "../components/dashboard/Charty";
+import {useGlobalStore} from "../stores/GlobalStore";
 
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
 const layout = [
         { i: "empty",            x:0, y:0, w:1, h:1 , isResizable: false, isDraggable: false},
-        { i: "empty2",           x:1, y:0, w:1, h:1 , isResizable: false, isDraggable: false},
+        { i: "empty2",           x:0, y:0, w:1, h:1 , isResizable: false, isDraggable: false},
+        { i: "empty3",           x:1, y:0, w:0.5, h:1 , isResizable: false, isDraggable: false},
         { i: "empty4",           x:3, y:0, w:1, h:4, isResizable: false, isDraggable: false },
 
         { i: "empty5",           x:0, y:1, w:1, h:2, isResizable: false, isDraggable: false  },
@@ -37,20 +39,24 @@ export const Dashboard = () => {
     const [allReloading, setAllReloading] = useState(false);
 
     const [reloadingCount, setReloadingCount] = useState(false);
+    const [reloadingCharts, setReloadingCharts] = useState(false);
     const [reloadingList1, setReloadingList1] = useState(false);
     const [reloadingList2, setReloadingList2] = useState(false);
+
+    const {mobileView} = useGlobalStore();
 
     // reloading
     useEffect(() => {
 
         if (!initialRender) {
-            if (allReloading && (!reloadingCount && !reloadingList1 && !reloadingList2)) {
+            if (allReloading && (!reloadingCount && !reloadingCharts && !reloadingList1 && !reloadingList2)) {
                 setAllReloading(false);
             }
         }
-    }, [reloadingCount, reloadingList1, reloadingList2])
+    }, [reloadingCount, reloadingCharts, reloadingList1, reloadingList2])
     useEffect(() => {
         if (!initialRender && triggerReload) {
+            setTriggerCountReload(true);
             setTriggerCountReload(true);
             setReloadingCount(true);
             setReloadingList1(true);
@@ -108,6 +114,13 @@ export const Dashboard = () => {
                         setReloading={setReloadingCount}
                     />
                 </div>
+                {/*<div className="dashboardItemView" key="empty3">*/}
+                {/*    <AllTodosCount*/}
+                {/*        triggerReload={triggerCountReload}*/}
+                {/*        reloading={reloadingCount}*/}
+                {/*        setReloading={setReloadingCount}*/}
+                {/*    />*/}
+                {/*</div>*/}
 
                 <div className="dashboardItem" key="empty4">
                     <Category/>
@@ -115,7 +128,7 @@ export const Dashboard = () => {
 
 
                 <div className="dashboardItem" key="empty5">
-                    <div className="todoHeaderDashboard">
+                    <div className={`todoHeaderDashboard ${mobileView?"mobile":""}`}>
                         Todo's
                     </div>
                     <TodoView
@@ -135,7 +148,7 @@ export const Dashboard = () => {
                 </div>
 
                 <div className="dashboardItem" key="empty7">
-                    <div className="todoHeaderDashboard">
+                    <div className={`todoHeaderDashboard ${mobileView?"mobile":""}`}>
                         Due's
                     </div>
                     <TodoView
@@ -156,7 +169,11 @@ export const Dashboard = () => {
                 </div>
 
                 <div className="dashboardItem todoAll" key="empty8">
-                    <Charty/>
+                    <Charty
+                        triggerReload={triggerCountReload}
+                        reloading={reloadingCharts}
+                        setReloading={setReloadingCharts}
+                    />
                 </div>
             </ResponsiveGridLayout>
             <AddTodo

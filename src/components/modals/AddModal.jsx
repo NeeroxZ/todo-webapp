@@ -76,7 +76,6 @@ export const AddModal = (props) => {
 
 
     useEffect(() => {
-        console.log("AddModal - useEffect - reloadingExternal: ", props.reloadingExternal)
         if (props.reloadingExternal !== undefined && !initialRender) {
             if (!props.reloadingExternal) {
                 props.setShow(false);

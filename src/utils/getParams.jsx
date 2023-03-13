@@ -35,15 +35,13 @@ export function getParams(filters, userId) {
         if (filters.dateUntil !== "") {
             let du = convertToPocketbaseDate(filters.dateUntil);
             query += ` && due_date < "${du}"`;
-
-            console.log(convertToPocketbaseDate(filters.dateUntil));
         }
     }
 
     return query;
 }
 
-function convertToPocketbaseDate(dt) {
+export function convertToPocketbaseDate(dt) {
     dt.setUTCHours(dt.getUTCHours() + 1);
     let year = dt.getUTCFullYear();
     let month = (dt.getUTCMonth() +1).toString();

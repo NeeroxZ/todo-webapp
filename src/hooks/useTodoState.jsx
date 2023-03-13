@@ -51,7 +51,6 @@ export function useTodoState(todoFrameProps) {
         setReloadError(null);
         let res = {};
         try {
-            console.log("useTodoState: reload todos")
             let filters = getParams(todoFrameProps, getUserId());
             res = await pb.collection('todo').getList(1, 1000, {
                 filter: filters,
@@ -65,7 +64,6 @@ export function useTodoState(todoFrameProps) {
                 setNoTodos(true);
             }
 
-            console.log("useTodoState: reloaded")
             setTodos(resData);
         } catch (e) {
             setReloadError(e);

@@ -40,12 +40,12 @@ export const Login = () => {
                 <form className="box">
                     <h1 className="form-name">Sign In</h1>
                     <label>
-                        <input className="placeholders" type="text" placeholder="Username"
+                        <input className={`placeholders ${errorSnackbar?"invalid":""}`} type="text" placeholder="Username"
                                onChange={e => setUsername(e.target.value)}
                                disabled={auth.waiting}/>
                     </label>
                     <label>
-                        <input className="placeholders" type="password" placeholder="Password"
+                        <input className={`placeholders ${errorSnackbar?"invalid":""}`} type="password" placeholder="Password"
                                onChange={e => setPassword(e.target.value)}
                                disabled={auth.waiting}/>
                     </label>

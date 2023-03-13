@@ -32,9 +32,6 @@ export const TodoView = (props) => {
             setHeading(props.pageHeading);
         }
     }, [props.topic, auth.loginValid, props.triggerReload]);
-    useEffect(() => {
-        console.log("TodoView - useEffect - reloading: ", props.reloading);
-    }, [props.reloading])
 
     useEffect(() => {
         setInitialRender(false)

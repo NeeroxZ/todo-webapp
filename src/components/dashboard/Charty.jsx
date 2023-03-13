@@ -1,38 +1,32 @@
 import {buildStyles, CircularProgressbar} from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
-import {useAuth} from "../stores/AuthStore";
+import {useAuth} from "../../stores/AuthStore";
 import {useEffect, useState} from "react";
-import pb from "../utils/pocketbase";
+import pb from "../../utils/pocketbase";
+import PropTypes from "prop-types";
+import {AllTodosCount} from "./AllTodosCount";
+import {getTodayTime, getTomorrowTime} from "../../utils/time";
 
-const today = 33;
-const done = 69;
-const saved = 5;
-const due = 80;
 
 export const Charty = (props) => {
     const {loginValid, getUserId} = useAuth();
 
-    const [data, setData] = useState([
-        ["Status", "Count"],
-        ["Due", 1],
-        ["Todo", 1],
-        ["Done", 1]
-    ]);
+    let initData = {"value":0, "max":0, "percentage": "0"}
 
-    const [todayData, setTodayData] = useState({"value":0, "max":0})
-    const [doneData, setDoneData] = useState({"value":0, "max":0})
-    const [savedData, setSavedData] = useState({"value":0, "max":0})
-    const [dueData, setDueData] = useState({"value":0, "max":0})
+    const [todayData, setTodayData] = useState(initData)
+    const [doneData, setDoneData] = useState(initData)
+    const [savedData, setSavedData] = useState(initData)
+    const [dueData, setDueData] = useState(initData)
 
 
     const [resError, setResError] = useState(false);
     const [resLoading, setResLoading] = useState(true);
 
     const loadCounts = async () => {
-        setResLoading(false);
+        setResLoading(true);
         setResError(false);
+        props.setReloading(true);
         let res = {};
-        let newData = [["Status", "Count"]];
         try {
             res = await pb.collection('todo').getFullList(1000, {
                 filter: `user_id="${getUserId()}"`,
@@ -41,50 +35,55 @@ export const Charty = (props) => {
 
             // create dates
             let currentDate = new Date();
-            let today = currentDate;
-            let tomorrow = currentDate;
-
-            // modify today
-            today.setUTCHours(0);
-            today.setUTCMinutes(0);
-            today.setUTCSeconds(0);
-            today.setUTCMilliseconds(0);
-
-            // modify tomorrow
-            tomorrow.setUTCDate(tomorrow.getUTCDate() + 1);
-            tomorrow.setUTCHours(0);
-            tomorrow.setUTCMinutes(0);
-            tomorrow.setUTCSeconds(0);
-            tomorrow.setUTCMilliseconds(0);
+            let twoAhead = new Date();
+            let today = getTodayTime();
+            let tomorrow = getTomorrowTime();
 
             // modify twoAhead
-            let twoAhead = tomorrow;
-            twoAhead.setUTCDate(twoAhead.getUTCDate() + 1);
+            twoAhead.setUTCDate(twoAhead.getUTCDate() + 2);
+            twoAhead.setUTCHours(0);
+            twoAhead.setUTCMinutes(0);
+            twoAhead.setUTCSeconds(0);
+            twoAhead.setUTCMilliseconds(0);
 
             // check today
-            let tmpToday = {"value": 0, "max": 0};
-            let tmpTds = []
-            tmpTds = res.filter(e => (((new Date(e.due_date) < tomorrow) && (new Date(e.due_date) > today)) && !e.deleted))
-            tmpToday["max"] = tmpTds.length
-            tmpToday["value"] = tmpTds.filter(e => e.done);
+            let tmpToday = {"value": 0, "max": 0, "percentage": "0"};
+            let tmpTds = [];
+            tmpTds = res.filter(e => (((new Date(e.due_date) < tomorrow) && (new Date(e.due_date) > today)) && !e.deleted));
+            tmpToday["max"] = tmpTds.length;
+            tmpToday["value"] = tmpTds.filter(e => e.done).length;
+            tmpToday["percentage"] = ((tmpToday["value"] / tmpToday["max"]) * 100).toFixed(0);
+            if (tmpToday["percentage"] === "NaN") {
+                tmpToday["percentage"] = "100"
+            }
             setTodayData(tmpToday);
 
-            // check today
-            newData.push(["Due", res.filter((e) => ((new Date(e.due_date)) < currentDate)).length])
-            newData.push(["Due", res.filter((e) => ((new Date(e.due_date)) < currentDate)).length])
+            // check done
+            let tmpDone = {"value": 0, "max": 0, "percentage": "0"};
+            tmpTds = res.filter(e => !e.deleted);
+            tmpDone["max"] = tmpTds.length;
+            tmpDone["value"] = tmpTds.filter(e => e.done).length;
+            tmpDone["percentage"] = ((tmpDone["value"] / tmpDone["max"]) * 100).toFixed(0);
+            setDoneData(tmpDone);
 
+            // check saved
+            let tmpSaved = {"value": 0, "max": tmpDone["max"], "percentage": "0"};
+            tmpSaved["value"] = tmpTds.filter(e => e.saved).length;
+            tmpSaved["percentage"] = ((tmpSaved["value"] / tmpSaved["max"]) * 100).toFixed(0);
+            setSavedData(tmpSaved);
 
-            // todo
-            newData.push(["Todo", res.filter((e) => !e.done).length])
+            // check due
+            let tmpDue = {"value": 0, "max": tmpDone["max"], "percentage": "0"};
+            tmpDue["value"] = tmpTds.filter(e => (new Date(e.due_date) < currentDate)).length;
+            tmpDue["percentage"] = ((tmpDue["value"] / tmpDue["max"]) * 100).toFixed(0);
+            setDueData(tmpDue);
 
-            // done
-            newData.push(["Done", res.filter((e) => e.done).length])
-            setData(newData);
         } catch(e) {
             console.log("error getting stats: ", e)
             setResError(true);
         } finally {
             setResLoading(false);
+            props.setReloading(false);
         }
     }
 
@@ -92,15 +91,15 @@ export const Charty = (props) => {
         if (loginValid) {
             loadCounts();
         }
-    }, [loginValid])
+    }, [loginValid, props.triggerReload])
     return(
         <>
             <div className={'containerChart'} style={{display:'flex'}}>
 
                 <div className={'charty'}>
                     <CircularProgressbar
-                        value={today}
-                        text={`${today}%`}
+                        value={parseInt(todayData["percentage"])}
+                        text={`${todayData["percentage"]}%`}
                         background
                         backgroundPadding={6}
                         styles={buildStyles({
@@ -116,8 +115,8 @@ export const Charty = (props) => {
                 </div>
                 <div className={'charty'}>
                     <CircularProgressbar
-                        value={done}
-                        text={`${done}%`}
+                        value={parseInt(doneData["percentage"])}
+                        text={`${doneData["percentage"]}%`}
                         background
                         backgroundPadding={6}
                         styles={buildStyles({
@@ -133,8 +132,8 @@ export const Charty = (props) => {
                 </div>
                 <div className={'charty'}>
                     <CircularProgressbar
-                        value={saved}
-                        text={`${saved}%`}
+                        value={parseInt(savedData["percentage"])}
+                        text={`${savedData["percentage"]}%`}
                         background
                         backgroundPadding={6}
                         styles={buildStyles({
@@ -150,8 +149,9 @@ export const Charty = (props) => {
                 </div>
                 <div className={'charty'}>
                     <CircularProgressbar
-                        value={due}
-                        text={`${due}%`}
+                        // value={dueData["percentage"]}
+                        value={parseInt(dueData["percentage"])}
+                        text={`${dueData["percentage"]}%`}
                         background
                         backgroundPadding={6}
                         styles={buildStyles({
@@ -163,12 +163,19 @@ export const Charty = (props) => {
 
                     />
                     <div className={'charLabel'}>
-                        <strong>DUE</strong>
+                        <strong>Due</strong>
                     </div>
                 </div>
             </div>
         </>
 
     )
+}
+
+Charty.propTypes = {
+    triggerReload: PropTypes.bool,
+
+    reloading: PropTypes.bool,
+    setReloading: PropTypes.func,
 }
 

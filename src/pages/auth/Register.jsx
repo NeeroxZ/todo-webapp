@@ -25,7 +25,6 @@ export const Register = () => {
 
     const sendVerification = async () => {
         try {
-            console.log(mail.toString())
             await pb.collection('users').requestVerification(mail.toString());
             return true;
         } catch (error) {

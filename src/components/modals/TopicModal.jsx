@@ -35,7 +35,6 @@ export const TopicModal = (props) => {
             });
             if (!found) {
                 setInpErr(false);
-                console.log("Bio")
                 let data = {
                     "title": title,
                     "user_id": auth.getUserId(),
