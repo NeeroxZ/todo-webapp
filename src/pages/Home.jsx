@@ -29,7 +29,9 @@ const layout = [
 ];
 
 
-export const Dashboard = () => {
+export const Home = () => {
+    const {mobileView, setTabName} = useGlobalStore();
+    setTabName("Home");
 
     const [initialRender, setInitialRender] = useState(true);
 
@@ -42,8 +44,6 @@ export const Dashboard = () => {
     const [reloadingCharts, setReloadingCharts] = useState(false);
     const [reloadingList1, setReloadingList1] = useState(false);
     const [reloadingList2, setReloadingList2] = useState(false);
-
-    const {mobileView} = useGlobalStore();
 
     // reloading
     useEffect(() => {

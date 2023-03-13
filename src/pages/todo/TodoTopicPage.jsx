@@ -7,8 +7,11 @@ import PropTypes from "prop-types";
 import {NoContent} from "../NoContent";
 import {useTopics} from "../../stores/TopicStore";
 import '../../styles/todo.css';
+import {useGlobalStore} from "../../stores/GlobalStore";
 
 export const TodoTopicPage = () => {
+    const {setTabName} = useGlobalStore();
+
     const { title } = useParams();
     const topic = useTopics();
     const auth = useAuth();
@@ -28,6 +31,7 @@ export const TodoTopicPage = () => {
                 topic.topics.forEach((elem, i) => {
                     if (elem.titleLow === newTitle) {
                         setFoundTopic(elem);
+                        setTabName(`Topic - ${elem.title}`);
                         found = true;
                     }
                 });
@@ -52,7 +56,6 @@ export const TodoTopicPage = () => {
         );
     }
 
-    console.log("not found: ", notFound)
 
     if (notFound) {
         return (<NoContent variant="topic"/>);

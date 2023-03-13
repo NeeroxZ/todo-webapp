@@ -57,8 +57,8 @@ Pocketbase functions as the whole backend of our web application in that it supp
 | --- | --- |
 | Registration Page | Nick Obereiter |
 | Reset Password Page | Nick Obereiter |
-| Home/Dashboard | Martin Hofsäß / Nick Obereiter |
-| Dashboard sub functionality | Martin Hofsäß / Nick Obereiter |
+| Home/Home | Martin Hofsäß / Nick Obereiter |
+| Home sub functionality | Martin Hofsäß / Nick Obereiter |
 | Create ToDo | Marvin Samouelian |
 | ToDo overview Page | Marvin Samouelian |
 | ToDo tomorrow Page | Marvin Samouelian |
@@ -90,7 +90,7 @@ The user arrives at the login screen and enters his login credentials.
 
 After successfully authenticating he will be greeted on his home-site/dashboard and gets a comprehensive overview of all important information in relation to his existing ToDo's.
 
-![Dashboard.png](Dashboard.png)
+![Home.png](Dashboard.png)
 
 The user decides to create a new ToDo. For this he can use the button in the bottom right of every page.
 

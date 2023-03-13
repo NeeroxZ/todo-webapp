@@ -1,5 +1,8 @@
 import '../styles/user.css'
+import {useGlobalStore} from "../stores/GlobalStore";
 export const NoMatch = () => {
+    const {setTabName} = useGlobalStore();
+    setTabName("Not found!");
     return (
         <>
             <div className={"staticAbsoluteContainer"}>

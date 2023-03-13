@@ -1,6 +1,9 @@
 import {TodoView} from "../../components/TodoView";
+import {useGlobalStore} from "../../stores/GlobalStore";
 
 export const TodoAllPage = () => {
+    const {setTabName} = useGlobalStore();
+    setTabName("All");
 
     return (
         <>

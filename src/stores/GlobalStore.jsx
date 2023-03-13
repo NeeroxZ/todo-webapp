@@ -23,9 +23,13 @@ export const GlobalStore = ({children}) => {
         }
     };
 
+    const setTabName = (name) => {
+        document.title = name;
+    }
+
 
     return(
-        <GlobalContext.Provider value={{mobileView, showNav, toggleNav}}>
+        <GlobalContext.Provider value={{mobileView, showNav, toggleNav, setTabName}}>
             {children}
         </GlobalContext.Provider>
     );

@@ -57,8 +57,8 @@ Pocketbase functions as the whole backend of our web application in that it supp
 | --- | --- |
 | Registration Page | Nick Obereiter |
 | Reset Password Page | Nick Obereiter |
-| Home/Dashboard | Martin Hofsäß / Nick Obereiter |
-| Dashboard sub functionality | Martin Hofsäß / Nick Obereiter |
+| Home | Martin Hofsäß / Nick Obereiter |
+| Home sub functionality | Martin Hofsäß / Nick Obereiter |
 | Create ToDo | Marvin Samouelian |
 | ToDo overview Page | Marvin Samouelian |
 | ToDo tomorrow Page | Marvin Samouelian |

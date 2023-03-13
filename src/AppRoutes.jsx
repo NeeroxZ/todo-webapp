@@ -5,7 +5,7 @@ import {Register} from "./pages/auth/Register";
 import {ConfirmMailPage} from "./pages/auth/ConfirmMail";
 import {UserPage} from "./pages/UserPage";
 import {About} from "./pages/About";
-import {Dashboard} from "./pages/Dashboard";
+import {Home} from "./pages/Home";
 import {TodoAllPage} from "./pages/todo/TodoAllPage";
 import {TodoTodayPage} from "./pages/todo/TodoTodayPage";
 import {TodoTomorrowPage} from "./pages/todo/TodoTomorrowPage";
@@ -31,8 +31,8 @@ export const AppRoutes = () => {
                 <Route path="about" element={<About/>}/>
                 <Route element={<PrivateRoute/>}>
                     <Route path="*" element={<NoMatch/>}/>
-                    <Route index element={<Dashboard/>}/>
-                    <Route path="home" element={<Dashboard/>}/>
+                    <Route index element={<Home/>}/>
+                    <Route path="home" element={<Home/>}/>
                     <Route path="todo">
                         <Route path="all" element={<TodoAllPage/>}/>
                         <Route path="today" element={<TodoTodayPage/>}/>

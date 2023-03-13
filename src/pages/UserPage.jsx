@@ -12,6 +12,8 @@ import {useUserStore} from "../stores/UserStore";
 import {StatusBox} from "../components/StatusBox";
 
 export const UserPage = () => {
+    const {setTabName} = useGlobalStore();
+    setTabName("Settings");
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 

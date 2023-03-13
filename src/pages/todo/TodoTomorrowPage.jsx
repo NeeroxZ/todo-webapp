@@ -1,7 +1,9 @@
 import {TodoView} from "../../components/TodoView";
+import {useGlobalStore} from "../../stores/GlobalStore";
 
 export const TodoTomorrowPage = () => {
-    document.title = "Tomorrow";
+    const {setTabName} = useGlobalStore();
+    setTabName("Tomorrow");
     const getTimeFrom = () => {
         let dt = new Date();
         dt.setUTCDate(dt.getUTCDate() + 1);
