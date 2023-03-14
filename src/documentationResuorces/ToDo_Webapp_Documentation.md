@@ -109,4 +109,4 @@ The pages for ToDoToday and ToDoTomorow can give you a more in depth overview of
 
 # 2.3. Routing structure
 
-[Routing_Structure.drawio](Routing_Structure.drawio)
+![Routing_Structure.png](Routing_Structure.png)
