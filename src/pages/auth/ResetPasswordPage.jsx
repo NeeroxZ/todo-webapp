@@ -3,6 +3,7 @@ import {useState} from "react";
 import pb from "../../utils/pocketbase";
 import {Alert, Backdrop, CircularProgress} from "@mui/material";
 import {StatusBox} from "../../components/StatusBox";
+import {useGlobalStore} from "../../stores/GlobalStore";
 
 export const ResetPasswordPage = () => {
     const navigator = useNavigate();
@@ -10,6 +11,9 @@ export const ResetPasswordPage = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [success, setSuccess] = useState(false);
+
+    const {setTabName} = useGlobalStore();
+    setTabName("DodoTodo - Reset Password");
 
     const requestResetLink = async() => {
         if (mail === "") {

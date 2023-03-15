@@ -29,26 +29,20 @@ import PropTypes from 'prop-types';
 export const AddModal = (props) => {
     const tpCtx = useTopics();
 
-    const {mobileView} = useGlobalStore();
-
-    const [showAddTopic, setShowAddTopic] = useState(false);
-
     const [initialRender, setInitialRender] = useState(true);
+    const [showAddTopic, setShowAddTopic] = useState(false);
 
     const [title, setTitle] = useState("");
     const [titleError, setTitleError] = useState(false);
-
     const [bookmark, setBookmark] = useState(false);
-
     const [topic, setTopic] = useState(props.selectedTopic);
     const [topicInput, setTopicInput] = useState("");
     const [topicError, setTopicError] = useState(false);
-
     const [desc, setDesc] = useState("");
-
     const [date, setDate] = useState(dayjs(new Date()));
     const [dateError, setDateError] = useState(false);
 
+    const {mobileView} = useGlobalStore();
     const {getUserId} = useAuth();
 
     useEffect(() => {

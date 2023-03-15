@@ -4,6 +4,7 @@ import {Navigate, useNavigate} from "react-router-dom";
 import {Backdrop, CircularProgress} from "@mui/material";
 import '../../styles/user.css';
 import {StatusBox} from "../../components/StatusBox";
+import {useGlobalStore} from "../../stores/GlobalStore";
 
 
 export const Login = () => {
@@ -14,6 +15,9 @@ export const Login = () => {
 
     const auth = useAuth();
     const navigator = useNavigate();
+
+    const {setTabName} = useGlobalStore();
+    setTabName("DodoTodo - Login");
 
     const handleLogin = async (username, password) => {
         await auth.login(username, password)

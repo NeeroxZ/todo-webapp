@@ -5,6 +5,7 @@ import pb from "../../utils/pocketbase";
 import '../../styles/user.css';
 import {validateEmail} from "../../utils/functions";
 import {StatusBox} from "../../components/StatusBox";
+import {useGlobalStore} from "../../stores/GlobalStore";
 export const Register = () => {
     const [initialRender, setInitialRender] = useState(true);
 
@@ -23,6 +24,9 @@ export const Register = () => {
     const [disableReg, setDisableReg] = useState(true);
 
     const navigator = useNavigate();
+
+    const {setTabName} = useGlobalStore();
+    setTabName("DodoTodo - Register");
 
     // set initial render
     useEffect(() => {setInitialRender(false)}, [])
@@ -84,6 +88,7 @@ export const Register = () => {
 
     const handleRegister = async () => {
         setWaiting(true);
+        setRegistrationError(false);
 
         if (!disableReg) {
             const data = {
@@ -96,16 +101,12 @@ export const Register = () => {
 
             try {
                 await pb.collection('users').create(data).then(async () => {
-                    const success = await sendVerification();
-                    if (success) {
-                        navigator("/confirm");
-                    }
+                    await sendVerification();
+                    navigator("/verify");
                 })
             } catch(error) {
                 console.log(error)
                 setRegistrationError(true);
-            } finally {
-                setWaiting(false);
             }
         }
 

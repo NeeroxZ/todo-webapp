@@ -8,7 +8,7 @@ import {useGlobalStore} from "../stores/GlobalStore";
 import {StatusBox} from "../components/StatusBox";
 import {ChangeDashboardView} from "../components/settings/ChangeDashboardView";
 
-export const UserPage = () => {
+export const SettingsPage = () => {
     const {setTabName} = useGlobalStore();
     setTabName("Settings");
 

@@ -19,8 +19,8 @@ export const ContentDesktop = (props) => {
                     <i className="fa fa-user" aria-hidden="true"></i>
                 </button>
                 <div className="dropdown-content-user">
-                    <NavLink to="/user">User</NavLink>
                     <NavLink to="/about">About</NavLink>
+                    <NavLink to="/settings">Settings</NavLink>
                     <NavLink to="/login" onClick={() => {
                         logout();
                     }}>Logout</NavLink>

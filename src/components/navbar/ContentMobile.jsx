@@ -20,16 +20,14 @@ export const ContentMobile = (props) => {
                 <button className="dropbtn">
                     <div className="flexMenuItem">
                         <PersonIcon fontSize="small" className="flexMenuIcon" />
-                        <div>User settings</div>
+                        <div>Account</div>
                     </div>
 
                 </button>
                 <div className="dropdown-content-user">
-                    <NavLink to="/user" onClick={toggleNav}>User</NavLink>
                     <NavLink to="/about" onClick={toggleNav}>About</NavLink>
-                    <NavLink to="/login" onClick={() => {
-                        logout();
-                    }}>Logout</NavLink>
+                    <NavLink to="/settings" onClick={toggleNav}>Settings</NavLink>
+                    <NavLink to="/login" onClick={() => {logout()}}>Logout</NavLink>
                 </div>
             </div>
             <NavLink to="/home" className={"home"} onClick={toggleNav}>

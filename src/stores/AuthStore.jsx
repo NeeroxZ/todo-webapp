@@ -62,6 +62,11 @@ export const AuthProvider = ({children}) => {
                 username,
                 password
             )
+            if (!pb.authStore.model["verified"]) {
+                navigator('/not-verified');
+                return;
+            }
+
             let expCookie = pb.authStore.exportToCookie({sameSite: 'none', secure: false}, COOKIE_KEY);
             cookies.set(COOKIE_KEY, expCookie, {sameSite:'none', secure: false})
         } catch(error) {

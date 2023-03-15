@@ -2,8 +2,8 @@ import {Route, Routes} from "react-router-dom";
 import {Login} from "./pages/auth/Login";
 import {ResetPasswordPage} from "./pages/auth/ResetPasswordPage";
 import {Register} from "./pages/auth/Register";
-import {ConfirmMailPage} from "./pages/auth/ConfirmMail";
-import {UserPage} from "./pages/UserPage";
+import {ConfirmMailPage} from "./pages/auth/VerifyMailPage";
+import {SettingsPage} from "./pages/SettingsPage";
 import {About} from "./pages/About";
 import {Home} from "./pages/Home";
 import {TodoAllPage} from "./pages/todo/TodoAllPage";
@@ -17,6 +17,7 @@ import {TodoDuePage} from "./pages/todo/TodoDuePage";
 import {TodoSavedPage} from "./pages/todo/TodoSavedPage";
 import {TodoDonePage} from "./pages/todo/TodoDonePage";
 import {TodoDeletedPage} from "./pages/todo/TodoDeletedPage";
+import {NotVerifiedPage} from "./pages/auth/NotVerifiedPage";
 
 export const AppRoutes = () => {
     return (
@@ -26,8 +27,9 @@ export const AppRoutes = () => {
                 <Route path="login" element={<Login/>}/>
                 <Route path="reset" element={<ResetPasswordPage/>}/>
                 <Route path="register" element={<Register/>}/>
-                <Route path="confirm" element={<ConfirmMailPage/>}/>
-                <Route path="user" element={<UserPage/>}/>
+                <Route path="verify" element={<ConfirmMailPage/>}/>
+                <Route path="not-verified" element={<NotVerifiedPage/>}/>
+                <Route path="settings" element={<SettingsPage/>}/>
                 <Route path="about" element={<About/>}/>
                 <Route element={<PrivateRoute/>}>
                     <Route path="*" element={<NoMatch/>}/>
