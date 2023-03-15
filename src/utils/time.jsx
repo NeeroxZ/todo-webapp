@@ -16,3 +16,13 @@ export const getTomorrowTime = () => {
     t.setUTCMilliseconds(1);
     return t;
 };
+
+export const getTwoAheadTime = () => {
+    let t = new Date();
+    t.setDate(t.getDate() + 2);
+    t.setHours(0);
+    t.setUTCMinutes(0);
+    t.setUTCSeconds(0);
+    t.setUTCMilliseconds(1);
+    return t;
+}
