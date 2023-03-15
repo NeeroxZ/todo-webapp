@@ -22,13 +22,11 @@ import {useAuth} from "../../stores/AuthStore";
 import pb from "../../utils/pocketbase";
 import {useTopics} from "../../stores/TopicStore";
 import {useGlobalStore} from "../../stores/GlobalStore";
-import {useUserStore} from "../../stores/UserStore";
 import {TopicModal} from "./TopicModal";
 import PropTypes from 'prop-types';
 
 
 export const AddModal = (props) => {
-    const user = useUserStore();
     const tpCtx = useTopics();
 
     const {mobileView} = useGlobalStore();
@@ -42,7 +40,7 @@ export const AddModal = (props) => {
 
     const [bookmark, setBookmark] = useState(false);
 
-    const [topic, setTopic] = useState(null);
+    const [topic, setTopic] = useState(props.selectedTopic);
     const [topicInput, setTopicInput] = useState("");
     const [topicError, setTopicError] = useState(false);
 
@@ -54,14 +52,17 @@ export const AddModal = (props) => {
     const {getUserId} = useAuth();
 
     useEffect(() => {
-        if (props.topic !== null) {
-            setTopic(props.selectedTopic);
-        }
         setInitialRender(false);
     }, []);
 
     useEffect(() => {
-        if (!props.show) {
+        if (props.selectedTopic !== null && !initialRender) {
+            setTopic(props.selectedTopic);
+        }
+    }, [props.selectedTopic])
+
+    useEffect(() => {
+        if (!props.show && !initialRender) {
             setTitle("");
             setTitleError(false);
             setBookmark(false);
@@ -226,10 +227,12 @@ export const AddModal = (props) => {
                                         }}
                                         inputValue={topicInput}
                                         onInputChange={(event, newInputValue) => {
-                                            setTopicInput(newInputValue);
+                                            if (newInputValue !== "undefined") {
+                                                setTopicInput(newInputValue);
+                                            }
                                         }}
                                         options={tpCtx.topics}
-                                        getOptionLabel={(option) => option.titleMod}
+                                        getOptionLabel={(option) => option.titleMod || ""}
                                         loading={tpCtx.waiting}
                                         renderInput={(params) => <TextField {...params} label="Topic"
                                                                             error={topicError}/>}
@@ -302,7 +305,7 @@ export const AddModal = (props) => {
 };
 
 AddModal.defaultProps = {
-    selectedTopic: null,
+    selectedTopic: "",
     reloading: false,
 }
 
