@@ -62,17 +62,19 @@ export const ChangeMail = (props) => {
                               rowSpacing={2}
                               className="infoContainer"
                         >
-                            <Grid item xs={12} style={{
-                                display: "flex",
-                                justifyContent: "flex-start",
-                            }}>
-                                <div className="infoText">
-                                    Current email:
-                                </div>
-                                <div className="infoText userValue">
-                                    {user.email}
-                                </div>
-                            </Grid>
+                            {!mobileView &&
+                                <Grid item xs={12} style={{
+                                    display: "flex",
+                                    justifyContent: "flex-start",
+                                }}>
+                                    <div className="infoText">
+                                        Current email:
+                                    </div>
+                                    <div className="infoText userValue">
+                                        {user.email}
+                                    </div>
+                                </Grid>
+                            }
                             <Grid container item xs={12} spacing={1.5}>
                                 <Grid item xs={12} sm={8}>
                                     <TextField
