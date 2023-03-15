@@ -1,63 +1,112 @@
 import {useNavigate} from "react-router-dom";
-import {useState} from "react";
-import {Alert, AlertTitle, Backdrop, CircularProgress} from "@mui/material";
+import {useEffect, useState} from "react";
+import {Backdrop, CircularProgress} from "@mui/material";
 import pb from "../../utils/pocketbase";
+import '../../styles/user.css';
+import {validateEmail} from "../../utils/functions";
+import {StatusBox} from "../../components/StatusBox";
 export const Register = () => {
-    const [username, setUsername] = useState(null);
-    const [mail, setMail] = useState(null);
-    const [password, setPassword] = useState(null);
-    const [confPass, setConfPass] = useState(null);
+    const [initialRender, setInitialRender] = useState(true);
+
+    const [username, setUsername] = useState("");
+    const [usernameError, setUsernameError] = useState(false);
+
+    const [mail, setMail] = useState("");
     const [mailError, setMailError] = useState(false);
+
+    const [password, setPassword] = useState("");
+    const [confPass, setConfPass] = useState("");
+    const [pwError, setPwError] = useState(false);
+
     const [waiting, setWaiting] = useState(false);
     const [registrationError, setRegistrationError] = useState(false);
-    const [validError, setValidError] = useState(false);
+    const [disableReg, setDisableReg] = useState(true);
 
     const navigator = useNavigate();
 
-    const validatePassword = (confirmPassword) => {
-        if (confirmPassword !== password) {
-            setValidError(true);
+    // set initial render
+    useEffect(() => {setInitialRender(false)}, [])
+
+    useEffect(() => {
+        if (usernameError || mailError || pwError) {
+            setDisableReg(true);
         } else {
-            setValidError(false);
-            setConfPass(confirmPassword);
+            if (!initialRender) {
+                setDisableReg(false);
+            }
         }
+
+    }, [usernameError, mailError, pwError])
+
+    const verifyPassword = (e) => {
+        let vpw = e.target.value;
+        if (password !== "" && password.length >= 8 && (password === vpw)) {
+            setPwError(false);
+        } else {
+            setPwError(true);
+        }
+
+        setConfPass(vpw);
+    };
+
+    const verifyUsername = (e) => {
+        if (e.target.value.length >= 4 && e.target.value.length <= 16) {
+            setUsernameError(false);
+        } else {
+            setUsernameError(true);
+        }
+
+        setUsername(e.target.value);
+    };
+
+    const handleMailChange = (event) => {
+        if (validateEmail(event.target.value)) {
+            setMailError(false);
+        } else if (event.target.value === "") {
+            setMailError(false);
+        } else {
+            setMailError(true);
+        }
+
+        setMail(event.target.value);
     };
 
     const sendVerification = async () => {
         try {
             await pb.collection('users').requestVerification(mail.toString());
-            return true;
         } catch (error) {
             console.log(error)
-            setWaiting(false);
             setRegistrationError(true);
-            return false;
+        } finally {
+            setWaiting(false);
         }
     };
 
     const handleRegister = async () => {
         setWaiting(true);
 
-        const data = {
-            "username": username,
-            "email": mail,
-            "emailVisibility": false,
-            "password": password,
-            "passwordConfirm": confPass,
-        };
+        if (!disableReg) {
+            const data = {
+                "username": username,
+                "email": mail,
+                "emailVisibility": false,
+                "password": password,
+                "passwordConfirm": confPass,
+            };
 
-        try {
-            await pb.collection('users').create(data)
-        } catch(error) {
-            console.log(error)
-            setWaiting(false);
-            setRegistrationError(true);
-            return
-        }
-
-        const success = await sendVerification();
-        if (success) {
-            navigator("/confirm");
+            try {
+                await pb.collection('users').create(data).then(async () => {
+                    const success = await sendVerification();
+                    if (success) {
+                        navigator("/confirm");
+                    }
+                })
+            } catch(error) {
+                console.log(error)
+                setRegistrationError(true);
+            } finally {
+                setWaiting(false);
+            }
         }
 
     };
@@ -68,44 +117,51 @@ export const Register = () => {
             <div className="containerChild">
                 <div className="box">
                     <h1 className="form-name">Register</h1>
-                    <label>
-                        <input className={`placeholders ${mailError ? "error" : ""}`} type="text" placeholder="Email"
-                               onBlur={e => {
-                                   setMail(e.target.value)
-                               }
-                               }/>
+                    <label className="inpLabel">
+                        <input className={`registerInp placeholders ${mailError ? "invalid" : ""}`} type="text"
+                               placeholder="Email"
+                               onChange={(e) => setMail(e.target.value)}
+                               onBlur={handleMailChange}
+                        />
                     </label>
                     <label>
-                        <input className="placeholders" type="text" placeholder="Username"
-                               onBlur={e => setUsername(e.target.value)}/>
+                        <input className={`registerInp placeholders ${usernameError ? "invalid" : ""}`}
+                               type="text"
+                               placeholder="Username"
+                               onChange={verifyUsername}/>
                     </label>
                     <label>
-                        <input className="placeholders" type="password" placeholder="Password"
-                               onBlur={e => setPassword(e.target.value)}/>
+                        <input className={`registerInp placeholders ${pwError ? "invalid" : ""}`}
+                               type="password"
+                               placeholder="Password"
+                               onChange={e => setPassword(e.target.value)}/>
                     </label>
                     <label>
-                        <input className="placeholders" type="password" placeholder="Confirm password"
-                               onBlur={e => validatePassword(e.target.value)}/>
+                        <input className={`registerInp placeholders ${pwError ? "invalid" : ""}`}
+                               type="password"
+                               placeholder="Confirm password"
+                               onChange={verifyPassword}/>
                     </label>
-                    <input className="btn-submit" type="submit" name="" value="Register"
-                           onClick={() => handleRegister()}/>
+                    <input className={`btn-submit ${disableReg ? "disabled" : ""}`}
+                           type="submit"
+                           name="Register"
+                           value="Register"
+                           onClick={handleRegister}/>
                     <p className="forgot"> Already have an account?
                         <a onClick={() => navigator("/login")}>Sign in</a>
                     </p>
                 </div>
             </div>
+            <StatusBox
+                type={"error"}
+                topic={"Register"}
+                message={"Please try again"}
+                show={registrationError}
+                setShow={setRegistrationError}/>
             {waiting && (
-                <div className={"circularContainer"}>
-                    <Backdrop open={waiting}>
-                        <CircularProgress/>
-                    </Backdrop>
-                </div>
-            )}
-            {registrationError && (
-                <Alert severity="error">
-                    <AlertTitle>Error</AlertTitle>
-                    Login error — <strong>Please try again</strong>
-                </Alert>
+                <Backdrop open={waiting}>
+                    <CircularProgress/>
+                </Backdrop>
             )}
         </div>
     );
