@@ -48,16 +48,15 @@ export const Home = () => {
 
     // reloading
     useEffect(() => {
-
         if (!initialRender) {
             if (allReloading && (!reloadingCount && !reloadingCharts && !reloadingList1 && !reloadingList2)) {
                 setAllReloading(false);
             }
         }
     }, [reloadingCount, reloadingCharts, reloadingList1, reloadingList2])
+
     useEffect(() => {
         if (!initialRender && triggerReload) {
-            setTriggerCountReload(true);
             setTriggerCountReload(true);
             setReloadingCount(true);
             setReloadingList1(true);

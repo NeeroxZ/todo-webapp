@@ -11,7 +11,18 @@ export const AllTodosCount = (props) => {
     const [allCount, setAllCount] = useState(0);
     const [todayCount, setTodayCount] = useState(0);
 
+    const [isLoadingAllCount, setIsLoadingAllCount] = useState(true);
+    const [isLoadingTodayCount, setIsLoadingTodayCount] = useState(true);
+
+
+    useEffect(() => {
+        if (!isLoadingAllCount && !isLoadingTodayCount) {
+            props.setReloading(false);
+        }
+    }, [isLoadingAllCount, isLoadingTodayCount])
+
     const loadAllCount = async () => {
+        setIsLoadingAllCount(true);
         let res = {};
         try {
             res = await pb.collection('todo').getFullList(1000, {
@@ -23,12 +34,15 @@ export const AllTodosCount = (props) => {
             console.log("error while loading count: ", e);
         } finally {
             if (props.triggerReload !== null) {
-                props.setReloading(false);
+                setIsLoadingAllCount(false);
+                // props.setReloading(false);
             }
         }
     };
 
     const loadTodayCount = async () => {
+        setIsLoadingTodayCount(true);
+
         // get time
         let today = getTodayTime();
         let tomorrow = getTomorrowTime();
@@ -51,7 +65,8 @@ export const AllTodosCount = (props) => {
             console.log("error while loading today count: ", e);
         } finally {
             if (props.triggerReload !== null) {
-                props.setReloading(false);
+                setIsLoadingTodayCount(false);
+                // props.setReloading(false);
             }
         }
     }
