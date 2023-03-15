@@ -16,6 +16,24 @@ html, body, #app, #app>div {
     display: none;
 }
 
+.checkFlex {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.inpLabel {
+    width: 70%;
+    /*padding-left: 15px;*/
+}
+
+.checkItem {
+    margin-left: 20px !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 
 p {
     color: #fdfdfdce;
@@ -36,6 +54,12 @@ input:focus, input:hover{
 input .invalid {
     border-radius: 40px;
     outline: red;
+}
+
+.registerInp {
+    margin: 10px 10px;
+    width: 100%;
+    /*min-width: 80%;*/
 }
 
 a{
@@ -103,6 +127,12 @@ a:hover{
 button:focus{
     outline: 0;
 }
+
+.btn-submit.disabled {
+    background-color: #a6c4bc;
+    pointer-events: none;
+}
+
 .btn-submit{
     font-weight: bolder;
     letter-spacing: 1px;
@@ -110,6 +140,7 @@ button:focus{
     height: 50px;
     background-color: #2e9274;
 }
+
 .btn-submit:hover, .btn-submit:focus{
     background-color: #43d3a8;
     box-shadow: 0 0 7px  #2c2c2cd7;
@@ -147,6 +178,8 @@ button:focus{
     transform: translate(-50%,-50%);
 }
 .staticContainer {
+    font-size: 1.25rem;
+    text-align: center;
     position: relative;
     margin: auto;
     height: 300px;
@@ -154,13 +187,12 @@ button:focus{
     color: #fdfdfdce;
 }
 .staticHeading {
-    text-align: center;
+    /*text-align: center;*/
     font-size: 3rem;
     color: #04AA6D;
 }
 .staticBody {
     margin-top: 10px;
-    text-align: center;
     font-size: 1.25rem;
 }
 
@@ -168,4 +200,9 @@ button:focus{
     margin-top: 5px;
     text-align: center;
     font-size: 0.9rem;
+}
+
+.staticLoginReturn {
+    cursor: pointer;
+    margin-top: 1rem;
 }

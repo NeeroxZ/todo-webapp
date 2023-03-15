@@ -2,6 +2,7 @@ import {useNavigate} from "react-router-dom";
 import {useState} from "react";
 import pb from "../../utils/pocketbase";
 import {Alert, Backdrop, CircularProgress} from "@mui/material";
+import {StatusBox} from "../../components/StatusBox";
 
 export const ResetPasswordPage = () => {
     const navigator = useNavigate();
@@ -65,6 +66,7 @@ export const ResetPasswordPage = () => {
                     </div>
                 </div>
             </div>
+            <StatusBox type={"success"} message={"Reset link sent to your mailbox!"} show={success} setShow={setSuccess} />
             {loading && (
                 <div className={"circularContainer"}>
                     <Backdrop open={loading}>

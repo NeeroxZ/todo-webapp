@@ -1,19 +1,10 @@
-import {Button, CircularProgress, Divider, Grid, TextField} from "@mui/material";
-import {useGlobalStore} from "../../stores/GlobalStore";
-import {useUserStore} from "../../stores/UserStore";
+import {Button, Divider, Grid, TextField} from "@mui/material";
 import {useState} from "react";
 import {useChangeUser} from "../../hooks/useChangeUser";
-import pb from "../../utils/pocketbase"
-import {StatusBox} from "../StatusBox";
-import {ElectricalServices} from "@mui/icons-material";
-import {useAuth} from "../../stores/AuthStore";
+import {InfoModal} from "../modals/InfoModal";
 
 
 export const ChangePassword = (props) => {
-    const {mobileView} = useGlobalStore();
-    const {user} = useUserStore();
-    const auth = useAuth();
-    // const {changePassword, isLoadingChangePassword, errorChangePassword} = useChangeUser();
     const uc = useChangeUser();
 
     const [newPw, setNewPw] = useState("");
@@ -139,4 +130,4 @@ export const ChangePassword = (props) => {
 
         </>
     );
-};
+}
