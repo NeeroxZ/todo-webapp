@@ -19,7 +19,7 @@ const ResponsiveGridLayout = WidthProvider(Responsive);
 const layout = [
     {i: "user_info",        x: 0, y: 0, w: 1, h: 1, isResizable: false, isDraggable: false},
     {i: "all_todos_count",  x: 0, y: 0, w: 1, h: 1, isResizable: false, isDraggable: false},
-    {i: "empty3",           x: 1, y: 0, w: 0.5, h: 1, isResizable: false, isDraggable: false},
+    // {i: "empty3",           x: 1, y: 0, w: 0.5, h: 1, isResizable: false, isDraggable: false},
     {i: "topics",           x: 3, y: 0, w: 1, h: 4, isResizable: false, isDraggable: false},
 
     {i: "todo_list_all",    x: 0, y: 1, w: 1, h: 2, isResizable: false, isDraggable: false},
@@ -94,8 +94,7 @@ export const Home = () => {
             <ResponsiveGridLayout
 
                 layouts={{lg: layout}}
-                // breakepoints={{lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0}}
-                breakepoints={{lg: 1300, md: 1000, sm: 500, xs: 500, xxs: 0}}
+                breakepoints={{lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0}}
                 cols={{lg: 4, md: 2, sm: 2, xs: 1, xxs: 1}}
                 margin={[10, 10]}
                 compactType={"horizontal"}

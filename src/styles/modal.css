@@ -42,7 +42,7 @@
 }
 
 .modalBox.mobile {
-    width: 400px;
+    width: 350px;
     height: 560px;
 }
 
@@ -52,7 +52,7 @@
 }
 
 .modalBox.info.mobile {
-    width: 400px;
+    width: 350px;
 }
 
 .modalBox.topic {

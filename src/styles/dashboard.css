@@ -3,6 +3,7 @@
     border-bottom: none;
     -ms-overflow-style: none;
     scrollbar-width: none;
+    margin-right: 0 !important;
 }
 .topicStyle {
     color: #fdfdfdce;
