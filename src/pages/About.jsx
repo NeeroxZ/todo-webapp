@@ -1,6 +1,5 @@
 import "../styles/about.css"
 import userIcon from '../assets/images/userIcon.jpg'
-import {Documentation} from '../components/Documentation'
 import {useGlobalStore} from "../stores/GlobalStore";
 export const About = () =>{
     const {setTabName} = useGlobalStore();

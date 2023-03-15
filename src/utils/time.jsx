@@ -1,3 +1,7 @@
+export const getNowTime = () => {
+    return new Date();
+}
+
 export const getTodayTime = () => {
     let t = new Date();
     t.setHours(0);

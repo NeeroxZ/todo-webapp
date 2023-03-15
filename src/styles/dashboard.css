@@ -61,7 +61,7 @@
 }
 @media only screen and (max-width: 860px){
     .dashboardItem{
-        margin-left: 0em;
+        margin-left: 0;
         color: white;
         overflow: scroll;
         text-align: center;
@@ -86,7 +86,7 @@
         border-bottom: 2px solid #43558f1a;
     }
     .dashboardItemView{
-        margin-left: 0em;
+        margin-left: 0;
         color: white;
         text-align: center;
         font-size: 2em;
@@ -125,20 +125,21 @@
 }
 .todoHeaderDashboard{
     margin-top: 0.5rem;
+    font-size: 2rem;
     color: #33a382;
 }
 
 .todoHeaderDashboard.mobile {
-    font-size: 2rem;
+    font-size: 1.5rem;
 }
 
 rect{
     fill:none;
 }
-empty{
-    background: linear-gradient(312deg,#455bbd1f 2%, rgba(255,255,255,0.2) 87%);
-    color: white;
-}
+/*empty{*/
+/*    background: linear-gradient(312deg,#455bbd1f 2%, rgba(255,255,255,0.2) 87%);*/
+/*    color: white;*/
+/*}*/
 .userInfo{
     width: 100%;
     height: 100%;
@@ -187,18 +188,24 @@ empty{
     color: white;
 }
 .charty{
-    width: 120px;
-    height: 120px;
-    margin-left: 90px;
+    width: 100px;
+    height: 100px;
+    margin-left: 10px;
+    margin-right: 10px;
     font-size: 20px;
-    margin-top: 5px;
 }
-@media only screen and (max-width: 900px) {
-    .charty{
-        width: 90px;
-        height: 90px;
-        margin-left: 4px;
-        font-size: 20px;
-        margin-top: 20px;
-    }
+
+.containerChart {
+    margin-left: 5rem;
+    margin-right: 5rem;
+    height: 100%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.containerChart.mobile {
+    margin-left: 1rem;
+    margin-right: 1rem;
 }

@@ -2,7 +2,7 @@ import {TodoView} from "../../components/TodoView";
 import {useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {useAuth} from "../../stores/AuthStore";
-import {Alert, AlertTitle, CircularProgress} from "@mui/material";
+import {CircularProgress} from "@mui/material";
 import PropTypes from "prop-types";
 import {NoContent} from "../NoContent";
 import {useTopics} from "../../stores/TopicStore";
@@ -19,7 +19,6 @@ export const TodoTopicPage = () => {
     const [notFound, setNotFound] = useState(false);
 
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(false);
 
     // Todo: Error handling
     const searchTopicID = () => {
@@ -28,7 +27,7 @@ export const TodoTopicPage = () => {
                 setLoading(true);
                 let newTitle = title.replaceAll("_", " ");
                 let found = false;
-                topic.topics.forEach((elem, i) => {
+                topic.topics.forEach((elem) => {
                     if (elem.titleLow === newTitle) {
                         setFoundTopic(elem);
                         setTabName(`Topic - ${elem.title}`);
@@ -71,13 +70,6 @@ export const TodoTopicPage = () => {
                     pageHeading={`Topic: ${foundTopic.titleMod}`}
                     topic={foundTopic}
                 />
-            )}
-
-            {error && (
-                <Alert severity="error">
-                    <AlertTitle>Error</AlertTitle>
-                    Database error — <strong>Please try again</strong>
-                </Alert>
             )}
         </>
     );

@@ -13,7 +13,6 @@ export const UserProvider = ({children}) => {
     const [isLoadingUser, setIsLoadingUser] = useState(true);
 
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
 
     const reloadSettings = async () => {
         await loadSettings();
@@ -27,7 +26,6 @@ export const UserProvider = ({children}) => {
         if (auth.loginValid) {
             console.log("loading settings")
             setIsLoadingSettings(true);
-            setError(null);
             try {
                 let data = await pb.collection('user_settings').getFirstListItem(
                     `user_id="${auth.getUserId()}"`
@@ -36,7 +34,6 @@ export const UserProvider = ({children}) => {
                 console.log("settings loaded")
             } catch (e) {
                 console.log("error getting user_settings: ", e);
-                setError(e);
             } finally {
                 setIsLoadingSettings(false);
             }
@@ -47,14 +44,12 @@ export const UserProvider = ({children}) => {
         if (auth.loginValid) {
             console.log("loading user")
             setIsLoadingUser(true);
-            setError(null);
             try {
                 let data = await pb.collection('users').getOne(auth.getUserId());
                 setUser(data);
                 console.log("user loaded")
             } catch (e) {
                 console.log("error getting user: ", e);
-                setError(e);
             } finally {
                 setIsLoadingUser(false);
             }

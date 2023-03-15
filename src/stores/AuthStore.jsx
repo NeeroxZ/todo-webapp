@@ -49,7 +49,7 @@ export const AuthProvider = ({children}) => {
     };
 
     useEffect(() => {
-        loadCookie().then((r) => {console.log("cookie loaded")});
+        loadCookie().then(() => {console.log("cookie loaded")});
     }, []);
 
     // login

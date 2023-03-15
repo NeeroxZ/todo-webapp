@@ -1,11 +1,9 @@
 import Todo from "./Todo";
 import {useEffect, useState} from "react";
 import {useAuth} from "../stores/AuthStore";
-import pb from "../utils/pocketbase";
 import PropTypes from 'prop-types';
 import {NoContent} from "../pages/NoContent";
 import {AddTodo} from "./AddTodo";
-import {getParams} from "../utils/getParams";
 import {CircularProgress} from "@mui/material";
 import "../styles/todo.css"
 import {EditModal} from "./modals/EditModal";
@@ -99,7 +97,7 @@ export const TodoView = (props) => {
                         </div>
                     }
                     <ul className="todo-list">
-                        {tds.todos && tds.todos.map((item, i) => {
+                        {tds.todos && tds.todos.map((item) => {
                             return (
                                     <Todo
                                         key={item.id}

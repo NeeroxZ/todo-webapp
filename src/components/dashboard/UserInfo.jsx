@@ -1,4 +1,3 @@
-import { Responsive, WidthProvider } from "react-grid-layout";
 import {User} from "./User";
 import {DateDay} from "./DateDay";
 

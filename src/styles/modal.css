@@ -41,7 +41,7 @@
     position: relative;
 }
 
-.modalBox .mobile {
+.modalBox.mobile {
     width: 400px;
     height: 560px;
 }
@@ -116,7 +116,6 @@
 }
 .tpIconRight {
     height: 100%;
-    /*width: 100%;*/
 }
 
 .tpIconRight.regular {
@@ -131,7 +130,6 @@
     position: absolute;
     top: 0;
     right: 0;
-
 }
 
 .tdTopicRow {
@@ -147,6 +145,7 @@
     justify-items: center;
     align-items: center;
 }
+
 .tdTopicStyle {
     width: 100%;
     flex-grow: 1;

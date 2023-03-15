@@ -11,10 +11,6 @@ export const TopicProvider = ({children}) => {
     const [loading, setLoading] = useState(true);
     const [topics, setTopics] = useState([]);
 
-    const uploadTopic = async () => {
-
-    };
-
     const loadTopics = async () => {
         if (auth.loginValid) {
             console.log("get topics");

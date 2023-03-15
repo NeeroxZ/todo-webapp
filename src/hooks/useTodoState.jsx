@@ -1,12 +1,10 @@
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {getParams} from "../utils/getParams";
 import pb from "../utils/pocketbase";
 import {useAuth} from "../stores/AuthStore";
-import {useTopics} from "../stores/TopicStore";
 
 export function useTodoState(todoFrameProps) {
-    const {getUserId, loginValid} = useAuth();
-    const tp = useTopics();
+    const {getUserId} = useAuth();
 
     const [todos, setTodos] = useState([]);
     const [noTodos, setNoTodos] = useState(true);

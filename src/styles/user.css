@@ -16,23 +16,23 @@ html, body, #app, #app>div {
     display: none;
 }
 
-.checkFlex {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-}
+/*.checkFlex {*/
+/*    display: flex;*/
+/*    justify-content: flex-start;*/
+/*    align-items: center;*/
+/*}*/
 
 .inpLabel {
     width: 70%;
     /*padding-left: 15px;*/
 }
 
-.checkItem {
-    margin-left: 20px !important;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+/*.checkItem {*/
+/*    margin-left: 20px !important;*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*}*/
 
 
 p {
@@ -88,9 +88,9 @@ a:hover{
     height: 100%;
 }
 
-.containerRegist{
-    margin-top: 2%;
-}
+/*.containerRegist{*/
+/*    margin-top: 2%;*/
+/*}*/
 .title{
     padding:10px 15px;
 }
@@ -164,10 +164,10 @@ button:focus{
     box-shadow: 0 0 4px #d34343;
 }
 
-.modalText{
-    background-color: #FFFFFF;
-    color: blue;
-}
+/*.modalText{*/
+/*    background-color: #FFFFFF;*/
+/*    color: blue;*/
+/*}*/
 
 /*static pages*/
 .staticAbsoluteContainer {

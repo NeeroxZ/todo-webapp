@@ -1,8 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {Chart} from "react-google-charts";
-import pb from "../utils/pocketbase";
-import {useTodoState} from "../hooks/useTodoState";
-import {useAuth} from "../stores/AuthStore";
+import pb from "../../utils/pocketbase";
+import {useAuth} from "../../stores/AuthStore";
 
 const tasks = [
     ["Status", "Count"],
@@ -12,10 +11,6 @@ const tasks = [
 ];
 
 const opts = {
-    // title: "ToDo´s status",
-    // titleTextStyle: {
-    //     color: '#fdfdfdce'
-    // }
     baselineColor: 'white',
     legendTextStyle: { color: '#FFF' },
     titleTextStyle: { color: '#FFF' },

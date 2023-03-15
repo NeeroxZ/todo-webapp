@@ -2,10 +2,10 @@ import ControlPointIcon from '@mui/icons-material/ControlPoint';
 import {NavLink} from "react-router-dom";
 import {useTopics} from "../../stores/TopicStore";
 import {Backdrop, CircularProgress} from "@mui/material";
-import {useContext, useState} from "react";
+import {useState} from "react";
 import '../../styles/utlis.css';
 import {TopicModal} from "../modals/TopicModal";
-export const Category = () => {
+export const Topics = () => {
     const topics = useTopics();
 
     const [show, setShow] = useState(false);
@@ -21,7 +21,6 @@ export const Category = () => {
                     <ControlPointIcon/>
                     Add topic
                 </a>
-                {/*{topics.waiting*/}
                 {topics.waiting
                     ?
                     <div className={"circularContainer"}>

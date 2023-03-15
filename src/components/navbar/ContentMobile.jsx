@@ -8,10 +8,10 @@ import HomeIcon from "@mui/icons-material/Home";
 import PersonIcon from '@mui/icons-material/Person';
 
 export const ContentMobile = (props) => {
-    const {loginValid, logout} = useAuth();
-    const {topics, loading, error} = useTopics();
+    const {logout} = useAuth();
+    const {loading} = useTopics();
 
-    const {showNav, toggleNav, mobileView} = useGlobalStore();
+    const {showNav, toggleNav} = useGlobalStore();
     return (
         <>
             <a style={{display: "none"}}></a>

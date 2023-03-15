@@ -2,14 +2,10 @@ import {Checkbox, Grid, Typography} from "@mui/material";
 import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
 import RadioButtonCheckedIcon from '@mui/icons-material/RadioButtonChecked';
 import {Bookmark, BookmarkBorder} from "@mui/icons-material";
-import {memo, useEffect, useRef, useState} from "react";
-import {checkIfDue, zeroPad} from "../utils/functions";
+import {memo, useEffect, useState} from "react";
+import {checkIfDue} from "../utils/functions";
 import pb from "../utils/pocketbase";
 import '../styles/todo.css'
-import Grow from '@mui/material/Grow';
-import {useAuth} from "../stores/AuthStore";
-import {useGlobalStore} from "../stores/GlobalStore";
-import {debounce} from "lodash";
 
 const Todo = (props) => {
     const [done, setDone] = useState(false);
@@ -19,22 +15,6 @@ const Todo = (props) => {
     const [topic, setTopic] = useState("");
     const [due, setDue] = useState(false);
     const [date, setDate] = useState(new Date());
-    const [repetitive, setRepetitive] = useState("");
-
-    const [test, setTest] = useState(false);
-    const [isDebouncing, setIsDebouncing] = useState(false);
-    const [doneSave, setDoneSave] = useState(false);
-
-    const {getUserId} = useAuth();
-
-
-    const {mobileView} = useGlobalStore();
-
-
-
-    const [data, setData] = useState(null);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
 
     useEffect(() => {
         setTitle(props.data.title);
@@ -45,7 +25,7 @@ const Todo = (props) => {
 
         // check if element is due
         let resDate = new Date(props.data.due_date);
-        resDate.setHours(resDate.getHours());
+        resDate.setHours(resDate.getHours() -1);
         setDate(resDate);
         if (checkIfDue(resDate)) {
             setDue(true);
@@ -103,7 +83,6 @@ const Todo = (props) => {
 
     const updateTodo = async (data) => {
         await pb.collection('todo').update(props.id, data);
-        // props.reloadTodos()
     };
 
     const handleSaved = async (event) => {
@@ -121,7 +100,7 @@ const Todo = (props) => {
         }
     }
 
-    const handleOpenModal = (e) => {
+    const handleOpenModal = () => {
         if (!props.disableEdit) {
             props.setEditDate({
                 id: props.id,
@@ -135,10 +114,6 @@ const Todo = (props) => {
             props.setShowEdit(true);
         }
     };
-
-    // if (props.reloading) {
-    //     return null;
-    // }
 
     return (
         <>

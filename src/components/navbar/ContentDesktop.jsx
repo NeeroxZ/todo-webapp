@@ -4,7 +4,6 @@ import logo from "../../assets/images/dodo/dodoWithCoffee.png";
 import {useAuth} from "../../stores/AuthStore";
 import {useTopics} from "../../stores/TopicStore";
 import HomeIcon from '@mui/icons-material/Home';
-import {useGlobalStore} from "../../stores/GlobalStore";
 
 export const ContentDesktop = (props) => {
 

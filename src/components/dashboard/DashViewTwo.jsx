@@ -113,7 +113,7 @@ export const DashViewTwo = (props) => {
 };
 
 DashViewTwo.propTypes = {
-    triggerReload: PropTypes.func.isRequired,
+    triggerReload: PropTypes.bool.isRequired,
     reloading: PropTypes.bool.isRequired,
     setReloading: PropTypes.func.isRequired,
     triggerCountReload: PropTypes.bool.isRequired,

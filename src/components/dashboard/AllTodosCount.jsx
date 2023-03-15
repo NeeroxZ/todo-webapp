@@ -8,19 +8,10 @@ import {getParams} from "../../utils/getParams";
 
 export const AllTodosCount = (props) => {
     const {loginValid, getUserId} = useAuth();
-
     const [allCount, setAllCount] = useState(0);
-    const [allCountError, setAllCountError] = useState(false);
-    const [allCountLoading, setAllCountLoading] = useState(true);
-
     const [todayCount, setTodayCount] = useState(0);
-    const [todayCountError, setTodayCountError] = useState(false);
-    const [todayCountLoading, setTodayCountLoading] = useState(false);
 
     const loadAllCount = async () => {
-        setAllCountError(false);
-        setAllCountLoading(true);
-
         let res = {};
         try {
             res = await pb.collection('todo').getFullList(1000, {
@@ -29,10 +20,8 @@ export const AllTodosCount = (props) => {
             });
             setAllCount(res.length);
         } catch (e) {
-            setAllCountError(true);
             console.log("error while loading count: ", e);
         } finally {
-            setAllCountLoading(false);
             if (props.triggerReload !== null) {
                 props.setReloading(false);
             }
@@ -40,9 +29,6 @@ export const AllTodosCount = (props) => {
     };
 
     const loadTodayCount = async () => {
-        setTodayCountLoading(true);
-        setTodayCountError(false);
-
         // get time
         let today = getTodayTime();
         let tomorrow = getTomorrowTime();
@@ -62,10 +48,8 @@ export const AllTodosCount = (props) => {
 
             setTodayCount(res.length);
         } catch (e) {
-            setTodayCountError(true);
             console.log("error while loading today count: ", e);
         } finally {
-            setTodayCountLoading(false);
             if (props.triggerReload !== null) {
                 props.setReloading(false);
             }
@@ -74,7 +58,6 @@ export const AllTodosCount = (props) => {
 
     useEffect(() => {
         if (loginValid) {
-            // if (props.triggerReload !== null && props.setTriggerReload !== null) {
             if (props.triggerReload !== null) {
                 props.setReloading(true);
                 loadAllCount();
@@ -108,7 +91,6 @@ export const AllTodosCount = (props) => {
 
 AllTodosCount.propTypes = {
     triggerReload: PropTypes.bool,
-    // setTriggerReload: PropTypes.func,
 
     reloading: PropTypes.bool,
     setReloading: PropTypes.func,

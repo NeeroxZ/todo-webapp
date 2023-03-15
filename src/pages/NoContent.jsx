@@ -1,5 +1,4 @@
 import "../styles/todo.css"
-import {AddTodo} from "../components/AddTodo";
 import PropTypes from 'prop-types';
 import {useEffect, useState} from "react";
 export const NoContent = (props) => {

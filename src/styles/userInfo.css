@@ -33,28 +33,28 @@
 .userRow h1{
     font-size: 1rem;
 }
-.userInput{
-    height: 2rem;
-    padding-left: 20px;
-    border-radius: 1rem;
-    border:1px solid #fdfdfd;
-    margin-left: auto;
-}
-.btn-delete{
-    font-weight: bolder;
-    letter-spacing: 1px;
-    width:40%;
-    height: 50px;
-    background-color: #c83434;
-}
-.btn-delete:hover, .btn-delete:focus{
-    background-color: #ff0000;
-    box-shadow: 0 0 7px  #2c2c2cd7;
-    transition: 0.2s ease-in-out;
-}
-.checkBoxInput{
-    margin-left: 12.5%;
-}
+/*.userInput{*/
+/*    height: 2rem;*/
+/*    padding-left: 20px;*/
+/*    border-radius: 1rem;*/
+/*    border:1px solid #fdfdfd;*/
+/*    margin-left: auto;*/
+/*}*/
+/*.btn-delete{*/
+/*    font-weight: bolder;*/
+/*    letter-spacing: 1px;*/
+/*    width:40%;*/
+/*    height: 50px;*/
+/*    background-color: #c83434;*/
+/*}*/
+/*.btn-delete:hover, .btn-delete:focus{*/
+/*    background-color: #ff0000;*/
+/*    box-shadow: 0 0 7px  #2c2c2cd7;*/
+/*    transition: 0.2s ease-in-out;*/
+/*}*/
+/*.checkBoxInput{*/
+/*    margin-left: 12.5%;*/
+/*}*/
 
 .userHeading {
     text-align: center;

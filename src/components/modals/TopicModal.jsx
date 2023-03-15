@@ -1,10 +1,8 @@
 import PropTypes from 'prop-types';
-import {Backdrop, CircularProgress, Modal, Box, Checkbox, TextField, Grid, Button} from "@mui/material";
+import {Modal, Box, TextField, Button} from "@mui/material";
 import React, {useEffect, useState} from "react";
 import {useGlobalStore} from "../../stores/GlobalStore";
 import {useTopics} from "../../stores/TopicStore";
-import Tooltip from "@mui/material/Tooltip";
-import {Bookmark, BookmarkBorder} from "@mui/icons-material";
 import pb from "../../utils/pocketbase";
 
 import '../../styles/modal.css'
@@ -28,7 +26,7 @@ export const TopicModal = (props) => {
             setLoading(true);
             let newTitle = title.replaceAll("_", " ").toLowerCase();
             let found = false;
-            tp.topics.forEach((elem, i) => {
+            tp.topics.forEach((elem) => {
                 if (elem.titleLow === newTitle) {
                     found = true;
                 }

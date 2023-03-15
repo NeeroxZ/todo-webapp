@@ -1,11 +1,9 @@
 import {useEffect, useState} from "react";
 import {useAuth} from "../../stores/AuthStore";
 import {Navigate, useNavigate} from "react-router-dom";
-import {Alert, AlertTitle, Backdrop, CircularProgress} from "@mui/material";
+import {Backdrop, CircularProgress} from "@mui/material";
 import '../../styles/user.css';
 import {StatusBox} from "../../components/StatusBox";
-import IconButton from "@mui/material/IconButton";
-import CloseIcon from "@mui/icons-material/Close";
 
 
 export const Login = () => {

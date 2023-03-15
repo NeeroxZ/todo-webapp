@@ -1,9 +1,6 @@
 import {TextField, useMediaQuery} from "@mui/material";
 import React from "react";
 import {MobileDateTimePicker, LocalizationProvider} from "@mui/x-date-pickers";
-// import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import dayjs from "dayjs";
-import PropTypes from 'prop-types';
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import {DateTimePicker} from "@mui/x-date-pickers/DateTimePicker";
 import 'dayjs/locale/de';

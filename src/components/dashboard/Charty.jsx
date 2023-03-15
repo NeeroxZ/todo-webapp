@@ -4,12 +4,15 @@ import {useAuth} from "../../stores/AuthStore";
 import {useEffect, useState} from "react";
 import pb from "../../utils/pocketbase";
 import PropTypes from "prop-types";
-import {AllTodosCount} from "./AllTodosCount";
 import {getTodayTime, getTomorrowTime} from "../../utils/time";
+import '../../styles/dashboard.css';
+import {convertPocketbaseTime} from "../../utils/functions";
+import {useGlobalStore} from "../../stores/GlobalStore";
 
 
 export const Charty = (props) => {
     const {loginValid, getUserId} = useAuth();
+    const {mobileView} = useGlobalStore();
 
     let initData = {"value":0, "max":0, "percentage": "0"}
 
@@ -18,13 +21,7 @@ export const Charty = (props) => {
     const [savedData, setSavedData] = useState(initData)
     const [dueData, setDueData] = useState(initData)
 
-
-    const [resError, setResError] = useState(false);
-    const [resLoading, setResLoading] = useState(true);
-
     const loadCounts = async () => {
-        setResLoading(true);
-        setResError(false);
         props.setReloading(true);
         let res = {};
         try {
@@ -80,7 +77,7 @@ export const Charty = (props) => {
 
             // check due
             let tmpDue = {"value": 0, "max": tmpDone["max"], "percentage": "0"};
-            tmpDue["value"] = tmpTds.filter(e => (new Date(e.due_date) < currentDate)).length;
+            tmpDue["value"] = tmpTds.filter(e => (convertPocketbaseTime(e.due_date) < currentDate)).length;
             tmpDue["percentage"] = ((tmpDue["value"] / tmpDue["max"]) * 100).toFixed(0);
             if (tmpDue["percentage"] === "NaN") {
                 tmpDue["percentage"] = "100"
@@ -89,9 +86,7 @@ export const Charty = (props) => {
 
         } catch(e) {
             console.log("error getting stats: ", e)
-            setResError(true);
         } finally {
-            setResLoading(false);
             props.setReloading(false);
         }
     }
@@ -103,8 +98,7 @@ export const Charty = (props) => {
     }, [loginValid, props.triggerReload])
     return(
         <>
-            <div className={'containerChart'} style={{display:'flex'}}>
-
+            <div className={`containerChart ${mobileView?"mobile":""}`}>
                 <div className={'charty'}>
                     <CircularProgressbar
                         value={parseInt(todayData["percentage"])}

@@ -1,7 +1,7 @@
 import { Responsive, WidthProvider } from "react-grid-layout";
 import 'font-awesome/css/font-awesome.min.css';
 import {UserInfo} from "../components/dashboard/UserInfo";
-import {Category} from "../components/dashboard/Category";
+import {Topics} from "../components/dashboard/Topics";
 import {AllTodosCount} from "../components/dashboard/AllTodosCount";
 import {TodoView} from "../components/TodoView";
 import "react-grid-layout/css/styles.css";
@@ -17,15 +17,15 @@ import {DashViewTwo} from "../components/dashboard/DashViewTwo";
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
 const layout = [
-        { i: "empty",            x:0, y:0, w:1, h:1 , isResizable: false, isDraggable: false},
-        { i: "empty2",           x:0, y:0, w:1, h:1 , isResizable: false, isDraggable: false},
-        { i: "empty3",           x:1, y:0, w:0.5, h:1 , isResizable: false, isDraggable: false},
-        { i: "empty4",           x:3, y:0, w:1, h:4, isResizable: false, isDraggable: false },
+    {i: "user_info",        x: 0, y: 0, w: 1, h: 1, isResizable: false, isDraggable: false},
+    {i: "all_todos_count",  x: 0, y: 0, w: 1, h: 1, isResizable: false, isDraggable: false},
+    {i: "empty3",           x: 1, y: 0, w: 0.5, h: 1, isResizable: false, isDraggable: false},
+    {i: "topics",           x: 3, y: 0, w: 1, h: 4, isResizable: false, isDraggable: false},
 
-        { i: "empty5",           x:0, y:1, w:1, h:2, isResizable: false, isDraggable: false  },
-        { i: "empty7",           x:2, y:1, w:1, h:2, isResizable: false, isDraggable: false },
+    {i: "todo_list_all",    x: 0, y: 1, w: 1, h: 2, isResizable: false, isDraggable: false},
+    {i: "todo_list_custom", x: 2, y: 1, w: 1, h: 2, isResizable: false, isDraggable: false},
 
-        { i: "empty8",           x:0, y:3, w:2, h:1, isResizable: false, isDraggable: false  },
+    {i: "charts",           x: 0, y: 3, w: 2, h: 1, isResizable: false, isDraggable: false},
 
 ];
 
@@ -94,7 +94,8 @@ export const Home = () => {
             <ResponsiveGridLayout
 
                 layouts={{lg: layout}}
-                breakepoints={{lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0}}
+                // breakepoints={{lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0}}
+                breakepoints={{lg: 1300, md: 1000, sm: 500, xs: 500, xxs: 0}}
                 cols={{lg: 4, md: 2, sm: 2, xs: 1, xxs: 1}}
                 margin={[10, 10]}
                 compactType={"horizontal"}
@@ -105,10 +106,10 @@ export const Home = () => {
                 className="responsiveGridContainer"
             >
 
-                <div className="dashboardItem itemLeft" key="empty">
+                <div className="dashboardItem itemLeft" key="user_info">
                     <UserInfo/>
                 </div>
-                <div className="dashboardItemView" key="empty2">
+                <div className="dashboardItemView" key="all_todos_count">
                     <AllTodosCount
                         triggerReload={triggerCountReload}
                         reloading={reloadingCount}
@@ -116,14 +117,14 @@ export const Home = () => {
                     />
                 </div>
 
-                <div className="dashboardItem" key="empty4">
-                    <Category/>
+                <div className="dashboardItem" key="topics">
+                    <Topics/>
                 </div>
 
 
-                <div className="dashboardItem" key="empty5">
+                <div className="dashboardItem" key="todo_list_all">
                     <div className={`todoHeaderDashboard ${mobileView?"mobile":""}`}>
-                        Todo's
+                        All
                     </div>
                     <TodoView
                         scrollable={false}
@@ -141,7 +142,7 @@ export const Home = () => {
                     />
                 </div>
 
-                <div className="dashboardItem" key="empty7">
+                <div className="dashboardItem" key="todo_list_custom">
                     <DashViewTwo
                         dateUntil={getTimeUntil()}
 
@@ -154,7 +155,7 @@ export const Home = () => {
                     />
                 </div>
 
-                <div className="dashboardItem todoAll" key="empty8">
+                <div className="dashboardItem todoAll" key="charts">
                     <Charty
                         triggerReload={triggerCountReload}
                         reloading={reloadingCharts}
