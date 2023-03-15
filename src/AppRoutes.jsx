@@ -1,7 +1,7 @@
 import {Route, Routes} from "react-router-dom";
-import {Login} from "./pages/auth/Login";
+import {LoginPage} from "./pages/auth/LoginPage";
 import {ResetPasswordPage} from "./pages/auth/ResetPasswordPage";
-import {Register} from "./pages/auth/Register";
+import {RegisterPage} from "./pages/auth/RegisterPage";
 import {ConfirmMailPage} from "./pages/auth/VerifyMailPage";
 import {SettingsPage} from "./pages/SettingsPage";
 import {About} from "./pages/About";
@@ -24,9 +24,9 @@ export const AppRoutes = () => {
         <>
             <Routes>
                 <Route path="*" element={<NoMatch/>}/>
-                <Route path="login" element={<Login/>}/>
+                <Route path="login" element={<LoginPage/>}/>
                 <Route path="reset" element={<ResetPasswordPage/>}/>
-                <Route path="register" element={<Register/>}/>
+                <Route path="register" element={<RegisterPage/>}/>
                 <Route path="verify" element={<ConfirmMailPage/>}/>
                 <Route path="not-verified" element={<NotVerifiedPage/>}/>
                 <Route path="settings" element={<SettingsPage/>}/>

@@ -7,7 +7,7 @@ import {StatusBox} from "../../components/StatusBox";
 import {useGlobalStore} from "../../stores/GlobalStore";
 
 
-export const Login = () => {
+export const LoginPage = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 

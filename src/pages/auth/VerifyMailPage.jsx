@@ -8,7 +8,7 @@ export const ConfirmMailPage = () => {
     const navigator = useNavigate();
 
     const {setTabName} = useGlobalStore();
-    setTabName("DodoTodo - Confirm");
+    setTabName("DodoTodo - Verify");
 
     return (
         <>

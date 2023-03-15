@@ -8,7 +8,7 @@ export const NotVerifiedPage = () => {
     const navigator = useNavigate();
 
     const {setTabName} = useGlobalStore();
-    setTabName("DodoTodo - Not confirmed");
+    setTabName("DodoTodo - Not verified");
 
     return (
         <>

@@ -67,8 +67,8 @@ export const AuthProvider = ({children}) => {
                 return;
             }
 
-            let expCookie = pb.authStore.exportToCookie({sameSite: 'none', secure: false}, COOKIE_KEY);
-            cookies.set(COOKIE_KEY, expCookie, {sameSite:'none', secure: false})
+            let expCookie = pb.authStore.exportToCookie({sameSite: 'none', secure: true}, COOKIE_KEY);
+            cookies.set(COOKIE_KEY, expCookie, {sameSite:'none', secure: true})
         } catch(error) {
             setLoginError(error);
         } finally {

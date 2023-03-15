@@ -13,7 +13,6 @@ export const DashViewTwo = (props) => {
         return null;
     }
 
-    console.log(settings["dashboardTwo"])
     switch (settings["dashboardTwo"]) {
         case "today":
             return (

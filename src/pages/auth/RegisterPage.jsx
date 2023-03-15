@@ -6,7 +6,7 @@ import '../../styles/user.css';
 import {validateEmail} from "../../utils/functions";
 import {StatusBox} from "../../components/StatusBox";
 import {useGlobalStore} from "../../stores/GlobalStore";
-export const Register = () => {
+export const RegisterPage = () => {
     const [initialRender, setInitialRender] = useState(true);
 
     const [username, setUsername] = useState("");
