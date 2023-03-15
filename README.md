@@ -6,6 +6,11 @@
 
 By: Marvin Samouelian, Nick Obereiter and Martin Hofsäß
 
+Try it: https://dodo.marvsman.com/home
+
+User: TestUser
+
+Password: Start123
 # Table of contents
 
 ## 1. Planning
@@ -49,7 +54,7 @@ Pocketbase functions as the whole backend of our web application in that it supp
 ### Tech Stack
 - React JS
 - Pocketbase / Go
--
+
 
 # 1.3. Division of responsibilities
 
@@ -59,7 +64,7 @@ Pocketbase functions as the whole backend of our web application in that it supp
 | Reset Password Page | Nick Obereiter |
 | Home | Martin Hofsäß / Nick Obereiter |
 | Home sub functionality | Martin Hofsäß / Nick Obereiter |
-| Create ToDo | Marvin Samouelian |
+| Create ToDo | Marvin Samouelian / Nick Obreiter |
 | ToDo overview Page | Marvin Samouelian |
 | ToDo tomorrow Page | Marvin Samouelian |
 | ToDo today Page | Marvin Samouelian |
@@ -68,8 +73,7 @@ Pocketbase functions as the whole backend of our web application in that it supp
 | Database | Marvin Samouelian |
 | Backend | Marvin Samouelian |
 |
-|
-|
+|-----------------------------
 | Project Documentation | Martin Hofsäß |
 
 # 2. Implementation and showcase
@@ -80,21 +84,22 @@ Pocketbase functions as the whole backend of our web application in that it supp
 - Working Account-Management via Pocketbase.
 - Fully reactive design.
 - Create, edit and delete ToDo's
--
+
 
 # 2.2. A simple showcase of the ToDo-Webapp
 
 The user arrives at the login screen and enters his login credentials.
 
-![./src/doku/Sign_In.png](Sign_In.png)
+![Login.png](./doc/Login.png)
 
 After successfully authenticating he will be greeted on his home-site/dashboard and gets a comprehensive overview of all important information in relation to his existing ToDo's.
 
-![Dashboard.png](Dashboard.png)
+![Dashboard.png](./doc/Dashboard.png)
 
 The user decides to create a new ToDo. For this he can use the button in the bottom right of every page.
 
-![Create_ToDo.png](Create_ToDo.png)
+![Create_ToDo.png](./doc/AddTodo.png)
+
 
 The Navigation Bar at the top of the screen allows the user to navigate between the different sites.
 
