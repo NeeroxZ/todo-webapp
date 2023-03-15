@@ -41,9 +41,18 @@
     position: relative;
 }
 
-.modalBox.mobile {
+.modalBox .mobile {
     width: 400px;
     height: 560px;
+}
+
+.modalBox.info {
+    width: 500px;
+    height: 400px;
+}
+
+.modalBox.info.mobile {
+    width: 400px;
 }
 
 .modalBox.topic {
@@ -200,4 +209,32 @@
 
 .desktopBtn {
     width: 100px;
+}
+
+.infoMHeading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    font-size: 2.5rem;
+    color: #04AA6D;
+
+}
+.infoMItem {
+    width: 100%;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.infoMItem.infoText {
+    font-size: 1.4rem;
+    color: white;
+}
+
+.infoMItem.redirect {
+    margin-top: 8rem;
+    font-style: italic;
 }

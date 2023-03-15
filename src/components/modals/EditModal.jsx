@@ -13,7 +13,6 @@ import {
     Grid,
     Modal,
     TextField,
-    useMediaQuery
 } from "@mui/material";
 import Tooltip from "@mui/material/Tooltip";
 import IconButton from "@mui/material/IconButton";
@@ -21,13 +20,12 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import RestoreIcon from '@mui/icons-material/Restore';
 import {DatePicker} from "./DatePicker";
-import {useUserStore} from "../../stores/UserStore";
 import {useGlobalStore} from "../../stores/GlobalStore";
 import pb from "../../utils/pocketbase";
 import {TopicModal} from "./TopicModal";
-import {findShadowRoot} from "bootstrap/js/src/util";
+import '../../styles/modal.css';
+
 export const EditModal = (props) => {
-    const user = useUserStore();
     const tpCtx = useTopics();
 
     const [loadingData, setLoadingData] = useState(true);
@@ -57,7 +55,7 @@ export const EditModal = (props) => {
 
     const loadTopic = () => {
         if (!tpCtx.loading && (tpCtx.topics.length !== 0)) {
-            tpCtx.topics.forEach((elem, i) => {
+            tpCtx.topics.forEach((elem) => {
                 if (elem.id === props.todoData.topic) {
                     setTopic(elem);
                 }

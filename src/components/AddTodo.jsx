@@ -11,6 +11,7 @@ import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 
 export const AddTodo = (props) => {
     const [isOpen, setIsOpen] = useState(false);
+
     return (
         <>
 
@@ -51,6 +52,7 @@ export const AddTodo = (props) => {
 AddTodo.defaultProps = {
     reloadOnAdd: true,
     showPointer: false,
+    selectedTopic: "",
 };
 
 AddTodo.propType = {

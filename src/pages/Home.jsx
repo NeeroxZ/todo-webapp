@@ -11,6 +11,7 @@ import '../styles/dashboard.css'
 import React, {useEffect, useState} from "react";
 import {Charty} from "../components/dashboard/Charty";
 import {useGlobalStore} from "../stores/GlobalStore";
+import {DashViewTwo} from "../components/dashboard/DashViewTwo";
 
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
@@ -114,13 +115,6 @@ export const Home = () => {
                         setReloading={setReloadingCount}
                     />
                 </div>
-                {/*<div className="dashboardItemView" key="empty3">*/}
-                {/*    <AllTodosCount*/}
-                {/*        triggerReload={triggerCountReload}*/}
-                {/*        reloading={reloadingCount}*/}
-                {/*        setReloading={setReloadingCount}*/}
-                {/*    />*/}
-                {/*</div>*/}
 
                 <div className="dashboardItem" key="empty4">
                     <Category/>
@@ -148,15 +142,7 @@ export const Home = () => {
                 </div>
 
                 <div className="dashboardItem" key="empty7">
-                    <div className={`todoHeaderDashboard ${mobileView?"mobile":""}`}>
-                        Due's
-                    </div>
-                    <TodoView
-                        scrollable={false}
-                        showFab={false}
-                        showInfo={false}
-                        showDue={false}
-                        disableEdit={true}
+                    <DashViewTwo
                         dateUntil={getTimeUntil()}
 
                         triggerReload={triggerReload}

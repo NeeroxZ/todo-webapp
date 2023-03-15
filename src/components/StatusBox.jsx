@@ -6,13 +6,23 @@ import {useEffect, useState} from "react";
 
 
 export const StatusBox = (props) => {
-    const [type, setType] = useState("success");
     const [msg, setMsg] = useState("");
 
     useEffect(() => {
-        setType(props.type);
-        setMsg(props.message);
-    }, [props.type, props.message])
+        setMsg(getMessage())
+    }, [props.type, props.message, props.topic])
+
+    const getMessage = () => {
+        if (props.topic !== "" && props.topic !== undefined && props.topic !== null) {
+            return (
+                <>{`${props.topic}: `} <strong>{props.message}</strong></>
+            );
+        } else {
+            return (
+                <>{props.message}</>
+            );
+        }
+    };
 
     const getAlert = () => {
         switch (props.type) {
@@ -63,9 +73,6 @@ export const StatusBox = (props) => {
                 }
             >
                 {getAlert()}
-                {/*<Alert onClose={() => props.setShow(false)} severity={type} sx={{ width: '100%' }}>*/}
-                {/*    {msg}*/}
-                {/*</Alert>*/}
             </Snackbar>
         </>
     );
@@ -73,11 +80,13 @@ export const StatusBox = (props) => {
 
 StatusBox.defaulProps = {
     closeButton: false,
+    topic: "",
     type: "success",
 };
 
 StatusBox.propTypes = {
     type: PropTypes.string.isRequired,
+    topic: PropTypes.string,
     message: PropTypes.string.isRequired,
     show: PropTypes.bool.isRequired,
     setShow: PropTypes.func.isRequired,
