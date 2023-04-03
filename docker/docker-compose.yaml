@@ -34,6 +34,6 @@ services:
       WATCHTOWER_CLEANUP: true
       WATCHTOWER_NOTIFICATION_TITLE_TAG: "watchtower frontend"
       WATCHTOWER_NOTIFICATION_URL: "telegram://$TELEGRAM_TOKEN@telegram/?channels=$TELEGRAM_CHAT_ID"
-    command: --interval 30 --scope frontend dodotodo-ui-container
+    command: --interval 1800 --scope frontend dodotodo-ui-container
     labels:
       - "com.centurylinklabs.watchtower.scope=frontend"
